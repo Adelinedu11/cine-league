@@ -29,15 +29,19 @@ export const dict: Record<Locale, Dict> = {
 
     // Login
     "login.title": "Connexion",
-    "login.subtitle": "Reçois un lien de connexion par e-mail, sans mot de passe.",
+    "login.subtitle": "Reçois un code de connexion par e-mail, sans mot de passe.",
     "login.emailLabel": "Adresse e-mail",
     "login.emailPlaceholder": "ton@email.com",
-    "login.submit": "Recevoir mon lien de connexion",
+    "login.submit": "Recevoir mon code",
     "login.submitting": "Envoi en cours…",
     "login.sentTitle": "Vérifie ta boîte mail 📬",
-    "login.sentBody1": "Un lien de connexion a été envoyé à ",
-    "login.sentBody2": ". Clique dessus pour te connecter.",
-    "login.errorFallback": "Impossible d'envoyer le lien de connexion.",
+    "login.codeSentTo": "Un code à 6 chiffres a été envoyé à {email}.",
+    "login.codeLabel": "Code à 6 chiffres",
+    "login.codePlaceholder": "123456",
+    "login.verify": "Valider",
+    "login.verifying": "Vérification…",
+    "login.verifyError": "Code invalide ou expiré, réessaie.",
+    "login.errorFallback": "Impossible d'envoyer le code de connexion.",
 
     // Accueil
     "home.badge": "BIENVENUE",
@@ -160,15 +164,19 @@ export const dict: Record<Locale, Dict> = {
 
     // Login
     "login.title": "Sign in",
-    "login.subtitle": "Get a sign-in link by email, no password needed.",
+    "login.subtitle": "Get a sign-in code by email, no password needed.",
     "login.emailLabel": "Email address",
     "login.emailPlaceholder": "you@email.com",
-    "login.submit": "Send my sign-in link",
+    "login.submit": "Send my code",
     "login.submitting": "Sending…",
     "login.sentTitle": "Check your inbox 📬",
-    "login.sentBody1": "A sign-in link was sent to ",
-    "login.sentBody2": ". Click it to sign in.",
-    "login.errorFallback": "Couldn't send the sign-in link.",
+    "login.codeSentTo": "A 6-digit code was sent to {email}.",
+    "login.codeLabel": "6-digit code",
+    "login.codePlaceholder": "123456",
+    "login.verify": "Verify",
+    "login.verifying": "Verifying…",
+    "login.verifyError": "Invalid or expired code, try again.",
+    "login.errorFallback": "Couldn't send the sign-in code.",
 
     // Home
     "home.badge": "WELCOME",
