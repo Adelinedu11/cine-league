@@ -6,6 +6,7 @@ import { formatRoundDate } from "@/lib/rounds";
 import { getLocale, t } from "@/lib/i18n";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
+import RenameLeagueForm from "@/components/RenameLeagueForm";
 
 // Couleur du stub (languette) selon le statut du round.
 const ROUND_STATUS_STUB_CLASS: Record<string, string> = {
@@ -138,6 +139,45 @@ export default async function LeaguePage({
     redirect(`/leagues/${id}`);
   }
 
+  // --- Server Action : renommer la ligue (admin uniquement) ---
+  // La policy RLS UPDATE (is_league_admin) est la garde effective : un
+  // non-admin ne mettrait à jour aucune ligne.
+  async function renameLeague(formData: FormData) {
+    "use server";
+    const name = String(formData.get("name") ?? "").trim();
+    if (!name) {
+      redirect(`/leagues/${id}`);
+    }
+
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      redirect("/login");
+    }
+
+    await supabase.from("leagues").update({ name }).eq("id", id);
+    redirect(`/leagues/${id}`);
+  }
+
+  // --- Server Action : supprimer la ligue (admin uniquement) ---
+  // Cascade sur les tables liées (ON DELETE CASCADE). Garde effective : la
+  // policy RLS DELETE (is_league_admin).
+  async function deleteLeague() {
+    "use server";
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      redirect("/login");
+    }
+
+    await supabase.from("leagues").delete().eq("id", id);
+    redirect("/leagues");
+  }
+
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-8 p-6">
       <Link
@@ -151,9 +191,18 @@ export default async function LeaguePage({
         <span className="font-mono flex w-fit items-center gap-1.5 rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[11px] tracking-wide text-[var(--color-muted)]">
           <Ticket size={13} strokeWidth={1.5} /> {t(locale, "league.badge")}
         </span>
-        <h1 className="font-display text-5xl uppercase tracking-wide text-[var(--color-gold)]">
-          {league.name}
-        </h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="font-display text-5xl uppercase tracking-wide text-[var(--color-gold)]">
+            {league.name}
+          </h1>
+          {isAdmin && (
+            <RenameLeagueForm
+              action={renameLeague}
+              currentName={league.name}
+              locale={locale}
+            />
+          )}
+        </div>
         <p className="max-w-md text-[var(--color-muted)]">
           {t(locale, "league.pitch")}
         </p>
@@ -163,6 +212,15 @@ export default async function LeaguePage({
             {league.invite_code}
           </code>
         </p>
+        {isAdmin && (
+          <ConfirmSubmitButton
+            action={deleteLeague}
+            confirmMessage={t(locale, "league.deleteLeagueConfirm")}
+            className="w-fit rounded-lg border border-red-500/40 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10"
+          >
+            {t(locale, "league.deleteLeagueButton")}
+          </ConfirmSubmitButton>
+        )}
       </div>
 
       {/* Liste des rounds */}

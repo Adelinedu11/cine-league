@@ -8,6 +8,15 @@ import { t, type Locale } from "@/lib/i18n";
 // idle/sending : écran e-mail ; code/verifying : écran de saisie du code.
 type Status = "idle" | "sending" | "code" | "verifying";
 
+// Longueur du code OTP envoyé par Supabase (GOTRUE_MAILER_OTP_LENGTH).
+// Source de vérité unique : champ, validation et libellés en dépendent.
+const OTP_LENGTH = 8;
+// Placeholder illustratif : « 12345678… » selon la longueur.
+const OTP_PLACEHOLDER = Array.from(
+  { length: OTP_LENGTH },
+  (_, i) => (i + 1) % 10,
+).join("");
+
 export default function LoginForm({ locale }: { locale: Locale }) {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -93,14 +102,14 @@ export default function LoginForm({ locale }: { locale: Locale }) {
             {t(locale, "login.sentTitle")}
           </h1>
           <p className="mt-3 text-sm text-[var(--color-muted)]">
-            {t(locale, "login.codeSentTo", { email })}
+            {t(locale, "login.codeSentTo", { email, length: OTP_LENGTH })}
           </p>
 
           <label
             htmlFor="code"
             className="mt-6 block text-left text-sm font-medium text-[var(--color-cream)]"
           >
-            {t(locale, "login.codeLabel")}
+            {t(locale, "login.codeLabel", { length: OTP_LENGTH })}
           </label>
           <input
             id="code"
@@ -109,14 +118,14 @@ export default function LoginForm({ locale }: { locale: Locale }) {
             inputMode="numeric"
             autoComplete="one-time-code"
             pattern="[0-9]*"
-            maxLength={8}
+            maxLength={OTP_LENGTH}
             required
             autoFocus
             value={code}
             onChange={(e) =>
-              setCode(e.target.value.replace(/\D/g, "").slice(0, 8))
+              setCode(e.target.value.replace(/\D/g, "").slice(0, OTP_LENGTH))
             }
-            placeholder={t(locale, "login.codePlaceholder")}
+            placeholder={OTP_PLACEHOLDER}
             className="mt-2 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-center font-mono text-lg tracking-[0.4em] text-[var(--color-cream)] outline-none placeholder:tracking-normal placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
           />
 
@@ -126,7 +135,7 @@ export default function LoginForm({ locale }: { locale: Locale }) {
 
           <button
             type="submit"
-            disabled={status === "verifying" || code.length < 8}
+            disabled={status === "verifying" || code.length < OTP_LENGTH}
             className="mt-6 w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)] disabled:opacity-50"
           >
             {status === "verifying"

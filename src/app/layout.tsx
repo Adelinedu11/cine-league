@@ -1,7 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Bebas_Neue, IBM_Plex_Mono } from "next/font/google";
 import { getLocale, t } from "@/lib/i18n";
+import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import "./globals.css";
+
+// Favicon : emoji ticket rendu dans un <text> SVG, encodé en data-URI.
+const FAVICON = `data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="52" font-size="76" text-anchor="middle" dominant-baseline="central">🎟️</text></svg>`,
+)}`;
+
+// Barre de statut mobile alignée sur le fond du thème sombre.
+export const viewport: Viewport = {
+  themeColor: "#150A0C",
+};
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,6 +36,15 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Ciné League",
     description: t(locale, "meta.description"),
+    icons: {
+      icon: { url: FAVICON, type: "image/svg+xml" },
+      apple: [{ url: "/icons/apple-touch-icon.png" }],
+    },
+    appleWebApp: {
+      capable: true,
+      title: "Ciné League",
+      statusBarStyle: "default",
+    },
   };
 }
 
@@ -47,7 +67,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ServiceWorkerRegistrar />
+        {children}
+      </body>
     </html>
   );
 }

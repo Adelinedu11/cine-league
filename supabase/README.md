@@ -22,6 +22,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `009_members_admin.sql` | RPC `league_members_list`, `remove_league_member` (SECURITY DEFINER, admin only) | 001, 008 |
 | `010_comments.sql` | colonnes `comment` sur `submissions`/`votes`, `round_submission_details` (+comment), `submit_votes` (+comment), RPC `round_vote_comments` | 001, 006, 007 |
 | `011_poster.sql` | colonne `poster_path` sur `submissions`, `round_ballot` (+poster_path), `round_submission_details` (+poster_path) | 001, 008, 010 |
+| `012_league_admin_actions.sql` | policies UPDATE / DELETE sur `leagues` (admin : renommer / supprimer) | 008 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de
