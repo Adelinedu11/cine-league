@@ -21,6 +21,9 @@ export const dict: Record<Locale, Dict> = {
     // Métadonnées
     "meta.description": "Ligues de cinéma entre amis",
 
+    // Commun
+    "common.sending": "Envoi…",
+
     // Header / bascules
     "header.signOut": "Se déconnecter",
     "toggle.toLight": "Passer en mode clair",
@@ -160,6 +163,9 @@ export const dict: Record<Locale, Dict> = {
   en: {
     // Metadata
     "meta.description": "Movie leagues with friends",
+
+    // Common
+    "common.sending": "Sending…",
 
     // Header / toggles
     "header.signOut": "Sign out",

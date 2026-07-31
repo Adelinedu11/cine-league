@@ -7,6 +7,7 @@ import { getLocale, t } from "@/lib/i18n";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import RenameLeagueForm from "@/components/RenameLeagueForm";
+import SubmitButton from "@/components/SubmitButton";
 
 // Couleur du stub (languette) selon le statut du round.
 const ROUND_STATUS_STUB_CLASS: Record<string, string> = {
@@ -215,6 +216,7 @@ export default async function LeaguePage({
         {isAdmin && (
           <ConfirmSubmitButton
             action={deleteLeague}
+            locale={locale}
             confirmMessage={t(locale, "league.deleteLeagueConfirm")}
             className="w-fit rounded-lg border border-red-500/40 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10"
           >
@@ -325,6 +327,7 @@ export default async function LeaguePage({
               {isAdmin && member.user_id !== user.id && (
                 <ConfirmSubmitButton
                   action={removeMember.bind(null, member.id)}
+                  locale={locale}
                   confirmMessage={t(locale, "league.excludeConfirm", {
                     name: member.display_name,
                   })}
@@ -393,12 +396,12 @@ export default async function LeaguePage({
             </p>
           )}
 
-          <button
-            type="submit"
+          <SubmitButton
+            locale={locale}
             className="mt-1 w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
           >
             {t(locale, "league.createRoundButton")}
-          </button>
+          </SubmitButton>
         </form>
       </section>
     </main>

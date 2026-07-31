@@ -1,21 +1,26 @@
 "use client";
 
+import SubmitButton from "@/components/SubmitButton";
+import type { Locale } from "@/lib/i18n";
+
 /**
  * Bouton de soumission d'une Server Action, précédé d'une confirmation native.
- * Sert aux actions destructrices (supprimer un round, exclure un membre).
- * `action` est une Server Action sans argument ; `confirmMessage` est le texte
- * du dialogue de confirmation.
+ * Sert aux actions destructrices (supprimer un round, exclure un membre,
+ * supprimer une ligue). Le bouton interne (SubmitButton) affiche l'état de
+ * chargement une fois la confirmation acceptée.
  */
 export default function ConfirmSubmitButton({
   action,
   confirmMessage,
   children,
   className,
+  locale,
 }: {
   action: () => Promise<void>;
   confirmMessage: string;
   children: React.ReactNode;
   className?: string;
+  locale: Locale;
 }) {
   return (
     <form
@@ -26,9 +31,9 @@ export default function ConfirmSubmitButton({
         }
       }}
     >
-      <button type="submit" className={className}>
+      <SubmitButton locale={locale} className={className}>
         {children}
-      </button>
+      </SubmitButton>
     </form>
   );
 }

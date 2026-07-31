@@ -4,6 +4,7 @@ import { Ticket } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getLocale, t } from "@/lib/i18n";
 import TicketStub from "@/components/TicketStub";
+import SubmitButton from "@/components/SubmitButton";
 
 export default async function LeaguesPage({
   searchParams,
@@ -80,13 +81,13 @@ export default async function LeaguesPage({
       redirect("/login");
     }
 
-    const { data: league } = await supabase
-      .from("leagues")
-      .select("id")
-      .eq("invite_code", inviteCode)
-      .maybeSingle();
+    // La policy SELECT sur `leagues` réserve la lecture aux membres ; on résout
+    // le code via une fonction SECURITY DEFINER qui contourne la RLS.
+    const { data: leagueId } = await supabase.rpc("find_league_by_invite_code", {
+      _code: inviteCode,
+    });
 
-    if (!league) {
+    if (!leagueId) {
       redirect("/leagues?error=invalid");
     }
 
@@ -94,18 +95,18 @@ export default async function LeaguesPage({
     const { data: existingMember } = await supabase
       .from("league_members")
       .select("league_id")
-      .eq("league_id", league.id)
+      .eq("league_id", leagueId)
       .eq("user_id", user.id)
       .maybeSingle();
 
     if (existingMember) {
-      redirect(`/leagues/${league.id}`);
+      redirect(`/leagues/${leagueId}`);
     }
 
     const { error: memberError } = await supabase
       .from("league_members")
       .insert({
-        league_id: league.id,
+        league_id: leagueId,
         user_id: user.id,
         display_name: user.email ?? user.id,
       });
@@ -114,7 +115,7 @@ export default async function LeaguesPage({
       redirect("/leagues?error=join");
     }
 
-    redirect(`/leagues/${league.id}`);
+    redirect(`/leagues/${leagueId}`);
   }
 
   return (
@@ -182,12 +183,12 @@ export default async function LeaguesPage({
               {t(locale, "leagues.createError")}
             </p>
           )}
-          <button
-            type="submit"
+          <SubmitButton
+            locale={locale}
             className="mt-1 w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
           >
             {t(locale, "leagues.createButton")}
-          </button>
+          </SubmitButton>
         </form>
       </section>
 
@@ -221,12 +222,12 @@ export default async function LeaguesPage({
               {t(locale, "leagues.joinError")}
             </p>
           )}
-          <button
-            type="submit"
+          <SubmitButton
+            locale={locale}
             className="mt-1 w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
           >
             {t(locale, "leagues.joinButton")}
-          </button>
+          </SubmitButton>
         </form>
       </section>
     </main>

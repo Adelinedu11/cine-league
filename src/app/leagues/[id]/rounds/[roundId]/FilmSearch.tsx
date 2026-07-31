@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import FilmPoster from "@/components/FilmPoster";
+import SubmitButton from "@/components/SubmitButton";
 import { t, type Locale } from "@/lib/i18n";
 
 type Movie = {
@@ -43,7 +44,6 @@ export default function FilmSearch({
   const [platforms, setPlatforms] = useState<string[] | null>(null);
   const [overlaps, setOverlaps] = useState<Overlap[]>([]);
   const [loadingDetails, setLoadingDetails] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   // Recherche débouncée au fil de la saisie.
   useEffect(() => {
@@ -214,10 +214,7 @@ export default function FilmSearch({
 
       {selected && (
         <form
-          action={async (formData) => {
-            setSubmitting(true);
-            await submitFilm(formData);
-          }}
+          action={submitFilm}
           className="flex flex-col gap-3 border-t border-[var(--color-border)] pt-4"
         >
           <input type="hidden" name="tmdb_id" value={selected.id} />
@@ -292,15 +289,13 @@ export default function FilmSearch({
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={submitting || loadingDetails}
-            className="w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)] disabled:opacity-40"
+          <SubmitButton
+            locale={locale}
+            disabled={loadingDetails}
+            className="w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
           >
-            {submitting
-              ? t(locale, "film.submitting")
-              : t(locale, "film.submitButton")}
-          </button>
+            {t(locale, "film.submitButton")}
+          </SubmitButton>
         </form>
       )}
     </div>

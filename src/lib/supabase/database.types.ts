@@ -238,6 +238,10 @@ export type Database = {
         Args: { _round_id: string; _tmdb_id: number }
         Returns: boolean
       }
+      find_league_by_invite_code: {
+        Args: { _code: string }
+        Returns: string
+      }
       round_credit_overlaps: {
         Args: { _round_id: string; _people: string[] }
         Returns: { person: string; film_title: string }[]

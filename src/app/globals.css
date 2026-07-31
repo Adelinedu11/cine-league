@@ -62,3 +62,24 @@ body {
 .font-mono {
   font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
 }
+
+/* Retour visuel au clic : léger enfoncement immédiat sur TOUS les boutons.
+   Règle non-layerisée → prioritaire sur les utilitaires Tailwind (cascade
+   layers), tout en conservant les transitions de couleur au survol. */
+button {
+  transition-property:
+    color, background-color, border-color, transform, opacity, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+button:not(:disabled):active {
+  transform: scale(0.96);
+}
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition-duration: 0ms;
+  }
+  button:not(:disabled):active {
+    transform: none;
+  }
+}

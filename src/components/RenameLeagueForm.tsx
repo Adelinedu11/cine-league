@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { t, type Locale } from "@/lib/i18n";
+import SubmitButton from "@/components/SubmitButton";
 
 /**
  * Bouton « Renommer » qui déplie un formulaire inline (nom pré-rempli).
@@ -41,12 +42,12 @@ export default function RenameLeagueForm({
         aria-label={t(locale, "leagues.nameLabel")}
         className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-1.5 text-sm text-[var(--color-cream)] outline-none focus:border-[var(--color-gold)]"
       />
-      <button
-        type="submit"
+      <SubmitButton
+        locale={locale}
         className="rounded-lg bg-[var(--color-gold)] px-3 py-1.5 text-xs font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
       >
         {t(locale, "league.renameSave")}
-      </button>
+      </SubmitButton>
       <button
         type="button"
         onClick={() => setOpen(false)}

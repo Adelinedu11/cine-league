@@ -14,6 +14,7 @@ import RoundResults from "./RoundResults";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import FilmPoster from "@/components/FilmPoster";
+import SubmitButton from "@/components/SubmitButton";
 
 export default async function RoundPage({
   params,
@@ -480,13 +481,13 @@ export default async function RoundPage({
           {nextStatus && (
             <div className="flex flex-col gap-2">
               <form action={advanceStatus}>
-                <button
-                  type="submit"
+                <SubmitButton
+                  locale={locale}
                   disabled={!canAdvance}
-                  className="rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)] disabled:cursor-not-allowed disabled:opacity-40"
+                  className="rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
                 >
                   {t(locale, `roundAction.${round.status}`)}
-                </button>
+                </SubmitButton>
               </form>
               {!canAdvance && advanceBlockedMessage && (
                 <p className="font-mono text-xs text-[var(--color-muted)]">
@@ -503,6 +504,7 @@ export default async function RoundPage({
           {isAdmin && (
             <ConfirmSubmitButton
               action={deleteRound}
+              locale={locale}
               confirmMessage={t(locale, "round.deleteConfirm")}
               className="rounded-lg border border-red-500/40 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10"
             >
@@ -613,12 +615,12 @@ export default async function RoundPage({
                 </TicketStub>
               ))}
 
-              <button
-                type="submit"
+              <SubmitButton
+                locale={locale}
                 className="rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
               >
                 {t(locale, "round.voteButton")}
-              </button>
+              </SubmitButton>
             </form>
           )}
         </section>
