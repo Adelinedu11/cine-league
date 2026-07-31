@@ -66,6 +66,9 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Standalone iOS : Next émet déjà `mobile-web-app-capable` ; on ajoute
+            la variante Apple pour les anciennes versions d'iOS Safari. */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body className="min-h-full flex flex-col">
         <ServiceWorkerRegistrar />
