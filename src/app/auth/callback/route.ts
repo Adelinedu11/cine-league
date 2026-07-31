@@ -3,12 +3,12 @@ import { createClient } from "@/lib/supabase/server";
 
 /**
  * Callback d'authentification : échange le `code` reçu par e-mail contre une
- * session (flux PKCE), puis redirige vers /init.
+ * session (flux PKCE), puis redirige vers la page d'accueil.
  */
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = "/init";
+  const next = "/accueil";
 
   if (code) {
     const supabase = await createClient();

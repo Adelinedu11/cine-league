@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
+/* Polices chargées via next/font/google dans src/app/layout.tsx :
+   --font-inter, --font-bebas, --font-ibm-plex-mono. */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Palette bleu-gris — thème sombre par défaut. Le mode clair (bleu nuit sur
+     fond blanc) est défini plus bas via :root[data-theme="light"]. */
+  --color-bg: #0d1f23;
+  --color-surface: #132e35;
+  --color-surface-alt: #2d4a53;
+  --color-border: #5a636a;
+  --color-muted: #69818d;
+  --color-cream: #dcc7b4;
+  --color-gold: #d4dcf2;
+  --color-gold-bright: #e8c468;
+  --color-teal: #3e6259;
+
+  /* Couleur chair pour le hover des boutons « Créer ». Identique dans les deux
+     thèmes (non redéfinie en mode clair) : un hover visible partout. --flesh-ink
+     est le texte lisible posé sur ce fond clair au survol. */
+  --color-flesh: #e6c3a3;
+  --color-flesh-ink: #3a2a20;
+
+  /* Tokens hérités encore utilisés par des utilitaires existants
+     (bg-foreground / text-background). Remappés sur la nouvelle palette. */
+  --background: var(--color-bg);
+  --foreground: var(--color-cream);
+}
+
+/* Mode clair — activé par data-theme="light" sur <html>. Miroir du thème
+   bleu-gris : fond blanc, texte et accent bleu nuit. Seuls les tokens qui
+   changent sont redéfinis ; --background / --foreground suivent automatiquement
+   (substitution paresseuse des variables CSS). */
+:root[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-surface: #f4f7fb;
+  --color-surface-alt: #e6ecf6;
+  --color-border: #cbd6e6;
+  --color-muted: #5b6b84;
+  --color-cream: #14213d;
+  --color-gold: #1d2e5c;
+  --color-gold-bright: #16244d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-cream);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Classes utilitaires de police réutilisables. */
+.font-display {
+  font-family: var(--font-bebas), ui-sans-serif, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
 }
