@@ -109,12 +109,12 @@ export default function LoginForm({ locale }: { locale: Locale }) {
             inputMode="numeric"
             autoComplete="one-time-code"
             pattern="[0-9]*"
-            maxLength={6}
+            maxLength={8}
             required
             autoFocus
             value={code}
             onChange={(e) =>
-              setCode(e.target.value.replace(/\D/g, "").slice(0, 6))
+              setCode(e.target.value.replace(/\D/g, "").slice(0, 8))
             }
             placeholder={t(locale, "login.codePlaceholder")}
             className="mt-2 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-center font-mono text-lg tracking-[0.4em] text-[var(--color-cream)] outline-none placeholder:tracking-normal placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
@@ -126,7 +126,7 @@ export default function LoginForm({ locale }: { locale: Locale }) {
 
           <button
             type="submit"
-            disabled={status === "verifying" || code.length < 6}
+            disabled={status === "verifying" || code.length < 8}
             className="mt-6 w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)] disabled:opacity-50"
           >
             {status === "verifying"
