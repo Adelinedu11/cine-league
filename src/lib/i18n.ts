@@ -130,6 +130,9 @@ export const dict: Record<Locale, Dict> = {
     "round.whyChoice": "Pourquoi ce choix ? (optionnel)",
     "round.voteCommentPlaceholder": "Quelques mots sur ton vote…",
     "round.voteButton": "Voter",
+    "round.votersTitle": "Qui a voté",
+    "round.voterVoted": "a voté",
+    "round.voterPending": "pas encore",
     "round.resultsTitle": "Résultats",
 
     // Recherche / soumission de film
@@ -273,6 +276,9 @@ export const dict: Record<Locale, Dict> = {
     "round.whyChoice": "Why this choice? (optional)",
     "round.voteCommentPlaceholder": "A few words about your vote…",
     "round.voteButton": "Vote",
+    "round.votersTitle": "Who has voted",
+    "round.voterVoted": "voted",
+    "round.voterPending": "not yet",
     "round.resultsTitle": "Results",
 
     // Film search / submission

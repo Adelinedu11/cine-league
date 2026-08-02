@@ -66,14 +66,17 @@ export default async function RoundPage({
   const locale = await getLocale();
   const nextStatus = ROUND_NEXT_STATUS[round.status];
 
-  // La transition n'est possible qu'une fois la date seuil dépassée.
+  // La transition n'est possible qu'une fois la date seuil dépassée…
+  // …sauf pour un admin de la ligue, qui peut forcer la transition (même règle
+  // que la Server Action advanceStatus).
   const thresholdIso = transitionThresholdIso(
     round.status,
     round.submission_deadline,
     round.ceremony_at,
   );
   const canAdvance =
-    thresholdIso !== null && Date.now() > new Date(thresholdIso).getTime();
+    Boolean(isAdmin) ||
+    (thresholdIso !== null && Date.now() > new Date(thresholdIso).getTime());
   const advanceBlockedMessage =
     round.status === "submission" && thresholdIso
       ? t(locale, "round.votesOpenOn", {
@@ -289,14 +292,19 @@ export default async function RoundPage({
     platforms: string[] | null;
     poster_path: string | null;
   }[] = [];
+  // Qui a voté (existence d'un vote uniquement, jamais le contenu).
+  let voters: { display_name: string; has_voted: boolean }[] = [];
   if (round.status === "voting") {
-    const [{ data: cats }, { data: ballotRows }] = await Promise.all([
-      supabase.from("categories").select("id, name").order("name"),
-      // Films du round SAUF celui du votant, sans jamais exposer les user_id.
-      supabase.rpc("round_ballot", { _round_id: roundId }),
-    ]);
+    const [{ data: cats }, { data: ballotRows }, { data: voterRows }] =
+      await Promise.all([
+        supabase.from("categories").select("id, name").order("name"),
+        // Films du round SAUF celui du votant, sans jamais exposer les user_id.
+        supabase.rpc("round_ballot", { _round_id: roundId }),
+        supabase.rpc("round_voters", { _round_id: roundId }),
+      ]);
     categories = cats ?? [];
     ballot = ballotRows ?? [];
+    voters = voterRows ?? [];
   }
 
   // Résultats (uniquement en phase closed) : gagnant(s) par catégorie + ex-aequo.
@@ -622,6 +630,36 @@ export default async function RoundPage({
                 {t(locale, "round.voteButton")}
               </SubmitButton>
             </form>
+          )}
+
+          {/* Qui a voté (présence uniquement, jamais le contenu du vote). */}
+          {voters.length > 0 && (
+            <div className="mt-2 flex flex-col gap-2">
+              <h3 className="font-display text-lg tracking-wide text-[var(--color-cream)]">
+                {t(locale, "round.votersTitle")}
+              </h3>
+              <ul className="flex flex-col gap-1">
+                {voters.map((voter, i) => (
+                  <li
+                    key={`${voter.display_name}-${i}`}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm"
+                  >
+                    <span className="text-[var(--color-cream)]">
+                      {voter.display_name}
+                    </span>
+                    <span className="font-mono text-xs text-[var(--color-muted)]">
+                      {voter.has_voted ? "✅" : "⏳"}{" "}
+                      {t(
+                        locale,
+                        voter.has_voted
+                          ? "round.voterVoted"
+                          : "round.voterPending",
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </section>
       )}

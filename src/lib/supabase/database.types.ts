@@ -298,6 +298,13 @@ export type Database = {
           comment: string
         }[]
       }
+      round_voters: {
+        Args: { _round_id: string }
+        Returns: {
+          display_name: string
+          has_voted: boolean
+        }[]
+      }
       get_round_results: {
         Args: { p_round_id: string }
         Returns: {
