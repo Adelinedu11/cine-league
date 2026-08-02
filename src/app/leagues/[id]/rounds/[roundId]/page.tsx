@@ -307,6 +307,15 @@ export default async function RoundPage({
     voters = voterRows ?? [];
   }
 
+  // Qui a soumis (existence d'une soumission uniquement, jamais le film).
+  let submitters: { display_name: string; has_submitted: boolean }[] = [];
+  if (round.status === "submission") {
+    const { data: submitterRows } = await supabase.rpc("round_submitters", {
+      _round_id: roundId,
+    });
+    submitters = submitterRows ?? [];
+  }
+
   // Résultats (uniquement en phase closed) : gagnant(s) par catégorie + ex-aequo.
   let results: {
     categoryId: string;
@@ -536,6 +545,36 @@ export default async function RoundPage({
             error={submissionError ?? null}
             submitFilm={submitFilm}
           />
+
+          {/* Qui a soumis (présence uniquement, jamais le film soumis). */}
+          {submitters.length > 0 && (
+            <div className="mt-2 flex flex-col gap-2">
+              <h3 className="font-display text-lg tracking-wide text-[var(--color-cream)]">
+                {t(locale, "round.submittersTitle")}
+              </h3>
+              <ul className="flex flex-col gap-1">
+                {submitters.map((submitter, i) => (
+                  <li
+                    key={`${submitter.display_name}-${i}`}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm"
+                  >
+                    <span className="text-[var(--color-cream)]">
+                      {submitter.display_name}
+                    </span>
+                    <span className="font-mono text-xs text-[var(--color-muted)]">
+                      {submitter.has_submitted ? "✅" : "⏳"}{" "}
+                      {t(
+                        locale,
+                        submitter.has_submitted
+                          ? "round.submitterSubmitted"
+                          : "round.voterPending",
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </section>
       )}
 

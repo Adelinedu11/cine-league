@@ -133,6 +133,8 @@ export const dict: Record<Locale, Dict> = {
     "round.votersTitle": "Qui a voté",
     "round.voterVoted": "a voté",
     "round.voterPending": "pas encore",
+    "round.submittersTitle": "Qui a soumis",
+    "round.submitterSubmitted": "a soumis",
     "round.resultsTitle": "Résultats",
 
     // Recherche / soumission de film
@@ -279,6 +281,8 @@ export const dict: Record<Locale, Dict> = {
     "round.votersTitle": "Who has voted",
     "round.voterVoted": "voted",
     "round.voterPending": "not yet",
+    "round.submittersTitle": "Who has submitted",
+    "round.submitterSubmitted": "submitted",
     "round.resultsTitle": "Results",
 
     // Film search / submission

@@ -25,6 +25,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `012_league_admin_actions.sql` | policies UPDATE / DELETE sur `leagues` (admin : renommer / supprimer) | 008 |
 | `013_find_league_by_code.sql` | RPC `find_league_by_invite_code` (résout un code → id, contourne la RLS pour `joinLeague`) | — |
 | `014_round_voters.sql` | RPC `round_voters` (membres + `has_voted`, sans jamais exposer le contenu des votes) | 001 |
+| `015_round_submitters.sql` | RPC `round_submitters` (membres + `has_submitted`, sans jamais exposer le film soumis) | 001 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

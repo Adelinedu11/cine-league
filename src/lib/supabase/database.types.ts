@@ -305,6 +305,13 @@ export type Database = {
           has_voted: boolean
         }[]
       }
+      round_submitters: {
+        Args: { _round_id: string }
+        Returns: {
+          display_name: string
+          has_submitted: boolean
+        }[]
+      }
       get_round_results: {
         Args: { p_round_id: string }
         Returns: {
