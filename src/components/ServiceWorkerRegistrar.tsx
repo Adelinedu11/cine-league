@@ -11,9 +11,27 @@ export default function ServiceWorkerRegistrar() {
     if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) {
       return;
     }
-    navigator.serviceWorker.register("/sw.js").catch((err) => {
-      console.error("Échec d'enregistrement du service worker :", err);
-    });
+
+    if (process.env.NODE_ENV === "production") {
+      navigator.serviceWorker.register("/sw.js").catch((err) => {
+        console.error("Échec d'enregistrement du service worker :", err);
+      });
+      return;
+    }
+
+    // En développement, le cache-first du SW ressert des bundles /_next/static
+    // périmés (traductions/labels obsolètes malgré un rebuild). On le retire et
+    // on vide ses caches.
+    navigator.serviceWorker
+      .getRegistrations()
+      .then((regs) => regs.forEach((r) => r.unregister()))
+      .catch(() => {});
+    if (typeof caches !== "undefined") {
+      caches
+        .keys()
+        .then((keys) => keys.forEach((k) => caches.delete(k)))
+        .catch(() => {});
+    }
   }, []);
 
   return null;

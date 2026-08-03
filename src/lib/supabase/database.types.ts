@@ -29,6 +29,119 @@ export type Database = {
         }
         Relationships: []
       }
+      cine_files_targets: {
+        Row: {
+          cast_names: string[] | null
+          country: string | null
+          created_at: string | null
+          director: string | null
+          film_title: string | null
+          genres: string[] | null
+          id: string
+          original_language: string | null
+          platforms: string[] | null
+          release_date: string | null
+          round_id: string | null
+          tmdb_id: number | null
+          user_id: string | null
+        }
+        Insert: {
+          cast_names?: string[] | null
+          country?: string | null
+          created_at?: string | null
+          director?: string | null
+          film_title?: string | null
+          genres?: string[] | null
+          id?: string
+          original_language?: string | null
+          platforms?: string[] | null
+          release_date?: string | null
+          round_id?: string | null
+          tmdb_id?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          cast_names?: string[] | null
+          country?: string | null
+          created_at?: string | null
+          director?: string | null
+          film_title?: string | null
+          genres?: string[] | null
+          id?: string
+          original_language?: string | null
+          platforms?: string[] | null
+          release_date?: string | null
+          round_id?: string | null
+          tmdb_id?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cine_files_targets_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cine_files_guesses: {
+        Row: {
+          attempt_number: number | null
+          feedback: Json | null
+          found: boolean | null
+          guess_meta: Json | null
+          guessed_at: string | null
+          guessed_title: string | null
+          guessed_tmdb_id: number | null
+          guesser_id: string | null
+          id: string
+          round_id: string | null
+          target_id: string | null
+        }
+        Insert: {
+          attempt_number?: number | null
+          feedback?: Json | null
+          found?: boolean | null
+          guess_meta?: Json | null
+          guessed_at?: string | null
+          guessed_title?: string | null
+          guessed_tmdb_id?: number | null
+          guesser_id?: string | null
+          id?: string
+          round_id?: string | null
+          target_id?: string | null
+        }
+        Update: {
+          attempt_number?: number | null
+          feedback?: Json | null
+          found?: boolean | null
+          guess_meta?: Json | null
+          guessed_at?: string | null
+          guessed_title?: string | null
+          guessed_tmdb_id?: number | null
+          guesser_id?: string | null
+          id?: string
+          round_id?: string | null
+          target_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cine_files_guesses_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "rounds"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cine_files_guesses_target_id_fkey"
+            columns: ["target_id"]
+            isOneToOne: false
+            referencedRelation: "cine_files_targets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       league_members: {
         Row: {
           display_name: string
@@ -85,10 +198,29 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          pseudo: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          pseudo?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          pseudo?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       rounds: {
         Row: {
           ceremony_at: string
           created_at: string | null
+          game_mode: string
           id: string
           league_id: string | null
           status: string
@@ -98,6 +230,7 @@ export type Database = {
         Insert: {
           ceremony_at: string
           created_at?: string | null
+          game_mode?: string
           id?: string
           league_id?: string | null
           status?: string
@@ -107,6 +240,7 @@ export type Database = {
         Update: {
           ceremony_at?: string
           created_at?: string | null
+          game_mode?: string
           id?: string
           league_id?: string | null
           status?: string
@@ -311,6 +445,36 @@ export type Database = {
           display_name: string
           has_submitted: boolean
         }[]
+      }
+      round_cine_mysteries: {
+        Args: { _round_id: string }
+        Returns: {
+          target_id: string
+          display_name: string
+          attempts: number
+          found: boolean
+        }[]
+      }
+      compute_cine_score: {
+        Args: { _attempts: number }
+        Returns: number
+      }
+      round_cine_files_scores: {
+        Args: { _round_id: string }
+        Returns: { display_name: string; total_points: number }[]
+      }
+      league_cine_files_history: {
+        Args: { _league_id: string }
+        Returns: { display_name: string; total_points: number }[]
+      }
+      submit_cine_guess: {
+        Args: {
+          _target_id: string
+          _guessed_tmdb_id: number
+          _guessed_title: string
+          _guess: Json
+        }
+        Returns: Json
       }
       get_round_results: {
         Args: { p_round_id: string }

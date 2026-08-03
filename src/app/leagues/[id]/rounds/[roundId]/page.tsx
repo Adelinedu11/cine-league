@@ -1,15 +1,22 @@
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { fetchMovieCredits } from "@/lib/tmdb";
 import {
-  ROUND_NEXT_STATUS,
+  fetchMovieCredits,
+  fetchMovieDetails,
+  fetchMoviePlatforms,
+} from "@/lib/tmdb";
+import {
+  nextRoundStatus,
   formatRoundDate,
   formatRoundDateWithHour,
   transitionThresholdIso,
 } from "@/lib/rounds";
 import { getLocale, t } from "@/lib/i18n";
+import type { Json } from "@/lib/supabase/database.types";
 import FilmSearch from "./FilmSearch";
+import CineGuessBoard from "./CineGuessBoard";
+import Avatar from "@/components/Avatar";
 import RoundResults from "./RoundResults";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
@@ -21,10 +28,14 @@ export default async function RoundPage({
   searchParams,
 }: {
   params: Promise<{ id: string; roundId: string }>;
-  searchParams: Promise<{ error?: string; voted?: string }>;
+  searchParams: Promise<{ error?: string; voted?: string; mystery?: string }>;
 }) {
   const { id, roundId } = await params;
-  const { error: submissionError, voted } = await searchParams;
+  const {
+    error: submissionError,
+    voted,
+    mystery: selectedMystery,
+  } = await searchParams;
 
   const supabase = await createClient();
   const {
@@ -54,7 +65,9 @@ export default async function RoundPage({
 
   const { data: round } = await supabase
     .from("rounds")
-    .select("id, theme, status, submission_deadline, ceremony_at, league_id")
+    .select(
+      "id, theme, status, submission_deadline, ceremony_at, league_id, game_mode",
+    )
     .eq("id", roundId)
     .eq("league_id", id)
     .maybeSingle();
@@ -64,7 +77,7 @@ export default async function RoundPage({
   }
 
   const locale = await getLocale();
-  const nextStatus = ROUND_NEXT_STATUS[round.status];
+  const nextStatus = nextRoundStatus(round.status, round.game_mode);
 
   // La transition n'est possible qu'une fois la date seuil dépassée…
   // …sauf pour un admin de la ligue, qui peut forcer la transition (même règle
@@ -96,6 +109,18 @@ export default async function RoundPage({
     .eq("user_id", user.id)
     .maybeSingle();
 
+  // Mode Ciné'Files : film mystère de l'utilisateur courant (le sien seulement).
+  let myCineTarget: { film_title: string | null } | null = null;
+  if (round.game_mode === "cine_files") {
+    const { data } = await supabase
+      .from("cine_files_targets")
+      .select("film_title")
+      .eq("round_id", roundId)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    myCineTarget = data;
+  }
+
   // --- Server Action : faire avancer le statut du round ---
   async function advanceStatus() {
     "use server";
@@ -121,7 +146,7 @@ export default async function RoundPage({
     // confiance à des valeurs venues du client.
     const { data: current } = await supabase
       .from("rounds")
-      .select("status, submission_deadline, ceremony_at")
+      .select("status, submission_deadline, ceremony_at, game_mode")
       .eq("id", roundId)
       .eq("league_id", id)
       .maybeSingle();
@@ -130,7 +155,7 @@ export default async function RoundPage({
       redirect(`/leagues/${id}/rounds/${roundId}`);
     }
 
-    const next = ROUND_NEXT_STATUS[current.status];
+    const next = nextRoundStatus(current.status, current.game_mode);
     if (!next) {
       redirect(`/leagues/${id}/rounds/${roundId}`);
     }
@@ -284,6 +309,138 @@ export default async function RoundPage({
     redirect(`/leagues/${id}/rounds/${roundId}`);
   }
 
+  // --- Server Action : choisir/modifier son film mystère (mode Ciné'Files) ---
+  async function submitCineFile(formData: FormData) {
+    "use server";
+    const filmTitle = String(formData.get("film_title") ?? "").trim();
+    const tmdbIdRaw = String(formData.get("tmdb_id") ?? "");
+
+    if (!filmTitle) {
+      redirect(`/leagues/${id}/rounds/${roundId}?error=submit`);
+    }
+
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      redirect("/login");
+    }
+
+    // Round en mode Ciné'Files ET en phase de soumission (revérifié serveur).
+    const { data: currentRound } = await supabase
+      .from("rounds")
+      .select("status, game_mode")
+      .eq("id", roundId)
+      .eq("league_id", id)
+      .maybeSingle();
+    if (
+      !currentRound ||
+      currentRound.status !== "submission" ||
+      currentRound.game_mode !== "cine_files"
+    ) {
+      redirect(`/leagues/${id}/rounds/${roundId}?error=closed`);
+    }
+
+    const tmdbId = /^\d+$/.test(tmdbIdRaw) ? Number(tmdbIdRaw) : null;
+
+    // Métadonnées re-récupérées côté serveur (source d'autorité) pour la
+    // comparaison future : crédits, détails, plateformes.
+    const [{ director, cast: castNames }, details, platforms] = tmdbId
+      ? await Promise.all([
+          fetchMovieCredits(tmdbId),
+          fetchMovieDetails(tmdbId),
+          fetchMoviePlatforms(tmdbId),
+        ])
+      : [
+          { director: null, cast: [] as string[] },
+          {
+            genres: [] as string[],
+            releaseDate: null,
+            originalLanguage: null,
+            country: null,
+          },
+          [] as string[],
+        ];
+
+    const { error } = await supabase.from("cine_files_targets").upsert(
+      {
+        round_id: roundId,
+        user_id: user.id,
+        tmdb_id: tmdbId,
+        film_title: filmTitle,
+        genres: details.genres,
+        release_date: details.releaseDate,
+        director,
+        country: details.country,
+        original_language: details.originalLanguage,
+        cast_names: castNames,
+        platforms,
+      },
+      { onConflict: "round_id,user_id" },
+    );
+
+    if (error) {
+      redirect(`/leagues/${id}/rounds/${roundId}?error=submit`);
+    }
+
+    redirect(`/leagues/${id}/rounds/${roundId}`);
+  }
+
+  // --- Server Action : proposer un film pour un mystère (mode Ciné'Files) ---
+  async function submitGuess(targetId: string, formData: FormData) {
+    "use server";
+    const guessedTitle = String(formData.get("film_title") ?? "").trim();
+    const tmdbIdRaw = String(formData.get("tmdb_id") ?? "");
+    const tmdbId = /^\d+$/.test(tmdbIdRaw) ? Number(tmdbIdRaw) : null;
+
+    if (!guessedTitle || tmdbId === null) {
+      redirect(`/leagues/${id}/rounds/${roundId}?error=guess`);
+    }
+
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      redirect("/login");
+    }
+
+    // Métadonnées du film DEVINÉ, re-récupérées côté serveur.
+    const [{ director, cast }, details, platforms] = await Promise.all([
+      fetchMovieCredits(tmdbId),
+      fetchMovieDetails(tmdbId),
+      fetchMoviePlatforms(tmdbId),
+    ]);
+
+    // Le feedback est calculé ENTIÈREMENT en base (submit_cine_guess,
+    // SECURITY DEFINER) : les métadonnées de la cible ne quittent jamais le
+    // serveur SQL. On ne transmet que les métadonnées du film deviné.
+    const { error } = await supabase.rpc("submit_cine_guess", {
+      _target_id: targetId,
+      _guessed_tmdb_id: tmdbId,
+      _guessed_title: guessedTitle,
+      _guess: {
+        genres: details.genres,
+        releaseDate: details.releaseDate,
+        director,
+        country: details.country,
+        originalLanguage: details.originalLanguage,
+        castNames: cast,
+        platforms,
+      },
+    });
+
+    if (error) {
+      redirect(
+        `/leagues/${id}/rounds/${roundId}?mystery=${targetId}&error=guess`,
+      );
+    }
+
+    // On garde le mystère ouvert après la proposition.
+    redirect(`/leagues/${id}/rounds/${roundId}?mystery=${targetId}`);
+  }
+
   // Données du bulletin de vote (uniquement en phase voting).
   let categories: { id: string; name: string }[] = [];
   let ballot: {
@@ -308,12 +465,46 @@ export default async function RoundPage({
   }
 
   // Qui a soumis (existence d'une soumission uniquement, jamais le film).
+  // Mode compétition seulement — round_submitters s'appuie sur `submissions`.
   let submitters: { display_name: string; has_submitted: boolean }[] = [];
-  if (round.status === "submission") {
+  if (
+    round.status === "submission" &&
+    round.game_mode === "competition_officielle"
+  ) {
     const { data: submitterRows } = await supabase.rpc("round_submitters", {
       _round_id: roundId,
     });
     submitters = submitterRows ?? [];
+  }
+
+  // Mode Ciné'Files (round non clos) : mystères à deviner + tentatives perso.
+  let cineMysteries: {
+    target_id: string;
+    display_name: string;
+    attempts: number;
+    found: boolean;
+  }[] = [];
+  let myGuesses: {
+    target_id: string | null;
+    guessed_title: string | null;
+    feedback: Json | null;
+    guess_meta: Json | null;
+    attempt_number: number | null;
+    found: boolean | null;
+  }[] = [];
+  if (round.game_mode === "cine_files" && round.status !== "closed") {
+    const [{ data: mysteryRows }, { data: guessRows }] = await Promise.all([
+      supabase.rpc("round_cine_mysteries", { _round_id: roundId }),
+      supabase
+        .from("cine_files_guesses")
+        .select(
+          "target_id, guessed_title, feedback, guess_meta, attempt_number, found",
+        )
+        .eq("round_id", roundId)
+        .order("attempt_number", { ascending: true }),
+    ]);
+    cineMysteries = mysteryRows ?? [];
+    myGuesses = guessRows ?? [];
   }
 
   // Résultats (uniquement en phase closed) : gagnant(s) par catégorie + ex-aequo.
@@ -330,7 +521,7 @@ export default async function RoundPage({
       posterPath: string | null;
     }[];
   }[] = [];
-  if (round.status === "closed") {
+  if (round.status === "closed" && round.game_mode === "competition_officielle") {
     const [{ data: rawResults }, { data: details }, { data: voteComments }] =
       await Promise.all([
         supabase.rpc("get_round_results", { p_round_id: roundId }),
@@ -396,6 +587,15 @@ export default async function RoundPage({
         }));
       return { categoryId, categoryName: name, tie: winners.length > 1, winners };
     });
+  }
+
+  // Classement d'une séance Ciné'Files clôturée.
+  let cineScores: { display_name: string; total_points: number }[] = [];
+  if (round.status === "closed" && round.game_mode === "cine_files") {
+    const { data } = await supabase.rpc("round_cine_files_scores", {
+      _round_id: roundId,
+    });
+    cineScores = data ?? [];
   }
 
   // --- Server Action : enregistrer les votes (un choix par catégorie) ---
@@ -478,7 +678,17 @@ export default async function RoundPage({
             {round.theme}
           </h1>
           <span className="font-mono rounded-full bg-[var(--color-surface-alt)] px-2 py-1 text-xs text-[var(--color-muted)]">
-            {t(locale, `roundStatus.${round.status}`)}
+            {round.game_mode === "cine_files" && round.status === "submission"
+              ? t(locale, "roundStatus.cineOngoing")
+              : t(locale, `roundStatus.${round.status}`)}
+          </span>
+          <span className="font-mono rounded-full border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-gold)]">
+            {t(
+              locale,
+              round.game_mode === "cine_files"
+                ? "roundMode.cineFiles"
+                : "roundMode.competition",
+            )}
           </span>
         </div>
         <p className="font-mono mt-3 text-xs text-[var(--color-muted)]">
@@ -503,7 +713,9 @@ export default async function RoundPage({
                   disabled={!canAdvance}
                   className="rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
                 >
-                  {t(locale, `roundAction.${round.status}`)}
+                  {round.game_mode === "cine_files"
+                    ? t(locale, "roundAction.cineClose")
+                    : t(locale, `roundAction.${round.status}`)}
                 </SubmitButton>
               </form>
               {!canAdvance && advanceBlockedMessage && (
@@ -531,8 +743,28 @@ export default async function RoundPage({
         </div>
       )}
 
-      {/* Phase de soumission */}
-      {round.status === "submission" && (
+      {/* Phase de soumission — mode Ciné'Files : film mystère. */}
+      {round.status === "submission" && round.game_mode === "cine_files" && (
+        <section className="flex flex-col gap-3">
+          <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "cinefiles.submissionTitle")}
+          </h2>
+          <FilmSearch
+            roundId={roundId}
+            locale={locale}
+            existingTitle={myCineTarget?.film_title ?? null}
+            existingComment={null}
+            error={submissionError ?? null}
+            submitFilm={submitCineFile}
+            submitLabel={t(locale, "cinefiles.chooseButton")}
+            showComment={false}
+          />
+        </section>
+      )}
+
+      {/* Phase de soumission — mode Compétition officielle. */}
+      {round.status === "submission" &&
+        round.game_mode === "competition_officielle" && (
         <section className="flex flex-col gap-3">
           <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
             {t(locale, "round.submissionTitle")}
@@ -578,8 +810,28 @@ export default async function RoundPage({
         </section>
       )}
 
-      {/* Phase de vote */}
-      {round.status === "voting" && (
+      {/* Mode Ciné'Files (round non clos) : deviner les films mystères. */}
+      {round.game_mode === "cine_files" && round.status !== "closed" && (
+        <section className="flex flex-col gap-3">
+          <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "cinefiles.guessTitle")}
+          </h2>
+          <CineGuessBoard
+            locale={locale}
+            roundId={roundId}
+            hasOwnTarget={!!myCineTarget}
+            mysteries={cineMysteries}
+            guesses={myGuesses}
+            submitGuess={submitGuess}
+            error={submissionError === "guess"}
+            initialSelected={selectedMystery ?? null}
+          />
+        </section>
+      )}
+
+      {/* Phase de vote — mode Compétition officielle. */}
+      {round.status === "voting" &&
+        round.game_mode === "competition_officielle" && (
         <section className="flex flex-col gap-4">
           <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
             {t(locale, "round.voteTitle")}
@@ -703,13 +955,50 @@ export default async function RoundPage({
         </section>
       )}
 
-      {/* Round terminé : résultats */}
-      {round.status === "closed" && (
+      {/* Séance terminée — Compétition : résultats par catégorie. */}
+      {round.status === "closed" &&
+        round.game_mode === "competition_officielle" && (
+          <section className="flex flex-col gap-4">
+            <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+              {t(locale, "round.resultsTitle")}
+            </h2>
+            <RoundResults results={results} locale={locale} />
+          </section>
+        )}
+
+      {/* Séance terminée — Ciné'Files : classement de la séance. */}
+      {round.status === "closed" && round.game_mode === "cine_files" && (
         <section className="flex flex-col gap-4">
           <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
-            {t(locale, "round.resultsTitle")}
+            {t(locale, "cinefiles.roundScoresTitle")}
           </h2>
-          <RoundResults results={results} locale={locale} />
+          {cineScores.length === 0 ? (
+            <p className="text-sm text-[var(--color-muted)]">
+              {t(locale, "league.cineStandingsEmpty")}
+            </p>
+          ) : (
+            <ul className="flex flex-col gap-2">
+              {cineScores.map((entry, i) => (
+                <li
+                  key={`${entry.display_name}-${i}`}
+                  className="flex items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="font-display w-6 text-center text-xl text-[var(--color-gold)]">
+                      {i + 1}
+                    </span>
+                    <Avatar name={entry.display_name} size={28} />
+                    <span className="text-[var(--color-cream)]">
+                      {entry.display_name}
+                    </span>
+                  </span>
+                  <span className="font-mono text-sm text-[var(--color-muted)]">
+                    {t(locale, "league.points", { count: entry.total_points })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       )}
     </main>

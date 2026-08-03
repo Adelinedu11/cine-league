@@ -13,6 +13,20 @@ export const ROUND_NEXT_STATUS: Record<string, string | undefined> = {
   voting: "closed",
 };
 
+/**
+ * État suivant selon le mode de jeu. Ciné'Files n'a que 2 phases :
+ * submission → closed (on saute voting). Compétition : cycle complet.
+ */
+export function nextRoundStatus(
+  status: string,
+  gameMode: string,
+): string | undefined {
+  if (gameMode === "cine_files") {
+    return status === "submission" ? "closed" : undefined;
+  }
+  return ROUND_NEXT_STATUS[status];
+}
+
 /** Code de locale Intl selon la langue de l'app. */
 const DATE_LOCALE: Record<Locale, string> = { fr: "fr-FR", en: "en-GB" };
 

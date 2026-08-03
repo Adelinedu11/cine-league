@@ -65,3 +65,77 @@ export async function fetchMovieCredits(
     return { director: null, cast: [] };
   }
 }
+
+/**
+ * Détails d'un film pour la comparaison Ciné'Files : genres, date de sortie,
+ * langue originale, pays de production principal. Valeurs nulles/vides en cas
+ * d'échec (jamais d'exception réseau).
+ */
+export async function fetchMovieDetails(movieId: string | number): Promise<{
+  genres: string[];
+  releaseDate: string | null;
+  originalLanguage: string | null;
+  country: string | null;
+}> {
+  try {
+    const res = await tmdbFetch(`/movie/${movieId}`, { language: "fr-FR" });
+    if (!res.ok) {
+      return {
+        genres: [],
+        releaseDate: null,
+        originalLanguage: null,
+        country: null,
+      };
+    }
+    const data = await res.json();
+
+    const genres = (data.genres ?? [])
+      .map((g: { name?: string }) => g.name)
+      .filter((n: unknown): n is string => typeof n === "string");
+
+    const releaseDate =
+      typeof data.release_date === "string" && data.release_date !== ""
+        ? data.release_date
+        : null;
+
+    const originalLanguage =
+      typeof data.original_language === "string" ? data.original_language : null;
+
+    const country =
+      (data.production_countries ?? [])[0]?.iso_3166_1 ??
+      (data.origin_country ?? [])[0] ??
+      null;
+
+    return { genres, releaseDate, originalLanguage, country };
+  } catch {
+    return {
+      genres: [],
+      releaseDate: null,
+      originalLanguage: null,
+      country: null,
+    };
+  }
+}
+
+/**
+ * Plateformes de streaming FR d'un film (même logique que la route providers),
+ * pour un usage côté serveur (Server Actions).
+ */
+export async function fetchMoviePlatforms(
+  movieId: string | number,
+): Promise<string[]> {
+  try {
+    const res = await tmdbFetch(`/movie/${movieId}/watch/providers`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    const fr = data.results?.FR;
+    type Provider = { provider_name: string };
+    const offers: Provider[] =
+      fr?.flatrate ?? fr?.free ?? fr?.ads ?? fr?.rent ?? fr?.buy ?? [];
+    return offers
+      .map((p) => p.provider_name)
+      .filter((n): n is string => typeof n === "string");
+  } catch {
+    return [];
+  }
+}

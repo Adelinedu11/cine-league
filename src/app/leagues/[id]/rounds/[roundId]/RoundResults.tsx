@@ -3,6 +3,7 @@
 import { useState } from "react";
 import TicketStub from "@/components/TicketStub";
 import FilmPoster from "@/components/FilmPoster";
+import Avatar from "@/components/Avatar";
 import { t, type Locale } from "@/lib/i18n";
 
 type Winner = {
@@ -84,8 +85,15 @@ export default function RoundResults({
                       <div className="flex-1">
                         <span className="font-medium">{winner.filmTitle}</span>
                         {revealed && (
-                          <span className="text-[var(--color-muted)]">
+                          <span className="inline-flex items-center gap-1.5 align-middle text-[var(--color-muted)]">
                             {` · ${t(locale, "results.submittedBy")} `}
+                            <Avatar
+                              name={
+                                winner.displayName ??
+                                t(locale, "results.unknown")
+                              }
+                              size={18}
+                            />
                             <span className="font-medium text-[var(--color-cream)]">
                               {winner.displayName ?? t(locale, "results.unknown")}
                             </span>

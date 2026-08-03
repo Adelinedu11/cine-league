@@ -25,6 +25,9 @@ export default function FilmSearch({
   existingComment,
   error,
   submitFilm,
+  submitLabel,
+  showComment = true,
+  checkContradiction,
 }: {
   roundId: string;
   locale: Locale;
@@ -32,6 +35,17 @@ export default function FilmSearch({
   existingComment: string | null;
   error: string | null;
   submitFilm: (formData: FormData) => Promise<void>;
+  submitLabel?: string;
+  showComment?: boolean;
+  // Mode Ciné'Files : valide un candidat contre les indices confirmés ;
+  // renvoie un message de contradiction (bloquant) ou null.
+  checkContradiction?: (candidate: {
+    country: string | null;
+    language: string | null;
+    director: string | null;
+    year: number | null;
+    genres: string[];
+  }) => string | null;
 }) {
   // Si l'utilisateur a déjà soumis, on affiche d'abord un récap ; la recherche
   // ne s'ouvre que s'il clique sur « Modifier » (ou si le serveur a renvoyé une
@@ -44,6 +58,7 @@ export default function FilmSearch({
   const [platforms, setPlatforms] = useState<string[] | null>(null);
   const [overlaps, setOverlaps] = useState<Overlap[]>([]);
   const [loadingDetails, setLoadingDetails] = useState(false);
+  const [contradiction, setContradiction] = useState<string | null>(null);
 
   // Recherche débouncée au fil de la saisie.
   useEffect(() => {
@@ -86,13 +101,17 @@ export default function FilmSearch({
     setQuery(label(movie));
     setPlatforms(null);
     setOverlaps([]);
+    setContradiction(null);
     setLoadingDetails(true);
 
     try {
-      // Plateformes + crédits en parallèle.
-      const [providersRes, creditsRes] = await Promise.all([
+      // Plateformes + crédits (+ détails si contrôle de contradiction).
+      const [providersRes, creditsRes, detailsRes] = await Promise.all([
         fetch(`/api/tmdb/${movie.id}/providers`),
         fetch(`/api/tmdb/${movie.id}/credits`),
+        checkContradiction
+          ? fetch(`/api/tmdb/${movie.id}/details`)
+          : Promise.resolve(null),
       ]);
 
       const providersData = providersRes.ok ? await providersRes.json() : {};
@@ -101,6 +120,24 @@ export default function FilmSearch({
       const creditsData = creditsRes.ok ? await creditsRes.json() : {};
       const movieDirector: string | null = creditsData.director ?? null;
       const movieCast: string[] = creditsData.cast ?? [];
+
+      // Ciné'Files : bloque une proposition qui contredit un indice confirmé.
+      if (checkContradiction && detailsRes && detailsRes.ok) {
+        const d = await detailsRes.json();
+        const year =
+          typeof d.releaseDate === "string" && d.releaseDate.length >= 4
+            ? parseInt(d.releaseDate.slice(0, 4), 10)
+            : null;
+        setContradiction(
+          checkContradiction({
+            country: d.country ?? null,
+            language: d.originalLanguage ?? null,
+            director: movieDirector,
+            year: Number.isFinite(year) ? year : null,
+            genres: d.genres ?? [],
+          }),
+        );
+      }
 
       // Comparaison avec les autres soumissions (côté serveur, sans révéler
       // qui a soumis quoi).
@@ -176,6 +213,7 @@ export default function FilmSearch({
             setSelected(null);
             setPlatforms(null);
             setOverlaps([]);
+            setContradiction(null);
           }}
           placeholder={t(locale, "film.searchPlaceholder")}
           autoComplete="off"
@@ -272,29 +310,37 @@ export default function FilmSearch({
             </ul>
           )}
 
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="comment"
-              className="text-sm font-medium text-[var(--color-cream)]"
-            >
-              {t(locale, "round.whyChoice")}
-            </label>
-            <textarea
-              id="comment"
-              name="comment"
-              rows={3}
-              defaultValue={existingComment ?? ""}
-              placeholder={t(locale, "film.commentPlaceholder")}
-              className="w-full resize-y rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-cream)] outline-none placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
-            />
-          </div>
+          {showComment && (
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="comment"
+                className="text-sm font-medium text-[var(--color-cream)]"
+              >
+                {t(locale, "round.whyChoice")}
+              </label>
+              <textarea
+                id="comment"
+                name="comment"
+                rows={3}
+                defaultValue={existingComment ?? ""}
+                placeholder={t(locale, "film.commentPlaceholder")}
+                className="w-full resize-y rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-cream)] outline-none placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
+              />
+            </div>
+          )}
+
+          {contradiction && (
+            <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+              {contradiction}
+            </p>
+          )}
 
           <SubmitButton
             locale={locale}
-            disabled={loadingDetails}
+            disabled={loadingDetails || contradiction !== null}
             className="w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
           >
-            {t(locale, "film.submitButton")}
+            {submitLabel ?? t(locale, "film.submitButton")}
           </SubmitButton>
         </form>
       )}

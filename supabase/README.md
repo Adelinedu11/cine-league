@@ -26,6 +26,12 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `013_find_league_by_code.sql` | RPC `find_league_by_invite_code` (résout un code → id, contourne la RLS pour `joinLeague`) | — |
 | `014_round_voters.sql` | RPC `round_voters` (membres + `has_voted`, sans jamais exposer le contenu des votes) | 001 |
 | `015_round_submitters.sql` | RPC `round_submitters` (membres + `has_submitted`, sans jamais exposer le film soumis) | 001 |
+| `016_cine_files_foundation.sql` | colonne `game_mode` sur `rounds` + table `cine_files_targets` (films mystères) + RLS | 001 |
+| `017_cine_files_guesses.sql` | table `cine_files_guesses` + RLS + RPC `round_cine_mysteries` / `get_cine_target` (mécanique de devinette) | 001, 016 |
+| `018_cine_files_feedback_sql.sql` | feedback calculé 100 % en base (`submit_cine_guess`, SECURITY DEFINER, ne renvoie que le feedback) ; **remplace** `get_cine_target` (retirée) | 016, 017 |
+| `019_profiles.sql` | table `profiles` (pseudo global) + RLS ; toutes les fonctions de nom passent à `coalesce(pseudo, display_name)` ; `round_cine_mysteries` renvoie le nom du joueur (attribution) | 008, 009, 011, 014, 015, 017 |
+| `020_cine_guess_meta.sql` | colonne `guess_meta` sur `cine_files_guesses` (métadonnées du film proposé) + `submit_cine_guess` la stocke — pour indices confirmés & blocage des contradictions | 016, 017, 018 |
+| `021_cine_files_scoring.sql` | `compute_cine_score`, `round_cine_files_scores`, `league_cine_files_history` (barème + classements Ciné'Files) | 016, 017, 019, 020 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

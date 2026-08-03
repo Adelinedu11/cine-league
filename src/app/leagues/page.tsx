@@ -120,6 +120,16 @@ export default async function LeaguesPage({
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-10 p-6">
+      {/* Bandeau d'accueil */}
+      <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+        <h2 className="font-display text-2xl tracking-wide text-[var(--color-gold)]">
+          {t(locale, "leagues.welcomeTitle")}
+        </h2>
+        <p className="mt-2 text-sm text-[var(--color-cream)]/90">
+          {t(locale, "leagues.welcomeIntro")}
+        </p>
+      </section>
+
       <div className="flex flex-col gap-3">
         <span className="font-mono flex w-fit items-center gap-1.5 rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[11px] tracking-wide text-[var(--color-muted)]">
           <Ticket size={13} strokeWidth={1.5} /> {t(locale, "leagues.badge")}

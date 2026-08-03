@@ -4,6 +4,10 @@
    --font-inter, --font-bebas, --font-ibm-plex-mono. */
 
 :root {
+  /* Adapte les contrôles natifs du navigateur (calendrier datetime-local,
+     scrollbars…) au thème sombre par défaut. */
+  color-scheme: dark;
+
   /* Palette bleu-gris — thème sombre par défaut. Le mode clair (bleu nuit sur
      fond blanc) est défini plus bas via :root[data-theme="light"]. */
   --color-bg: #0d1f23;
@@ -33,6 +37,8 @@
    changent sont redéfinis ; --background / --foreground suivent automatiquement
    (substitution paresseuse des variables CSS). */
 :root[data-theme="light"] {
+  color-scheme: light;
+
   --color-bg: #ffffff;
   --color-surface: #f4f7fb;
   --color-surface-alt: #e6ecf6;

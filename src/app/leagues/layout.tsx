@@ -2,9 +2,8 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Ticket } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
-import ThemeToggle from "@/components/ThemeToggle";
-import LocaleToggle from "@/components/LocaleToggle";
-import { getLocale, t } from "@/lib/i18n";
+import HeaderMenu from "@/components/HeaderMenu";
+import { getLocale } from "@/lib/i18n";
 
 export default async function LeaguesLayout({
   children,
@@ -21,6 +20,14 @@ export default async function LeaguesLayout({
   }
 
   const locale = await getLocale();
+
+  // Pseudo global (prioritaire sur l'e-mail) pour le lien profil du header.
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("pseudo")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  const headerName = profile?.pseudo?.trim() || user.email || "?";
 
   async function signOut() {
     "use server";
@@ -46,21 +53,7 @@ export default async function LeaguesLayout({
               Ciné League
             </span>
           </Link>
-          <div className="flex items-center gap-3 overflow-hidden">
-            <LocaleToggle locale={locale} />
-            <ThemeToggle locale={locale} />
-            <span className="font-mono truncate text-sm text-[var(--color-cream)]">
-              {user.email}
-            </span>
-            <form action={signOut}>
-              <button
-                type="submit"
-                className="shrink-0 rounded-lg border border-[var(--color-border)] px-3 py-1.5 text-sm font-medium text-[var(--color-cream)] transition-colors hover:border-[var(--color-gold)]"
-              >
-                {t(locale, "header.signOut")}
-              </button>
-            </form>
-          </div>
+          <HeaderMenu locale={locale} name={headerName} signOut={signOut} />
         </div>
       </header>
       {children}

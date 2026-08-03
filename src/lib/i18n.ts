@@ -24,6 +24,56 @@ export const dict: Record<Locale, Dict> = {
     // Commun
     "common.sending": "Envoi…",
 
+    // Profil
+    "header.profile": "Mon profil",
+    "header.theme": "Thème",
+    "header.language": "Langue",
+    "profile.title": "Mon profil",
+    "profile.back": "← Retour",
+    "profile.hint":
+      "Ton pseudo s'affiche à la place de ton e-mail partout dans l'app.",
+    "profile.pseudoLabel": "Pseudo",
+    "profile.pseudoPlaceholder": "Ton pseudo",
+    "profile.save": "Enregistrer",
+    "profile.saved": "Pseudo enregistré.",
+
+    // Ciné'Files (compléments)
+    "cinefiles.proposalBy": "Proposition de {name}",
+    "roundStatus.cineOngoing": "En cours",
+    "roundAction.cineClose": "Clôturer cette séance",
+    "league.closeDateLabel": "Date de clôture",
+
+    // Onglets + classements + règles
+    "header.rules": "Règles",
+    "league.tabRounds": "Séances",
+    "league.tabMembers": "Membres",
+    "league.tabStandings": "Classements",
+    "league.cineStandingsTitle": "Classement Ciné'Files",
+    "league.cineStandingsEmpty":
+      "Aucun point Ciné'Files pour l'instant — joue une séance Ciné'Files clôturée.",
+    "league.points": "{count} pts",
+    "cinefiles.roundScoresTitle": "Classement de la séance",
+    "rules.title": "Règles du jeu",
+    "rules.back": "← Retour",
+    "rules.intro": "Deux modes de jeu, une même ligue.",
+    "rules.compTitle": "Compétition officielle",
+    "rules.compBody":
+      "Chaque membre soumet un film de façon anonyme sur un thème donné. Une fois les votes ouverts, chacun vote par catégorie (meilleur film, meilleur réalisateur…) sans savoir qui a proposé quoi. À la clôture, le générique est révélé : on découvre qui avait soumis chaque film et les gagnants de chaque catégorie.",
+    "rules.cineTitle": "Ciné'Files",
+    "rules.cineBody":
+      "Chaque membre choisit secrètement un film mystère. Les autres tentent de le deviner en proposant des films : chaque proposition renvoie un tableau d'indices par critère — genre, décennie, année, réalisateur, pays, langue, acteurs et plateformes en commun. Les indices confirmés s'accumulent, et une proposition qui contredit un indice déjà confirmé est bloquée.",
+    "rules.cineFeedback":
+      "Vert = exact, ambre = partiel ou proche (flèches ↑/↓ pour l'année et la décennie), gris = aucun rapport.",
+    "rules.scoringTitle": "Score",
+    "rules.scoringGuesser":
+      "Le devineur marque round(100 × (16 − essais) ÷ 15) points s'il trouve en 1 à 15 essais, 0 sinon.",
+    "rules.scoringAuthor":
+      "L'auteur du mystère marque 100 − les points du devineur si son film est trouvé, ou 50 s'il n'est jamais trouvé en 15 essais.",
+    "rules.example1": "Trouvé au 1er essai : devineur 100 pts, auteur 0 pt.",
+    "rules.example15": "Trouvé au 15e essai : devineur 7 pts, auteur 93 pts.",
+    "rules.exampleNever":
+      "Jamais trouvé (15 essais) : devineur 0 pt, auteur 50 pts.",
+
     // Header / bascules
     "header.signOut": "Se déconnecter",
     "toggle.toLight": "Passer en mode clair",
@@ -53,6 +103,9 @@ export const dict: Record<Locale, Dict> = {
     "home.loggedInAs": "Connecté en tant que {email}",
 
     // Liste des ligues
+    "leagues.welcomeTitle": "Bienvenue sur Ciné League 🎬",
+    "leagues.welcomeIntro":
+      "Crée ou rejoins une ligue pour jouer entre amis : proposez des films, votez, devinez les films mystères, et grimpez au classement.",
     "leagues.badge": "VOS LIGUES",
     "leagues.title": "Mes ligues",
     "leagues.subtitle": "Rejoignez ou créez une ligue.",
@@ -80,35 +133,36 @@ export const dict: Record<Locale, Dict> = {
     "league.cancel": "Annuler",
     "league.deleteLeagueButton": "Supprimer cette ligue",
     "league.deleteLeagueConfirm":
-      "Supprimer définitivement cette ligue et tous ses rounds ? Cette action est irréversible.",
-    "league.roundsTitle": "Rounds",
-    "league.roundsEmpty": "Aucun round pour l'instant. Crée le premier ci-dessous.",
+      "Supprimer définitivement cette ligue et toutes ses séances ? Cette action est irréversible.",
+    "league.roundsTitle": "Séances",
+    "league.roundsEmpty":
+      "Aucune séance pour l'instant. Crée la première ci-dessous.",
     "league.standingsTitle": "Classement",
     "league.standingsEmpty":
-      "Aucune victoire pour l'instant — le classement s'affichera après le premier round terminé.",
+      "Aucune victoire pour l'instant — le classement s'affichera après la première séance terminée.",
     "league.wins": "{count} victoires",
     "league.win": "{count} victoire",
     "league.membersTitle": "Membres",
     "league.adminBadge": "Admin",
     "league.exclude": "Exclure",
     "league.excludeConfirm": "Exclure {name} de la ligue ?",
-    "league.createRoundTitle": "Créer un round",
+    "league.createRoundTitle": "Créer une séance",
     "league.themeLabel": "Thème",
     "league.themePlaceholder": "Ex : Films de casse",
     "league.deadlineLabel": "Date limite de soumission",
     "league.ceremonyLabel": "Date de la cérémonie",
     "league.createRoundError":
-      "La création du round a échoué, vérifie les champs et réessaie.",
-    "league.createRoundButton": "Créer le round",
+      "La création de la séance a échoué, vérifie les champs et réessaie.",
+    "league.createRoundButton": "Créer la séance",
 
     // Round — statuts et transitions
     "roundStatus.submission": "Soumissions ouvertes",
     "roundStatus.voting": "Votes en cours",
     "roundStatus.closed": "Terminé",
     "roundAction.submission": "Ouvrir les votes",
-    "roundAction.voting": "Clôturer le round",
+    "roundAction.voting": "Clôturer la séance",
     "round.votesOpenOn": "Les votes ouvriront le {date}.",
-    "round.canCloseOn": "Le round pourra être clôturé le {date}.",
+    "round.canCloseOn": "La séance pourra être clôturée le {date}.",
 
     // Round — dates
     "round.submissionsUntil": "Soumissions jusqu'au {date}",
@@ -118,9 +172,9 @@ export const dict: Record<Locale, Dict> = {
     // Page round
     "round.back": "← Retour à la ligue",
     "round.tooEarly": "Cette transition n'est pas encore possible.",
-    "round.deleteButton": "Supprimer ce round",
+    "round.deleteButton": "Supprimer cette séance",
     "round.deleteConfirm":
-      "Supprimer définitivement ce round ? Cette action est irréversible.",
+      "Supprimer définitivement cette séance ? Cette action est irréversible.",
     "round.submissionTitle": "Ta soumission",
     "round.voteTitle": "Voter",
     "round.votesSaved": "Votes enregistrés.",
@@ -135,6 +189,33 @@ export const dict: Record<Locale, Dict> = {
     "round.voterPending": "pas encore",
     "round.submittersTitle": "Qui a soumis",
     "round.submitterSubmitted": "a soumis",
+    "roundMode.competition": "Compétition officielle",
+    "roundMode.cineFiles": "Ciné'Files",
+    "league.modeLabel": "Type de séance",
+    "cinefiles.submissionTitle": "Ton film mystère",
+    "cinefiles.chooseButton": "Choisir mon film mystère",
+    "cinefiles.guessTitle": "Deviner les films mystères",
+    "cinefiles.chooseFirst":
+      "Choisis d'abord ton film mystère pour pouvoir deviner ceux des autres.",
+    "cinefiles.noMysteries": "Aucun autre film mystère à deviner pour l'instant.",
+    "cinefiles.mystery": "Mystère {label}",
+    "cinefiles.attempt": "{count} tentative",
+    "cinefiles.attempts": "{count} tentatives",
+    "cinefiles.foundBadge": "Trouvé",
+    "cinefiles.guessButton": "Proposer ce film",
+    "cinefiles.guessError": "La tentative a échoué, réessaie.",
+    "cinefiles.attemptsEmpty": "Aucune tentative pour l'instant.",
+    "cinefiles.critGenre": "Genre",
+    "cinefiles.critDecade": "Décennie",
+    "cinefiles.critYear": "Année",
+    "cinefiles.critDirector": "Réalisateur",
+    "cinefiles.critCountry": "Pays",
+    "cinefiles.critLanguage": "Langue",
+    "cinefiles.critActors": "Acteurs",
+    "cinefiles.critPlatforms": "Plateformes",
+    "cinefiles.confirmedHints": "Indices confirmés",
+    "cinefiles.contradiction":
+      "Ce choix contredit l'indice déjà confirmé : {hint}",
     "round.resultsTitle": "Résultats",
 
     // Recherche / soumission de film
@@ -142,7 +223,7 @@ export const dict: Record<Locale, Dict> = {
     "film.editSubmission": "Modifier ma soumission",
     "film.currentSubmission": "Soumission actuelle : {title}",
     "film.errorDuplicate": "Ce film a déjà été choisi par un autre joueur.",
-    "film.errorClosed": "Les soumissions ne sont plus ouvertes pour ce round.",
+    "film.errorClosed": "Les soumissions ne sont plus ouvertes pour cette séance.",
     "film.errorSubmit": "L'enregistrement a échoué, réessaie.",
     "film.searchLabel": "Rechercher un film",
     "film.searchPlaceholder": "Tape un titre…",
@@ -155,7 +236,7 @@ export const dict: Record<Locale, Dict> = {
     "film.submitButton": "Soumettre ce film",
 
     // Résultats / cérémonie
-    "results.empty": "Aucun vote n'a été enregistré pour ce round.",
+    "results.empty": "Aucun vote n'a été enregistré pour cette séance.",
     "results.hideCredits": "Masquer le générique",
     "results.showCredits": "Afficher le générique",
     "results.tie": "Ex-aequo",
@@ -171,6 +252,55 @@ export const dict: Record<Locale, Dict> = {
 
     // Common
     "common.sending": "Sending…",
+
+    // Profile
+    "header.profile": "My profile",
+    "header.theme": "Theme",
+    "header.language": "Language",
+    "profile.title": "My profile",
+    "profile.back": "← Back",
+    "profile.hint":
+      "Your nickname is shown instead of your email everywhere in the app.",
+    "profile.pseudoLabel": "Nickname",
+    "profile.pseudoPlaceholder": "Your nickname",
+    "profile.save": "Save",
+    "profile.saved": "Nickname saved.",
+
+    // Ciné'Files (extras)
+    "cinefiles.proposalBy": "{name}'s pick",
+    "roundStatus.cineOngoing": "Ongoing",
+    "roundAction.cineClose": "Close this screening",
+    "league.closeDateLabel": "Close date",
+
+    // Tabs + standings + rules
+    "header.rules": "Rules",
+    "league.tabRounds": "Screenings",
+    "league.tabMembers": "Members",
+    "league.tabStandings": "Standings",
+    "league.cineStandingsTitle": "Ciné'Files standings",
+    "league.cineStandingsEmpty":
+      "No Ciné'Files points yet — play a closed Ciné'Files screening.",
+    "league.points": "{count} pts",
+    "cinefiles.roundScoresTitle": "Screening standings",
+    "rules.title": "Game rules",
+    "rules.back": "← Back",
+    "rules.intro": "Two game modes, one league.",
+    "rules.compTitle": "Official competition",
+    "rules.compBody":
+      "Each member submits a film anonymously on a given theme. Once voting opens, everyone votes by category (best film, best director…) without knowing who submitted what. At closing, the credits are revealed: you find out who submitted each film and the winners of each category.",
+    "rules.cineTitle": "Ciné'Files",
+    "rules.cineBody":
+      "Each member secretly picks a mystery film. The others try to guess it by proposing films: each proposal returns a table of hints per criterion — genre, decade, year, director, country, language, and shared actors and platforms. Confirmed hints accumulate, and a proposal that contradicts an already-confirmed hint is blocked.",
+    "rules.cineFeedback":
+      "Green = exact, amber = partial or close (↑/↓ arrows for year and decade), grey = unrelated.",
+    "rules.scoringTitle": "Scoring",
+    "rules.scoringGuesser":
+      "The guesser scores round(100 × (16 − tries) ÷ 15) points if they find it within 1 to 15 tries, 0 otherwise.",
+    "rules.scoringAuthor":
+      "The mystery's author scores 100 − the guesser's points if their film is found, or 50 if it's never found within 15 tries.",
+    "rules.example1": "Found on the 1st try: guesser 100 pts, author 0 pt.",
+    "rules.example15": "Found on the 15th try: guesser 7 pts, author 93 pts.",
+    "rules.exampleNever": "Never found (15 tries): guesser 0 pt, author 50 pts.",
 
     // Header / toggles
     "header.signOut": "Sign out",
@@ -201,6 +331,9 @@ export const dict: Record<Locale, Dict> = {
     "home.loggedInAs": "Signed in as {email}",
 
     // Leagues list
+    "leagues.welcomeTitle": "Welcome to Ciné League 🎬",
+    "leagues.welcomeIntro":
+      "Create or join a league to play with friends: submit films, vote, guess mystery films, and climb the standings.",
     "leagues.badge": "YOUR LEAGUES",
     "leagues.title": "My leagues",
     "leagues.subtitle": "Join or create a league.",
@@ -228,35 +361,35 @@ export const dict: Record<Locale, Dict> = {
     "league.cancel": "Cancel",
     "league.deleteLeagueButton": "Delete this league",
     "league.deleteLeagueConfirm":
-      "Permanently delete this league and all its rounds? This action cannot be undone.",
-    "league.roundsTitle": "Rounds",
-    "league.roundsEmpty": "No round yet. Create the first one below.",
+      "Permanently delete this league and all its screenings? This action cannot be undone.",
+    "league.roundsTitle": "Screenings",
+    "league.roundsEmpty": "No screening yet. Create the first one below.",
     "league.standingsTitle": "Standings",
     "league.standingsEmpty":
-      "No win yet — standings will appear after the first completed round.",
+      "No win yet — standings will appear after the first completed screening.",
     "league.wins": "{count} wins",
     "league.win": "{count} win",
     "league.membersTitle": "Members",
     "league.adminBadge": "Admin",
     "league.exclude": "Remove",
     "league.excludeConfirm": "Remove {name} from the league?",
-    "league.createRoundTitle": "Create a round",
+    "league.createRoundTitle": "Create a screening",
     "league.themeLabel": "Theme",
     "league.themePlaceholder": "e.g. Heist movies",
     "league.deadlineLabel": "Submission deadline",
     "league.ceremonyLabel": "Ceremony date",
     "league.createRoundError":
-      "Round creation failed, check the fields and try again.",
-    "league.createRoundButton": "Create the round",
+      "Screening creation failed, check the fields and try again.",
+    "league.createRoundButton": "Create the screening",
 
     // Round — statuses and transitions
     "roundStatus.submission": "Submissions open",
     "roundStatus.voting": "Voting open",
     "roundStatus.closed": "Closed",
     "roundAction.submission": "Open voting",
-    "roundAction.voting": "Close the round",
+    "roundAction.voting": "Close the screening",
     "round.votesOpenOn": "Voting opens on {date}.",
-    "round.canCloseOn": "The round can be closed on {date}.",
+    "round.canCloseOn": "The screening can be closed on {date}.",
 
     // Round — dates
     "round.submissionsUntil": "Submissions until {date}",
@@ -266,9 +399,9 @@ export const dict: Record<Locale, Dict> = {
     // Round page
     "round.back": "← Back to league",
     "round.tooEarly": "This transition isn't possible yet.",
-    "round.deleteButton": "Delete this round",
+    "round.deleteButton": "Delete this screening",
     "round.deleteConfirm":
-      "Permanently delete this round? This action cannot be undone.",
+      "Permanently delete this screening? This action cannot be undone.",
     "round.submissionTitle": "Your submission",
     "round.voteTitle": "Vote",
     "round.votesSaved": "Votes saved.",
@@ -283,6 +416,33 @@ export const dict: Record<Locale, Dict> = {
     "round.voterPending": "not yet",
     "round.submittersTitle": "Who has submitted",
     "round.submitterSubmitted": "submitted",
+    "roundMode.competition": "Official competition",
+    "roundMode.cineFiles": "Ciné'Files",
+    "league.modeLabel": "Screening type",
+    "cinefiles.submissionTitle": "Your mystery film",
+    "cinefiles.chooseButton": "Choose my mystery film",
+    "cinefiles.guessTitle": "Guess the mystery films",
+    "cinefiles.chooseFirst":
+      "Choose your own mystery film first to start guessing the others.",
+    "cinefiles.noMysteries": "No other mystery film to guess yet.",
+    "cinefiles.mystery": "Mystery {label}",
+    "cinefiles.attempt": "{count} attempt",
+    "cinefiles.attempts": "{count} attempts",
+    "cinefiles.foundBadge": "Found",
+    "cinefiles.guessButton": "Guess this film",
+    "cinefiles.guessError": "The guess failed, try again.",
+    "cinefiles.attemptsEmpty": "No attempt yet.",
+    "cinefiles.critGenre": "Genre",
+    "cinefiles.critDecade": "Decade",
+    "cinefiles.critYear": "Year",
+    "cinefiles.critDirector": "Director",
+    "cinefiles.critCountry": "Country",
+    "cinefiles.critLanguage": "Language",
+    "cinefiles.critActors": "Actors",
+    "cinefiles.critPlatforms": "Platforms",
+    "cinefiles.confirmedHints": "Confirmed hints",
+    "cinefiles.contradiction":
+      "This choice contradicts an already-confirmed hint: {hint}",
     "round.resultsTitle": "Results",
 
     // Film search / submission
@@ -290,7 +450,7 @@ export const dict: Record<Locale, Dict> = {
     "film.editSubmission": "Edit my submission",
     "film.currentSubmission": "Current submission: {title}",
     "film.errorDuplicate": "This film was already picked by another player.",
-    "film.errorClosed": "Submissions are closed for this round.",
+    "film.errorClosed": "Submissions are closed for this screening.",
     "film.errorSubmit": "Saving failed, try again.",
     "film.searchLabel": "Search for a film",
     "film.searchPlaceholder": "Type a title…",
@@ -303,7 +463,7 @@ export const dict: Record<Locale, Dict> = {
     "film.submitButton": "Submit this film",
 
     // Results / ceremony
-    "results.empty": "No vote was recorded for this round.",
+    "results.empty": "No vote was recorded for this screening.",
     "results.hideCredits": "Hide the credits",
     "results.showCredits": "Show the credits",
     "results.tie": "Tie",
