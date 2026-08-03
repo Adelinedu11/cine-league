@@ -10,7 +10,7 @@ const inputClass =
 const labelClass = "text-sm font-medium text-[var(--color-cream)]";
 
 /**
- * Sélecteur de mode + champ(s) de date pour « Créer une séance ».
+ * Champs de « Créer une séance » : mode, thème (+ note en Ciné'Files) et date(s).
  * Compétition : date limite de soumission + date de cérémonie.
  * Ciné'Files : une seule « Date de clôture » (le serveur la copie dans les deux
  * colonnes submission_deadline / ceremony_at).
@@ -35,6 +35,23 @@ export default function RoundModeDateFields({ locale }: { locale: Locale }) {
         </option>
         <option value="cine_files">{t(locale, "roundMode.cineFiles")}</option>
       </select>
+
+      <label htmlFor="theme" className={labelClass}>
+        {t(locale, "league.themeLabel")}
+      </label>
+      <input
+        id="theme"
+        name="theme"
+        type="text"
+        required
+        placeholder={t(locale, "league.themePlaceholder")}
+        className={`${inputClass} placeholder:text-[var(--color-cream)]/40`}
+      />
+      {mode === "cine_files" && (
+        <p className="-mt-1 text-xs text-[var(--color-muted)]">
+          {t(locale, "cinefiles.createNote")}
+        </p>
+      )}
 
       {mode === "cine_files" ? (
         <>

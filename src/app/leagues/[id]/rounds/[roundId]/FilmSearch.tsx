@@ -330,14 +330,14 @@ export default function FilmSearch({
           )}
 
           {contradiction && (
-            <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400">
-              {contradiction}
+            <p className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm text-amber-400">
+              ⚠️ {contradiction}
             </p>
           )}
 
           <SubmitButton
             locale={locale}
-            disabled={loadingDetails || contradiction !== null}
+            disabled={loadingDetails}
             className="w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
           >
             {submitLabel ?? t(locale, "film.submitButton")}

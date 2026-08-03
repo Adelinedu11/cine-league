@@ -314,21 +314,6 @@ export default async function LeaguePage({
                     action={createRound}
                     className="mt-4 flex flex-col gap-3"
                   >
-                    <label
-                      htmlFor="theme"
-                      className="text-sm font-medium text-[var(--color-cream)]"
-                    >
-                      {t(locale, "league.themeLabel")}
-                    </label>
-                    <input
-                      id="theme"
-                      name="theme"
-                      type="text"
-                      required
-                      placeholder={t(locale, "league.themePlaceholder")}
-                      className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-cream)] outline-none placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
-                    />
-
                     <RoundModeDateFields locale={locale} />
 
                     {pageError === "round" && (

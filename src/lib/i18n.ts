@@ -38,7 +38,7 @@ export const dict: Record<Locale, Dict> = {
     "profile.saved": "Pseudo enregistré.",
 
     // Ciné'Files (compléments)
-    "cinefiles.proposalBy": "Proposition de {name}",
+    "cinefiles.proposalBy": "Le secret de {name}",
     "roundStatus.cineOngoing": "En cours",
     "roundAction.cineClose": "Clôturer cette séance",
     "league.closeDateLabel": "Date de clôture",
@@ -192,8 +192,12 @@ export const dict: Record<Locale, Dict> = {
     "roundMode.competition": "Compétition officielle",
     "roundMode.cineFiles": "Ciné'Files",
     "league.modeLabel": "Type de séance",
-    "cinefiles.submissionTitle": "Ton film mystère",
+    "cinefiles.submissionTitle": "Ton film secret",
     "cinefiles.chooseButton": "Choisir mon film mystère",
+    "cinefiles.themeExplain":
+      "Le thème est « {theme} ». Chaque joueur a choisi un film secret qui y correspond — devine ceux des autres !",
+    "cinefiles.createNote":
+      "Chacun choisira secrètement un film qui correspond à ce thème.",
     "cinefiles.guessTitle": "Deviner les films mystères",
     "cinefiles.chooseFirst":
       "Choisis d'abord ton film mystère pour pouvoir deviner ceux des autres.",
@@ -267,7 +271,7 @@ export const dict: Record<Locale, Dict> = {
     "profile.saved": "Nickname saved.",
 
     // Ciné'Files (extras)
-    "cinefiles.proposalBy": "{name}'s pick",
+    "cinefiles.proposalBy": "{name}'s secret",
     "roundStatus.cineOngoing": "Ongoing",
     "roundAction.cineClose": "Close this screening",
     "league.closeDateLabel": "Close date",
@@ -419,8 +423,12 @@ export const dict: Record<Locale, Dict> = {
     "roundMode.competition": "Official competition",
     "roundMode.cineFiles": "Ciné'Files",
     "league.modeLabel": "Screening type",
-    "cinefiles.submissionTitle": "Your mystery film",
+    "cinefiles.submissionTitle": "Your secret film",
     "cinefiles.chooseButton": "Choose my mystery film",
+    "cinefiles.themeExplain":
+      "The theme is “{theme}”. Each player picked a secret film that fits it — guess the others!",
+    "cinefiles.createNote":
+      "Everyone will secretly pick a film that matches this theme.",
     "cinefiles.guessTitle": "Guess the mystery films",
     "cinefiles.chooseFirst":
       "Choose your own mystery film first to start guessing the others.",

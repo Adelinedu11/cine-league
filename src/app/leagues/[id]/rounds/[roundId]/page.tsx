@@ -700,6 +700,11 @@ export default async function RoundPage({
             date: formatRoundDate(round.ceremony_at, locale),
           })}
         </p>
+        {round.game_mode === "cine_files" && (
+          <p className="mt-3 max-w-md text-sm text-[var(--color-muted)]">
+            {t(locale, "cinefiles.themeExplain", { theme: round.theme })}
+          </p>
+        )}
       </div>
 
       {/* Transition de statut (après la date seuil) et actions admin. */}
