@@ -32,6 +32,7 @@ export default function FilmPoster({
       alt={alt}
       width={width}
       height={height}
+      unoptimized
       className="flex-shrink-0 rounded-md object-cover"
     />
   );
