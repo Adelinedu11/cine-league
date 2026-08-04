@@ -32,6 +32,9 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `019_profiles.sql` | table `profiles` (pseudo global) + RLS ; toutes les fonctions de nom passent à `coalesce(pseudo, display_name)` ; `round_cine_mysteries` renvoie le nom du joueur (attribution) | 008, 009, 011, 014, 015, 017 |
 | `020_cine_guess_meta.sql` | colonne `guess_meta` sur `cine_files_guesses` (métadonnées du film proposé) + `submit_cine_guess` la stocke — pour indices confirmés & blocage des contradictions | 016, 017, 018 |
 | `021_cine_files_scoring.sql` | `compute_cine_score`, `round_cine_files_scores`, `league_cine_files_history` (barème + classements Ciné'Files) | 016, 017, 019, 020 |
+| `022_cine_files_scoring_v2.sql` | barème v2 (20 essais : 1-14 formule, 15-20 → 10/50, non trouvé → 0/0) + garde ≤20 dans `submit_cine_guess` | 021 |
+| `023_cine_files_hints.sql` | table `cine_files_hints` + RLS + `request_cine_bonus_hint` (indice bonus acteur dès la 10e tentative) | 016, 017, 020 |
+| `024_cine_files_detail.sql` | `round_cine_files_detail` / `league_cine_files_detail` (récap détaillé séance + ligue) | 016, 017, 019, 020, 022 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

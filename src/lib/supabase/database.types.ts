@@ -142,6 +142,33 @@ export type Database = {
           },
         ]
       }
+      cine_files_hints: {
+        Row: {
+          actor_name: string | null
+          guesser_id: string | null
+          id: string
+          revealed_at: string | null
+          round_id: string | null
+          target_id: string | null
+        }
+        Insert: {
+          actor_name?: string | null
+          guesser_id?: string | null
+          id?: string
+          revealed_at?: string | null
+          round_id?: string | null
+          target_id?: string | null
+        }
+        Update: {
+          actor_name?: string | null
+          guesser_id?: string | null
+          id?: string
+          revealed_at?: string | null
+          round_id?: string | null
+          target_id?: string | null
+        }
+        Relationships: []
+      }
       league_members: {
         Row: {
           display_name: string
@@ -466,6 +493,27 @@ export type Database = {
       league_cine_files_history: {
         Args: { _league_id: string }
         Returns: { display_name: string; total_points: number }[]
+      }
+      request_cine_bonus_hint: {
+        Args: { _target_id: string }
+        Returns: string
+      }
+      round_cine_files_detail: {
+        Args: { _round_id: string }
+        Returns: {
+          display_name: string
+          total_points: number
+          secret_title: string | null
+          mysteries: Json
+        }[]
+      }
+      league_cine_files_detail: {
+        Args: { _league_id: string }
+        Returns: {
+          display_name: string
+          total_points: number
+          rounds: Json
+        }[]
       }
       submit_cine_guess: {
         Args: {

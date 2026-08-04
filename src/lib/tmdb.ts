@@ -35,8 +35,9 @@ export async function tmdbFetch(
 }
 
 /**
- * Récupère le réalisateur et les 5 premiers acteurs principaux d'un film.
- * Renvoie des valeurs vides en cas d'échec (jamais d'exception réseau).
+ * Récupère le réalisateur et les 20 premiers acteurs (au billing) d'un film.
+ * 20 (et non 5) pour inclure les seconds rôles dans l'indice « casting » de
+ * Ciné'Files et alimenter les indices bonus. Valeurs vides si échec.
  */
 export async function fetchMovieCredits(
   movieId: string | number,
@@ -56,7 +57,7 @@ export async function fetchMovieCredits(
       )?.name ?? null;
 
     const cast = (data.cast ?? [])
-      .slice(0, 5)
+      .slice(0, 20)
       .map((c: { name?: string }) => c.name)
       .filter((name: unknown): name is string => typeof name === "string");
 

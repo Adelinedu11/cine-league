@@ -27,6 +27,7 @@ export default function FilmSearch({
   submitFilm,
   submitLabel,
   showComment = true,
+  showPoster = true,
   checkContradiction,
 }: {
   roundId: string;
@@ -37,6 +38,7 @@ export default function FilmSearch({
   submitFilm: (formData: FormData) => Promise<void>;
   submitLabel?: string;
   showComment?: boolean;
+  showPoster?: boolean;
   // Mode Ciné'Files : valide un candidat contre les indices confirmés ;
   // renvoie un message de contradiction (bloquant) ou null.
   checkContradiction?: (candidate: {
@@ -238,11 +240,13 @@ export default function FilmSearch({
                 onClick={() => selectMovie(movie)}
                 className="flex w-full items-center gap-3 px-3 py-2 text-left text-sm text-[var(--color-cream)] transition-colors hover:bg-[var(--color-surface-alt)]"
               >
-                <FilmPoster
-                  posterPath={movie.posterPath}
-                  alt={movie.title}
-                  width={44}
-                />
+                {showPoster && (
+                  <FilmPoster
+                    posterPath={movie.posterPath}
+                    alt={movie.title}
+                    width={44}
+                  />
+                )}
                 {label(movie)}
               </button>
             </li>

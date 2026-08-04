@@ -1,4 +1,5 @@
 import { redirect, notFound } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -15,9 +16,9 @@ import {
 import { getLocale, t } from "@/lib/i18n";
 import type { Json } from "@/lib/supabase/database.types";
 import FilmSearch from "./FilmSearch";
-import CineGuessBoard from "./CineGuessBoard";
 import Avatar from "@/components/Avatar";
 import RoundResults from "./RoundResults";
+import CineRoundScores from "@/components/CineRoundScores";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import FilmPoster from "@/components/FilmPoster";
@@ -31,11 +32,7 @@ export default async function RoundPage({
   searchParams: Promise<{ error?: string; voted?: string; mystery?: string }>;
 }) {
   const { id, roundId } = await params;
-  const {
-    error: submissionError,
-    voted,
-    mystery: selectedMystery,
-  } = await searchParams;
+  const { error: submissionError, voted } = await searchParams;
 
   const supabase = await createClient();
   const {
@@ -187,6 +184,9 @@ export default async function RoundPage({
       .eq("id", roundId)
       .eq("league_id", id);
 
+    // Invalide le Router Cache pour que la nouvelle phase (ex. cérémonie/closed)
+    // s'affiche sans refresh manuel.
+    revalidatePath(`/leagues/${id}/rounds/${roundId}`);
     redirect(`/leagues/${id}/rounds/${roundId}`);
   }
 
@@ -210,6 +210,7 @@ export default async function RoundPage({
       .eq("id", roundId)
       .eq("league_id", id);
 
+    revalidatePath(`/leagues/${id}`);
     redirect(`/leagues/${id}`);
   }
 
@@ -306,6 +307,7 @@ export default async function RoundPage({
       redirect(`/leagues/${id}/rounds/${roundId}?error=submit`);
     }
 
+    revalidatePath(`/leagues/${id}/rounds/${roundId}`);
     redirect(`/leagues/${id}/rounds/${roundId}`);
   }
 
@@ -384,62 +386,12 @@ export default async function RoundPage({
       redirect(`/leagues/${id}/rounds/${roundId}?error=submit`);
     }
 
+    revalidatePath(`/leagues/${id}/rounds/${roundId}`);
     redirect(`/leagues/${id}/rounds/${roundId}`);
   }
 
-  // --- Server Action : proposer un film pour un mystère (mode Ciné'Files) ---
-  async function submitGuess(targetId: string, formData: FormData) {
-    "use server";
-    const guessedTitle = String(formData.get("film_title") ?? "").trim();
-    const tmdbIdRaw = String(formData.get("tmdb_id") ?? "");
-    const tmdbId = /^\d+$/.test(tmdbIdRaw) ? Number(tmdbIdRaw) : null;
-
-    if (!guessedTitle || tmdbId === null) {
-      redirect(`/leagues/${id}/rounds/${roundId}?error=guess`);
-    }
-
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      redirect("/login");
-    }
-
-    // Métadonnées du film DEVINÉ, re-récupérées côté serveur.
-    const [{ director, cast }, details, platforms] = await Promise.all([
-      fetchMovieCredits(tmdbId),
-      fetchMovieDetails(tmdbId),
-      fetchMoviePlatforms(tmdbId),
-    ]);
-
-    // Le feedback est calculé ENTIÈREMENT en base (submit_cine_guess,
-    // SECURITY DEFINER) : les métadonnées de la cible ne quittent jamais le
-    // serveur SQL. On ne transmet que les métadonnées du film deviné.
-    const { error } = await supabase.rpc("submit_cine_guess", {
-      _target_id: targetId,
-      _guessed_tmdb_id: tmdbId,
-      _guessed_title: guessedTitle,
-      _guess: {
-        genres: details.genres,
-        releaseDate: details.releaseDate,
-        director,
-        country: details.country,
-        originalLanguage: details.originalLanguage,
-        castNames: cast,
-        platforms,
-      },
-    });
-
-    if (error) {
-      redirect(
-        `/leagues/${id}/rounds/${roundId}?mystery=${targetId}&error=guess`,
-      );
-    }
-
-    // On garde le mystère ouvert après la proposition.
-    redirect(`/leagues/${id}/rounds/${roundId}?mystery=${targetId}`);
-  }
+  // La proposition Ciné'Files vit désormais sur la page dédiée
+  // /mystere/[targetId] (submitGuess + indices bonus y sont définis).
 
   // Données du bulletin de vote (uniquement en phase voting).
   let categories: { id: string; name: string }[] = [];
@@ -477,34 +429,19 @@ export default async function RoundPage({
     submitters = submitterRows ?? [];
   }
 
-  // Mode Ciné'Files (round non clos) : mystères à deviner + tentatives perso.
+  // Mode Ciné'Files (round non clos) : liste des mystères à deviner (le détail
+  // et la saisie sont sur la page dédiée /mystere/[targetId]).
   let cineMysteries: {
     target_id: string;
     display_name: string;
     attempts: number;
     found: boolean;
   }[] = [];
-  let myGuesses: {
-    target_id: string | null;
-    guessed_title: string | null;
-    feedback: Json | null;
-    guess_meta: Json | null;
-    attempt_number: number | null;
-    found: boolean | null;
-  }[] = [];
   if (round.game_mode === "cine_files" && round.status !== "closed") {
-    const [{ data: mysteryRows }, { data: guessRows }] = await Promise.all([
-      supabase.rpc("round_cine_mysteries", { _round_id: roundId }),
-      supabase
-        .from("cine_files_guesses")
-        .select(
-          "target_id, guessed_title, feedback, guess_meta, attempt_number, found",
-        )
-        .eq("round_id", roundId)
-        .order("attempt_number", { ascending: true }),
-    ]);
+    const { data: mysteryRows } = await supabase.rpc("round_cine_mysteries", {
+      _round_id: roundId,
+    });
     cineMysteries = mysteryRows ?? [];
-    myGuesses = guessRows ?? [];
   }
 
   // Résultats (uniquement en phase closed) : gagnant(s) par catégorie + ex-aequo.
@@ -589,13 +526,18 @@ export default async function RoundPage({
     });
   }
 
-  // Classement d'une séance Ciné'Files clôturée.
-  let cineScores: { display_name: string; total_points: number }[] = [];
+  // Classement détaillé d'une séance Ciné'Files clôturée.
+  let cineDetail: {
+    display_name: string;
+    total_points: number;
+    secret_title: string | null;
+    mysteries: Json;
+  }[] = [];
   if (round.status === "closed" && round.game_mode === "cine_files") {
-    const { data } = await supabase.rpc("round_cine_files_scores", {
+    const { data } = await supabase.rpc("round_cine_files_detail", {
       _round_id: roundId,
     });
-    cineScores = data ?? [];
+    cineDetail = data ?? [];
   }
 
   // --- Server Action : enregistrer les votes (un choix par catégorie) ---
@@ -660,6 +602,7 @@ export default async function RoundPage({
       }
     }
 
+    revalidatePath(`/leagues/${id}/rounds/${roundId}`);
     redirect(`/leagues/${id}/rounds/${roundId}?voted=1`);
   }
 
@@ -815,22 +758,51 @@ export default async function RoundPage({
         </section>
       )}
 
-      {/* Mode Ciné'Files (round non clos) : deviner les films mystères. */}
+      {/* Mode Ciné'Files (round non clos) : liste des mystères (→ page dédiée). */}
       {round.game_mode === "cine_files" && round.status !== "closed" && (
         <section className="flex flex-col gap-3">
           <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
             {t(locale, "cinefiles.guessTitle")}
           </h2>
-          <CineGuessBoard
-            locale={locale}
-            roundId={roundId}
-            hasOwnTarget={!!myCineTarget}
-            mysteries={cineMysteries}
-            guesses={myGuesses}
-            submitGuess={submitGuess}
-            error={submissionError === "guess"}
-            initialSelected={selectedMystery ?? null}
-          />
+          {!myCineTarget ? (
+            <p className="text-sm text-[var(--color-muted)]">
+              {t(locale, "cinefiles.chooseFirst")}
+            </p>
+          ) : cineMysteries.length === 0 ? (
+            <p className="text-sm text-[var(--color-muted)]">
+              {t(locale, "cinefiles.noMysteries")}
+            </p>
+          ) : (
+            <ul className="flex flex-col gap-2">
+              {cineMysteries.map((m) => (
+                <li key={m.target_id}>
+                  <Link
+                    href={`/leagues/${id}/rounds/${roundId}/mystere/${m.target_id}`}
+                    className="flex w-full items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 transition-colors hover:border-[var(--color-gold)]"
+                  >
+                    <span className="flex items-center gap-2 font-display text-lg tracking-wide text-[var(--color-cream)]">
+                      <Avatar name={m.display_name} size={26} />
+                      {t(locale, "cinefiles.proposalBy", {
+                        name: m.display_name,
+                      })}
+                    </span>
+                    <span className="font-mono text-xs text-[var(--color-muted)]">
+                      {m.found ? (
+                        <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-emerald-400">
+                          {t(locale, "cinefiles.foundBadge")} ✅
+                        </span>
+                      ) : (
+                        t(locale, "cinefiles.attemptCounter", {
+                          count: m.attempts,
+                          max: 20,
+                        })
+                      )}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       )}
 
@@ -971,39 +943,13 @@ export default async function RoundPage({
           </section>
         )}
 
-      {/* Séance terminée — Ciné'Files : classement de la séance. */}
+      {/* Séance terminée — Ciné'Files : classement détaillé de la séance. */}
       {round.status === "closed" && round.game_mode === "cine_files" && (
         <section className="flex flex-col gap-4">
           <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
             {t(locale, "cinefiles.roundScoresTitle")}
           </h2>
-          {cineScores.length === 0 ? (
-            <p className="text-sm text-[var(--color-muted)]">
-              {t(locale, "league.cineStandingsEmpty")}
-            </p>
-          ) : (
-            <ul className="flex flex-col gap-2">
-              {cineScores.map((entry, i) => (
-                <li
-                  key={`${entry.display_name}-${i}`}
-                  className="flex items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3"
-                >
-                  <span className="flex items-center gap-3">
-                    <span className="font-display w-6 text-center text-xl text-[var(--color-gold)]">
-                      {i + 1}
-                    </span>
-                    <Avatar name={entry.display_name} size={28} />
-                    <span className="text-[var(--color-cream)]">
-                      {entry.display_name}
-                    </span>
-                  </span>
-                  <span className="font-mono text-sm text-[var(--color-muted)]">
-                    {t(locale, "league.points", { count: entry.total_points })}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
+          <CineRoundScores players={cineDetail} locale={locale} />
         </section>
       )}
     </main>

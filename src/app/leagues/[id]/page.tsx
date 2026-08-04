@@ -11,6 +11,7 @@ import SubmitButton from "@/components/SubmitButton";
 import RoundModeDateFields from "@/components/RoundModeDateFields";
 import Avatar from "@/components/Avatar";
 import LeagueTabs from "@/components/LeagueTabs";
+import CineLeagueScores from "@/components/CineLeagueScores";
 
 // Couleur du stub (languette) selon le statut du round.
 const ROUND_STATUS_STUB_CLASS: Record<string, string> = {
@@ -78,7 +79,7 @@ export default async function LeaguePage({
     supabase.rpc("is_league_admin", { _league_id: id }),
     supabase.rpc("league_members_list", { _league_id: id }),
     supabase.rpc("league_win_history", { _league_id: id }),
-    supabase.rpc("league_cine_files_history", { _league_id: id }),
+    supabase.rpc("league_cine_files_detail", { _league_id: id }),
   ]);
 
   // --- Server Action : créer un round ---
@@ -418,40 +419,15 @@ export default async function LeaguePage({
                   )}
                 </section>
 
-                {/* Classement Ciné'Files */}
+                {/* Classement Ciné'Files (détaillé, dépliable) */}
                 <section className="flex flex-col gap-3">
                   <h2 className="text-lg font-semibold">
                     🔎 {t(locale, "league.cineStandingsTitle")}
                   </h2>
-                  {!cineHistory || cineHistory.length === 0 ? (
-                    <p className="text-sm text-[var(--color-muted)]">
-                      {t(locale, "league.cineStandingsEmpty")}
-                    </p>
-                  ) : (
-                    <ul className="flex flex-col gap-2">
-                      {cineHistory.map((entry, i) => (
-                        <li
-                          key={`${entry.display_name}-${i}`}
-                          className="flex items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3"
-                        >
-                          <span className="flex items-center gap-3">
-                            <span className="font-display w-6 text-center text-xl text-[var(--color-gold)]">
-                              {i + 1}
-                            </span>
-                            <Avatar name={entry.display_name} size={28} />
-                            <span className="text-[var(--color-cream)]">
-                              {entry.display_name}
-                            </span>
-                          </span>
-                          <span className="font-mono text-sm text-[var(--color-muted)]">
-                            {t(locale, "league.points", {
-                              count: entry.total_points,
-                            })}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <CineLeagueScores
+                    players={cineHistory ?? []}
+                    locale={locale}
+                  />
                 </section>
               </>
             ),
