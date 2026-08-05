@@ -21,6 +21,7 @@ import RoundResults from "./RoundResults";
 import CineRoundScores from "@/components/CineRoundScores";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
+import EditRoundDatesButton from "@/components/EditRoundDatesButton";
 import FilmPoster from "@/components/FilmPoster";
 import SubmitButton from "@/components/SubmitButton";
 
@@ -212,6 +213,55 @@ export default async function RoundPage({
 
     revalidatePath(`/leagues/${id}`);
     redirect(`/leagues/${id}`);
+  }
+
+  // --- Server Action : modifier les dates du round (admin uniquement) ---
+  async function updateRoundDates(formData: FormData) {
+    "use server";
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      redirect("/login");
+    }
+
+    // Les valeurs datetime-local (ex. « 2026-08-12T20:00 ») sont interprétées
+    // en heure locale du serveur, puis normalisées en ISO/UTC.
+    const deadlineRaw = String(formData.get("submission_deadline") ?? "").trim();
+    const ceremonyRaw = String(formData.get("ceremony_at") ?? "").trim();
+    const deadline = new Date(deadlineRaw);
+    const ceremony = new Date(ceremonyRaw);
+    if (
+      !deadlineRaw ||
+      !ceremonyRaw ||
+      Number.isNaN(deadline.getTime()) ||
+      Number.isNaN(ceremony.getTime())
+    ) {
+      redirect(`/leagues/${id}/rounds/${roundId}?error=dates`);
+    }
+
+    // La RPC (SECURITY DEFINER) revérifie l'admin et cérémonie > soumission ;
+    // elle ne touche pas au statut.
+    const { error } = await supabase.rpc("update_round_dates", {
+      _round_id: roundId,
+      _submission_deadline: deadline.toISOString(),
+      _ceremony_at: ceremony.toISOString(),
+    });
+
+    if (error) {
+      console.error("update_round_dates a échoué", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+        roundId,
+      });
+      redirect(`/leagues/${id}/rounds/${roundId}?error=dates`);
+    }
+
+    revalidatePath(`/leagues/${id}/rounds/${roundId}`);
+    redirect(`/leagues/${id}/rounds/${roundId}`);
   }
 
   // --- Server Action : soumettre (ou remplacer) un film ---
@@ -679,6 +729,14 @@ export default async function RoundPage({
             </div>
           )}
           {isAdmin && (
+            <EditRoundDatesButton
+              action={updateRoundDates}
+              submissionDeadline={round.submission_deadline}
+              ceremonyAt={round.ceremony_at}
+              locale={locale}
+            />
+          )}
+          {isAdmin && (
             <ConfirmSubmitButton
               action={deleteRound}
               locale={locale}
@@ -687,6 +745,11 @@ export default async function RoundPage({
             >
               {t(locale, "round.deleteButton")}
             </ConfirmSubmitButton>
+          )}
+          {submissionError === "dates" && (
+            <p className="w-full text-xs text-red-400">
+              {t(locale, "round.datesError")}
+            </p>
           )}
         </div>
       )}

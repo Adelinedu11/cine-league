@@ -171,6 +171,9 @@ export const dict: Record<Locale, Dict> = {
     // Page round
     "round.back": "← Retour à la ligue",
     "round.tooEarly": "Cette transition n'est pas encore possible.",
+    "round.editDates": "Modifier les dates",
+    "round.datesError":
+      "La cérémonie doit être postérieure à la date limite de soumission.",
     "round.deleteButton": "Supprimer cette séance",
     "round.deleteConfirm":
       "Supprimer définitivement cette séance ? Cette action est irréversible.",
@@ -412,6 +415,9 @@ export const dict: Record<Locale, Dict> = {
     // Round page
     "round.back": "← Back to league",
     "round.tooEarly": "This transition isn't possible yet.",
+    "round.editDates": "Edit dates",
+    "round.datesError":
+      "The ceremony must be later than the submission deadline.",
     "round.deleteButton": "Delete this screening",
     "round.deleteConfirm":
       "Permanently delete this screening? This action cannot be undone.",

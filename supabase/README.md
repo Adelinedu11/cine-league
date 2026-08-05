@@ -36,6 +36,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `023_cine_files_hints.sql` | table `cine_files_hints` + RLS + `request_cine_bonus_hint` (indice bonus acteur dès la 10e tentative) | 016, 017, 020 |
 | `024_cine_files_detail.sql` | `round_cine_files_detail` / `league_cine_files_detail` (récap détaillé séance + ligue) | 016, 017, 019, 020, 022 |
 | `025_cine_files_scoring_10_10.sql` | palier 15-20 essais → auteur 10 pts (au lieu de 50) dans les 4 fonctions de score | 022, 024 |
+| `026_update_round_dates.sql` | RPC `update_round_dates` (admin : modifie `submission_deadline` / `ceremony_at`, valide cérémonie > soumission, ne touche pas au statut) | 001, 008 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

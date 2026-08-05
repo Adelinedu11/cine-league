@@ -437,6 +437,14 @@ export type Database = {
         Args: { _member_id: string }
         Returns: undefined
       }
+      update_round_dates: {
+        Args: {
+          _round_id: string
+          _submission_deadline: string
+          _ceremony_at: string
+        }
+        Returns: undefined
+      }
       submit_votes: {
         Args: { _rows: Json }
         Returns: undefined
