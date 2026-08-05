@@ -188,9 +188,11 @@ begin
   from public.cine_files_guesses
   where target_id = _target_id and guesser_id = auth.uid();
 
+  -- Alias cg + colonne qualifiée : `found` seul serait pris pour la variable
+  -- plpgsql spéciale FOUND (bug), pas pour la colonne.
   if exists (
-    select 1 from public.cine_files_guesses
-    where target_id = _target_id and guesser_id = auth.uid() and found
+    select 1 from public.cine_files_guesses cg
+    where cg.target_id = _target_id and cg.guesser_id = auth.uid() and cg.found
   ) then
     raise exception 'Film déjà trouvé';
   end if;

@@ -149,8 +149,21 @@ export default async function MysteryPage({
       },
     });
 
+    if (error) {
+      // Log temporaire : l'erreur RPC réelle n'apparaissait nulle part.
+      console.error("submit_cine_guess a échoué", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+        targetId,
+        tmdbId,
+      });
+      redirect(`${base}?error=guess`);
+    }
+
     revalidatePath(base);
-    redirect(error ? `${base}?error=guess` : base);
+    redirect(base);
   }
 
   // --- Server Action : demander un indice bonus ---
@@ -168,8 +181,18 @@ export default async function MysteryPage({
       _target_id: targetId,
     });
 
+    if (error) {
+      console.error("request_cine_bonus_hint a échoué", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+        targetId,
+      });
+      redirect(`${base}?error=hint`);
+    }
+
     revalidatePath(base);
-    if (error) redirect(`${base}?error=hint`);
     redirect(data === null ? `${base}?nohint=1` : base);
   }
 

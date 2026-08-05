@@ -60,10 +60,10 @@ begin
     raise exception 'Indice non autorisé';
   end if;
 
-  -- Déjà trouvé : plus d'indice.
+  -- Déjà trouvé : plus d'indice. (colonne qualifiée cg.found, cf. FOUND plpgsql)
   if exists (
-    select 1 from public.cine_files_guesses
-    where target_id = _target_id and guesser_id = auth.uid() and found
+    select 1 from public.cine_files_guesses cg
+    where cg.target_id = _target_id and cg.guesser_id = auth.uid() and cg.found
   ) then
     raise exception 'Film déjà trouvé';
   end if;
