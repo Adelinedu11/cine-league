@@ -18,6 +18,7 @@ import { confirmedHintLines } from "@/lib/cinefiles-hints";
 import Avatar from "@/components/Avatar";
 import SubmitButton from "@/components/SubmitButton";
 import CineFeedbackChips from "@/components/CineFeedbackChips";
+import FilmPoster from "@/components/FilmPoster";
 import CineGuessForm from "../../CineGuessForm";
 
 const MAX_ATTEMPTS = 20;
@@ -117,6 +118,7 @@ export default async function MysteryPage({
     const guessedTitle = String(formData.get("film_title") ?? "").trim();
     const tmdbIdRaw = String(formData.get("tmdb_id") ?? "");
     const tmdbId = /^\d+$/.test(tmdbIdRaw) ? Number(tmdbIdRaw) : null;
+    const posterPath = String(formData.get("poster_path") ?? "").trim() || null;
     if (!guessedTitle || tmdbId === null) {
       redirect(`${base}?error=guess`);
     }
@@ -147,6 +149,7 @@ export default async function MysteryPage({
         originalLanguage: details.originalLanguage,
         castNames: cast,
         platforms,
+        posterPath,
       },
     });
 
@@ -284,6 +287,15 @@ export default async function MysteryPage({
                 <span className="font-mono text-xs text-[var(--color-muted)]">
                   #{g.attempt_number}
                 </span>
+                <FilmPoster
+                  posterPath={
+                    (g.guess_meta as { posterPath?: string | null } | null)
+                      ?.posterPath ?? null
+                  }
+                  alt={g.guessed_title ?? ""}
+                  width={28}
+                  tmdbSize="w92"
+                />
                 <span className="text-[var(--color-cream)]">
                   {g.guessed_title}
                 </span>

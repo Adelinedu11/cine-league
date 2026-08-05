@@ -9,10 +9,13 @@ export default function FilmPoster({
   posterPath,
   alt,
   width = 64,
+  tmdbSize = "w200",
 }: {
   posterPath: string | null;
   alt: string;
   width?: number;
+  // Format TMDB source (léger = w45 / w92 pour les miniatures).
+  tmdbSize?: "w45" | "w92" | "w200";
 }) {
   const height = Math.round(width * 1.5);
 
@@ -28,7 +31,7 @@ export default function FilmPoster({
 
   return (
     <Image
-      src={`https://image.tmdb.org/t/p/w200${posterPath}`}
+      src={`https://image.tmdb.org/t/p/${tmdbSize}${posterPath}`}
       alt={alt}
       width={width}
       height={height}
