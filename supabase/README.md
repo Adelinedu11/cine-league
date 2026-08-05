@@ -35,6 +35,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `022_cine_files_scoring_v2.sql` | barème v2 (20 essais : 1-14 formule, 15-20 → 10/50, non trouvé → 0/0) + garde ≤20 dans `submit_cine_guess` | 021 |
 | `023_cine_files_hints.sql` | table `cine_files_hints` + RLS + `request_cine_bonus_hint` (indice bonus acteur dès la 10e tentative) | 016, 017, 020 |
 | `024_cine_files_detail.sql` | `round_cine_files_detail` / `league_cine_files_detail` (récap détaillé séance + ligue) | 016, 017, 019, 020, 022 |
+| `025_cine_files_scoring_10_10.sql` | palier 15-20 essais → auteur 10 pts (au lieu de 50) dans les 4 fonctions de score | 022, 024 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

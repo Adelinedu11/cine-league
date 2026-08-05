@@ -46,21 +46,18 @@ export default async function RulesPage() {
           🔎 {t(locale, "rules.cineTitle")}
         </h2>
         <p className="text-sm text-[var(--color-cream)]/90">
+          {t(locale, "rules.cineIntro")}
+        </p>
+        <p className="text-sm text-[var(--color-cream)]/90">
           {t(locale, "rules.cineBody")}
         </p>
-        <p className="text-sm text-[var(--color-muted)]">
-          {t(locale, "rules.cineFeedback")}
+        <p className="text-sm text-[var(--color-cream)]/90">
+          {t(locale, "rules.cineBonus")}
         </p>
-
-        <h3 className="font-display mt-2 text-lg tracking-wide text-[var(--color-cream)]">
-          {t(locale, "rules.scoringTitle")}
-        </h3>
-        <ul className="flex flex-col gap-1 text-sm text-[var(--color-cream)]/90">
-          <li>• {t(locale, "rules.scoringGuesser")}</li>
-          <li>• {t(locale, "rules.scoringAuthor")}</li>
-        </ul>
+        <p className="mt-1 text-sm text-[var(--color-cream)]/90">
+          {t(locale, "rules.scoringMain")}
+        </p>
         <ul className="mt-1 flex flex-col gap-1 rounded-lg border border-[var(--color-teal)]/40 bg-[var(--color-teal)]/10 px-4 py-3 text-sm text-[var(--color-cream)]">
-          <li>{t(locale, "rules.example1")}</li>
           <li>{t(locale, "rules.example15")}</li>
           <li>{t(locale, "rules.exampleNever")}</li>
         </ul>

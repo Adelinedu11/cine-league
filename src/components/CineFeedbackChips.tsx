@@ -28,19 +28,31 @@ function Chip({
   );
 }
 
-/** Chips de feedback (genre, décennie, année, réalisateur…) pour une tentative. */
+/** Chips de feedback (genre, décennie, année, réalisateur…) pour une tentative.
+ * `year` = année du film PROPOSÉ pour cette tentative : quand année/décennie
+ * correspondent exactement, on affiche la valeur (identique au mystère). */
 export default function CineFeedbackChips({
   feedback: fb,
   locale,
+  year,
 }: {
   feedback: CineFeedback;
   locale: Locale;
+  year?: number | null;
 }) {
   const yesNo = (b: boolean): Status => (b ? "match" : "none");
   const dir = (d: CineFeedback["decade"]) =>
     d === "exact" ? "✓" : d === "earlier" ? "↓" : d === "later" ? "↑" : "—";
   const dirStatus = (d: CineFeedback["decade"]): Status =>
     d === "exact" ? "match" : d === "unknown" ? "none" : "partial";
+
+  // Valeur révélée quand c'est exact (sinon flèche / —).
+  const yearValue =
+    fb.releaseYear === "exact" && year != null ? `${year} ✓` : dir(fb.releaseYear);
+  const decadeValue =
+    fb.decade === "exact" && year != null
+      ? `${t(locale, "cinefiles.decadeValue", { decade: Math.floor(year / 10) * 10 })} ✓`
+      : dir(fb.decade);
 
   return (
     <div className="mt-1 flex flex-wrap gap-1.5">
@@ -58,12 +70,12 @@ export default function CineFeedbackChips({
       <Chip
         status={dirStatus(fb.decade)}
         label={t(locale, "cinefiles.critDecade")}
-        value={dir(fb.decade)}
+        value={decadeValue}
       />
       <Chip
         status={dirStatus(fb.releaseYear)}
         label={t(locale, "cinefiles.critYear")}
-        value={dir(fb.releaseYear)}
+        value={yearValue}
       />
       <Chip
         status={yesNo(fb.director)}

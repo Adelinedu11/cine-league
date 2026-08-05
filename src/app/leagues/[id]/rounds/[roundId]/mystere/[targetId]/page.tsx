@@ -10,6 +10,7 @@ import {
 import { getLocale, t } from "@/lib/i18n";
 import {
   computeConfirmedHints,
+  yearFromDate,
   type CineFeedback,
   type CineMeta,
 } from "@/lib/cinefiles";
@@ -292,6 +293,9 @@ export default async function MysteryPage({
                 <CineFeedbackChips
                   feedback={g.feedback as CineFeedback}
                   locale={locale}
+                  year={yearFromDate(
+                    (g.guess_meta as CineMeta | null)?.releaseDate ?? null,
+                  )}
                 />
               ) : null}
             </li>

@@ -59,20 +59,19 @@ export const dict: Record<Locale, Dict> = {
     "rules.compTitle": "Compétition officielle",
     "rules.compBody":
       "Chaque membre soumet un film de façon anonyme sur un thème donné. Une fois les votes ouverts, chacun vote par catégorie (meilleur film, meilleur réalisateur…) sans savoir qui a proposé quoi. À la clôture, le générique est révélé : on découvre qui avait soumis chaque film et les gagnants de chaque catégorie.",
-    "rules.cineTitle": "Ciné'Files",
+    "rules.cineTitle": "Comment jouer à Ciné'Files",
+    "rules.cineIntro":
+      "Un joueur propose un film mystère, correspondant au thème de la séance.",
     "rules.cineBody":
-      "Chaque membre choisit secrètement un film mystère. Les autres tentent de le deviner en proposant des films : chaque proposition renvoie un tableau d'indices par critère — genre, décennie, année, réalisateur, pays, langue, acteurs et plateformes en commun. Les indices confirmés s'accumulent, et une proposition qui contredit un indice déjà confirmé est bloquée.",
-    "rules.cineFeedback":
-      "Vert = exact, ambre = partiel ou proche (flèches ↑/↓ pour l'année et la décennie), gris = aucun rapport.",
-    "rules.scoringTitle": "Score",
-    "rules.scoringGuesser":
-      "Le devineur marque round(100 × (16 − essais) ÷ 15) points s'il trouve en 1 à 15 essais, 0 sinon.",
-    "rules.scoringAuthor":
-      "L'auteur du mystère marque 100 − les points du devineur si son film est trouvé, ou 50 s'il n'est jamais trouvé en 15 essais.",
-    "rules.example1": "Trouvé au 1er essai : devineur 100 pts, auteur 0 pt.",
-    "rules.example15": "Trouvé au 15e essai : devineur 7 pts, auteur 93 pts.",
+      "Les autres joueurs tentent de deviner ce film en proposant des titres. Après chaque proposition, le jeu compare ton film candidat au mystère sur plusieurs critères : genre, décennie, année, réalisateur, pays, langue, un acteur du casting, plateforme de diffusion. Chaque critère qui correspond est validé (✓) et reste affiché aux tentatives suivantes.",
+    "rules.cineBonus":
+      "À partir du 10e essai, tu peux demander un indice bonus : un acteur supplémentaire du casting, différent de ceux déjà révélés.",
+    "rules.scoringMain":
+      "Le film mystère rapporte 100 points, partagés entre toi (le devineur) et l'auteur du mystère. Plus tu trouves tôt, plus tu gagnes de points — et moins l'auteur en garde.",
+    "rules.example15":
+      "Trouvé entre le 15e et le 19e essai : 10 points pour toi, 10 points pour l'auteur.",
     "rules.exampleNever":
-      "Jamais trouvé (15 essais) : devineur 0 pt, auteur 50 pts.",
+      "Toujours pas trouvé après 20 essais : personne ne marque de points.",
 
     // Header / bascules
     "header.signOut": "Se déconnecter",
@@ -217,6 +216,7 @@ export const dict: Record<Locale, Dict> = {
     "cinefiles.critLanguage": "Langue",
     "cinefiles.critActors": "Acteurs",
     "cinefiles.critPlatforms": "Plateformes",
+    "cinefiles.decadeValue": "Années {decade}",
     "cinefiles.attemptCounter": "{count}/{max} essais",
     "cinefiles.bonusHints": "Indices bonus",
     "cinefiles.bonusButton": "Demander un indice bonus",
@@ -301,19 +301,19 @@ export const dict: Record<Locale, Dict> = {
     "rules.compTitle": "Official competition",
     "rules.compBody":
       "Each member submits a film anonymously on a given theme. Once voting opens, everyone votes by category (best film, best director…) without knowing who submitted what. At closing, the credits are revealed: you find out who submitted each film and the winners of each category.",
-    "rules.cineTitle": "Ciné'Files",
+    "rules.cineTitle": "How to play Ciné'Files",
+    "rules.cineIntro":
+      "One player submits a mystery film that matches the screening's theme.",
     "rules.cineBody":
-      "Each member secretly picks a mystery film. The others try to guess it by proposing films: each proposal returns a table of hints per criterion — genre, decade, year, director, country, language, and shared actors and platforms. Confirmed hints accumulate, and a proposal that contradicts an already-confirmed hint is blocked.",
-    "rules.cineFeedback":
-      "Green = exact, amber = partial or close (↑/↓ arrows for year and decade), grey = unrelated.",
-    "rules.scoringTitle": "Scoring",
-    "rules.scoringGuesser":
-      "The guesser scores round(100 × (16 − tries) ÷ 15) points if they find it within 1 to 15 tries, 0 otherwise.",
-    "rules.scoringAuthor":
-      "The mystery's author scores 100 − the guesser's points if their film is found, or 50 if it's never found within 15 tries.",
-    "rules.example1": "Found on the 1st try: guesser 100 pts, author 0 pt.",
-    "rules.example15": "Found on the 15th try: guesser 7 pts, author 93 pts.",
-    "rules.exampleNever": "Never found (15 tries): guesser 0 pt, author 50 pts.",
+      "The other players try to guess it by proposing titles. After each guess, the game compares your candidate film to the mystery across several criteria: genre, decade, year, director, country, language, one cast member, and streaming platform. Each matching criterion is validated (✓) and stays shown on later attempts.",
+    "rules.cineBonus":
+      "From the 10th attempt, you can request a bonus hint: an extra cast member, different from those already revealed.",
+    "rules.scoringMain":
+      "The mystery film is worth 100 points, shared between you (the guesser) and the mystery's author. The earlier you find it, the more you score — and the less the author keeps.",
+    "rules.example15":
+      "Found between the 15th and 19th attempt: 10 points for you, 10 points for the author.",
+    "rules.exampleNever":
+      "Still not found after 20 attempts: no one scores.",
 
     // Header / toggles
     "header.signOut": "Sign out",
@@ -457,6 +457,7 @@ export const dict: Record<Locale, Dict> = {
     "cinefiles.critLanguage": "Language",
     "cinefiles.critActors": "Actors",
     "cinefiles.critPlatforms": "Platforms",
+    "cinefiles.decadeValue": "{decade}s",
     "cinefiles.attemptCounter": "{count}/{max} tries",
     "cinefiles.bonusHints": "Bonus hints",
     "cinefiles.bonusButton": "Request a bonus hint",
