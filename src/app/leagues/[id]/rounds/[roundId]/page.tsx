@@ -22,6 +22,8 @@ import CineRoundScores from "@/components/CineRoundScores";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import EditRoundDatesButton from "@/components/EditRoundDatesButton";
+import WhereToWatch from "@/components/WhereToWatch";
+import RoundCountdown from "@/components/RoundCountdown";
 import FilmPoster from "@/components/FilmPoster";
 import SubmitButton from "@/components/SubmitButton";
 
@@ -357,6 +359,12 @@ export default async function RoundPage({
       redirect(`/leagues/${id}/rounds/${roundId}?error=submit`);
     }
 
+    // Signal d'activité générique (jamais le titre du film, anonymat préservé).
+    await supabase.rpc("notify_round_activity", {
+      _round_id: roundId,
+      _kind: "submission",
+    });
+
     revalidatePath(`/leagues/${id}/rounds/${roundId}`);
     redirect(`/leagues/${id}/rounds/${roundId}`);
   }
@@ -435,6 +443,12 @@ export default async function RoundPage({
     if (error) {
       redirect(`/leagues/${id}/rounds/${roundId}?error=submit`);
     }
+
+    // Signal d'activité générique (jamais le titre du film mystère).
+    await supabase.rpc("notify_round_activity", {
+      _round_id: roundId,
+      _kind: "submission",
+    });
 
     revalidatePath(`/leagues/${id}/rounds/${roundId}`);
     redirect(`/leagues/${id}/rounds/${roundId}`);
@@ -650,6 +664,12 @@ export default async function RoundPage({
       if (error) {
         redirect(`/leagues/${id}/rounds/${roundId}?error=vote`);
       }
+
+      // Signal d'activité générique (jamais le contenu du vote).
+      await supabase.rpc("notify_round_activity", {
+        _round_id: roundId,
+        _kind: "vote",
+      });
     }
 
     revalidatePath(`/leagues/${id}/rounds/${roundId}`);
@@ -693,6 +713,9 @@ export default async function RoundPage({
             date: formatRoundDate(round.ceremony_at, locale),
           })}
         </p>
+        {round.status !== "closed" && thresholdIso && (
+          <RoundCountdown targetIso={thresholdIso} locale={locale} />
+        )}
         {round.game_mode === "cine_files" && (
           <p className="mt-3 max-w-md text-sm text-[var(--color-muted)]">
             {t(locale, "cinefiles.themeExplain", { theme: round.theme })}
@@ -922,18 +945,7 @@ export default async function RoundPage({
                         />
                         <span className="flex flex-1 flex-wrap items-center gap-2">
                           <span>{film.film_title}</span>
-                          {film.platforms && film.platforms.length > 0 && (
-                            <span className="flex flex-wrap gap-1.5">
-                              {film.platforms.map((p) => (
-                                <span
-                                  key={p}
-                                  className="rounded-full bg-[var(--color-surface-alt)] px-2 py-0.5 text-xs text-[var(--color-cream)]"
-                                >
-                                  {p}
-                                </span>
-                              ))}
-                            </span>
-                          )}
+                          <WhereToWatch platforms={film.platforms ?? []} locale={locale} />
                         </span>
                       </label>
                     ))}

@@ -166,6 +166,12 @@ export default async function MysteryPage({
       redirect(`${base}?error=guess`);
     }
 
+    // Signal d'activité générique (jamais le titre du mystère ni le film proposé).
+    await supabase.rpc("notify_round_activity", {
+      _round_id: roundId,
+      _kind: "guess",
+    });
+
     revalidatePath(base);
     redirect(base);
   }

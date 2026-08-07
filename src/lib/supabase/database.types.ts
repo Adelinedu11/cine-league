@@ -169,6 +169,39 @@ export type Database = {
         }
         Relationships: []
       }
+      notifications: {
+        Row: {
+          id: string
+          user_id: string
+          league_id: string | null
+          round_id: string | null
+          kind: string
+          message: string
+          read_at: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          league_id?: string | null
+          round_id?: string | null
+          kind: string
+          message: string
+          read_at?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          league_id?: string | null
+          round_id?: string | null
+          kind?: string
+          message?: string
+          read_at?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
       league_members: {
         Row: {
           display_name: string
@@ -443,6 +476,34 @@ export type Database = {
           _submission_deadline: string
           _ceremony_at: string
         }
+        Returns: undefined
+      }
+      sync_round_deadline_notifications: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      notify_round_created: {
+        Args: { _round_id: string }
+        Returns: undefined
+      }
+      notify_round_activity: {
+        Args: { _round_id: string; _kind: string }
+        Returns: undefined
+      }
+      list_recent_notifications: {
+        Args: { _limit?: number }
+        Returns: {
+          id: string
+          league_id: string | null
+          round_id: string | null
+          kind: string
+          message: string
+          read_at: string | null
+          created_at: string
+        }[]
+      }
+      mark_all_notifications_read: {
+        Args: Record<PropertyKey, never>
         Returns: undefined
       }
       submit_votes: {

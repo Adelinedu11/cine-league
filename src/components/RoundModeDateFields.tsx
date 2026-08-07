@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import { t, type Locale } from "@/lib/i18n";
+import DurationSelect from "@/components/DurationSelect";
+import {
+  CINE_FILES_DURATION_PRESETS,
+  SUBMISSION_DURATION_PRESETS,
+  VOTING_DURATION_PRESETS,
+} from "@/lib/rounds";
 
 type Mode = "competition_officielle" | "cine_files";
 
@@ -10,13 +16,30 @@ const inputClass =
 const labelClass = "text-sm font-medium text-[var(--color-cream)]";
 
 /**
- * Champs de « Créer une séance » : mode, thème (+ note en Ciné'Files) et date(s).
- * Compétition : date limite de soumission + date de cérémonie.
- * Ciné'Files : une seule « Date de clôture » (le serveur la copie dans les deux
- * colonnes submission_deadline / ceremony_at).
+ * Champs de « Créer une séance » : mode, thème (+ note en Ciné'Files) et
+ * durée(s) — système "tic-tac-boom" (voir backlog point 13) : on choisit une
+ * durée depuis le lancement plutôt qu'une date précise, le serveur calcule
+ * l'échéance exacte à la création. Compétition : durée de soumission + durée
+ * de vote (enchaînée après la soumission). Ciné'Files : une seule durée de
+ * clôture (le serveur la copie dans les deux colonnes submission_deadline /
+ * ceremony_at).
  */
 export default function RoundModeDateFields({ locale }: { locale: Locale }) {
   const [mode, setMode] = useState<Mode>("competition_officielle");
+  const [closeMinutes, setCloseMinutes] = useState(
+    CINE_FILES_DURATION_PRESETS[2]?.minutes ?? 120,
+  );
+  const [submissionMinutes, setSubmissionMinutes] = useState(
+    SUBMISSION_DURATION_PRESETS[2]?.minutes ?? 10080,
+  );
+  const [votingMinutes, setVotingMinutes] = useState(
+    VOTING_DURATION_PRESETS[2]?.minutes ?? 4320,
+  );
+
+  // Initialisation paresseuse (exécutée une seule fois, au montage) : sert
+  // uniquement à l'aperçu affiché à l'utilisateur, l'échéance réelle est de
+  // toute façon recalculée par le serveur au moment de la création.
+  const [now] = useState(() => Date.now());
 
   return (
     <>
@@ -54,40 +77,35 @@ export default function RoundModeDateFields({ locale }: { locale: Locale }) {
       )}
 
       {mode === "cine_files" ? (
-        <>
-          <label htmlFor="submission_deadline" className={labelClass}>
-            {t(locale, "league.closeDateLabel")}
-          </label>
-          <input
-            id="submission_deadline"
-            name="submission_deadline"
-            type="datetime-local"
-            required
-            className={inputClass}
-          />
-        </>
+        <DurationSelect
+          name="close_duration_minutes"
+          label={t(locale, "league.closeDateLabel")}
+          presets={CINE_FILES_DURATION_PRESETS}
+          locale={locale}
+          value={closeMinutes}
+          onChange={setCloseMinutes}
+          baseIsoMs={now}
+        />
       ) : (
         <>
-          <label htmlFor="submission_deadline" className={labelClass}>
-            {t(locale, "league.deadlineLabel")}
-          </label>
-          <input
-            id="submission_deadline"
-            name="submission_deadline"
-            type="datetime-local"
-            required
-            className={inputClass}
+          <DurationSelect
+            name="submission_duration_minutes"
+            label={t(locale, "league.deadlineLabel")}
+            presets={SUBMISSION_DURATION_PRESETS}
+            locale={locale}
+            value={submissionMinutes}
+            onChange={setSubmissionMinutes}
+            baseIsoMs={now}
           />
 
-          <label htmlFor="ceremony_at" className={labelClass}>
-            {t(locale, "league.ceremonyLabel")}
-          </label>
-          <input
-            id="ceremony_at"
-            name="ceremony_at"
-            type="datetime-local"
-            required
-            className={inputClass}
+          <DurationSelect
+            name="voting_duration_minutes"
+            label={t(locale, "league.ceremonyLabel")}
+            presets={VOTING_DURATION_PRESETS}
+            locale={locale}
+            value={votingMinutes}
+            onChange={setVotingMinutes}
+            baseIsoMs={now + submissionMinutes * 60_000}
           />
         </>
       )}

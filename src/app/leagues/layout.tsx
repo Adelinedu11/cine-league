@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { Ticket } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import HeaderMenu from "@/components/HeaderMenu";
+import NotificationsBell from "@/components/NotificationsBell";
 import { getLocale } from "@/lib/i18n";
 
 export default async function LeaguesLayout({
@@ -29,11 +31,27 @@ export default async function LeaguesLayout({
     .maybeSingle();
   const headerName = profile?.pseudo?.trim() || user.email || "?";
 
+  // Alerte T-1h "à la demande" : calculée à chaque visite d'une page connectée
+  // plutôt que par un cron (voir backlog point 13) — best effort, ne bloque
+  // jamais le rendu de la page si ça échoue.
+  await supabase.rpc("sync_round_deadline_notifications");
+  const { data: notifications } = await supabase.rpc(
+    "list_recent_notifications",
+    { _limit: 20 },
+  );
+
   async function signOut() {
     "use server";
     const supabase = await createClient();
     await supabase.auth.signOut();
     redirect("/login");
+  }
+
+  async function markAllNotificationsRead() {
+    "use server";
+    const supabase = await createClient();
+    await supabase.rpc("mark_all_notifications_read");
+    revalidatePath("/leagues", "layout");
   }
 
   return (
@@ -53,7 +71,14 @@ export default async function LeaguesLayout({
               Ciné League
             </span>
           </Link>
-          <HeaderMenu locale={locale} name={headerName} signOut={signOut} />
+          <div className="flex shrink-0 items-center gap-2">
+            <NotificationsBell
+              notifications={notifications ?? []}
+              locale={locale}
+              markAllRead={markAllNotificationsRead}
+            />
+            <HeaderMenu locale={locale} name={headerName} signOut={signOut} />
+          </div>
         </div>
       </header>
       {children}

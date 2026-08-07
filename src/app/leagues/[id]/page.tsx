@@ -2,7 +2,7 @@ import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { Ticket } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
-import { formatRoundDate } from "@/lib/rounds";
+import { formatRoundDate, transitionThresholdIso } from "@/lib/rounds";
 import { getLocale, t } from "@/lib/i18n";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
@@ -12,6 +12,7 @@ import RoundModeDateFields from "@/components/RoundModeDateFields";
 import Avatar from "@/components/Avatar";
 import LeagueTabs from "@/components/LeagueTabs";
 import CineLeagueScores from "@/components/CineLeagueScores";
+import RoundCountdown from "@/components/RoundCountdown";
 
 // Couleur du stub (languette) selon le statut du round.
 const ROUND_STATUS_STUB_CLASS: Record<string, string> = {
@@ -69,6 +70,19 @@ export default async function LeaguePage({
     .eq("league_id", id)
     .order("ceremony_at", { ascending: true });
 
+  // Séparation "En cours" / "Archives" : bascule automatique dès que le
+  // round passe en `closed`, aucune action admin requise. Pas de colonne
+  // `closed_at` dédiée : `ceremony_at` sert de date de clôture pour le tri
+  // décroissant des archives (c'est la date d'échéance du round dans les
+  // deux modes de jeu).
+  const activeRounds = (rounds ?? []).filter((r) => r.status !== "closed");
+  const archivedRounds = (rounds ?? [])
+    .filter((r) => r.status === "closed")
+    .sort(
+      (a, b) =>
+        new Date(b.ceremony_at).getTime() - new Date(a.ceremony_at).getTime(),
+    );
+
   // Admin, membres, classement compétition, classement Ciné'Files.
   const [
     { data: isAdmin },
@@ -82,22 +96,125 @@ export default async function LeaguePage({
     supabase.rpc("league_cine_files_detail", { _league_id: id }),
   ]);
 
+  // Rendu factorisé de la liste des séances (utilisé pour "En cours" et
+  // "Archives") : mêmes tickets, seule la source de données change.
+  function renderRoundsList(list: typeof activeRounds, emptyKey: string) {
+    return (
+      <section className="flex flex-col gap-3">
+        {list.length === 0 ? (
+          <p className="text-sm text-[var(--color-muted)]">
+            {t(locale, emptyKey)}
+          </p>
+        ) : (
+          <ul className="flex flex-col gap-3">
+            {list.map((round) => (
+              <li key={round.id}>
+                <Link
+                  href={`/leagues/${id}/rounds/${round.id}`}
+                  className="block transition-opacity hover:opacity-90"
+                >
+                  <TicketStub
+                    stub={t(locale, `roundStatus.${round.status}`)}
+                    stubClassName={
+                      ROUND_STATUS_STUB_CLASS[round.status] ??
+                      "text-[var(--color-gold)]"
+                    }
+                  >
+                    <span className="mb-1 flex w-fit items-center gap-1 rounded-full bg-[var(--color-surface-alt)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-[var(--color-muted)]">
+                      {round.game_mode === "cine_files" ? "🔎" : "🏆"}{" "}
+                      {t(
+                        locale,
+                        round.game_mode === "cine_files"
+                          ? "roundMode.cineFiles"
+                          : "roundMode.competition",
+                      )}
+                    </span>
+                    <span className="block font-medium uppercase text-[var(--color-cream)]">
+                      {round.theme}
+                    </span>
+                    <p className="font-mono mt-2 text-xs text-[var(--color-muted)]">
+                      {t(locale, "round.submissionsUntil", {
+                        date: formatRoundDate(
+                          round.submission_deadline,
+                          locale,
+                        ),
+                      })}
+                    </p>
+                    <p className="font-mono mt-1 text-xs text-[var(--color-muted)]">
+                      {t(locale, "round.ceremonyOn", {
+                        date: formatRoundDate(round.ceremony_at, locale),
+                      })}
+                    </p>
+                    {round.status !== "closed" && (
+                      <RoundCountdown
+                        targetIso={
+                          transitionThresholdIso(
+                            round.status,
+                            round.submission_deadline,
+                            round.ceremony_at,
+                          ) ?? round.ceremony_at
+                        }
+                        locale={locale}
+                      />
+                    )}
+                  </TicketStub>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    );
+  }
+
   // --- Server Action : créer un round ---
+  // Système de durée ("tic-tac-boom", backlog point 13) : l'auteur choisit
+  // une durée depuis le lancement plutôt qu'une date précise ; le serveur
+  // calcule l'échéance exacte ici, à l'instant de la création — plus robuste
+  // qu'une date fixe comparée par un cron (qui n'existe pas dans ce projet).
   async function createRound(formData: FormData) {
     "use server";
     const theme = String(formData.get("theme") ?? "").trim();
-    const submissionDeadline = String(formData.get("submission_deadline") ?? "");
     const gameModeRaw = String(formData.get("game_mode") ?? "");
     const gameMode =
       gameModeRaw === "cine_files" ? "cine_files" : "competition_officielle";
-    // Ciné'Files : une seule date (clôture) → copiée dans les deux colonnes.
-    const ceremonyAt =
-      gameMode === "cine_files"
-        ? submissionDeadline
-        : String(formData.get("ceremony_at") ?? "");
 
-    if (!theme || !submissionDeadline || !ceremonyAt) {
-      redirect(`/leagues/${id}?error=round`);
+    const launchedAt = Date.now();
+    let submissionDeadline: string;
+    let ceremonyAt: string;
+
+    if (gameMode === "cine_files") {
+      // Ciné'Files : une seule durée (clôture) → copiée dans les deux colonnes.
+      const closeMinutes = Number(formData.get("close_duration_minutes"));
+      if (!theme || !Number.isFinite(closeMinutes) || closeMinutes <= 0) {
+        redirect(`/leagues/${id}?error=round`);
+      }
+      submissionDeadline = new Date(
+        launchedAt + closeMinutes * 60_000,
+      ).toISOString();
+      ceremonyAt = submissionDeadline;
+    } else {
+      // Compétition : durée de soumission, puis durée de vote enchaînée
+      // après la clôture des soumissions.
+      const submissionMinutes = Number(
+        formData.get("submission_duration_minutes"),
+      );
+      const votingMinutes = Number(formData.get("voting_duration_minutes"));
+      if (
+        !theme ||
+        !Number.isFinite(submissionMinutes) ||
+        submissionMinutes <= 0 ||
+        !Number.isFinite(votingMinutes) ||
+        votingMinutes <= 0
+      ) {
+        redirect(`/leagues/${id}?error=round`);
+      }
+      submissionDeadline = new Date(
+        launchedAt + submissionMinutes * 60_000,
+      ).toISOString();
+      ceremonyAt = new Date(
+        launchedAt + (submissionMinutes + votingMinutes) * 60_000,
+      ).toISOString();
     }
 
     const supabase = await createClient();
@@ -127,8 +244,8 @@ export default async function LeaguePage({
         theme,
         status: "submission",
         game_mode: gameMode,
-        submission_deadline: new Date(submissionDeadline).toISOString(),
-        ceremony_at: new Date(ceremonyAt).toISOString(),
+        submission_deadline: submissionDeadline,
+        ceremony_at: ceremonyAt,
       })
       .select("id")
       .single();
@@ -136,6 +253,10 @@ export default async function LeaguePage({
     if (error || !round) {
       redirect(`/leagues/${id}?error=round`);
     }
+
+    // Notification in-app "league lancée" (1ère séance) ou "activité"
+    // (séances suivantes) — best effort, ne bloque jamais la création.
+    await supabase.rpc("notify_round_created", { _round_id: round.id });
 
     redirect(`/leagues/${id}/rounds/${round.id}`);
   }
@@ -249,62 +370,27 @@ export default async function LeaguePage({
             label: t(locale, "league.tabRounds"),
             content: (
               <>
-                {/* Liste des séances */}
-                <section className="flex flex-col gap-3">
-                  {!rounds || rounds.length === 0 ? (
-                    <p className="text-sm text-[var(--color-muted)]">
-                      {t(locale, "league.roundsEmpty")}
-                    </p>
-                  ) : (
-                    <ul className="flex flex-col gap-3">
-                      {rounds.map((round) => (
-                        <li key={round.id}>
-                          <Link
-                            href={`/leagues/${id}/rounds/${round.id}`}
-                            className="block transition-opacity hover:opacity-90"
-                          >
-                            <TicketStub
-                              stub={t(locale, `roundStatus.${round.status}`)}
-                              stubClassName={
-                                ROUND_STATUS_STUB_CLASS[round.status] ??
-                                "text-[var(--color-gold)]"
-                              }
-                            >
-                              <span className="mb-1 flex w-fit items-center gap-1 rounded-full bg-[var(--color-surface-alt)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-[var(--color-muted)]">
-                                {round.game_mode === "cine_files" ? "🔎" : "🏆"}{" "}
-                                {t(
-                                  locale,
-                                  round.game_mode === "cine_files"
-                                    ? "roundMode.cineFiles"
-                                    : "roundMode.competition",
-                                )}
-                              </span>
-                              <span className="block font-medium uppercase text-[var(--color-cream)]">
-                                {round.theme}
-                              </span>
-                              <p className="font-mono mt-2 text-xs text-[var(--color-muted)]">
-                                {t(locale, "round.submissionsUntil", {
-                                  date: formatRoundDate(
-                                    round.submission_deadline,
-                                    locale,
-                                  ),
-                                })}
-                              </p>
-                              <p className="font-mono mt-1 text-xs text-[var(--color-muted)]">
-                                {t(locale, "round.ceremonyOn", {
-                                  date: formatRoundDate(
-                                    round.ceremony_at,
-                                    locale,
-                                  ),
-                                })}
-                              </p>
-                            </TicketStub>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </section>
+                {/* Séances : "En cours" / "Archives" (bascule auto sur closed) */}
+                <LeagueTabs
+                  tabs={[
+                    {
+                      id: "active",
+                      label: t(locale, "league.tabRoundsActive"),
+                      content: renderRoundsList(
+                        activeRounds,
+                        "league.roundsEmpty",
+                      ),
+                    },
+                    {
+                      id: "archived",
+                      label: t(locale, "league.tabRoundsArchived"),
+                      content: renderRoundsList(
+                        archivedRounds,
+                        "league.archivesEmpty",
+                      ),
+                    },
+                  ]}
+                />
 
                 {/* Créer une séance */}
                 <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">

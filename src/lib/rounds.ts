@@ -65,3 +65,62 @@ export function transitionThresholdIso(
   if (status === "voting") return ceremonyAt;
   return null;
 }
+
+/**
+ * Système de durée ("tic-tac-boom") : à la création d'un round, l'auteur
+ * choisit une durée (pas une date précise) et le serveur calcule l'échéance
+ * exacte à partir de l'instant de lancement. Plus robuste et plus lisible
+ * qu'une comparaison de date fixe (voir backlog point 13) — remplace la
+ * correction du cron, qui n'existait pas.
+ */
+export type DurationPreset = {
+  minutes: number;
+  label: Record<Locale, string>;
+};
+
+/** Ciné'Files : séance courte, jouée en direct. */
+export const CINE_FILES_DURATION_PRESETS: DurationPreset[] = [
+  { minutes: 30, label: { fr: "30 minutes", en: "30 minutes" } },
+  { minutes: 60, label: { fr: "1 heure", en: "1 hour" } },
+  { minutes: 120, label: { fr: "2 heures", en: "2 hours" } },
+  { minutes: 180, label: { fr: "3 heures", en: "3 hours" } },
+  { minutes: 360, label: { fr: "6 heures", en: "6 hours" } },
+  { minutes: 1440, label: { fr: "24 heures", en: "24 hours" } },
+];
+
+/** Compétition — phase de soumission. */
+export const SUBMISSION_DURATION_PRESETS: DurationPreset[] = [
+  { minutes: 1440, label: { fr: "1 jour", en: "1 day" } },
+  { minutes: 3 * 1440, label: { fr: "3 jours", en: "3 days" } },
+  { minutes: 7 * 1440, label: { fr: "7 jours", en: "7 days" } },
+  { minutes: 14 * 1440, label: { fr: "14 jours", en: "14 days" } },
+  { minutes: 30 * 1440, label: { fr: "30 jours", en: "30 days" } },
+  { minutes: 90 * 1440, label: { fr: "90 jours", en: "90 days" } },
+];
+
+/** Compétition — phase de vote, décomptée depuis la clôture des soumissions. */
+export const VOTING_DURATION_PRESETS: DurationPreset[] = [
+  { minutes: 1440, label: { fr: "1 jour", en: "1 day" } },
+  { minutes: 2 * 1440, label: { fr: "2 jours", en: "2 days" } },
+  { minutes: 3 * 1440, label: { fr: "3 jours", en: "3 days" } },
+  { minutes: 7 * 1440, label: { fr: "7 jours", en: "7 days" } },
+];
+
+/** Formatte un compte à rebours compact ("2j 04h", "03min 12s"…). */
+export function formatCountdown(ms: number, locale: Locale): string {
+  if (ms <= 0) return t(locale, "round.countdownEnded");
+  const totalSeconds = Math.floor(ms / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  if (days > 0) {
+    return `${days}${t(locale, "date.daysShort")} ${pad(hours)}${t(locale, "date.hoursShort")}`;
+  }
+  if (hours > 0) {
+    return `${pad(hours)}${t(locale, "date.hoursShort")} ${pad(minutes)}${t(locale, "date.minutesShort")}`;
+  }
+  return `${pad(minutes)}${t(locale, "date.minutesShort")} ${pad(seconds)}${t(locale, "date.secondsShort")}`;
+}
