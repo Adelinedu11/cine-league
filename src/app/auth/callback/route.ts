@@ -2,13 +2,27 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
 /**
+ * Destinations autorisées après échange du code. Liste blanche volontaire :
+ * rediriger vers un `next` arbitraire venu de l'URL ouvrirait une faille
+ * d'open redirect (un lien de phishing pourrait renvoyer ailleurs).
+ */
+const ALLOWED_NEXT = ["/accueil", "/reset-password"] as const;
+
+function safeNext(raw: string | null): string {
+  return ALLOWED_NEXT.includes((raw ?? "") as (typeof ALLOWED_NEXT)[number])
+    ? raw!
+    : "/accueil";
+}
+
+/**
  * Callback d'authentification : échange le `code` reçu par e-mail contre une
- * session (flux PKCE), puis redirige vers la page d'accueil.
+ * session (flux PKCE). Sert au lien de réinitialisation de mot de passe
+ * (`?next=/reset-password`) et, par défaut, à l'entrée dans l'app.
  */
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = "/accueil";
+  const next = safeNext(searchParams.get("next"));
 
   if (code) {
     const supabase = await createClient();
@@ -27,8 +41,13 @@ export async function GET(request: Request) {
       }
       return NextResponse.redirect(`${origin}${next}`);
     }
+
+    console.error("Échec de exchangeCodeForSession :", error);
   }
 
-  // Code manquant ou échange en erreur : retour à la page de connexion.
-  return NextResponse.redirect(`${origin}/login?error=auth`);
+  // Code manquant ou échange en erreur. Pour un lien de récupération périmé, on
+  // renvoie vers la demande d'un nouveau lien plutôt que vers la connexion.
+  const fallback =
+    next === "/reset-password" ? "/mot-de-passe-oublie?expired=1" : "/login?error=auth";
+  return NextResponse.redirect(`${origin}${fallback}`);
 }

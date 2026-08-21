@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getLocale, t } from "@/lib/i18n";
 import SubmitButton from "@/components/SubmitButton";
 import Avatar from "@/components/Avatar";
+import ChangePasswordForm from "@/components/ChangePasswordForm";
 
 export default async function ProfilePage({
   searchParams,
@@ -102,6 +103,12 @@ export default async function ProfilePage({
           {t(locale, "profile.save")}
         </SubmitButton>
       </form>
+
+      {/* L'e-mail est nécessaire pour revérifier l'identité avant le
+          changement de mot de passe (voir ChangePasswordForm). */}
+      {user.email && (
+        <ChangePasswordForm locale={locale} email={user.email} />
+      )}
     </main>
   );
 }

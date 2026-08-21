@@ -1,198 +1,223 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Ticket } from "lucide-react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { t, type Locale } from "@/lib/i18n";
+import { MIN_PASSWORD_LENGTH, authErrorKey } from "@/lib/auth";
+import AuthCard from "@/components/AuthCard";
+import PasswordField from "@/components/PasswordField";
 
-// idle/sending : écran e-mail ; code/verifying : écran de saisie du code.
-type Status = "idle" | "sending" | "code" | "verifying";
-
-// Longueur du code OTP envoyé par Supabase (GOTRUE_MAILER_OTP_LENGTH).
-// Source de vérité unique : champ, validation et libellés en dépendent.
-const OTP_LENGTH = 8;
-// Placeholder illustratif : « 12345678… » selon la longueur.
-const OTP_PLACEHOLDER = Array.from(
-  { length: OTP_LENGTH },
-  (_, i) => (i + 1) % 10,
-).join("");
+// Deux modes dans un seul écran : on bascule par onglet, sans changer d'URL,
+// pour que l'e-mail déjà saisi ne soit pas perdu.
+type Mode = "signin" | "signup";
 
 export default function LoginForm({ locale }: { locale: Locale }) {
+  const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [status, setStatus] = useState<Status>("idle");
+  const [password, setPassword] = useState("");
+  const [pseudo, setPseudo] = useState("");
+  const [busy, setBusy] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Étape 1 : demander l'envoi d'un code à 6 chiffres (pas de emailRedirectTo →
-  // Supabase envoie un code OTP au lieu d'un lien magique).
-  async function handleSendCode(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus("sending");
+  function switchMode(next: Mode) {
+    setMode(next);
     setErrorMsg("");
-
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithOtp({ email });
-
-    if (error) {
-      // L'objet complet (name, status, code…) est loggé dans la console du
-      // navigateur : cet appel ne passe pas par le serveur Next.js.
-      console.error("Échec de signInWithOtp :", error);
-      const hasReadableMessage =
-        typeof error.message === "string" &&
-        error.message.trim() !== "" &&
-        error.message.trim() !== "{}";
-      const base = hasReadableMessage
-        ? error.message
-        : t(locale, "login.errorFallback");
-      const detail = [error.code, error.status ? `HTTP ${error.status}` : null]
-        .filter(Boolean)
-        .join(" · ");
-      setErrorMsg(detail ? `${base} (${detail})` : base);
-      setStatus("idle");
-      return;
-    }
-
-    setStatus("code");
+    setPassword("");
   }
 
-  // Étape 2 : vérifier le code saisi. En cas de succès, la session est posée
-  // dans les cookies (client @supabase/ssr) ; on navigue en dur pour que les
-  // Server Components la voient.
-  async function handleVerify(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("verifying");
     setErrorMsg("");
 
-    const supabase = createClient();
-    const { error } = await supabase.auth.verifyOtp({
-      email,
-      token: code.trim(),
-      type: "email",
-    });
-
-    if (error) {
-      console.error("Échec de verifyOtp :", error);
-      setErrorMsg(t(locale, "login.verifyError"));
-      setStatus("code");
+    // Validation locale avant l'appel réseau : messages immédiats et traduits,
+    // là où Supabase répondrait en anglais.
+    if (password.length < MIN_PASSWORD_LENGTH) {
+      setErrorMsg(
+        t(locale, "login.passwordTooShort", { length: MIN_PASSWORD_LENGTH }),
+      );
+      return;
+    }
+    if (mode === "signup" && pseudo.trim() === "") {
+      setErrorMsg(t(locale, "login.pseudoRequired"));
       return;
     }
 
+    setBusy(true);
+    const supabase = createClient();
+
+    if (mode === "signin") {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        console.error("Échec de signInWithPassword :", error);
+        setErrorMsg(t(locale, authErrorKey(error.code, error.message)));
+        setBusy(false);
+        return;
+      }
+    } else {
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        console.error("Échec de signUp :", error);
+        setErrorMsg(t(locale, authErrorKey(error.code, error.message)));
+        setBusy(false);
+        return;
+      }
+
+      // Sans confirmation d'e-mail, la session est ouverte immédiatement : on
+      // peut écrire le pseudo tout de suite (policy profiles_insert = sa propre
+      // ligne). Si l'écriture échoue, on ne bloque pas l'entrée — le pseudo
+      // reste modifiable dans /profil.
+      if (data.session && data.user) {
+        const { error: profileError } = await supabase
+          .from("profiles")
+          .upsert(
+            { user_id: data.user.id, pseudo: pseudo.trim() },
+            { onConflict: "user_id" },
+          );
+        if (profileError) {
+          console.error("Pseudo non enregistré à l'inscription :", profileError);
+        }
+      }
+    }
+
+    // Navigation en dur (et non router.push) : elle force un aller-retour
+    // serveur, sans quoi les Server Components ne verraient pas la session
+    // fraîchement posée dans les cookies.
     window.location.href = "/accueil";
   }
 
-  const brand = (
-    <div className="mb-6 flex items-center justify-center gap-2">
-      <Ticket size={20} strokeWidth={1.5} className="text-[var(--color-gold)]" />
-      <span className="font-display text-2xl tracking-wide text-[var(--color-gold)]">
-        Ciné League
-      </span>
-    </div>
-  );
+  const isSignUp = mode === "signup";
 
-  // Écran 2 : saisie du code à 6 chiffres.
-  if (status === "code" || status === "verifying") {
-    return (
-      <main className="flex min-h-screen items-center justify-center p-6">
-        <form
-          onSubmit={handleVerify}
-          className="w-full max-w-sm rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center"
-        >
-          {brand}
-          <h1 className="font-display text-3xl tracking-wide text-[var(--color-cream)]">
-            {t(locale, "login.sentTitle")}
-          </h1>
-          <p className="mt-3 text-sm text-[var(--color-muted)]">
-            {t(locale, "login.codeSentTo", { email, length: OTP_LENGTH })}
-          </p>
-
-          <label
-            htmlFor="code"
-            className="mt-6 block text-left text-sm font-medium text-[var(--color-cream)]"
+  return (
+    <AuthCard>
+      {/* Onglets */}
+      <div
+        role="tablist"
+        aria-label={t(locale, "login.signInTitle")}
+        className="mb-6 flex gap-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-1"
+      >
+        {(["signin", "signup"] as const).map((value) => (
+          <button
+            key={value}
+            type="button"
+            role="tab"
+            aria-selected={mode === value}
+            onClick={() => switchMode(value)}
+            className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              mode === value
+                ? "bg-[var(--color-gold)] text-[var(--color-bg)]"
+                : "text-[var(--color-muted)] hover:text-[var(--color-cream)]"
+            }`}
           >
-            {t(locale, "login.codeLabel", { length: OTP_LENGTH })}
+            {t(locale, value === "signin" ? "login.tabSignIn" : "login.tabSignUp")}
+          </button>
+        ))}
+      </div>
+
+      <h1 className="font-display text-3xl tracking-wide text-[var(--color-cream)]">
+        {t(locale, isSignUp ? "login.signUpTitle" : "login.signInTitle")}
+      </h1>
+      <p className="mt-2 text-sm text-[var(--color-muted)]">
+        {t(locale, isSignUp ? "login.signUpSubtitle" : "login.signInSubtitle")}
+      </p>
+
+      <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-[var(--color-cream)]"
+          >
+            {t(locale, "login.emailLabel")}
           </label>
           <input
-            id="code"
-            name="code"
-            type="text"
-            inputMode="numeric"
-            autoComplete="one-time-code"
-            pattern="[0-9]*"
-            maxLength={OTP_LENGTH}
+            id="email"
+            name="email"
+            type="email"
             required
-            autoFocus
-            value={code}
-            onChange={(e) =>
-              setCode(e.target.value.replace(/\D/g, "").slice(0, OTP_LENGTH))
-            }
-            placeholder={OTP_PLACEHOLDER}
-            className="mt-2 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-center font-mono text-lg tracking-[0.4em] text-[var(--color-cream)] outline-none placeholder:tracking-normal placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t(locale, "login.emailPlaceholder")}
+            className="mt-2 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-cream)] outline-none placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
           />
+        </div>
 
-          {errorMsg && (
-            <p className="mt-3 text-left text-sm text-red-400">{errorMsg}</p>
-          )}
+        {isSignUp && (
+          <div>
+            <label
+              htmlFor="pseudo"
+              className="block text-sm font-medium text-[var(--color-cream)]"
+            >
+              {t(locale, "login.pseudoLabel")}
+            </label>
+            <input
+              id="pseudo"
+              name="pseudo"
+              type="text"
+              required
+              maxLength={40}
+              autoComplete="nickname"
+              value={pseudo}
+              onChange={(e) => setPseudo(e.target.value)}
+              placeholder={t(locale, "login.pseudoPlaceholder")}
+              className="mt-2 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-cream)] outline-none placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
+            />
+            <p className="mt-1.5 text-xs text-[var(--color-muted)]">
+              {t(locale, "login.pseudoHint")}
+            </p>
+          </div>
+        )}
 
-          <button
-            type="submit"
-            disabled={status === "verifying" || code.length < OTP_LENGTH}
-            className="mt-6 w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)] disabled:opacity-50"
-          >
-            {status === "verifying"
-              ? t(locale, "login.verifying")
-              : t(locale, "login.verify")}
-          </button>
-        </form>
-      </main>
-    );
-  }
-
-  // Écran 1 : saisie de l'e-mail.
-  return (
-    <main className="flex min-h-screen items-center justify-center p-6">
-      <form
-        onSubmit={handleSendCode}
-        className="w-full max-w-sm rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8"
-      >
-        {brand}
-        <h1 className="font-display text-3xl tracking-wide text-[var(--color-cream)]">
-          {t(locale, "login.title")}
-        </h1>
-        <p className="mt-2 text-sm text-[var(--color-muted)]">
-          {t(locale, "login.subtitle")}
-        </p>
-
-        <label
-          htmlFor="email"
-          className="mt-6 block text-sm font-medium text-[var(--color-cream)]"
-        >
-          {t(locale, "login.emailLabel")}
-        </label>
-        <input
-          id="email"
-          type="email"
-          required
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder={t(locale, "login.emailPlaceholder")}
-          className="mt-2 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-cream)] outline-none placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
+        <PasswordField
+          id="password"
+          label={t(locale, "login.passwordLabel")}
+          value={password}
+          onChange={setPassword}
+          locale={locale}
+          // new-password en inscription : le gestionnaire du navigateur propose
+          // alors un mot de passe fort au lieu de recompléter l'ancien.
+          autoComplete={isSignUp ? "new-password" : "current-password"}
+          minLength={MIN_PASSWORD_LENGTH}
+          hint={
+            isSignUp
+              ? t(locale, "login.passwordHint", { length: MIN_PASSWORD_LENGTH })
+              : undefined
+          }
         />
 
         {errorMsg && (
-          <p className="mt-3 text-sm text-red-400">{errorMsg}</p>
+          <p
+            role="alert"
+            className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400"
+          >
+            {errorMsg}
+          </p>
         )}
 
         <button
           type="submit"
-          disabled={status === "sending"}
-          className="mt-6 w-full rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)] disabled:opacity-50"
+          disabled={busy}
+          className="rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)] disabled:opacity-50"
         >
-          {status === "sending"
-            ? t(locale, "login.submitting")
-            : t(locale, "login.submit")}
+          {busy
+            ? t(locale, isSignUp ? "login.signingUp" : "login.signingIn")
+            : t(locale, isSignUp ? "login.signUp" : "login.signIn")}
         </button>
       </form>
-    </main>
+
+      {!isSignUp && (
+        <p className="mt-4 text-center">
+          <Link
+            href="/mot-de-passe-oublie"
+            className="text-sm text-[var(--color-muted)] underline decoration-[var(--color-border)] underline-offset-4 hover:text-[var(--color-cream)]"
+          >
+            {t(locale, "login.forgot")}
+          </Link>
+        </p>
+      )}
+    </AuthCard>
   );
 }

@@ -36,6 +36,16 @@ export const dict: Record<Locale, Dict> = {
     "profile.pseudoPlaceholder": "Ton pseudo",
     "profile.save": "Enregistrer",
     "profile.saved": "Pseudo enregistré.",
+    "profile.passwordTitle": "Changer de mot de passe",
+    "profile.passwordHint":
+      "Ton mot de passe actuel est demandé pour vérifier que c'est bien toi.",
+    "profile.currentPassword": "Mot de passe actuel",
+    "profile.passwordSave": "Changer le mot de passe",
+    "profile.passwordSaving": "Enregistrement…",
+    "profile.passwordSaved": "Mot de passe modifié.",
+    "profile.currentPasswordWrong": "Ton mot de passe actuel est incorrect.",
+    "profile.passwordSame":
+      "Le nouveau mot de passe est identique à l'ancien.",
 
     // Ciné'Files (compléments)
     "cinefiles.proposalBy": "Le secret de {name}",
@@ -79,20 +89,60 @@ export const dict: Record<Locale, Dict> = {
     "toggle.toDark": "Passer en mode sombre",
     "toggle.locale": "Changer de langue",
 
-    // Login
-    "login.title": "Connexion",
-    "login.subtitle": "Reçois un code de connexion par e-mail, sans mot de passe.",
+    // Login / inscription (e-mail + mot de passe)
+    "login.tabSignIn": "Connexion",
+    "login.tabSignUp": "Créer un compte",
+    "login.signInTitle": "Connexion",
+    "login.signInSubtitle": "Retrouve tes leagues et tes séances en cours.",
+    "login.signUpTitle": "Créer un compte",
+    "login.signUpSubtitle":
+      "Choisis un pseudo, et tu rejoins directement la league publique.",
     "login.emailLabel": "Adresse e-mail",
     "login.emailPlaceholder": "ton@email.com",
-    "login.submit": "Recevoir mon code",
-    "login.submitting": "Envoi en cours…",
-    "login.sentTitle": "Vérifie ta boîte mail",
-    "login.codeSentTo": "Un code à {length} chiffres a été envoyé à {email}.",
-    "login.codeLabel": "Code à {length} chiffres",
-    "login.verify": "Valider",
-    "login.verifying": "Vérification…",
-    "login.verifyError": "Code invalide ou expiré, réessaie.",
-    "login.errorFallback": "Impossible d'envoyer le code de connexion.",
+    "login.passwordLabel": "Mot de passe",
+    "login.passwordPlaceholder": "••••••••",
+    "login.passwordHint": "{length} caractères minimum.",
+    "login.showPassword": "Afficher le mot de passe",
+    "login.hidePassword": "Masquer le mot de passe",
+    "login.pseudoLabel": "Pseudo",
+    "login.pseudoPlaceholder": "Ton pseudo",
+    "login.pseudoHint": "C'est lui qui s'affichera dans les classements.",
+    "login.signIn": "Se connecter",
+    "login.signingIn": "Connexion…",
+    "login.signUp": "Créer mon compte",
+    "login.signingUp": "Création du compte…",
+    "login.forgot": "Mot de passe oublié ?",
+    "login.pseudoRequired": "Choisis un pseudo pour continuer.",
+    "login.passwordTooShort":
+      "Ton mot de passe doit faire au moins {length} caractères.",
+    "login.invalidCredentials": "E-mail ou mot de passe incorrect.",
+    "login.emailTaken":
+      "Un compte existe déjà avec cet e-mail. Essaie de te connecter.",
+    "login.errorFallback": "Quelque chose s'est mal passé, réessaie.",
+
+    // Mot de passe oublié
+    "forgot.title": "Mot de passe oublié",
+    "forgot.subtitle":
+      "Indique ton e-mail : on t'envoie un lien pour en choisir un nouveau.",
+    "forgot.submit": "Envoyer le lien",
+    "forgot.submitting": "Envoi en cours…",
+    "forgot.sentTitle": "Vérifie ta boîte mail",
+    "forgot.sent":
+      "Si un compte existe pour {email}, le lien de réinitialisation vient d'y être envoyé.",
+    "forgot.back": "← Retour à la connexion",
+    "forgot.error": "Impossible d'envoyer le lien pour le moment.",
+
+    // Nouveau mot de passe
+    "reset.title": "Nouveau mot de passe",
+    "reset.subtitle": "Choisis un mot de passe, puis reconnecte-toi.",
+    "reset.passwordLabel": "Nouveau mot de passe",
+    "reset.confirmLabel": "Confirme le mot de passe",
+    "reset.submit": "Enregistrer",
+    "reset.submitting": "Enregistrement…",
+    "reset.mismatch": "Les deux mots de passe ne sont pas identiques.",
+    "reset.error": "Impossible d'enregistrer ce mot de passe.",
+    "reset.expired":
+      "Ce lien a expiré ou a déjà été utilisé. Demandes-en un nouveau.",
 
     // Accueil
     "home.badge": "BIENVENUE",
@@ -296,6 +346,15 @@ export const dict: Record<Locale, Dict> = {
     "profile.pseudoPlaceholder": "Your nickname",
     "profile.save": "Save",
     "profile.saved": "Nickname saved.",
+    "profile.passwordTitle": "Change your password",
+    "profile.passwordHint":
+      "We ask for your current password to confirm it's really you.",
+    "profile.currentPassword": "Current password",
+    "profile.passwordSave": "Change password",
+    "profile.passwordSaving": "Saving…",
+    "profile.passwordSaved": "Password changed.",
+    "profile.currentPasswordWrong": "Your current password is incorrect.",
+    "profile.passwordSame": "The new password is the same as the old one.",
 
     // Ciné'Files (extras)
     "cinefiles.proposalBy": "{name}'s secret",
@@ -339,20 +398,58 @@ export const dict: Record<Locale, Dict> = {
     "toggle.toDark": "Switch to dark mode",
     "toggle.locale": "Change language",
 
-    // Login
-    "login.title": "Sign in",
-    "login.subtitle": "Get a sign-in code by email, no password needed.",
+    // Login / sign-up (email + password)
+    "login.tabSignIn": "Sign in",
+    "login.tabSignUp": "Create an account",
+    "login.signInTitle": "Sign in",
+    "login.signInSubtitle": "Back to your leagues and ongoing screenings.",
+    "login.signUpTitle": "Create an account",
+    "login.signUpSubtitle":
+      "Pick a nickname and you'll join the public league right away.",
     "login.emailLabel": "Email address",
     "login.emailPlaceholder": "you@email.com",
-    "login.submit": "Send my code",
-    "login.submitting": "Sending…",
-    "login.sentTitle": "Check your inbox",
-    "login.codeSentTo": "Your {length}-digit code was sent to {email}.",
-    "login.codeLabel": "{length}-digit code",
-    "login.verify": "Verify",
-    "login.verifying": "Verifying…",
-    "login.verifyError": "Invalid or expired code, try again.",
-    "login.errorFallback": "Couldn't send the sign-in code.",
+    "login.passwordLabel": "Password",
+    "login.passwordPlaceholder": "••••••••",
+    "login.passwordHint": "{length} characters minimum.",
+    "login.showPassword": "Show password",
+    "login.hidePassword": "Hide password",
+    "login.pseudoLabel": "Nickname",
+    "login.pseudoPlaceholder": "Your nickname",
+    "login.pseudoHint": "This is what shows up in the standings.",
+    "login.signIn": "Sign in",
+    "login.signingIn": "Signing in…",
+    "login.signUp": "Create my account",
+    "login.signingUp": "Creating account…",
+    "login.forgot": "Forgot your password?",
+    "login.pseudoRequired": "Pick a nickname to continue.",
+    "login.passwordTooShort":
+      "Your password must be at least {length} characters long.",
+    "login.invalidCredentials": "Wrong email or password.",
+    "login.emailTaken":
+      "An account already exists for this email. Try signing in.",
+    "login.errorFallback": "Something went wrong, please try again.",
+
+    // Forgot password
+    "forgot.title": "Forgot your password",
+    "forgot.subtitle": "Enter your email and we'll send you a reset link.",
+    "forgot.submit": "Send the link",
+    "forgot.submitting": "Sending…",
+    "forgot.sentTitle": "Check your inbox",
+    "forgot.sent":
+      "If an account exists for {email}, the reset link is on its way.",
+    "forgot.back": "← Back to sign in",
+    "forgot.error": "Couldn't send the link right now.",
+
+    // New password
+    "reset.title": "New password",
+    "reset.subtitle": "Choose a password, then sign back in.",
+    "reset.passwordLabel": "New password",
+    "reset.confirmLabel": "Confirm password",
+    "reset.submit": "Save",
+    "reset.submitting": "Saving…",
+    "reset.mismatch": "The two passwords don't match.",
+    "reset.error": "Couldn't save this password.",
+    "reset.expired": "This link has expired or was already used. Request a new one.",
 
     // Home
     "home.badge": "WELCOME",
