@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check, X } from "lucide-react";
 import Avatar from "@/components/Avatar";
 import { t, type Locale } from "@/lib/i18n";
 
@@ -90,9 +91,21 @@ export default function CineRoundScores({
                         key={k}
                         className="flex items-center justify-between gap-2 text-[var(--color-cream)]"
                       >
-                        <span>
-                          {m.found ? "✅" : "❌"} {m.author} —{" "}
-                          {m.guessedTitle ?? "—"}
+                        <span className="flex items-center gap-1">
+                          {m.found ? (
+                            <Check
+                              size={13}
+                              strokeWidth={2}
+                              className="text-[var(--color-sage-ink)]"
+                            />
+                          ) : (
+                            <X
+                              size={13}
+                              strokeWidth={2}
+                              className="text-[var(--color-coral-ink)]"
+                            />
+                          )}
+                          {m.author} — {m.guessedTitle ?? "—"}
                         </span>
                         <span className="font-mono text-xs text-[var(--color-muted)]">
                           {m.attempts}

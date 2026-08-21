@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { Trophy, Search } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getLocale, t } from "@/lib/i18n";
 
@@ -32,8 +33,9 @@ export default async function RulesPage() {
 
       {/* Compétition officielle */}
       <section className="flex flex-col gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-        <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
-          🏆 {t(locale, "rules.compTitle")}
+        <h2 className="font-display flex items-center gap-2 text-2xl tracking-wide text-[var(--color-cream)]">
+          <Trophy size={20} strokeWidth={1.8} />
+          {t(locale, "rules.compTitle")}
         </h2>
         <p className="text-sm text-[var(--color-cream)]/90">
           {t(locale, "rules.compBody")}
@@ -42,8 +44,9 @@ export default async function RulesPage() {
 
       {/* Ciné'Files */}
       <section className="flex flex-col gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-        <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
-          🔎 {t(locale, "rules.cineTitle")}
+        <h2 className="font-display flex items-center gap-2 text-2xl tracking-wide text-[var(--color-cream)]">
+          <Search size={20} strokeWidth={1.8} />
+          {t(locale, "rules.cineTitle")}
         </h2>
         <p className="text-sm text-[var(--color-cream)]/90">
           {t(locale, "rules.cineIntro")}

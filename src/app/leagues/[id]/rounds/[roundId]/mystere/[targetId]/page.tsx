@@ -1,6 +1,7 @@
 import { redirect, notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { Check, User } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import {
   fetchMovieCredits,
@@ -240,8 +241,16 @@ export default async function MysteryPage({
               </p>
               <ul className="flex flex-col gap-0.5">
                 {hintLines.map((line, k) => (
-                  <li key={k} className="text-sm text-[var(--color-cream)]">
-                    ✅ {line}
+                  <li
+                    key={k}
+                    className="flex items-center gap-1.5 text-sm text-[var(--color-cream)]"
+                  >
+                    <Check
+                      size={14}
+                      strokeWidth={2}
+                      className="text-[var(--color-sage-ink)]"
+                    />
+                    {line}
                   </li>
                 ))}
               </ul>
@@ -254,8 +263,12 @@ export default async function MysteryPage({
               </p>
               <ul className="flex flex-col gap-0.5">
                 {bonusActors.map((a, k) => (
-                  <li key={k} className="text-sm text-[var(--color-cream)]">
-                    🎭 {a}
+                  <li
+                    key={k}
+                    className="flex items-center gap-1.5 text-sm text-[var(--color-cream)]"
+                  >
+                    <User size={14} strokeWidth={1.8} />
+                    {a}
                   </li>
                 ))}
               </ul>
@@ -305,7 +318,13 @@ export default async function MysteryPage({
                 <span className="text-[var(--color-cream)]">
                   {g.guessed_title}
                 </span>
-                {g.found && <span>✅</span>}
+                {g.found && (
+                  <Check
+                    size={14}
+                    strokeWidth={2}
+                    className="text-[var(--color-sage-ink)]"
+                  />
+                )}
               </div>
               {g.feedback ? (
                 <CineFeedbackChips

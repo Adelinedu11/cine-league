@@ -1,6 +1,7 @@
 import { redirect, notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { Check, Clock, Star } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import {
   fetchMovieCredits,
@@ -827,8 +828,16 @@ export default async function RoundPage({
                     <span className="text-[var(--color-cream)]">
                       {submitter.display_name}
                     </span>
-                    <span className="font-mono text-xs text-[var(--color-muted)]">
-                      {submitter.has_submitted ? "✅" : "⏳"}{" "}
+                    <span className="font-mono flex items-center gap-1 text-xs text-[var(--color-muted)]">
+                      {submitter.has_submitted ? (
+                        <Check
+                          size={12}
+                          strokeWidth={2}
+                          className="text-[var(--color-sage-ink)]"
+                        />
+                      ) : (
+                        <Clock size={12} strokeWidth={1.8} />
+                      )}
                       {t(
                         locale,
                         submitter.has_submitted
@@ -874,8 +883,9 @@ export default async function RoundPage({
                     </span>
                     <span className="font-mono text-xs text-[var(--color-muted)]">
                       {m.found ? (
-                        <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-emerald-400">
-                          {t(locale, "cinefiles.foundBadge")} ✅
+                        <span className="flex items-center gap-1 rounded-full bg-[var(--color-sage)]/25 px-2 py-0.5 text-[var(--color-sage-ink)]">
+                          <Check size={12} strokeWidth={2} />
+                          {t(locale, "cinefiles.foundBadge")}
                         </span>
                       ) : (
                         t(locale, "cinefiles.attemptCounter", {
@@ -920,7 +930,7 @@ export default async function RoundPage({
               {categories.map((category) => (
                 <TicketStub
                   key={category.id}
-                  stub="★"
+                  stub={<Star size={14} strokeWidth={1.8} />}
                   stubClassName="text-[var(--color-muted)]"
                 >
                   <fieldset className="flex flex-col gap-2">
@@ -990,8 +1000,16 @@ export default async function RoundPage({
                     <span className="text-[var(--color-cream)]">
                       {voter.display_name}
                     </span>
-                    <span className="font-mono text-xs text-[var(--color-muted)]">
-                      {voter.has_voted ? "✅" : "⏳"}{" "}
+                    <span className="font-mono flex items-center gap-1 text-xs text-[var(--color-muted)]">
+                      {voter.has_voted ? (
+                        <Check
+                          size={12}
+                          strokeWidth={2}
+                          className="text-[var(--color-sage-ink)]"
+                        />
+                      ) : (
+                        <Clock size={12} strokeWidth={1.8} />
+                      )}
                       {t(
                         locale,
                         voter.has_voted

@@ -1,30 +1,37 @@
 @import "tailwindcss";
 
 /* Polices chargées via next/font/google dans src/app/layout.tsx :
-   --font-inter, --font-bebas, --font-ibm-plex-mono. */
+   --font-poppins, --font-oswald. */
 
 :root {
-  /* Adapte les contrôles natifs du navigateur (calendrier datetime-local,
-     scrollbars…) au thème sombre par défaut. */
-  color-scheme: dark;
+  /* Direction v2 (docs/design-spec-v2.md) : thème clair par défaut. Le mode
+     sombre est optionnel, activé par data-theme="dark" (voir plus bas). */
+  color-scheme: light;
 
-  /* Palette bleu-gris — thème sombre par défaut. Le mode clair (bleu nuit sur
-     fond blanc) est défini plus bas via :root[data-theme="light"]. */
-  --color-bg: #0d1f23;
-  --color-surface: #132e35;
-  --color-surface-alt: #2d4a53;
-  --color-border: #5a636a;
-  --color-muted: #69818d;
-  --color-cream: #dcc7b4;
-  --color-gold: #d4dcf2;
-  --color-gold-bright: #e8c468;
-  --color-teal: #3e6259;
+  --color-bg: #edebe9;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f4f2;
+  --color-border: #d8d5d1;
+  --color-muted: #6b6b74;
+  --color-cream: #1c1c22;
+  --color-gold: #0e2396;
+  --color-gold-bright: #7294f4;
+  --color-teal: #aace89;
+  --color-teal-ink: #4c7a34;
 
-  /* Couleur chair pour le hover des boutons « Créer ». Identique dans les deux
-     thèmes (non redéfinie en mode clair) : un hover visible partout. --flesh-ink
-     est le texte lisible posé sur ce fond clair au survol. */
-  --color-flesh: #e6c3a3;
-  --color-flesh-ink: #3a2a20;
+  /* Accents de statut ajoutés par la direction v2. */
+  --color-coral: #f5566e;
+  --color-coral-ink: #a32c45;
+  --color-sage: #aace89;
+  --color-sage-ink: #4c7a34;
+  --color-yellow: #f2d366;
+  --color-yellow-ink: #8a6a10;
+
+  /* Couleur de hover des boutons « Créer » : periwinkle, cohérent avec le
+     bleu de marque plutôt qu'une couleur chair. --flesh-ink est le texte
+     lisible posé sur ce fond au survol. */
+  --color-flesh: #7294f4;
+  --color-flesh-ink: #0e2396;
 
   /* Tokens hérités encore utilisés par des utilitaires existants
      (bg-foreground / text-background). Remappés sur la nouvelle palette. */
@@ -32,21 +39,32 @@
   --foreground: var(--color-cream);
 }
 
-/* Mode clair — activé par data-theme="light" sur <html>. Miroir du thème
-   bleu-gris : fond blanc, texte et accent bleu nuit. Seuls les tokens qui
-   changent sont redéfinis ; --background / --foreground suivent automatiquement
-   (substitution paresseuse des variables CSS). */
-:root[data-theme="light"] {
-  color-scheme: light;
+/* Mode sombre — optionnel, activé par data-theme="dark" sur <html>. Reprend
+   les mêmes accents (corail/sage/periwinkle/jaune) sur fond assombri ; le
+   bleu de marque s'éclaircit en periwinkle pour rester lisible. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
 
-  --color-bg: #ffffff;
-  --color-surface: #f4f7fb;
-  --color-surface-alt: #e6ecf6;
-  --color-border: #cbd6e6;
-  --color-muted: #5b6b84;
-  --color-cream: #14213d;
-  --color-gold: #1d2e5c;
-  --color-gold-bright: #16244d;
+  --color-bg: #0b0d18;
+  --color-surface: #14172b;
+  --color-surface-alt: #1c2038;
+  --color-border: #2b2f4a;
+  --color-muted: #8890a8;
+  --color-cream: #ecedf3;
+  --color-gold: #7294f4;
+  --color-gold-bright: #0e2396;
+  --color-teal: #aace89;
+  --color-teal-ink: #dcebc9;
+
+  --color-coral: #f5566e;
+  --color-coral-ink: #fbc3cc;
+  --color-sage: #aace89;
+  --color-sage-ink: #dcebc9;
+  --color-yellow: #f2d366;
+  --color-yellow-ink: #f7e6b0;
+
+  --color-flesh: #0e2396;
+  --color-flesh-ink: #ecedf3;
 }
 
 @theme inline {
@@ -57,16 +75,21 @@
 body {
   background-color: var(--color-bg);
   color: var(--color-cream);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Classes utilitaires de police réutilisables. */
 .font-display {
-  font-family: var(--font-bebas), ui-sans-serif, sans-serif;
+  font-family: var(--font-oswald), ui-sans-serif, sans-serif;
+  font-weight: 700;
 }
 
+/* Anciennement IBM Plex Mono : les codes/labels passent en Poppins avec un
+   tracking plus large, pour rester cohérent avec le reste de l'UI. */
 .font-mono {
-  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-family: var(--font-poppins), ui-sans-serif, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 /* Retour visuel au clic : léger enfoncement immédiat sur TOUS les boutons.

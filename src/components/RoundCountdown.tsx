@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Clock } from "lucide-react";
 import { formatCountdown } from "@/lib/rounds";
 import { t, type Locale } from "@/lib/i18n";
 
@@ -31,8 +32,8 @@ export default function RoundCountdown({
   if (remaining === null) return null;
 
   return (
-    <p className="font-mono text-xs text-[var(--color-gold)]">
-      ⏳{" "}
+    <p className="font-mono flex items-center gap-1 text-xs text-[var(--color-gold)]">
+      <Clock size={12} strokeWidth={1.8} />
       {remaining > 0
         ? `${t(locale, "round.countdownPrefix")} ${formatCountdown(remaining, locale)}`
         : t(locale, "round.countdownEnded")}

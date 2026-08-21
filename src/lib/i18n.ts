@@ -86,7 +86,7 @@ export const dict: Record<Locale, Dict> = {
     "login.emailPlaceholder": "ton@email.com",
     "login.submit": "Recevoir mon code",
     "login.submitting": "Envoi en cours…",
-    "login.sentTitle": "Vérifie ta boîte mail 📬",
+    "login.sentTitle": "Vérifie ta boîte mail",
     "login.codeSentTo": "Un code à {length} chiffres a été envoyé à {email}.",
     "login.codeLabel": "Code à {length} chiffres",
     "login.verify": "Valider",
@@ -102,7 +102,7 @@ export const dict: Record<Locale, Dict> = {
     "home.loggedInAs": "Connecté en tant que {email}",
 
     // Liste des ligues
-    "leagues.welcomeTitle": "Bienvenue sur Ciné League 🎬",
+    "leagues.welcomeTitle": "Bienvenue sur Ciné League",
     "leagues.welcomeIntro":
       "Crée ou rejoins une ligue pour jouer entre amis : proposez des films, votez, devinez les films mystères, et grimpez au classement.",
     "leagues.badge": "VOS LIGUES",
@@ -239,7 +239,7 @@ export const dict: Record<Locale, Dict> = {
     "cinefiles.bonusHints": "Indices bonus",
     "cinefiles.bonusButton": "Demander un indice bonus",
     "cinefiles.bonusEmpty": "Plus d'acteur à révéler.",
-    "cinefiles.solved": "Trouvé ! ✅",
+    "cinefiles.solved": "Trouvé !",
     "cinefiles.exhausted": "Essais épuisés (20).",
     "cinefiles.secretFilm": "Film secret",
     "cinefiles.foundCount": "{count}/{total} mystères trouvés",
@@ -261,7 +261,7 @@ export const dict: Record<Locale, Dict> = {
     "film.searching": "Recherche…",
     "film.loadingDetails": "Chargement des détails…",
     "film.noPlatform": "Aucune plateforme trouvée en France.",
-    "film.overlap": "⚠️ {person} apparaît aussi dans {film}",
+    "film.overlap": "{person} apparaît aussi dans {film}",
     "film.commentPlaceholder": "Quelques mots sur ton film…",
     "film.submitting": "Envoi…",
     "film.submitButton": "Soumettre ce film",
@@ -346,7 +346,7 @@ export const dict: Record<Locale, Dict> = {
     "login.emailPlaceholder": "you@email.com",
     "login.submit": "Send my code",
     "login.submitting": "Sending…",
-    "login.sentTitle": "Check your inbox 📬",
+    "login.sentTitle": "Check your inbox",
     "login.codeSentTo": "Your {length}-digit code was sent to {email}.",
     "login.codeLabel": "{length}-digit code",
     "login.verify": "Verify",
@@ -362,7 +362,7 @@ export const dict: Record<Locale, Dict> = {
     "home.loggedInAs": "Signed in as {email}",
 
     // Leagues list
-    "leagues.welcomeTitle": "Welcome to Ciné League 🎬",
+    "leagues.welcomeTitle": "Welcome to Ciné League",
     "leagues.welcomeIntro":
       "Create or join a league to play with friends: submit films, vote, guess mystery films, and climb the standings.",
     "leagues.badge": "YOUR LEAGUES",
@@ -498,7 +498,7 @@ export const dict: Record<Locale, Dict> = {
     "cinefiles.bonusHints": "Bonus hints",
     "cinefiles.bonusButton": "Request a bonus hint",
     "cinefiles.bonusEmpty": "No more actor to reveal.",
-    "cinefiles.solved": "Found! ✅",
+    "cinefiles.solved": "Found!",
     "cinefiles.exhausted": "Out of tries (20).",
     "cinefiles.secretFilm": "Secret film",
     "cinefiles.foundCount": "{count}/{total} mysteries found",
@@ -520,7 +520,7 @@ export const dict: Record<Locale, Dict> = {
     "film.searching": "Searching…",
     "film.loadingDetails": "Loading details…",
     "film.noPlatform": "No platform found in France.",
-    "film.overlap": "⚠️ {person} also appears in {film}",
+    "film.overlap": "{person} also appears in {film}",
     "film.commentPlaceholder": "A few words about your film…",
     "film.submitting": "Sending…",
     "film.submitButton": "Submit this film",

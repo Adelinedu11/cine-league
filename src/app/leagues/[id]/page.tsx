@@ -1,6 +1,6 @@
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
-import { Ticket } from "lucide-react";
+import { Ticket, Trophy, Search } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { formatRoundDate, transitionThresholdIso } from "@/lib/rounds";
 import { getLocale, t } from "@/lib/i18n";
@@ -14,11 +14,13 @@ import LeagueTabs from "@/components/LeagueTabs";
 import CineLeagueScores from "@/components/CineLeagueScores";
 import RoundCountdown from "@/components/RoundCountdown";
 
-// Couleur du stub (languette) selon le statut du round.
+// Couleur du stub (languette) selon le statut du round — un code couleur
+// distinct par statut (direction v2 / docs/design-spec-v2.md), pour ne plus
+// confondre visuellement "en cours" et "terminé".
 const ROUND_STATUS_STUB_CLASS: Record<string, string> = {
-  submission: "text-[var(--color-gold)]",
-  voting: "text-[var(--color-gold)]",
-  closed: "text-[var(--color-gold)]",
+  submission: "text-[var(--color-gold-bright)]",
+  voting: "text-[var(--color-coral)]",
+  closed: "text-[var(--color-sage-ink)]",
 };
 
 export default async function LeaguePage({
@@ -121,7 +123,11 @@ export default async function LeaguePage({
                     }
                   >
                     <span className="mb-1 flex w-fit items-center gap-1 rounded-full bg-[var(--color-surface-alt)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-[var(--color-muted)]">
-                      {round.game_mode === "cine_files" ? "🔎" : "🏆"}{" "}
+                      {round.game_mode === "cine_files" ? (
+                        <Search size={11} strokeWidth={1.8} />
+                      ) : (
+                        <Trophy size={11} strokeWidth={1.8} />
+                      )}
                       {t(
                         locale,
                         round.game_mode === "cine_files"
@@ -507,8 +513,9 @@ export default async function LeaguePage({
 
                 {/* Classement Ciné'Files (détaillé, dépliable) */}
                 <section className="flex flex-col gap-3">
-                  <h2 className="text-lg font-semibold">
-                    🔎 {t(locale, "league.cineStandingsTitle")}
+                  <h2 className="flex items-center gap-1.5 text-lg font-semibold">
+                    <Search size={16} strokeWidth={1.8} />
+                    {t(locale, "league.cineStandingsTitle")}
                   </h2>
                   <CineLeagueScores
                     players={cineHistory ?? []}

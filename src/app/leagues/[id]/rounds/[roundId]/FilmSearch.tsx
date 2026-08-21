@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { TriangleAlert } from "lucide-react";
 import FilmPoster from "@/components/FilmPoster";
 import SubmitButton from "@/components/SubmitButton";
 import { t, type Locale } from "@/lib/i18n";
@@ -303,8 +304,9 @@ export default function FilmSearch({
               {overlaps.map((o, i) => (
                 <li
                   key={`${o.person}-${o.filmTitle}-${i}`}
-                  className="text-xs text-[var(--color-gold)]"
+                  className="flex items-center gap-1.5 text-xs text-[var(--color-gold)]"
                 >
+                  <TriangleAlert size={13} strokeWidth={1.8} />
                   {t(locale, "film.overlap", {
                     person: o.person,
                     film: o.filmTitle,
@@ -334,8 +336,9 @@ export default function FilmSearch({
           )}
 
           {contradiction && (
-            <p className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm text-amber-400">
-              ⚠️ {contradiction}
+            <p className="flex items-center gap-1.5 rounded-lg border border-[var(--color-yellow)]/50 bg-[var(--color-yellow)]/15 px-3 py-2 text-sm text-[var(--color-yellow-ink)]">
+              <TriangleAlert size={14} strokeWidth={1.8} />
+              {contradiction}
             </p>
           )}
 

@@ -1,34 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Bebas_Neue, IBM_Plex_Mono } from "next/font/google";
+import { Oswald, Poppins } from "next/font/google";
 import { getLocale, t } from "@/lib/i18n";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import "./globals.css";
 
-// Favicon : emoji ticket rendu dans un <text> SVG, encodé en data-URI.
+// Favicon : pictogramme ticket vectoriel (plus d'emoji), encodé en data-URI.
 const FAVICON = `data:image/svg+xml,${encodeURIComponent(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="52" font-size="76" text-anchor="middle" dominant-baseline="central">🎟️</text></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="8" y="26" width="84" height="48" rx="10" fill="#0E2396"/><line x1="62" y1="26" x2="62" y2="74" stroke="#EDEBE9" stroke-width="4" stroke-dasharray="6 6"/><circle cx="62" cy="26" r="7" fill="#EDEBE9"/><circle cx="62" cy="74" r="7" fill="#EDEBE9"/></svg>`,
 )}`;
 
-// Barre de statut mobile alignée sur le fond du thème sombre.
+// Barre de statut mobile alignée sur le fond du thème clair (direction v2).
 export const viewport: Viewport = {
-  themeColor: "#150A0C",
+  themeColor: "#EDEBE9",
 };
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const bebasNeue = Bebas_Neue({
-  variable: "--font-bebas",
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  weight: ["600", "700"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -54,15 +49,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // Applique le thème mémorisé avant la première peinture (évite le flash de
-  // mauvaise couleur). Seul le mode clair pose un attribut ; l'absence
-  // d'attribut = thème sombre par défaut.
-  const themeScript = `(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`;
+  // mauvaise couleur). Depuis la direction v2, le clair est le thème par
+  // défaut ; seul le mode sombre pose un attribut.
+  const themeScript = `(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();`;
 
   return (
     <html
       lang="fr"
       suppressHydrationWarning
-      className={`${inter.variable} ${bebasNeue.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${poppins.variable} ${oswald.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
