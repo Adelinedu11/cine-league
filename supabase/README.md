@@ -23,7 +23,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `010_comments.sql` | colonnes `comment` sur `submissions`/`votes`, `round_submission_details` (+comment), `submit_votes` (+comment), RPC `round_vote_comments` | 001, 006, 007 |
 | `011_poster.sql` | colonne `poster_path` sur `submissions`, `round_ballot` (+poster_path), `round_submission_details` (+poster_path) | 001, 008, 010 |
 | `012_league_admin_actions.sql` | policies UPDATE / DELETE sur `leagues` (admin : renommer / supprimer) | 008 |
-| `013_find_league_by_code.sql` | RPC `find_league_by_invite_code` (résout un code → id, contourne la RLS pour `joinLeague`) | — |
+| `013_find_league_by_code.sql` | RPC `find_league_by_invite_code` — ⚠️ **retirée par `028`** (résolvait un code → id sans contrôler l'adhésion derrière) | — |
 | `014_round_voters.sql` | RPC `round_voters` (membres + `has_voted`, sans jamais exposer le contenu des votes) | 001 |
 | `015_round_submitters.sql` | RPC `round_submitters` (membres + `has_submitted`, sans jamais exposer le film soumis) | 001 |
 | `016_cine_files_foundation.sql` | colonne `game_mode` sur `rounds` + table `cine_files_targets` (films mystères) + RLS | 001 |
@@ -38,6 +38,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `025_cine_files_scoring_10_10.sql` | palier 15-20 essais → auteur 10 pts (au lieu de 50) dans les 4 fonctions de score | 022, 024 |
 | `026_update_round_dates.sql` | RPC `update_round_dates` (admin : modifie `submission_deadline` / `ceremony_at`, valide cérémonie > soumission, ne touche pas au statut) | 001, 008 |
 | `027_notifications.sql` | table `notifications` + RLS + RPC `sync_round_deadline_notifications` (alerte T-1h, à la demande), `notify_round_created` (league lancée / activité), `notify_round_activity` (soumission/vote/tentative), `list_recent_notifications`, `mark_all_notifications_read` | 001 |
+| `028_public_league.sql` | colonne `is_public` + league « Ciné League Officielle » (unicité garantie par index partiel), policy de lecture publique, **fermeture réelle des leagues privées** (l'insertion directe dans `league_members` n'est plus permise que vers la league publique ; les privées passent par `join_league_by_code`, qui vérifie le code en base), trigger d'adhésion auto à l'inscription + rattrapage des comptes existants | 001, 008, 013, 019 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

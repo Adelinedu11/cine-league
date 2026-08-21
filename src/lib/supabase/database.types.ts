@@ -242,18 +242,21 @@ export type Database = {
           created_at: string | null
           id: string
           invite_code: string
+          is_public: boolean
           name: string
         }
         Insert: {
           created_at?: string | null
           id?: string
           invite_code?: string
+          is_public?: boolean
           name: string
         }
         Update: {
           created_at?: string | null
           id?: string
           invite_code?: string
+          is_public?: boolean
           name?: string
         }
         Relationships: []
@@ -432,9 +435,13 @@ export type Database = {
         Args: { _round_id: string; _tmdb_id: number }
         Returns: boolean
       }
-      find_league_by_invite_code: {
-        Args: { _code: string }
-        Returns: string
+      join_league_by_code: {
+        Args: { _code: string; _display_name: string }
+        Returns: string | null
+      }
+      public_league_id: {
+        Args: Record<string, never>
+        Returns: string | null
       }
       round_credit_overlaps: {
         Args: { _round_id: string; _people: string[] }

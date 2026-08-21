@@ -26,12 +26,15 @@ export default async function LeaguesPage({
   // Ligues dont l'utilisateur est déjà membre.
   const { data: memberships } = await supabase
     .from("league_members")
-    .select("league:leagues(id, name, invite_code)")
+    .select("league:leagues(id, name, invite_code, is_public)")
     .eq("user_id", user.id);
 
+  // La league publique remonte en tête : c'est celle où tout le monde a
+  // quelque chose à faire, y compris un compte tout neuf sans amis inscrits.
   const leagues = (memberships ?? [])
     .map((m) => m.league)
-    .filter((league) => league !== null);
+    .filter((league) => league !== null)
+    .sort((a, b) => Number(b.is_public) - Number(a.is_public));
 
   // --- Server Action : créer une ligue ---
   async function createLeague(formData: FormData) {
@@ -81,38 +84,25 @@ export default async function LeaguesPage({
       redirect("/login");
     }
 
-    // La policy SELECT sur `leagues` réserve la lecture aux membres ; on résout
-    // le code via une fonction SECURITY DEFINER qui contourne la RLS.
-    const { data: leagueId } = await supabase.rpc("find_league_by_invite_code", {
-      _code: inviteCode,
-    });
+    // Depuis la migration 028, la policy d'insertion sur `league_members` ne
+    // laisse plus passer que la league publique. L'adhésion à une league privée
+    // se fait exclusivement par cette fonction, qui vérifie le code EN BASE
+    // avant d'insérer — le contrôle n'est donc plus contournable via l'API.
+    // Elle est idempotente : déjà membre, elle renvoie simplement la league.
+    const { data: leagueId, error: joinRpcError } = await supabase.rpc(
+      "join_league_by_code",
+      { _code: inviteCode, _display_name: user.email ?? user.id },
+    );
 
+    if (joinRpcError) {
+      console.error("Échec de join_league_by_code :", joinRpcError);
+      redirect("/leagues?error=join");
+    }
+
+    // null = code inconnu. On ne distingue pas « inconnu » d'un autre refus :
+    // un message trop précis permettrait de tester des codes à la chaîne.
     if (!leagueId) {
       redirect("/leagues?error=invalid");
-    }
-
-    // Déjà membre ? On ne réinsère pas, on redirige directement vers la ligue.
-    const { data: existingMember } = await supabase
-      .from("league_members")
-      .select("league_id")
-      .eq("league_id", leagueId)
-      .eq("user_id", user.id)
-      .maybeSingle();
-
-    if (existingMember) {
-      redirect(`/leagues/${leagueId}`);
-    }
-
-    const { error: memberError } = await supabase
-      .from("league_members")
-      .insert({
-        league_id: leagueId,
-        user_id: user.id,
-        display_name: user.email ?? user.id,
-      });
-
-    if (memberError) {
-      redirect("/leagues?error=join");
     }
 
     redirect(`/leagues/${leagueId}`);
@@ -156,9 +146,22 @@ export default async function LeaguesPage({
                   href={`/leagues/${league.id}`}
                   className="block transition-opacity hover:opacity-90"
                 >
-                  <TicketStub stub={league.invite_code}>
-                    <span className="font-medium uppercase text-[var(--color-cream)]">
-                      {league.name}
+                  <TicketStub
+                    stub={
+                      league.is_public
+                        ? t(locale, "leagues.publicStub")
+                        : league.invite_code
+                    }
+                  >
+                    <span className="flex flex-wrap items-center gap-2">
+                      <span className="font-medium uppercase text-[var(--color-cream)]">
+                        {league.name}
+                      </span>
+                      {league.is_public && (
+                        <span className="font-mono rounded border border-[var(--color-sage)] bg-[var(--color-sage)]/20 px-1.5 py-0.5 text-[10px] tracking-wide text-[var(--color-sage-ink)]">
+                          {t(locale, "leagues.publicBadge")}
+                        </span>
+                      )}
                     </span>
                   </TicketStub>
                 </Link>
