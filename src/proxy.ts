@@ -4,8 +4,13 @@ import { NextResponse, type NextRequest } from "next/server";
 /**
  * Rafraîchit la session Supabase à chaque requête et propage les cookies
  * d'auth mis à jour vers le navigateur et les Server Components.
+ *
+ * Anciennement `src/middleware.ts` : Next.js 16 a renommé cette convention en
+ * `proxy` (fichier ET nom de la fonction exportée). Le runtime y est toujours
+ * `nodejs` et n'est plus configurable — sans effet ici, on n'utilisait pas
+ * l'edge runtime.
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(

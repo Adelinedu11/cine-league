@@ -9,6 +9,21 @@
 export const MIN_PASSWORD_LENGTH = 8;
 
 /**
+ * Longueur du code envoyé par e-mail pour réinitialiser un mot de passe.
+ *
+ * Doit correspondre au réglage Supabase `GOTRUE_MAILER_OTP_LENGTH` du projet
+ * (8 ici, hérité de l'ancienne connexion par code). Si les deux divergent, le
+ * bouton reste désactivé alors que le code saisi est bon.
+ *
+ * Pourquoi un code plutôt qu'un lien : les messageries — Gmail en tête —
+ * préchargent les liens contenus dans les e-mails pour les analyser. Ce
+ * prélancement consomme le jeton, à usage unique, et l'utilisateur reçoit
+ * « lien invalide ou expiré » alors qu'il n'a rien fait. Un code recopié à la
+ * main n'est consommable par aucun robot.
+ */
+export const RESET_CODE_LENGTH = 8;
+
+/**
  * Traduit une erreur Supabase Auth en clé i18n. Supabase renvoie des messages
  * en anglais, non traduisibles tels quels : on s'appuie sur `code` (stable)
  * plutôt que sur `message` (susceptible de changer entre versions).

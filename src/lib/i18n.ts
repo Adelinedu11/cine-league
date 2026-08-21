@@ -123,14 +123,22 @@ export const dict: Record<Locale, Dict> = {
     // Mot de passe oublié
     "forgot.title": "Mot de passe oublié",
     "forgot.subtitle":
-      "Indique ton e-mail : on t'envoie un lien pour en choisir un nouveau.",
-    "forgot.submit": "Envoyer le lien",
+      "Indique ton e-mail : on t'envoie un code pour choisir un nouveau mot de passe.",
+    "forgot.submit": "Envoyer le code",
     "forgot.submitting": "Envoi en cours…",
     "forgot.sentTitle": "Vérifie ta boîte mail",
-    "forgot.sent":
-      "Si un compte existe pour {email}, le lien de réinitialisation vient d'y être envoyé.",
+    "forgot.codeSentTo":
+      "Si un compte existe pour {email}, un code à {length} chiffres vient d'y être envoyé.",
+    "forgot.codeLabel": "Code à {length} chiffres",
+    "forgot.verify": "Valider le code",
+    "forgot.verifying": "Vérification…",
+    "forgot.verifyError": "Code invalide ou expiré, redemandes-en un.",
+    "forgot.resend": "Renvoyer",
+    "forgot.emailRequired": "Indique d'abord ton adresse e-mail.",
+    "forgot.codeHint":
+      "Tu peux quitter cette page pour aller chercher le code : elle t'attend.",
     "forgot.back": "← Retour à la connexion",
-    "forgot.error": "Impossible d'envoyer le lien pour le moment.",
+    "forgot.error": "Impossible d'envoyer le code pour le moment.",
 
     // Nouveau mot de passe
     "reset.title": "Nouveau mot de passe",
@@ -144,12 +152,39 @@ export const dict: Record<Locale, Dict> = {
     "reset.expired":
       "Ce lien a expiré ou a déjà été utilisé. Demandes-en un nouveau.",
 
-    // Accueil
-    "home.badge": "BIENVENUE",
-    "home.pitch":
-      "Vos soirées ciné en compétition : proposez un film sur un thème, votez en aveugle, et découvrez le palmarès à la cérémonie.",
-    "home.cta": "Accéder à mes ligues",
-    "home.loggedInAs": "Connecté en tant que {email}",
+    // Page de garde publique (/) — visible sans compte
+    "landing.tagline": "LE CINÉ, MAIS EN COMPÉTITION",
+    "landing.pitch":
+      "Un thème, un film chacun, un vote en aveugle. Et une cérémonie pour découvrir qui avait le meilleur goût.",
+    "landing.ctaSignUp": "Créer un compte",
+    "landing.ctaSignIn": "J'ai déjà un compte",
+    "landing.ctaNote":
+      "Gratuit, et tu rejoins la league publique dès l'inscription — pas besoin d'amis inscrits.",
+
+    "landing.howTitle": "Comment ça marche",
+    "landing.step1Title": "Un thème est lancé",
+    "landing.step1Text":
+      "« Un film qui se passe en huis clos », « le meilleur méchant »… L'admin ouvre une séance et fixe la date de la cérémonie.",
+    "landing.step2Title": "Chacun propose son film",
+    "landing.step2Text":
+      "Personne ne voit les choix des autres avant la fin. Pas d'influence, pas de suivisme.",
+    "landing.step3Title": "On vote, puis on célèbre",
+    "landing.step3Text":
+      "Vote par catégorie, à l'aveugle. À la cérémonie, le palmarès tombe et les scores s'ajoutent au classement.",
+
+    "landing.modesTitle": "Deux façons de jouer",
+    "landing.mode1Title": "Compétition officielle",
+    "landing.mode1Text":
+      "Le mode principal. Un film par personne sur le thème, un vote par catégorie, un palmarès à la clé.",
+    "landing.mode2Title": "Ciné'Files",
+    "landing.mode2Text":
+      "Chacun cache un film. Aux autres de le deviner en vingt essais, avec des indices de plus en plus généreux.",
+
+    "landing.publicTitle": "Pas encore d'amis sur Ciné League ?",
+    "landing.publicText":
+      "La league publique est ouverte à tous les inscrits. Tu y entres automatiquement, tu joues avec ceux qui sont là, et tu crées ta league privée quand tu veux.",
+
+    "landing.footer": "Ciné League — vos soirées ciné, en compétition.",
 
     // Liste des ligues
     "leagues.welcomeTitle": "Bienvenue sur Ciné League",
@@ -433,14 +468,23 @@ export const dict: Record<Locale, Dict> = {
 
     // Forgot password
     "forgot.title": "Forgot your password",
-    "forgot.subtitle": "Enter your email and we'll send you a reset link.",
-    "forgot.submit": "Send the link",
+    "forgot.subtitle":
+      "Enter your email and we'll send you a code to pick a new password.",
+    "forgot.submit": "Send the code",
     "forgot.submitting": "Sending…",
     "forgot.sentTitle": "Check your inbox",
-    "forgot.sent":
-      "If an account exists for {email}, the reset link is on its way.",
+    "forgot.codeSentTo":
+      "If an account exists for {email}, a {length}-digit code is on its way.",
+    "forgot.codeLabel": "{length}-digit code",
+    "forgot.verify": "Verify code",
+    "forgot.verifying": "Verifying…",
+    "forgot.verifyError": "Invalid or expired code, request a new one.",
+    "forgot.resend": "Resend",
+    "forgot.emailRequired": "Enter your email address first.",
+    "forgot.codeHint":
+      "Feel free to leave this page to fetch the code — it'll wait for you.",
     "forgot.back": "← Back to sign in",
-    "forgot.error": "Couldn't send the link right now.",
+    "forgot.error": "Couldn't send the code right now.",
 
     // New password
     "reset.title": "New password",
@@ -453,12 +497,41 @@ export const dict: Record<Locale, Dict> = {
     "reset.error": "Couldn't save this password.",
     "reset.expired": "This link has expired or was already used. Request a new one.",
 
+    // Public landing page (/) — visible without an account
+    "landing.tagline": "MOVIE NIGHTS, MADE COMPETITIVE",
+    "landing.pitch":
+      "One theme, one film each, a blind vote. Then a ceremony to find out who really has taste.",
+    "landing.ctaSignUp": "Create an account",
+    "landing.ctaSignIn": "I already have an account",
+    "landing.ctaNote":
+      "Free, and you join the public league the moment you sign up — no friends required.",
+
+    "landing.howTitle": "How it works",
+    "landing.step1Title": "A theme goes live",
+    "landing.step1Text":
+      "\"A film set in one room\", \"the best villain\"… The admin opens a screening and sets the ceremony date.",
+    "landing.step2Title": "Everyone picks a film",
+    "landing.step2Text":
+      "Nobody sees anyone else's pick until the end. No influence, no bandwagon.",
+    "landing.step3Title": "Vote, then celebrate",
+    "landing.step3Text":
+      "Blind voting, category by category. At the ceremony the results drop and scores join the standings.",
+
+    "landing.modesTitle": "Two ways to play",
+    "landing.mode1Title": "Official competition",
+    "landing.mode1Text":
+      "The main mode. One film each on the theme, one vote per category, a full prize list at the end.",
+    "landing.mode2Title": "Ciné'Files",
+    "landing.mode2Text":
+      "Everyone hides a film. The others get twenty guesses to find it, with hints growing kinder as they go.",
+
+    "landing.publicTitle": "No friends on Ciné League yet?",
+    "landing.publicText":
+      "The public league is open to every member. You're added automatically, you play with whoever's around, and you can start your own private league any time.",
+
+    "landing.footer": "Ciné League — movie nights, made competitive.",
+
     // Home
-    "home.badge": "WELCOME",
-    "home.pitch":
-      "Your movie nights, gamified: submit a film on a theme, vote blind, and reveal the winners at the ceremony.",
-    "home.cta": "Go to my leagues",
-    "home.loggedInAs": "Signed in as {email}",
 
     // Leagues list
     "leagues.welcomeTitle": "Welcome to Ciné League",

@@ -39,7 +39,7 @@ export default function ResetPasswordForm({ locale }: { locale: Locale }) {
       return;
     }
 
-    window.location.href = "/accueil";
+    window.location.href = "/leagues";
   }
 
   return (

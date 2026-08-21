@@ -24,7 +24,7 @@ export async function createClient() {
             );
           } catch {
             // Appelé depuis un Server Component : sans effet ici.
-            // Le rafraîchissement de session est assuré par le middleware.
+            // Le rafraîchissement de session est assuré par src/proxy.ts.
           }
         },
       },

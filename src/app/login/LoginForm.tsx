@@ -12,8 +12,14 @@ import PasswordField from "@/components/PasswordField";
 // pour que l'e-mail déjà saisi ne soit pas perdu.
 type Mode = "signin" | "signup";
 
-export default function LoginForm({ locale }: { locale: Locale }) {
-  const [mode, setMode] = useState<Mode>("signin");
+export default function LoginForm({
+  locale,
+  initialMode = "signin",
+}: {
+  locale: Locale;
+  initialMode?: Mode;
+}) {
+  const [mode, setMode] = useState<Mode>(initialMode);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pseudo, setPseudo] = useState("");
@@ -86,7 +92,7 @@ export default function LoginForm({ locale }: { locale: Locale }) {
     // Navigation en dur (et non router.push) : elle force un aller-retour
     // serveur, sans quoi les Server Components ne verraient pas la session
     // fraîchement posée dans les cookies.
-    window.location.href = "/accueil";
+    window.location.href = "/leagues";
   }
 
   const isSignUp = mode === "signup";

@@ -18,7 +18,7 @@ export default async function RulesPage() {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-8 p-6">
       <Link
-        href="/accueil"
+        href="/leagues"
         className="text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
       >
         {t(locale, "rules.back")}

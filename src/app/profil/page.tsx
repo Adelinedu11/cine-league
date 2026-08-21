@@ -58,7 +58,7 @@ export default async function ProfilePage({
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-md flex-col gap-6 p-6">
       <Link
-        href="/accueil"
+        href="/leagues"
         className="text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
       >
         {t(locale, "profile.back")}
