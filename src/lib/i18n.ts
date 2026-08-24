@@ -25,6 +25,7 @@ export const dict: Record<Locale, Dict> = {
     "common.sending": "Envoi…",
 
     // Profil
+    "header.myLeagues": "Mes ligues",
     "header.profile": "Mon profil",
     "header.theme": "Thème",
     "header.language": "Langue",
@@ -374,6 +375,7 @@ export const dict: Record<Locale, Dict> = {
     "common.sending": "Sending…",
 
     // Profile
+    "header.myLeagues": "My leagues",
     "header.profile": "My profile",
     "header.theme": "Theme",
     "header.language": "Language",

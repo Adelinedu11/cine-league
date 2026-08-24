@@ -74,6 +74,16 @@ export default function HeaderMenu({
             </span>
           </div>
 
+          {/* Le logo de l'en-tête mène désormais aux règles : ce raccourci
+              reprend le retour vers les leagues qu'il assurait avant. Sans lui,
+              on n'aurait plus aucun chemin direct depuis le fond d'une séance. */}
+          <Link
+            href="/leagues"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-[var(--color-cream)] transition-colors hover:bg-[var(--color-surface-alt)]"
+          >
+            {t(locale, "header.myLeagues")}
+          </Link>
           <Link
             href="/profil"
             onClick={() => setOpen(false)}

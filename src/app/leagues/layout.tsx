@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import { Ticket } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import HeaderMenu from "@/components/HeaderMenu";
 import NotificationsBell from "@/components/NotificationsBell";
-import { getLocale } from "@/lib/i18n";
+import { PopTicket } from "@/components/pop/PopShapes";
+import { getLocale, t } from "@/lib/i18n";
 
 export default async function LeaguesLayout({
   children,
@@ -58,15 +58,16 @@ export default async function LeaguesLayout({
     <>
       <header className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="mx-auto flex w-full max-w-2xl items-center justify-between gap-4 px-6 py-4">
+          {/* Le logo mène aux règles du jeu : c'est la question la plus
+              fréquente en cours de partie (« ça rapporte combien ? »). Le
+              retour vers les leagues est repris dans le menu hamburger, sans
+              quoi on n'aurait plus de chemin direct depuis une séance. */}
           <Link
-            href="/leagues"
-            className="flex shrink-0 -translate-y-0.5 items-center gap-2 rounded-lg border border-[var(--color-border)] px-3 py-1.5"
+            href="/regles"
+            aria-label={`Ciné League — ${t(locale, "rules.title")}`}
+            className="flex shrink-0 items-center gap-2 rounded-lg border-2 border-[var(--color-cream)] px-3 py-1.5 transition-transform hover:-translate-y-0.5"
           >
-            <Ticket
-              size={20}
-              strokeWidth={1.5}
-              className="text-[var(--color-gold)]"
-            />
+            <PopTicket size={36} fill="var(--color-gold-bright)" />
             <span className="font-display text-2xl tracking-wide text-[var(--color-gold)]">
               Ciné League
             </span>
