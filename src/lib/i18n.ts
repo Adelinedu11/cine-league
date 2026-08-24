@@ -193,7 +193,9 @@ export const dict: Record<Locale, Dict> = {
     "leagues.badge": "VOS LIGUES",
     "leagues.title": "Mes ligues",
     "leagues.subtitle": "Rejoignez ou créez une ligue.",
-    "leagues.empty": "Tu ne fais partie d'aucune ligue pour l'instant.",
+    "leagues.empty": "Aucune ligue pour l'instant",
+    "leagues.emptyHint":
+      "Crée ta ligue pour jouer entre amis, ou rejoins-en une avec un code d'invitation.",
     "leagues.createTitle": "Créer une ligue",
     "leagues.nameLabel": "Nom de la ligue",
     "leagues.namePlaceholder": "Ex : Ciné du bureau",
@@ -540,7 +542,9 @@ export const dict: Record<Locale, Dict> = {
     "leagues.badge": "YOUR LEAGUES",
     "leagues.title": "My leagues",
     "leagues.subtitle": "Join or create a league.",
-    "leagues.empty": "You're not part of any league yet.",
+    "leagues.empty": "No league yet",
+    "leagues.emptyHint":
+      "Start your own league to play with friends, or join one with an invite code.",
     "leagues.createTitle": "Create a league",
     "leagues.nameLabel": "League name",
     "leagues.namePlaceholder": "e.g. Office movie club",

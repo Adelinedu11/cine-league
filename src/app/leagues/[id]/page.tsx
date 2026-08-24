@@ -10,6 +10,7 @@ import RenameLeagueForm from "@/components/RenameLeagueForm";
 import SubmitButton from "@/components/SubmitButton";
 import RoundModeDateFields from "@/components/RoundModeDateFields";
 import Avatar from "@/components/Avatar";
+import PopBackdrop from "@/components/pop/PopBackdrop";
 import LeagueTabs from "@/components/LeagueTabs";
 import CineLeagueScores from "@/components/CineLeagueScores";
 import RoundCountdown from "@/components/RoundCountdown";
@@ -324,7 +325,12 @@ export default async function LeaguePage({
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-8 p-6">
+    <main className="relative min-h-screen overflow-hidden">
+      {/* Densité réduite : cette page porte le classement et l'historique,
+          des formes derrière un tableau de scores nuisent à la lecture. */}
+      <PopBackdrop density="corner" />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col gap-8 p-6">
       <Link
         href="/leagues"
         className="text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
@@ -527,6 +533,7 @@ export default async function LeaguePage({
           },
         ]}
       />
+      </div>
     </main>
   );
 }

@@ -21,6 +21,7 @@ import SubmitButton from "@/components/SubmitButton";
 import CineFeedbackChips from "@/components/CineFeedbackChips";
 import FilmPoster from "@/components/FilmPoster";
 import CineGuessForm from "../../CineGuessForm";
+import PopBackdrop from "@/components/pop/PopBackdrop";
 
 const MAX_ATTEMPTS = 20;
 const BONUS_FROM = 9; // ≥ 9 tentatives faites → dès la 10e
@@ -208,7 +209,12 @@ export default async function MysteryPage({
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-6 p-6">
+    <main className="relative min-h-screen overflow-hidden">
+      {/* Page de devinette : le joueur y lit des indices ligne à ligne.
+          Décor en coin uniquement. */}
+      <PopBackdrop density="corner" />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col gap-6 p-6">
       <Link
         href={`/leagues/${id}/rounds/${roundId}`}
         className="text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
@@ -366,6 +372,7 @@ export default async function MysteryPage({
           )}
         </>
       )}
+      </div>
     </main>
   );
 }

@@ -5,6 +5,7 @@ import { getLocale, t } from "@/lib/i18n";
 import SubmitButton from "@/components/SubmitButton";
 import Avatar from "@/components/Avatar";
 import ChangePasswordForm from "@/components/ChangePasswordForm";
+import PopBackdrop from "@/components/pop/PopBackdrop";
 
 export default async function ProfilePage({
   searchParams,
@@ -56,7 +57,10 @@ export default async function ProfilePage({
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col gap-6 p-6">
+    <main className="relative min-h-screen overflow-hidden">
+      <PopBackdrop density="full" />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-md flex-col gap-6 p-6">
       <Link
         href="/leagues"
         className="text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
@@ -109,6 +113,7 @@ export default async function ProfilePage({
       {user.email && (
         <ChangePasswordForm locale={locale} email={user.email} />
       )}
+      </div>
     </main>
   );
 }

@@ -217,5 +217,5 @@ update public.league_members
 set role = 'admin'
 where league_id = (select id from public.leagues where is_public limit 1)
   and user_id = (
-    select id from auth.users where lower(email) = lower('aboulard@mediawan.com')
+    select id from auth.users where lower(email) = lower('ad.boulard@gmail.com')
   );

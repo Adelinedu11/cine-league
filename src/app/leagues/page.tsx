@@ -5,6 +5,9 @@ import { createClient } from "@/lib/supabase/server";
 import { getLocale, t } from "@/lib/i18n";
 import TicketStub from "@/components/TicketStub";
 import SubmitButton from "@/components/SubmitButton";
+import PopBackdrop from "@/components/pop/PopBackdrop";
+import PopEmptyState from "@/components/pop/PopEmptyState";
+import { PopSeat } from "@/components/pop/PopShapes";
 
 export default async function LeaguesPage({
   searchParams,
@@ -109,7 +112,10 @@ export default async function LeaguesPage({
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-10 p-6">
+    <main className="relative min-h-screen overflow-hidden">
+      <PopBackdrop density="light" />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col gap-10 p-6">
       {/* Bandeau d'accueil */}
       <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
         <h2 className="font-display text-2xl tracking-wide text-[var(--color-gold)]">
@@ -135,9 +141,11 @@ export default async function LeaguesPage({
       {/* Liste des ligues */}
       <section className="flex flex-col gap-3">
         {leagues.length === 0 ? (
-          <p className="text-sm text-[var(--color-cream)]/60">
-            {t(locale, "leagues.empty")}
-          </p>
+          <PopEmptyState
+            shape={<PopSeat size={72} fill="var(--color-coral)" />}
+            title={t(locale, "leagues.empty")}
+            text={t(locale, "leagues.emptyHint")}
+          />
         ) : (
           <ul className="flex flex-col gap-3">
             {leagues.map((league) => (
@@ -243,6 +251,7 @@ export default async function LeaguesPage({
           </SubmitButton>
         </form>
       </section>
+      </div>
     </main>
   );
 }

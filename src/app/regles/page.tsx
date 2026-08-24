@@ -1,24 +1,32 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Trophy, Search } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getLocale, t } from "@/lib/i18n";
+import PopBackdrop from "@/components/pop/PopBackdrop";
 
+/**
+ * Règles du jeu — page PUBLIQUE.
+ *
+ * Elle exigeait une session, ce qui la rendait inaccessible depuis la page de
+ * garde : un visiteur qui voulait comprendre le jeu avant de s'inscrire était
+ * renvoyé vers la connexion. Elle ne lit aucune donnée, il n'y avait donc rien
+ * à protéger. Seul le lien de retour dépend de la session.
+ */
 export default async function RulesPage() {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) {
-    redirect("/login");
-  }
 
   const locale = await getLocale();
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-8 p-6">
+    <main className="relative min-h-screen overflow-hidden">
+      <PopBackdrop density="light" />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col gap-8 p-6">
       <Link
-        href="/leagues"
+        href={user ? "/leagues" : "/"}
         className="text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
       >
         {t(locale, "rules.back")}
@@ -65,6 +73,7 @@ export default async function RulesPage() {
           <li>{t(locale, "rules.exampleNever")}</li>
         </ul>
       </section>
+      </div>
     </main>
   );
 }

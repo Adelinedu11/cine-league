@@ -27,6 +27,7 @@ import WhereToWatch from "@/components/WhereToWatch";
 import RoundCountdown from "@/components/RoundCountdown";
 import FilmPoster from "@/components/FilmPoster";
 import SubmitButton from "@/components/SubmitButton";
+import PopBackdrop from "@/components/pop/PopBackdrop";
 
 export default async function RoundPage({
   params,
@@ -678,7 +679,12 @@ export default async function RoundPage({
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-6 p-6">
+    <main className="relative min-h-screen overflow-hidden">
+      {/* Page la plus dense de l'app (bulletin de vote, résultats) :
+          strictement deux formes en coin, loin de la colonne de lecture. */}
+      <PopBackdrop density="corner" />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col gap-6 p-6">
       <Link
         href={`/leagues/${id}`}
         className="text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
@@ -1045,6 +1051,7 @@ export default async function RoundPage({
           <CineRoundScores players={cineDetail} locale={locale} />
         </section>
       )}
+      </div>
     </main>
   );
 }
