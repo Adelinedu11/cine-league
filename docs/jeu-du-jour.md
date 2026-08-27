@@ -1,7 +1,20 @@
 # Le jeu du jour — deviner une personnalité par ses collaborations
 
-Issu de la séance de conception du 27/08/2026, et d'une partie test jouée à la
-main (cible : Wes Anderson, trouvée en 4 essais).
+Issu de la séance de conception du 27/08/2026 et de deux parties tests jouées à
+la main : Wes Anderson en 4 essais sans amorce, Ridley Scott en 6 essais avec
+amorce.
+
+**Ce que la comparaison des deux parties démontre.** Sans amorce : rien, rien,
+rien, puis résolu d'un coup dès le premier essai chaud — une loterie suivie
+d'une évidence. Avec amorce : six essais, mais de la progression à chaque coup.
+Plus long, et bien meilleur. **L'amorce chaude convertit de la chance en
+déduction** : c'est la règle qui porte le format.
+
+**Réserve méthodologique.** Ces parties ont été arbitrées de mémoire, avec deux
+erreurs factuelles sur une dizaine de réponses — un collaborateur compté 2 fois
+au lieu de 3, un autre entièrement oublié. L'arbitre humain est le maillon
+faible ; la base de données ne se trompera pas sur un casting. Les conclusions
+de conception restent valables, les chiffres de difficulté sont indicatifs.
 
 Ce document remplace l'idée de « league publique officielle » du plan v3.
 
@@ -72,13 +85,44 @@ devient prudent et ne tente que ce dont il est sûr — l'inverse de ce que ce j
 veut. Sans limite, on balance des films par curiosité. Le score reste le nombre
 de coups, donc la tension existe, mais elle est devenue positive.
 
+**Un seul champ, films ET personnes.** Tranché pendant la seconde partie test.
+Ce sont deux outils complémentaires qui s'équilibrent sans coût artificiel : un
+film est un **filet large** (une douzaine de personnes testées d'un coup, sans
+savoir lesquelles), un nom est une **sonde précise** (une question unique, une
+réponse chiffrée). Au début on n'a pas d'hypothèse, donc on jette des filets ;
+à la fin on en a une, donc on sonde. La partie prend naturellement la forme
+large-puis-étroit. Un « 0 film » sur une sonde est bien plus satisfaisant qu'un
+froid sur un film : l'échec est choisi, et il raye une piste précise.
+Cas particulier : si le nom proposé **est** la cible, c'est gagné.
+
+**L'amorce ne doit jamais contenir la cible.** Sinon l'amorce est la réponse.
+Règle évidente une fois écrite, oubliée une fois sur deux.
+
+**Distinguer les connexions nouvelles des connexions déjà connues.** Observé en
+partie test : proposer deux films qui partagent le même collaborateur renvoie
+deux fois le même nom, et le joueur a l'impression de tourner en rond sans
+comprendre pourquoi. Un nom déjà repéré doit apparaître barré ou grisé, le
+nouveau mis en avant.
+
+**La répartition des résultats trahit le métier de la cible**, et c'est un
+plaisir gratuit. Plusieurs acteurs à 1 film chacun, issus de films différents,
+désigne un réalisateur ; un acteur à 3 films désigne une relation fétiche. Le
+joueur apprend à lire ces motifs sans qu'on ait rien à coder — c'est ce qui
+transforme le hasard en expertise.
+
 ## Points encore ouverts
 
-**Autoriser aussi les noms de personnes dans le champ ?** Adeline penche pour
-les films seuls. Argument contraire : quand on a *déduit* la réponse, on veut la
-dire — obliger à retrouver un titre ajoute une épreuve de mémoire à un jeu de
-déduction. La recherche TMDB peut renvoyer films et personnes dans le même
-appel, donc le coût technique est nul.
+**L'opacité de l'amorce.** Elle résout l'écran vide, mais donner un film sans
+dire qui le connecte crée une pièce inutilisable : en partie test, la joueuse
+s'est bloquée à essayer de croiser l'amorce avec un nom trouvé ailleurs, sans
+savoir par quel fil l'amorce tenait. Trois sorties possibles : annoncer le
+nombre de personnes partagées sans les nommer, permettre d'« ouvrir » l'amorce
+comme premier indice payant, ou choisir systématiquement une amorce qui ne
+partage **qu'une seule** personne, pour que le fil soit unique.
+
+**Indice payant pour un collaborateur déjà identifié :** demander *dans quel
+film* il a croisé la cible. C'est l'information qui débloque, et elle donne
+presque la réponse — donc elle doit coûter cher.
 
 **Classement ou distribution ?** Un classement strict « en moins de coups »
 se heurte à l'arithmétique : sur mille joueurs, trois cents seront à quatre
