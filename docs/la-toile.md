@@ -77,6 +77,19 @@ devient la porte d'entrée, la league privée reste l'engagement profond.
 
 ---
 
+## Place dans l'application
+
+La Toile n'est pas un produit séparé : **c'est le premier écran de Ciné League**,
+celui qu'on ouvre chaque jour. Les leagues viennent ensuite, quand on veut jouer
+avec des gens qu'on connaît.
+
+Cette hiérarchie n'est pas cosmétique, elle décide de tout le reste. Le
+quotidien attire et fait revenir sans rien demander à personne ; la league
+retient, mais suppose déjà un groupe. Mettre la league en premier revenait à
+demander à un visiteur d'avoir des amis inscrits avant de pouvoir jouer.
+
+---
+
 ## Le principe
 
 On doit deviner **une personnalité du cinéma** — réalisateur, réalisatrice,

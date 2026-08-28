@@ -9,11 +9,22 @@
       "nb_films": 44,
       "nb_collaborateurs": 463,
       "nb_collaborateurs_recurrents": 37,
+      "top_collaborateurs": [
+        "John Williams (30)",
+        "David Koepp (5)",
+        "Tom Hanks (5)",
+        "Harrison Ford (4)",
+        "Tony Kushner (4)",
+        "Dan Aykroyd (3)",
+        "Jerry Goldsmith (3)",
+        "Simon Pegg (3)"
+      ],
       "amorce": {
-        "tmdb_id": 1368337,
-        "titre": "The Odyssey",
-        "annee": "2026",
-        "_lien": "Matt Damon"
+        "tmdb_id": 566525,
+        "titre": "Shang-Chi and the Legend of the Ten Rings",
+        "annee": "2021",
+        "_lien": "Ben Kingsley",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "3": {
@@ -1879,11 +1890,22 @@
       "nb_films": 26,
       "nb_collaborateurs": 217,
       "nb_collaborateurs_recurrents": 42,
+      "top_collaborateurs": [
+        "Robert Rodriguez (7)",
+        "Michael Madsen (5)",
+        "Samuel L. Jackson (5)",
+        "Uma Thurman (5)",
+        "Tim Roth (4)",
+        "Harvey Keitel (4)",
+        "Bruce Willis (3)",
+        "Steve Buscemi (3)"
+      ],
       "amorce": {
-        "tmdb_id": 634649,
-        "titre": "Spider-Man: No Way Home",
-        "annee": "2021",
-        "_lien": "Jamie Foxx"
+        "tmdb_id": 809,
+        "titre": "Shrek 2",
+        "annee": "2004",
+        "_lien": "Antonio Banderas",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "62": {
@@ -2765,11 +2787,22 @@
       "nb_films": 44,
       "nb_collaborateurs": 428,
       "nb_collaborateurs_recurrents": 47,
+      "top_collaborateurs": [
+        "Robert De Niro (13)",
+        "Leonardo DiCaprio (7)",
+        "Harvey Keitel (6)",
+        "Howard Shore (5)",
+        "Paul Schrader (4)",
+        "Elmer Bernstein (4)",
+        "Robbie Robertson (4)",
+        "Jay Cocks (4)"
+      ],
       "amorce": {
-        "tmdb_id": 299536,
-        "titre": "Avengers: Infinity War",
-        "annee": "2018",
-        "_lien": "Mark Ruffalo"
+        "tmdb_id": 597,
+        "titre": "Titanic",
+        "annee": "1997",
+        "_lien": "Leonardo DiCaprio",
+        "_lien_films": 7
       },
       "collaborateurs": {
         "13": {
@@ -4495,11 +4528,22 @@
       "nb_films": 27,
       "nb_collaborateurs": 253,
       "nb_collaborateurs_recurrents": 30,
+      "top_collaborateurs": [
+        "Danny Elfman (19)",
+        "Johnny Depp (8)",
+        "Helena Bonham Carter (7)",
+        "Michael Keaton (5)",
+        "Catherine O'Hara (4)",
+        "Danny DeVito (4)",
+        "Winona Ryder (4)",
+        "John August (4)"
+      ],
       "amorce": {
-        "tmdb_id": 1368337,
-        "titre": "The Odyssey",
-        "annee": "2026",
-        "_lien": "Anne Hathaway"
+        "tmdb_id": 315635,
+        "titre": "Spider-Man: Homecoming",
+        "annee": "2017",
+        "_lien": "Michael Keaton",
+        "_lien_films": 5
       },
       "collaborateurs": {
         "19": {
@@ -5525,11 +5569,22 @@
       "nb_films": 15,
       "nb_collaborateurs": 108,
       "nb_collaborateurs_recurrents": 23,
+      "top_collaborateurs": [
+        "Michael Caine (6)",
+        "Hans Zimmer (6)",
+        "Cillian Murphy (5)",
+        "David Julyan (5)",
+        "Christian Bale (4)",
+        "Jonathan Nolan (4)",
+        "Gary Oldman (3)",
+        "Tom Hardy (3)"
+      ],
       "amorce": {
-        "tmdb_id": 634649,
-        "titre": "Spider-Man: No Way Home",
-        "annee": "2021",
-        "_lien": "Tom Holland"
+        "tmdb_id": 2334,
+        "titre": "Taxi 3",
+        "annee": "2003",
+        "_lien": "Marion Cotillard",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "64": {
@@ -5975,11 +6030,22 @@
       "nb_films": 24,
       "nb_collaborateurs": 134,
       "nb_collaborateurs_recurrents": 44,
+      "top_collaborateurs": [
+        "Jason Schwartzman (8)",
+        "Bill Murray (8)",
+        "Alexandre Desplat (7)",
+        "Owen Wilson (6)",
+        "Ralph Fiennes (6)",
+        "Luke Wilson (4)",
+        "Mark Mothersbaugh (4)",
+        "Adrien Brody (4)"
+      ],
       "amorce": {
-        "tmdb_id": 24428,
-        "titre": "The Avengers",
-        "annee": "2012",
-        "_lien": "Scarlett Johansson"
+        "tmdb_id": 950387,
+        "titre": "A Minecraft Movie",
+        "annee": "2025",
+        "_lien": "Mark Mothersbaugh",
+        "_lien_films": 4
       },
       "collaborateurs": {
         "31": {
@@ -6529,11 +6595,22 @@
       "nb_films": 31,
       "nb_collaborateurs": 349,
       "nb_collaborateurs_recurrents": 37,
+      "top_collaborateurs": [
+        "Hans Zimmer (6)",
+        "Harry Gregson-Williams (6)",
+        "Russell Crowe (5)",
+        "Marc Streitenfeld (5)",
+        "Sigourney Weaver (3)",
+        "Steven Zaillian (3)",
+        "Michael Fassbender (3)",
+        "David Scarpa (3)"
+      ],
       "amorce": {
-        "tmdb_id": 634649,
-        "titre": "Spider-Man: No Way Home",
-        "annee": "2021",
-        "_lien": "Benedict Wong"
+        "tmdb_id": 299536,
+        "titre": "Avengers: Infinity War",
+        "annee": "2018",
+        "_lien": "Josh Brolin",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "3": {
@@ -7943,11 +8020,22 @@
       "nb_films": 15,
       "nb_collaborateurs": 147,
       "nb_collaborateurs_recurrents": 20,
+      "top_collaborateurs": [
+        "Sigourney Weaver (4)",
+        "Kate Winslet (3)",
+        "Bill Paxton (3)",
+        "James Horner (3)",
+        "Arnold Schwarzenegger (3)",
+        "Brad Fiedel (3)",
+        "Michael Biehn (3)",
+        "Lance Henriksen (3)"
+      ],
       "amorce": {
-        "tmdb_id": 299536,
-        "titre": "Avengers: Infinity War",
-        "annee": "2018",
-        "_lien": "Alan Silvestri"
+        "tmdb_id": 118340,
+        "titre": "Guardians of the Galaxy",
+        "annee": "2014",
+        "_lien": "Zoe Saldaña",
+        "_lien_films": 3
       },
       "collaborateurs": {
         "13": {
@@ -8549,11 +8637,22 @@
       "nb_films": 28,
       "nb_collaborateurs": 196,
       "nb_collaborateurs_recurrents": 45,
+      "top_collaborateurs": [
+        "Alberto Iglesias (16)",
+        "Penélope Cruz (8)",
+        "Julieta Serrano (7)",
+        "Carmen Maura (7)",
+        "Antonio Banderas (7)",
+        "Chus Lampreave (6)",
+        "Rossy de Palma (6)",
+        "Marisa Paredes (5)"
+      ],
       "amorce": {
-        "tmdb_id": 617126,
-        "titre": "The Fantastic 4: First Steps",
-        "annee": "2025",
-        "_lien": "Pedro Pascal"
+        "tmdb_id": 1865,
+        "titre": "Pirates of the Caribbean: On Stranger Tides",
+        "annee": "2011",
+        "_lien": "Penélope Cruz",
+        "_lien_films": 8
       },
       "collaborateurs": {
         "101": {
@@ -9351,11 +9450,22 @@
       "nb_films": 49,
       "nb_collaborateurs": 486,
       "nb_collaborateurs_recurrents": 56,
+      "top_collaborateurs": [
+        "Éric Serra (16)",
+        "Robert Mark Kamen (12)",
+        "Jean Reno (7)",
+        "Gérard Krawczyk (5)",
+        "Jean Bouise (4)",
+        "Samy Naceri (4)",
+        "Frédéric Diefenthal (4)",
+        "Emma Wiklund (4)"
+      ],
       "amorce": {
-        "tmdb_id": 634649,
-        "titre": "Spider-Man: No Way Home",
-        "annee": "2021",
-        "_lien": "Benedict Wong"
+        "tmdb_id": 411,
+        "titre": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
+        "annee": "2005",
+        "_lien": "Liam Neeson",
+        "_lien_films": 3
       },
       "collaborateurs": {
         "53": {
@@ -11313,11 +11423,22 @@
       "nb_films": 9,
       "nb_collaborateurs": 76,
       "nb_collaborateurs_recurrents": 14,
+      "top_collaborateurs": [
+        "Dominique Pinon (8)",
+        "Guillaume Laurant (5)",
+        "Rufus (3)",
+        "Audrey Tautou (2)",
+        "Serge Merlin (2)",
+        "Isabelle Nanty (2)",
+        "Jean-Claude Dreyfus (2)",
+        "Ticky Holgado (2)"
+      ],
       "amorce": {
-        "tmdb_id": 83533,
-        "titre": "Avatar: Fire and Ash",
-        "annee": "2025",
-        "_lien": "Sigourney Weaver"
+        "tmdb_id": 10795,
+        "titre": "Tell No One",
+        "annee": "2006",
+        "_lien": "André Dussollier",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "351": {
@@ -11635,11 +11756,22 @@
       "nb_films": 23,
       "nb_collaborateurs": 233,
       "nb_collaborateurs_recurrents": 31,
+      "top_collaborateurs": [
+        "Francis Ford Coppola (10)",
+        "Talia Shire (5)",
+        "Carmine Coppola (4)",
+        "Al Pacino (4)",
+        "Diane Keaton (4)",
+        "Mario Puzo (4)",
+        "Deck d'Arcy (4)",
+        "Thomas Mars (4)"
+      ],
       "amorce": {
-        "tmdb_id": 1275779,
-        "titre": "Disclosure Day",
-        "annee": "2026",
-        "_lien": "John Williams"
+        "tmdb_id": 475557,
+        "titre": "Joker",
+        "annee": "2019",
+        "_lien": "Robert De Niro",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "1": {
@@ -12585,11 +12717,22 @@
       "nb_films": 55,
       "nb_collaborateurs": 527,
       "nb_collaborateurs_recurrents": 81,
+      "top_collaborateurs": [
+        "Bernard Herrmann (7)",
+        "Alma Reville (7)",
+        "Joan Harrison (5)",
+        "Leo G. Carroll (5)",
+        "Charles Bennett (5)",
+        "Franz Waxman (4)",
+        "James Stewart (4)",
+        "John Michael Hayes (4)"
+      ],
       "amorce": {
-        "tmdb_id": 1275779,
-        "titre": "Disclosure Day",
-        "annee": "2026",
-        "_lien": "John Williams"
+        "tmdb_id": 466272,
+        "titre": "Once Upon a Time... in Hollywood",
+        "annee": "2019",
+        "_lien": "Bruce Dern",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "381": {
@@ -14711,11 +14854,22 @@
       "nb_films": 14,
       "nb_collaborateurs": 141,
       "nb_collaborateurs_recurrents": 8,
+      "top_collaborateurs": [
+        "Michel Piccoli (3)",
+        "Michel Legrand (3)",
+        "Mathieu Demy (3)",
+        "Catherine Deneuve (2)",
+        "Joanna Bruzdowicz (2)",
+        "Jane Birkin (2)",
+        "Charlotte Gainsbourg (2)",
+        "Pierre Barbaud (2)"
+      ],
       "amorce": {
-        "tmdb_id": 278,
-        "titre": "The Shawshank Redemption",
-        "annee": "1994",
-        "_lien": "Tim Robbins"
+        "tmdb_id": 103328,
+        "titre": "Holy Motors",
+        "annee": "2012",
+        "_lien": "Michel Piccoli",
+        "_lien_films": 3
       },
       "collaborateurs": {
         "50": {
@@ -15293,11 +15447,22 @@
       "nb_films": 66,
       "nb_collaborateurs": 692,
       "nb_collaborateurs_recurrents": 70,
+      "top_collaborateurs": [
+        "Alexandre Desplat (5)",
+        "Emily Blunt (4)",
+        "John C. Reilly (3)",
+        "Nicolas Cage (3)",
+        "Howard Shore (3)",
+        "Mamie Gummer (3)",
+        "Mike Nichols (3)",
+        "Thomas Newman (3)"
+      ],
       "amorce": {
-        "tmdb_id": 969681,
-        "titre": "Spider-Man: Brand New Day",
-        "annee": "2026",
-        "_lien": "Florence Pugh"
+        "tmdb_id": 694,
+        "titre": "The Shining",
+        "annee": "1980",
+        "_lien": "Jack Nicholson",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "4": {
@@ -18079,11 +18244,22 @@
       "nb_films": 74,
       "nb_collaborateurs": 764,
       "nb_collaborateurs_recurrents": 84,
+      "top_collaborateurs": [
+        "Tim Allen (10)",
+        "Wallace Shawn (8)",
+        "Alan Silvestri (6)",
+        "Robert Zemeckis (6)",
+        "Hans Zimmer (6)",
+        "Don Rickles (6)",
+        "Randy Newman (6)",
+        "Thomas Newman (6)"
+      ],
       "amorce": {
-        "tmdb_id": 969681,
-        "titre": "Spider-Man: Brand New Day",
-        "annee": "2026",
-        "_lien": "Michael Giacchino"
+        "tmdb_id": 58,
+        "titre": "Pirates of the Caribbean: Dead Man's Chest",
+        "annee": "2006",
+        "_lien": "Hans Zimmer",
+        "_lien_films": 6
       },
       "collaborateurs": {
         "4": {
@@ -21153,11 +21329,22 @@
       "nb_films": 33,
       "nb_collaborateurs": 357,
       "nb_collaborateurs_recurrents": 23,
+      "top_collaborateurs": [
+        "Martin Scorsese (6)",
+        "Howard Shore (3)",
+        "John C. Reilly (3)",
+        "Robert De Niro (3)",
+        "Pete Postlethwaite (2)",
+        "Baz Luhrmann (2)",
+        "Craig Pearce (2)",
+        "Craig Armstrong (2)"
+      ],
       "amorce": {
-        "tmdb_id": 315635,
-        "titre": "Spider-Man: Homecoming",
-        "annee": "2017",
-        "_lien": "Jon Favreau"
+        "tmdb_id": 475557,
+        "titre": "Joker",
+        "annee": "2019",
+        "_lien": "Robert De Niro",
+        "_lien_films": 3
       },
       "collaborateurs": {
         "27": {
@@ -22599,11 +22786,22 @@
       "nb_films": 53,
       "nb_collaborateurs": 554,
       "nb_collaborateurs_recurrents": 56,
+      "top_collaborateurs": [
+        "Harry Gregson-Williams (7)",
+        "Spike Lee (5)",
+        "Antoine Fuqua (5)",
+        "Tony Scott (5)",
+        "James Horner (4)",
+        "Richard Wenk (4)",
+        "Ethan Suplee (3)",
+        "Edward Zwick (3)"
+      ],
       "amorce": {
-        "tmdb_id": 634649,
-        "titre": "Spider-Man: No Way Home",
-        "annee": "2021",
-        "_lien": "Willem Dafoe"
+        "tmdb_id": 11324,
+        "titre": "Shutter Island",
+        "annee": "2010",
+        "_lien": "Ted Levine",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "24": {
@@ -24825,5564 +25023,6 @@
       }
     },
     {
-      "name": "Samuel L. Jackson",
-      "ok": true,
-      "tmdb_id": 2231,
-      "nom": "Samuel L. Jackson",
-      "metier": "Acting",
-      "nb_films": 137,
-      "nb_collaborateurs": 1385,
-      "nb_collaborateurs_recurrents": 196,
-      "amorce": {
-        "tmdb_id": 324857,
-        "titre": "Spider-Man: Into the Spider-Verse",
-        "annee": "2018",
-        "_lien": "Hailee Steinfeld"
-      },
-      "collaborateurs": {
-        "1": {
-          "nom": "George Lucas",
-          "films": 3
-        },
-        "2": {
-          "nom": "Mark Hamill",
-          "films": 2
-        },
-        "3": {
-          "nom": "Harrison Ford",
-          "films": 1
-        },
-        "4": {
-          "nom": "Carrie Fisher",
-          "films": 1
-        },
-        "6": {
-          "nom": "Anthony Daniels",
-          "films": 3
-        },
-        "11": {
-          "nom": "David Reynolds",
-          "films": 1
-        },
-        "13": {
-          "nom": "Albert Brooks",
-          "films": 1
-        },
-        "19": {
-          "nom": "Allison Janney",
-          "films": 1
-        },
-        "32": {
-          "nom": "Robin Wright",
-          "films": 1
-        },
-        "37": {
-          "nom": "Alan Silvestri",
-          "films": 5
-        },
-        "48": {
-          "nom": "Sean Bean",
-          "films": 1
-        },
-        "52": {
-          "nom": "David Morse",
-          "films": 2
-        },
-        "62": {
-          "nom": "Bruce Willis",
-          "films": 4
-        },
-        "63": {
-          "nom": "Milla Jovovich",
-          "films": 1
-        },
-        "64": {
-          "nom": "Gary Oldman",
-          "films": 3
-        },
-        "66": {
-          "nom": "Chris Tucker",
-          "films": 1
-        },
-        "99": {
-          "nom": "Amanda Plummer",
-          "films": 1
-        },
-        "100": {
-          "nom": "Scott Speedman",
-          "films": 1
-        },
-        "103": {
-          "nom": "Mark Ruffalo",
-          "films": 4
-        },
-        "113": {
-          "nom": "Christopher Lee",
-          "films": 3
-        },
-        "122": {
-          "nom": "Klaus Badelt",
-          "films": 1
-        },
-        "131": {
-          "nom": "Jake Gyllenhaal",
-          "films": 1
-        },
-        "134": {
-          "nom": "Jamie Foxx",
-          "films": 2
-        },
-        "138": {
-          "nom": "Quentin Tarantino",
-          "films": 8
-        },
-        "139": {
-          "nom": "Uma Thurman",
-          "films": 4
-        },
-        "140": {
-          "nom": "Lucy Liu",
-          "films": 2
-        },
-        "141": {
-          "nom": "David Carradine",
-          "films": 2
-        },
-        "147": {
-          "nom": "Michael Madsen",
-          "films": 3
-        },
-        "150": {
-          "nom": "RZA",
-          "films": 3
-        },
-        "192": {
-          "nom": "Morgan Freeman",
-          "films": 1
-        },
-        "194": {
-          "nom": "Richard Harris",
-          "films": 1
-        },
-        "207": {
-          "nom": "Tom Wilkinson",
-          "films": 1
-        },
-        "227": {
-          "nom": "William Hurt",
-          "films": 2
-        },
-        "228": {
-          "nom": "Ed Harris",
-          "films": 2
-        },
-        "287": {
-          "nom": "Brad Pitt",
-          "films": 3
-        },
-        "290": {
-          "nom": "Christopher Plummer",
-          "films": 1
-        },
-        "312": {
-          "nom": "Jon Brion",
-          "films": 2
-        },
-        "336": {
-          "nom": "Xzibit",
-          "films": 1
-        },
-        "380": {
-          "nom": "Robert De Niro",
-          "films": 2
-        },
-        "388": {
-          "nom": "Jim Broadbent",
-          "films": 2
-        },
-        "418": {
-          "nom": "Robert Patrick",
-          "films": 1
-        },
-        "449": {
-          "nom": "Jay Baruchel",
-          "films": 1
-        },
-        "454": {
-          "nom": "Michael Peña",
-          "films": 1
-        },
-        "478": {
-          "nom": "Jamie Bell",
-          "films": 1
-        },
-        "480": {
-          "nom": "Gary Lewis",
-          "films": 1
-        },
-        "488": {
-          "nom": "Steven Spielberg",
-          "films": 1
-        },
-        "491": {
-          "nom": "John Williams",
-          "films": 5
-        },
-        "508": {
-          "nom": "David Koepp",
-          "films": 1
-        },
-        "510": {
-          "nom": "Tim Burton",
-          "films": 1
-        },
-        "516": {
-          "nom": "Annette Bening",
-          "films": 2
-        },
-        "517": {
-          "nom": "Pierce Brosnan",
-          "films": 1
-        },
-        "524": {
-          "nom": "Natalie Portman",
-          "films": 4
-        },
-        "529": {
-          "nom": "Guy Pearce",
-          "films": 1
-        },
-        "530": {
-          "nom": "Carrie-Anne Moss",
-          "films": 1
-        },
-        "531": {
-          "nom": "Danny Elfman",
-          "films": 1
-        },
-        "534": {
-          "nom": "Mark Boone Junior",
-          "films": 1
-        },
-        "588": {
-          "nom": "M. Emmet Walsh",
-          "films": 1
-        },
-        "589": {
-          "nom": "Daryl Hannah",
-          "films": 2
-        },
-        "648": {
-          "nom": "Philip Kaufman",
-          "films": 1
-        },
-        "655": {
-          "nom": "John Rhys-Davies",
-          "films": 1
-        },
-        "776": {
-          "nom": "Eddie Murphy",
-          "films": 2
-        },
-        "818": {
-          "nom": "David McKenna",
-          "films": 1
-        },
-        "825": {
-          "nom": "Stacy Keach",
-          "films": 1
-        },
-        "862": {
-          "nom": "George C. Scott",
-          "films": 1
-        },
-        "876": {
-          "nom": "Jonathan Hensleigh",
-          "films": 1
-        },
-        "880": {
-          "nom": "Ben Affleck",
-          "films": 1
-        },
-        "883": {
-          "nom": "Will Patton",
-          "films": 1
-        },
-        "884": {
-          "nom": "Steve Buscemi",
-          "films": 1
-        },
-        "893": {
-          "nom": "Tony Scott",
-          "films": 1
-        },
-        "894": {
-          "nom": "Trevor Rabin",
-          "films": 3
-        },
-        "935": {
-          "nom": "Connie Nielsen",
-          "films": 1
-        },
-        "938": {
-          "nom": "Djimon Hounsou",
-          "films": 3
-        },
-        "947": {
-          "nom": "Hans Zimmer",
-          "films": 1
-        },
-        "957": {
-          "nom": "Matthew Vaughn",
-          "films": 2
-        },
-        "960": {
-          "nom": "John Murphy",
-          "films": 1
-        },
-        "1004": {
-          "nom": "Danny Aiello",
-          "films": 1
-        },
-        "1010": {
-          "nom": "Michael Badalucco",
-          "films": 1
-        },
-        "1032": {
-          "nom": "Martin Scorsese",
-          "films": 1
-        },
-        "1037": {
-          "nom": "Harvey Keitel",
-          "films": 1
-        },
-        "1069": {
-          "nom": "George DiCenzo",
-          "films": 1
-        },
-        "1090": {
-          "nom": "John McTiernan",
-          "films": 2
-        },
-        "1102": {
-          "nom": "Elpidia Carrillo",
-          "films": 1
-        },
-        "1108": {
-          "nom": "Shane Black",
-          "films": 1
-        },
-        "1117": {
-          "nom": "Dennis Farina",
-          "films": 1
-        },
-        "1137": {
-          "nom": "Juliette Binoche",
-          "films": 1
-        },
-        "1158": {
-          "nom": "Al Pacino",
-          "films": 1
-        },
-        "1161": {
-          "nom": "Mary Elizabeth Mastrantonio",
-          "films": 1
-        },
-        "1213": {
-          "nom": "James Newton Howard",
-          "films": 2
-        },
-        "1229": {
-          "nom": "Jeff Bridges",
-          "films": 1
-        },
-        "1230": {
-          "nom": "John Goodman",
-          "films": 2
-        },
-        "1231": {
-          "nom": "Julianne Moore",
-          "films": 1
-        },
-        "1233": {
-          "nom": "Philip Seymour Hoffman",
-          "films": 1
-        },
-        "1235": {
-          "nom": "Philip Moon",
-          "films": 1
-        },
-        "1236": {
-          "nom": "Mark Pellegrino",
-          "films": 1
-        },
-        "1240": {
-          "nom": "Jack Kehler",
-          "films": 1
-        },
-        "1241": {
-          "nom": "John Turturro",
-          "films": 3
-        },
-        "1243": {
-          "nom": "Woody Allen",
-          "films": 1
-        },
-        "1245": {
-          "nom": "Scarlett Johansson",
-          "films": 7
-        },
-        "1246": {
-          "nom": "Emily Mortimer",
-          "films": 1
-        },
-        "1248": {
-          "nom": "Brian Cox",
-          "films": 1
-        },
-        "1259": {
-          "nom": "Ennio Morricone",
-          "films": 1
-        },
-        "1271": {
-          "nom": "Andy Garcia",
-          "films": 1
-        },
-        "1281": {
-          "nom": "Freddie Highmore",
-          "films": 1
-        },
-        "1285": {
-          "nom": "AnnaSophia Robb",
-          "films": 1
-        },
-        "1292": {
-          "nom": "James Fox",
-          "films": 1
-        },
-        "1331": {
-          "nom": "Hugo Weaving",
-          "films": 1
-        },
-        "1341": {
-          "nom": "Donnie Yen",
-          "films": 1
-        },
-        "1370": {
-          "nom": "Brad Dourif",
-          "films": 3
-        },
-        "1461": {
-          "nom": "George Clooney",
-          "films": 1
-        },
-        "1620": {
-          "nom": "Michelle Yeoh",
-          "films": 1
-        },
-        "1640": {
-          "nom": "Stellan Skarsgård",
-          "films": 4
-        },
-        "1707": {
-          "nom": "Stuart Beattie",
-          "films": 1
-        },
-        "1729": {
-          "nom": "James Horner",
-          "films": 1
-        },
-        "1735": {
-          "nom": "Frank McRae",
-          "films": 1
-        },
-        "1736": {
-          "nom": "James Remar",
-          "films": 2
-        },
-        "1737": {
-          "nom": "David Patrick Kelly",
-          "films": 1
-        },
-        "1748": {
-          "nom": "William Shatner",
-          "films": 1
-        },
-        "1749": {
-          "nom": "Leonard Nimoy",
-          "films": 1
-        },
-        "1752": {
-          "nom": "George Takei",
-          "films": 1
-        },
-        "1771": {
-          "nom": "Giovanni Ribisi",
-          "films": 1
-        },
-        "1844": {
-          "nom": "Til Schweiger",
-          "films": 1
-        },
-        "1884": {
-          "nom": "Steven Soderbergh",
-          "films": 1
-        },
-        "1889": {
-          "nom": "David Holmes",
-          "films": 1
-        },
-        "1896": {
-          "nom": "Don Cheadle",
-          "films": 5
-        },
-        "1897": {
-          "nom": "Bernie Mac",
-          "films": 1
-        },
-        "1904": {
-          "nom": "Anthony Michael Hall",
-          "films": 1
-        },
-        "1911": {
-          "nom": "Dick Anthony Williams",
-          "films": 1
-        },
-        "1921": {
-          "nom": "George Nolfi",
-          "films": 1
-        },
-        "1925": {
-          "nom": "Vincent Cassel",
-          "films": 1
-        },
-        "1956": {
-          "nom": "Cherry Jones",
-          "films": 1
-        },
-        "1979": {
-          "nom": "Kevin Spacey",
-          "films": 2
-        },
-        "1980": {
-          "nom": "Mary McCormack",
-          "films": 1
-        },
-        "1983": {
-          "nom": "Vincent Laresca",
-          "films": 2
-        },
-        "2039": {
-          "nom": "Brendan Gleeson",
-          "films": 1
-        },
-        "2075": {
-          "nom": "David Loughery",
-          "films": 1
-        },
-        "2148": {
-          "nom": "Charlie Clouser",
-          "films": 1
-        },
-        "2155": {
-          "nom": "Thora Birch",
-          "films": 1
-        },
-        "2176": {
-          "nom": "Tommy Lee Jones",
-          "films": 3
-        },
-        "2199": {
-          "nom": "Scott Frank",
-          "films": 1
-        },
-        "2208": {
-          "nom": "Kathryn Morris",
-          "films": 1
-        },
-        "2224": {
-          "nom": "Christian Slater",
-          "films": 1
-        },
-        "2226": {
-          "nom": "Sydney Pollack",
-          "films": 1
-        },
-        "2229": {
-          "nom": "Catherine Keener",
-          "films": 3
-        },
-        "2230": {
-          "nom": "Pam Grier",
-          "films": 1
-        },
-        "2232": {
-          "nom": "Michael Keaton",
-          "films": 4
-        },
-        "2233": {
-          "nom": "Bridget Fonda",
-          "films": 1
-        },
-        "2234": {
-          "nom": "Michael Bowen",
-          "films": 1
-        },
-        "2282": {
-          "nom": "Ben Kingsley",
-          "films": 1
-        },
-        "2283": {
-          "nom": "Stanley Tucci",
-          "films": 2
-        },
-        "2293": {
-          "nom": "Frank Miller",
-          "films": 1
-        },
-        "2294": {
-          "nom": "Robert Rodriguez",
-          "films": 2
-        },
-        "2295": {
-          "nom": "Mickey Rourke",
-          "films": 2
-        },
-        "2299": {
-          "nom": "Josh Hartnett",
-          "films": 1
-        },
-        "2310": {
-          "nom": "Bruno Ganz",
-          "films": 1
-        },
-        "2319": {
-          "nom": "Maria de Medeiros",
-          "films": 1
-        },
-        "2341": {
-          "nom": "Richy Müller",
-          "films": 1
-        },
-        "2372": {
-          "nom": "Ron Perlman",
-          "films": 1
-        },
-        "2411": {
-          "nom": "Clotilde Mollet",
-          "films": 1
-        },
-        "2440": {
-          "nom": "Bill Nighy",
-          "films": 1
-        },
-        "2535": {
-          "nom": "Vivica A. Fox",
-          "films": 2
-        },
-        "2536": {
-          "nom": "Michael Parks",
-          "films": 2
-        },
-        "2537": {
-          "nom": "Sonny Chiba",
-          "films": 1
-        },
-        "2538": {
-          "nom": "Chiaki Kuriyama",
-          "films": 1
-        },
-        "2593": {
-          "nom": "Rupert Gregson-Williams",
-          "films": 1
-        },
-        "2620": {
-          "nom": "Harriet Lenabe",
-          "films": 1
-        },
-        "2628": {
-          "nom": "Kiefer Sutherland",
-          "films": 1
-        },
-        "2632": {
-          "nom": "Chris Rock",
-          "films": 1
-        },
-        "2675": {
-          "nom": "Darren Lynn Bousman",
-          "films": 1
-        },
-        "2683": {
-          "nom": "Glenn Plummer",
-          "films": 1
-        },
-        "2687": {
-          "nom": "Lyriq Bent",
-          "films": 1
-        },
-        "2694": {
-          "nom": "Josh Charles",
-          "films": 1
-        },
-        "2778": {
-          "nom": "Dennis Hopper",
-          "films": 1
-        },
-        "2838": {
-          "nom": "Chloë Sevigny",
-          "films": 1
-        },
-        "2880": {
-          "nom": "Emilio Estevez",
-          "films": 1
-        },
-        "2882": {
-          "nom": "Diane Lane",
-          "films": 1
-        },
-        "2945": {
-          "nom": "Stephen Gaghan",
-          "films": 1
-        },
-        "2949": {
-          "nom": "Alexandre Desplat",
-          "films": 1
-        },
-        "2954": {
-          "nom": "Jeffrey Wright",
-          "films": 1
-        },
-        "2956": {
-          "nom": "Amanda Peet",
-          "films": 1
-        },
-        "2963": {
-          "nom": "Nicolas Cage",
-          "films": 4
-        },
-        "2975": {
-          "nom": "Laurence Fishburne",
-          "films": 1
-        },
-        "2978": {
-          "nom": "Max Minghella",
-          "films": 1
-        },
-        "2983": {
-          "nom": "Mark Strong",
-          "films": 1
-        },
-        "2987": {
-          "nom": "Stewart Copeland",
-          "films": 1
-        },
-        "2989": {
-          "nom": "Richard Price",
-          "films": 4
-        },
-        "3027": {
-          "nom": "Stephen King",
-          "films": 1
-        },
-        "3036": {
-          "nom": "John Cusack",
-          "films": 3
-        },
-        "3051": {
-          "nom": "Toni Collette",
-          "films": 3
-        },
-        "3061": {
-          "nom": "Ewan McGregor",
-          "films": 3
-        },
-        "3075": {
-          "nom": "Rory McCann",
-          "films": 1
-        },
-        "3084": {
-          "nom": "Marlon Brando",
-          "films": 1
-        },
-        "3129": {
-          "nom": "Tim Roth",
-          "films": 2
-        },
-        "3131": {
-          "nom": "Antonio Banderas",
-          "films": 1
-        },
-        "3136": {
-          "nom": "Salma Hayek Pinault",
-          "films": 2
-        },
-        "3137": {
-          "nom": "Paul Calderon",
-          "films": 1
-        },
-        "3141": {
-          "nom": "Marisa Tomei",
-          "films": 1
-        },
-        "3155": {
-          "nom": "Pat O'Brien",
-          "films": 1
-        },
-        "3173": {
-          "nom": "G.D. Spradlin",
-          "films": 1
-        },
-        "3211": {
-          "nom": "Dale Dye",
-          "films": 1
-        },
-        "3223": {
-          "nom": "Robert Downey Jr.",
-          "films": 6
-        },
-        "3234": {
-          "nom": "Joan Cusack",
-          "films": 1
-        },
-        "3291": {
-          "nom": "Hugh Grant",
-          "films": 1
-        },
-        "3292": {
-          "nom": "Nicholas Hoult",
-          "films": 2
-        },
-        "3393": {
-          "nom": "David Newman",
-          "films": 1
-        },
-        "3489": {
-          "nom": "Naomi Watts",
-          "films": 1
-        },
-        "3627": {
-          "nom": "Paz Vega",
-          "films": 1
-        },
-        "3783": {
-          "nom": "Brigitte Bardot",
-          "films": 1
-        },
-        "3810": {
-          "nom": "Javier Bardem",
-          "films": 1
-        },
-        "3872": {
-          "nom": "Daniel Brühl",
-          "films": 1
-        },
-        "3893": {
-          "nom": "David S. Goyer",
-          "films": 1
-        },
-        "3894": {
-          "nom": "Christian Bale",
-          "films": 1
-        },
-        "3895": {
-          "nom": "Michael Caine",
-          "films": 2
-        },
-        "3896": {
-          "nom": "Liam Neeson",
-          "films": 1
-        },
-        "3968": {
-          "nom": "Michael Sheen",
-          "films": 1
-        },
-        "3974": {
-          "nom": "Miloš Forman",
-          "films": 1
-        },
-        "3978": {
-          "nom": "S. Epatha Merkerson",
-          "films": 2
-        },
-        "3999": {
-          "nom": "Tom Hulce",
-          "films": 1
-        },
-        "4012": {
-          "nom": "Spencer Treat Clark",
-          "films": 2
-        },
-        "4026": {
-          "nom": "Ambrosia Kelley",
-          "films": 1
-        },
-        "4037": {
-          "nom": "Ron Shelton",
-          "films": 1
-        },
-        "4135": {
-          "nom": "Robert Redford",
-          "films": 1
-        },
-        "4140": {
-          "nom": "Mark Isham",
-          "films": 3
-        },
-        "4169": {
-          "nom": "Dave Chappelle",
-          "films": 1
-        },
-        "4173": {
-          "nom": "Anthony Hopkins",
-          "films": 1
-        },
-        "4250": {
-          "nom": "Michael Lerner",
-          "films": 1
-        },
-        "4252": {
-          "nom": "Tony Shalhoub",
-          "films": 1
-        },
-        "4253": {
-          "nom": "Jon Polito",
-          "films": 1
-        },
-        "4257": {
-          "nom": "I.M. Hobson",
-          "films": 1
-        },
-        "4361": {
-          "nom": "Joey Bishop",
-          "films": 1
-        },
-        "4430": {
-          "nom": "Sharon Stone",
-          "films": 1
-        },
-        "4431": {
-          "nom": "Jessica Lange",
-          "films": 1
-        },
-        "4483": {
-          "nom": "Dustin Hoffman",
-          "films": 1
-        },
-        "4492": {
-          "nom": "Philip Baker Hall",
-          "films": 3
-        },
-        "4500": {
-          "nom": "John Debney",
-          "films": 2
-        },
-        "4513": {
-          "nom": "Elizabeth McGovern",
-          "films": 2
-        },
-        "4517": {
-          "nom": "Joe Pesci",
-          "films": 2
-        },
-        "4520": {
-          "nom": "William Forsythe",
-          "films": 1
-        },
-        "4521": {
-          "nom": "Burt Young",
-          "films": 1
-        },
-        "4581": {
-          "nom": "Steve Coogan",
-          "films": 1
-        },
-        "4587": {
-          "nom": "Halle Berry",
-          "films": 1
-        },
-        "4610": {
-          "nom": "John Landis",
-          "films": 1
-        },
-        "4613": {
-          "nom": "Nile Rodgers",
-          "films": 1
-        },
-        "4687": {
-          "nom": "Patricia Arquette",
-          "films": 1
-        },
-        "4688": {
-          "nom": "Michael Rapaport",
-          "films": 3
-        },
-        "4689": {
-          "nom": "Bronson Pinchot",
-          "films": 1
-        },
-        "4690": {
-          "nom": "Christopher Walken",
-          "films": 1
-        },
-        "4755": {
-          "nom": "David R. Ellis",
-          "films": 1
-        },
-        "4757": {
-          "nom": "Rupert Everett",
-          "films": 1
-        },
-        "4762": {
-          "nom": "Paul Thomas Anderson",
-          "films": 1
-        },
-        "4764": {
-          "nom": "John C. Reilly",
-          "films": 1
-        },
-        "4782": {
-          "nom": "Michael Crichton",
-          "films": 1
-        },
-        "4783": {
-          "nom": "Sam Neill",
-          "films": 1
-        },
-        "4784": {
-          "nom": "Laura Dern",
-          "films": 1
-        },
-        "4785": {
-          "nom": "Jeff Goldblum",
-          "films": 3
-        },
-        "4786": {
-          "nom": "Richard Attenborough",
-          "films": 1
-        },
-        "4787": {
-          "nom": "Joseph Mazzello",
-          "films": 1
-        },
-        "4788": {
-          "nom": "Ariana Richards",
-          "films": 1
-        },
-        "4789": {
-          "nom": "Bob Peck",
-          "films": 1
-        },
-        "4790": {
-          "nom": "Martin Ferrero",
-          "films": 1
-        },
-        "4808": {
-          "nom": "Giancarlo Esposito",
-          "films": 4
-        },
-        "4945": {
-          "nom": "Joe Johnston",
-          "films": 1
-        },
-        "4987": {
-          "nom": "Omar Epps",
-          "films": 1
-        },
-        "4996": {
-          "nom": "Tatyana Ali",
-          "films": 1
-        },
-        "5048": {
-          "nom": "Harry Dean Stanton",
-          "films": 1
-        },
-        "5151": {
-          "nom": "Beth Grant",
-          "films": 1
-        },
-        "5170": {
-          "nom": "Mike Starr",
-          "films": 1
-        },
-        "5281": {
-          "nom": "Spike Lee",
-          "films": 6
-        },
-        "5287": {
-          "nom": "Terence Blanchard",
-          "films": 4
-        },
-        "5292": {
-          "nom": "Denzel Washington",
-          "films": 1
-        },
-        "5293": {
-          "nom": "Willem Dafoe",
-          "films": 2
-        },
-        "5296": {
-          "nom": "James Ransone",
-          "films": 1
-        },
-        "5309": {
-          "nom": "Judi Dench",
-          "films": 1
-        },
-        "5359": {
-          "nom": "Mychael Danna",
-          "films": 1
-        },
-        "5365": {
-          "nom": "Clifton Collins Jr.",
-          "films": 1
-        },
-        "5384": {
-          "nom": "Method Man",
-          "films": 1
-        },
-        "5401": {
-          "nom": "Anthony Quinn",
-          "films": 1
-        },
-        "5472": {
-          "nom": "Colin Firth",
-          "films": 1
-        },
-        "5488": {
-          "nom": "Gabriel Yared",
-          "films": 1
-        },
-        "5496": {
-          "nom": "Mehmet Kurtuluş",
-          "films": 1
-        },
-        "5502": {
-          "nom": "Bill Nunn",
-          "films": 4
-        },
-        "5530": {
-          "nom": "James McAvoy",
-          "films": 1
-        },
-        "5550": {
-          "nom": "Ann Peacock",
-          "films": 1
-        },
-        "5551": {
-          "nom": "Christopher Markus",
-          "films": 4
-        },
-        "5552": {
-          "nom": "Stephen McFeely",
-          "films": 4
-        },
-        "5572": {
-          "nom": "Joel Schumacher",
-          "films": 1
-        },
-        "5575": {
-          "nom": "Akiva Goldsman",
-          "films": 1
-        },
-        "5576": {
-          "nom": "Val Kilmer",
-          "films": 1
-        },
-        "5578": {
-          "nom": "Debi Mazar",
-          "films": 1
-        },
-        "5581": {
-          "nom": "Elliot Goldenthal",
-          "films": 3
-        },
-        "5694": {
-          "nom": "Robert Forster",
-          "films": 2
-        },
-        "5788": {
-          "nom": "James Cagney",
-          "films": 1
-        },
-        "5823": {
-          "nom": "Julie Andrews",
-          "films": 1
-        },
-        "5912": {
-          "nom": "Graeme Revell",
-          "films": 2
-        },
-        "5915": {
-          "nom": "Jaime King",
-          "films": 2
-        },
-        "5946": {
-          "nom": "Philip Akin",
-          "films": 1
-        },
-        "6039": {
-          "nom": "Shane Salerno",
-          "films": 1
-        },
-        "6041": {
-          "nom": "Brian Tyler",
-          "films": 2
-        },
-        "6066": {
-          "nom": "Dash Mihok",
-          "films": 1
-        },
-        "6193": {
-          "nom": "Leonardo DiCaprio",
-          "films": 1
-        },
-        "6198": {
-          "nom": "Vondie Curtis-Hall",
-          "films": 1
-        },
-        "6396": {
-          "nom": "Richard Edson",
-          "films": 1
-        },
-        "6400": {
-          "nom": "Tom DiCillo",
-          "films": 1
-        },
-        "6401": {
-          "nom": "Rockets Redglare",
-          "films": 1
-        },
-        "6416": {
-          "nom": "Polly Walker",
-          "films": 1
-        },
-        "6465": {
-          "nom": "Grace Zabriskie",
-          "films": 1
-        },
-        "6482": {
-          "nom": "John Singleton",
-          "films": 1
-        },
-        "6485": {
-          "nom": "Busta Rhymes",
-          "films": 1
-        },
-        "6486": {
-          "nom": "Dan Hedaya",
-          "films": 1
-        },
-        "6487": {
-          "nom": "Richard Roundtree",
-          "films": 2
-        },
-        "6489": {
-          "nom": "David Arnold",
-          "films": 2
-        },
-        "6541": {
-          "nom": "Philip Bosco",
-          "films": 2
-        },
-        "6542": {
-          "nom": "Isaac Hayes",
-          "films": 1
-        },
-        "6561": {
-          "nom": "Moses Gunn",
-          "films": 1
-        },
-        "6575": {
-          "nom": "Gil Bellows",
-          "films": 2
-        },
-        "6585": {
-          "nom": "Perla Haney-Jardine",
-          "films": 1
-        },
-        "6677": {
-          "nom": "Kyle MacLachlan",
-          "films": 1
-        },
-        "6692": {
-          "nom": "Caroline Goodall",
-          "films": 1
-        },
-        "6751": {
-          "nom": "Siobhan Fallon Hogan",
-          "films": 1
-        },
-        "6804": {
-          "nom": "Graham Greene",
-          "films": 1
-        },
-        "6806": {
-          "nom": "Doug Hutchison",
-          "films": 1
-        },
-        "6807": {
-          "nom": "Sam Rockwell",
-          "films": 2
-        },
-        "6854": {
-          "nom": "Mark Protosevich",
-          "films": 1
-        },
-        "6856": {
-          "nom": "Kurt Russell",
-          "films": 1
-        },
-        "6885": {
-          "nom": "Charlize Theron",
-          "films": 1
-        },
-        "6886": {
-          "nom": "Christina Ricci",
-          "films": 2
-        },
-        "6905": {
-          "nom": "Bruce Dern",
-          "films": 1
-        },
-        "6908": {
-          "nom": "Marc Macaulay",
-          "films": 1
-        },
-        "6913": {
-          "nom": "Ellen Barkin",
-          "films": 1
-        },
-        "6914": {
-          "nom": "Scott Wilson",
-          "films": 1
-        },
-        "7002": {
-          "nom": "Luke Kirby",
-          "films": 2
-        },
-        "7004": {
-          "nom": "Paul Sorvino",
-          "films": 1
-        },
-        "7017": {
-          "nom": "Roger Michell",
-          "films": 1
-        },
-        "7020": {
-          "nom": "Trevor Jones",
-          "films": 2
-        },
-        "7026": {
-          "nom": "Rhys Ifans",
-          "films": 1
-        },
-        "7036": {
-          "nom": "Eric Stoltz",
-          "films": 2
-        },
-        "7087": {
-          "nom": "Brad Bird",
-          "films": 3
-        },
-        "7130": {
-          "nom": "Scott Alexander",
-          "films": 1
-        },
-        "7131": {
-          "nom": "Larry Karaszewski",
-          "films": 1
-        },
-        "7133": {
-          "nom": "Max Casella",
-          "films": 1
-        },
-        "7163": {
-          "nom": "Nicholas Pileggi",
-          "films": 1
-        },
-        "7164": {
-          "nom": "Frank Vincent",
-          "films": 2
-        },
-        "7229": {
-          "nom": "Marco Beltrami",
-          "films": 3
-        },
-        "7242": {
-          "nom": "Temuera Morrison",
-          "films": 1
-        },
-        "7256": {
-          "nom": "Lee Tamahori",
-          "films": 1
-        },
-        "7401": {
-          "nom": "Lin Shaye",
-          "films": 1
-        },
-        "7427": {
-          "nom": "Felicity Huffman",
-          "films": 1
-        },
-        "7430": {
-          "nom": "Elizabeth Peña",
-          "films": 1
-        },
-        "7469": {
-          "nom": "Jim Uhls",
-          "films": 1
-        },
-        "7470": {
-          "nom": "Meat Loaf",
-          "films": 1
-        },
-        "7488": {
-          "nom": "Jean-Claude La Marre",
-          "films": 1
-        },
-        "7714": {
-          "nom": "Michael Kamen",
-          "films": 1
-        },
-        "7722": {
-          "nom": "Edward Neumeier",
-          "films": 1
-        },
-        "7885": {
-          "nom": "Randy Newman",
-          "films": 1
-        },
-        "7908": {
-          "nom": "Frank Oz",
-          "films": 2
-        },
-        "8170": {
-          "nom": "Eva Mendes",
-          "films": 3
-        },
-        "8246": {
-          "nom": "Barry Levinson",
-          "films": 1
-        },
-        "8256": {
-          "nom": "Anne Heche",
-          "films": 1
-        },
-        "8300": {
-          "nom": "Kevin Reynolds",
-          "films": 1
-        },
-        "8320": {
-          "nom": "Jeff Danna",
-          "films": 2
-        },
-        "8351": {
-          "nom": "Frederic Forrest",
-          "films": 1
-        },
-        "8396": {
-          "nom": "Tommy Lister Jr.",
-          "films": 1
-        },
-        "8536": {
-          "nom": "Victor Garber",
-          "films": 1
-        },
-        "8654": {
-          "nom": "Matthew Modine",
-          "films": 1
-        },
-        "8854": {
-          "nom": "Bill Cobbs",
-          "films": 1
-        },
-        "8891": {
-          "nom": "John Travolta",
-          "films": 2
-        },
-        "8949": {
-          "nom": "Peter Fonda",
-          "films": 1
-        },
-        "8977": {
-          "nom": "Craig T. Nelson",
-          "films": 3
-        },
-        "8979": {
-          "nom": "Patrick Malahide",
-          "films": 2
-        },
-        "8985": {
-          "nom": "Margaret Colin",
-          "films": 1
-        },
-        "8986": {
-          "nom": "James Rebhorn",
-          "films": 1
-        },
-        "9039": {
-          "nom": "John Ottman",
-          "films": 1
-        },
-        "9048": {
-          "nom": "Clark Gregg",
-          "films": 5
-        },
-        "9152": {
-          "nom": "Patrick Doyle",
-          "films": 1
-        },
-        "9160": {
-          "nom": "Michael Higham",
-          "films": 1
-        },
-        "9297": {
-          "nom": "F. William Parker",
-          "films": 1
-        },
-        "9452": {
-          "nom": "Daniel Bernhardt",
-          "films": 1
-        },
-        "9575": {
-          "nom": "Jada Pinkett Smith",
-          "films": 1
-        },
-        "9642": {
-          "nom": "Jude Law",
-          "films": 1
-        },
-        "9769": {
-          "nom": "Stanley Clarke",
-          "films": 1
-        },
-        "9777": {
-          "nom": "Cuba Gooding Jr.",
-          "films": 1
-        },
-        "9778": {
-          "nom": "Ice Cube",
-          "films": 2
-        },
-        "9780": {
-          "nom": "Angela Bassett",
-          "films": 1
-        },
-        "9781": {
-          "nom": "Nia Long",
-          "films": 1
-        },
-        "9785": {
-          "nom": "John Cothran",
-          "films": 1
-        },
-        "9824": {
-          "nom": "Diane Kruger",
-          "films": 1
-        },
-        "9825": {
-          "nom": "Saffron Burrows",
-          "films": 1
-        },
-        "9979": {
-          "nom": "Peter Coyote",
-          "films": 1
-        },
-        "9994": {
-          "nom": "Helen Hunt",
-          "films": 1
-        },
-        "10132": {
-          "nom": "Colm Feore",
-          "films": 2
-        },
-        "10135": {
-          "nom": "Jesse James",
-          "films": 1
-        },
-        "10182": {
-          "nom": "Ving Rhames",
-          "films": 4
-        },
-        "10297": {
-          "nom": "Matthew McConaughey",
-          "films": 1
-        },
-        "10427": {
-          "nom": "Anne Archer",
-          "films": 2
-        },
-        "10431": {
-          "nom": "Jennifer Jason Leigh",
-          "films": 1
-        },
-        "10486": {
-          "nom": "Chelcie Ross",
-          "films": 1
-        },
-        "10556": {
-          "nom": "Carol Kane",
-          "films": 1
-        },
-        "10580": {
-          "nom": "Tracie Thoms",
-          "films": 1
-        },
-        "10689": {
-          "nom": "Rob Brown",
-          "films": 1
-        },
-        "10702": {
-          "nom": "Martin Campbell",
-          "films": 1
-        },
-        "10727": {
-          "nom": "John Hannah",
-          "films": 1
-        },
-        "10742": {
-          "nom": "Teri Hatcher",
-          "films": 1
-        },
-        "10814": {
-          "nom": "Wesley Snipes",
-          "films": 3
-        },
-        "10824": {
-          "nom": "N'Bushe Wright",
-          "films": 1
-        },
-        "10843": {
-          "nom": "Luke Goss",
-          "films": 1
-        },
-        "10851": {
-          "nom": "Ramin Djawadi",
-          "films": 1
-        },
-        "10859": {
-          "nom": "Ryan Reynolds",
-          "films": 3
-        },
-        "10860": {
-          "nom": "Jessica Biel",
-          "films": 1
-        },
-        "10912": {
-          "nom": "Eva Green",
-          "films": 1
-        },
-        "10963": {
-          "nom": "José Zúñiga",
-          "films": 1
-        },
-        "11064": {
-          "nom": "David Strathairn",
-          "films": 2
-        },
-        "11092": {
-          "nom": "Simon Kinberg",
-          "films": 2
-        },
-        "11098": {
-          "nom": "John Powell",
-          "films": 1
-        },
-        "11155": {
-          "nom": "Thomas Jane",
-          "films": 1
-        },
-        "11159": {
-          "nom": "Cheech Marin",
-          "films": 1
-        },
-        "11160": {
-          "nom": "Danny Trejo",
-          "films": 1
-        },
-        "11181": {
-          "nom": "Kenneth Branagh",
-          "films": 1
-        },
-        "11343": {
-          "nom": "David Yates",
-          "films": 1
-        },
-        "11367": {
-          "nom": "Bradley Whitford",
-          "films": 2
-        },
-        "11447": {
-          "nom": "Albert Hughes",
-          "films": 1
-        },
-        "11448": {
-          "nom": "Allen Hughes",
-          "films": 1
-        },
-        "11472": {
-          "nom": "Irwin Winkler",
-          "films": 1
-        },
-        "11477": {
-          "nom": "Ray Liotta",
-          "films": 1
-        },
-        "11478": {
-          "nom": "Lorraine Bracco",
-          "films": 1
-        },
-        "11479": {
-          "nom": "Chuck Low",
-          "films": 1
-        },
-        "11480": {
-          "nom": "Frank Sivero",
-          "films": 1
-        },
-        "11482": {
-          "nom": "Tony Darrow",
-          "films": 1
-        },
-        "11486": {
-          "nom": "Michael Imperioli",
-          "films": 1
-        },
-        "11512": {
-          "nom": "John Heard",
-          "films": 1
-        },
-        "11514": {
-          "nom": "Catherine O'Hara",
-          "films": 2
-        },
-        "11614": {
-          "nom": "M. Night Shyamalan",
-          "films": 2
-        },
-        "11662": {
-          "nom": "Jason Lee",
-          "films": 1
-        },
-        "11694": {
-          "nom": "Doug Liman",
-          "films": 1
-        },
-        "11703": {
-          "nom": "Kerry Washington",
-          "films": 3
-        },
-        "11764": {
-          "nom": "Ian Abercrombie",
-          "films": 1
-        },
-        "12052": {
-          "nom": "Gwyneth Paltrow",
-          "films": 3
-        },
-        "12111": {
-          "nom": "Justin Timberlake",
-          "films": 1
-        },
-        "12122": {
-          "nom": "Ron Rifkin",
-          "films": 1
-        },
-        "12132": {
-          "nom": "Michael Rooker",
-          "films": 2
-        },
-        "12521": {
-          "nom": "Kenneth McMillan",
-          "films": 1
-        },
-        "12792": {
-          "nom": "Brian Van Holt",
-          "films": 2
-        },
-        "12835": {
-          "nom": "Vin Diesel",
-          "films": 2
-        },
-        "12850": {
-          "nom": "Dabney Coleman",
-          "films": 1
-        },
-        "12851": {
-          "nom": "Ally Sheedy",
-          "films": 1
-        },
-        "12890": {
-          "nom": "Pete Docter",
-          "films": 1
-        },
-        "12891": {
-          "nom": "Joss Whedon",
-          "films": 2
-        },
-        "12967": {
-          "nom": "Swoosie Kurtz",
-          "films": 1
-        },
-        "13014": {
-          "nom": "Toby Jones",
-          "films": 1
-        },
-        "13015": {
-          "nom": "Phillip Noyce",
-          "films": 1
-        },
-        "13023": {
-          "nom": "Colleen Camp",
-          "films": 1
-        },
-        "13082": {
-          "nom": "Paul Hepker",
-          "films": 1
-        },
-        "13240": {
-          "nom": "Mark Wahlberg",
-          "films": 1
-        },
-        "13242": {
-          "nom": "Paul Giamatti",
-          "films": 2
-        },
-        "13295": {
-          "nom": "Donald O'Connor",
-          "films": 1
-        },
-        "13472": {
-          "nom": "Tim Curry",
-          "films": 1
-        },
-        "13548": {
-          "nom": "James Spader",
-          "films": 1
-        },
-        "13549": {
-          "nom": "Deborah Kara Unger",
-          "films": 1
-        },
-        "13602": {
-          "nom": "Joie Lee",
-          "films": 2
-        },
-        "13728": {
-          "nom": "John McMartin",
-          "films": 1
-        },
-        "13776": {
-          "nom": "John Frankenheimer",
-          "films": 1
-        },
-        "13936": {
-          "nom": "Frankie Faison",
-          "films": 2
-        },
-        "14062": {
-          "nom": "Don Gordon",
-          "films": 1
-        },
-        "14324": {
-          "nom": "Joss Ackland",
-          "films": 1
-        },
-        "14351": {
-          "nom": "Roque Baños",
-          "films": 2
-        },
-        "14406": {
-          "nom": "Lisa Kudrow",
-          "films": 1
-        },
-        "14592": {
-          "nom": "BD Wong",
-          "films": 1
-        },
-        "14639": {
-          "nom": "Mel Brooks",
-          "films": 1
-        },
-        "14711": {
-          "nom": "Timothy Harris",
-          "films": 1
-        },
-        "14712": {
-          "nom": "Randy Edelman",
-          "films": 1
-        },
-        "14792": {
-          "nom": "Josef Sommer",
-          "films": 1
-        },
-        "14886": {
-          "nom": "Craig Bierko",
-          "films": 1
-        },
-        "15009": {
-          "nom": "Justin Theroux",
-          "films": 1
-        },
-        "15135": {
-          "nom": "Alain Delon",
-          "films": 1
-        },
-        "15152": {
-          "nom": "James Earl Jones",
-          "films": 2
-        },
-        "15175": {
-          "nom": "William Friedkin",
-          "films": 1
-        },
-        "15234": {
-          "nom": "David Arquette",
-          "films": 1
-        },
-        "15277": {
-          "nom": "Jon Favreau",
-          "films": 3
-        },
-        "15293": {
-          "nom": "Keisha Castle-Hughes",
-          "films": 1
-        },
-        "15304": {
-          "nom": "W. Peter Iliff",
-          "films": 1
-        },
-        "15344": {
-          "nom": "J.J. Abrams",
-          "films": 1
-        },
-        "15347": {
-          "nom": "Michael Giacchino",
-          "films": 3
-        },
-        "15520": {
-          "nom": "Bill Lee",
-          "films": 3
-        },
-        "15521": {
-          "nom": "Ernest R. Dickerson",
-          "films": 1
-        },
-        "15531": {
-          "nom": "Ossie Davis",
-          "films": 3
-        },
-        "15532": {
-          "nom": "Ruby Dee",
-          "films": 2
-        },
-        "15533": {
-          "nom": "Olivier Martinez",
-          "films": 1
-        },
-        "15534": {
-          "nom": "Paul Benjamin",
-          "films": 1
-        },
-        "15535": {
-          "nom": "Robin Harris",
-          "films": 1
-        },
-        "15565": {
-          "nom": "Jennifer Hudson",
-          "films": 1
-        },
-        "15566": {
-          "nom": "Sharon Leal",
-          "films": 1
-        },
-        "15758": {
-          "nom": "Queen Latifah",
-          "films": 2
-        },
-        "15761": {
-          "nom": "Grey DeLisle",
-          "films": 1
-        },
-        "15852": {
-          "nom": "Ashley Judd",
-          "films": 2
-        },
-        "15854": {
-          "nom": "Ted Levine",
-          "films": 1
-        },
-        "15860": {
-          "nom": "Miguel Ferrer",
-          "films": 1
-        },
-        "15864": {
-          "nom": "Clarence Williams III",
-          "films": 1
-        },
-        "15899": {
-          "nom": "Jenifer Lewis",
-          "films": 1
-        },
-        "15912": {
-          "nom": "Stephen Gyllenhaal",
-          "films": 1
-        },
-        "16165": {
-          "nom": "Jon Lovitz",
-          "films": 2
-        },
-        "16181": {
-          "nom": "Haviland Morris",
-          "films": 1
-        },
-        "16217": {
-          "nom": "Lynn Whitfield",
-          "films": 1
-        },
-        "16293": {
-          "nom": "Anthony Heald",
-          "films": 1
-        },
-        "16307": {
-          "nom": "Maura Tierney",
-          "films": 1
-        },
-        "16560": {
-          "nom": "David Caruso",
-          "films": 1
-        },
-        "16828": {
-          "nom": "Chris Evans",
-          "films": 6
-        },
-        "16829": {
-          "nom": "Todd Robinson",
-          "films": 1
-        },
-        "16847": {
-          "nom": "Eli Roth",
-          "films": 1
-        },
-        "16851": {
-          "nom": "Josh Brolin",
-          "films": 3
-        },
-        "16856": {
-          "nom": "Gabriel Macht",
-          "films": 1
-        },
-        "16866": {
-          "nom": "Jennifer Lopez",
-          "films": 1
-        },
-        "16935": {
-          "nom": "Geena Davis",
-          "films": 1
-        },
-        "16938": {
-          "nom": "Renny Harlin",
-          "films": 3
-        },
-        "16939": {
-          "nom": "Michael Tolkin",
-          "films": 1
-        },
-        "16940": {
-          "nom": "Jeremy Irons",
-          "films": 1
-        },
-        "17018": {
-          "nom": "Ruth Negga",
-          "films": 1
-        },
-        "17140": {
-          "nom": "Abigail Breslin",
-          "films": 1
-        },
-        "17178": {
-          "nom": "Patrick Wilson",
-          "films": 1
-        },
-        "17183": {
-          "nom": "Jackie Earle Haley",
-          "films": 1
-        },
-        "17200": {
-          "nom": "Bill Smitrovich",
-          "films": 1
-        },
-        "17244": {
-          "nom": "Hayden Christensen",
-          "films": 3
-        },
-        "17268": {
-          "nom": "Ronny Yu",
-          "films": 1
-        },
-        "17271": {
-          "nom": "Brandon Routh",
-          "films": 1
-        },
-        "17288": {
-          "nom": "Michael Fassbender",
-          "films": 1
-        },
-        "17348": {
-          "nom": "Muse Watson",
-          "films": 1
-        },
-        "17351": {
-          "nom": "Larry Bryggman",
-          "films": 1
-        },
-        "17352": {
-          "nom": "Marianne Jean-Baptiste",
-          "films": 1
-        },
-        "17358": {
-          "nom": "Kim Staunton",
-          "films": 1
-        },
-        "17401": {
-          "nom": "Stephen Root",
-          "films": 1
-        },
-        "17412": {
-          "nom": "Lauren Shiohama",
-          "films": 1
-        },
-        "17419": {
-          "nom": "Bryan Cranston",
-          "films": 1
-        },
-        "17485": {
-          "nom": "Oliver Platt",
-          "films": 1
-        },
-        "17490": {
-          "nom": "Isiah Whitlock Jr.",
-          "films": 1
-        },
-        "17604": {
-          "nom": "Jeremy Renner",
-          "films": 4
-        },
-        "17605": {
-          "nom": "Idris Elba",
-          "films": 1
-        },
-        "17637": {
-          "nom": "Taye Diggs",
-          "films": 1
-        },
-        "17647": {
-          "nom": "Michelle Rodriguez",
-          "films": 1
-        },
-        "17764": {
-          "nom": "Charles S. Dutton",
-          "films": 1
-        },
-        "17782": {
-          "nom": "Colm Meaney",
-          "films": 1
-        },
-        "17835": {
-          "nom": "Ricky Gervais",
-          "films": 1
-        },
-        "17857": {
-          "nom": "Shaun Toub",
-          "films": 1
-        },
-        "17941": {
-          "nom": "Domenick Lombardozzi",
-          "films": 2
-        },
-        "18023": {
-          "nom": "Robert Carlyle",
-          "films": 1
-        },
-        "18182": {
-          "nom": "Olga Kurylenko",
-          "films": 1
-        },
-        "18277": {
-          "nom": "Sandra Bullock",
-          "films": 1
-        },
-        "18280": {
-          "nom": "Brian McCardie",
-          "films": 1
-        },
-        "18282": {
-          "nom": "Karina Arroyave",
-          "films": 1
-        },
-        "18286": {
-          "nom": "Nona Gaye",
-          "films": 1
-        },
-        "18288": {
-          "nom": "Terrence Howard",
-          "films": 1
-        },
-        "18291": {
-          "nom": "Larenz Tate",
-          "films": 1
-        },
-        "18307": {
-          "nom": "Daniel Dae Kim",
-          "films": 1
-        },
-        "18311": {
-          "nom": "Joe Roth",
-          "films": 1
-        },
-        "18324": {
-          "nom": "Steve Zahn",
-          "films": 1
-        },
-        "18331": {
-          "nom": "Nancy Travis",
-          "films": 1
-        },
-        "18345": {
-          "nom": "Brenda Fricker",
-          "films": 1
-        },
-        "18514": {
-          "nom": "Asia Argento",
-          "films": 1
-        },
-        "18686": {
-          "nom": "Holly Hunter",
-          "films": 2
-        },
-        "18746": {
-          "nom": "Stevie Wonder",
-          "films": 1
-        },
-        "18750": {
-          "nom": "Annabella Sciorra",
-          "films": 1
-        },
-        "18873": {
-          "nom": "Art Marcum",
-          "films": 1
-        },
-        "18875": {
-          "nom": "Matt Holloway",
-          "films": 1
-        },
-        "18878": {
-          "nom": "Rob Cohen",
-          "films": 1
-        },
-        "18898": {
-          "nom": "Rob Minkoff",
-          "films": 1
-        },
-        "18918": {
-          "nom": "Dwayne Johnson",
-          "films": 1
-        },
-        "18997": {
-          "nom": "Bryce Dallas Howard",
-          "films": 1
-        },
-        "19119": {
-          "nom": "Mélanie Laurent",
-          "films": 1
-        },
-        "19152": {
-          "nom": "Dylan Baker",
-          "films": 1
-        },
-        "19265": {
-          "nom": "Khandi Alexander",
-          "films": 1
-        },
-        "19271": {
-          "nom": "Anthony Russo",
-          "films": 3
-        },
-        "19272": {
-          "nom": "Joe Russo",
-          "films": 3
-        },
-        "19278": {
-          "nom": "Bill Hader",
-          "films": 1
-        },
-        "19299": {
-          "nom": "Eamonn Walker",
-          "films": 1
-        },
-        "19450": {
-          "nom": "Bob Rafelson",
-          "films": 1
-        },
-        "19453": {
-          "nom": "Tom Bower",
-          "films": 1
-        },
-        "19487": {
-          "nom": "Jay Hernandez",
-          "films": 1
-        },
-        "19489": {
-          "nom": "Peter McRobbie",
-          "films": 1
-        },
-        "19506": {
-          "nom": "James Arnold Taylor",
-          "films": 1
-        },
-        "19511": {
-          "nom": "Larry Pine",
-          "films": 1
-        },
-        "19549": {
-          "nom": "Greta Garbo",
-          "films": 1
-        },
-        "19656": {
-          "nom": "Sebastian Gutierrez",
-          "films": 1
-        },
-        "19665": {
-          "nom": "John Boorman",
-          "films": 1
-        },
-        "19767": {
-          "nom": "Snoop Dogg",
-          "films": 2
-        },
-        "19769": {
-          "nom": "David Ayer",
-          "films": 1
-        },
-        "19802": {
-          "nom": "Jonathan Hales",
-          "films": 1
-        },
-        "19839": {
-          "nom": "David Paymer",
-          "films": 1
-        },
-        "19961": {
-          "nom": "Nina Dobrev",
-          "films": 2
-        },
-        "20095": {
-          "nom": "Alex Greenwald",
-          "films": 1
-        },
-        "20115": {
-          "nom": "Amidou",
-          "films": 1
-        },
-        "20133": {
-          "nom": "Tod Williams",
-          "films": 1
-        },
-        "20158": {
-          "nom": "Diahann Carroll",
-          "films": 1
-        },
-        "20173": {
-          "nom": "Don McKellar",
-          "films": 1
-        },
-        "20187": {
-          "nom": "Camryn Manheim",
-          "films": 1
-        },
-        "20191": {
-          "nom": "Jose Pablo Cantillo",
-          "films": 1
-        },
-        "20204": {
-          "nom": "James Vanderbilt",
-          "films": 1
-        },
-        "20286": {
-          "nom": "Toby Kebbell",
-          "films": 1
-        },
-        "20400": {
-          "nom": "Tim Story",
-          "films": 1
-        },
-        "20401": {
-          "nom": "Don Payne",
-          "films": 1
-        },
-        "20580": {
-          "nom": "Joe Manganiello",
-          "films": 1
-        },
-        "20644": {
-          "nom": "Aasif Mandvi",
-          "films": 2
-        },
-        "20686": {
-          "nom": "Christopher Canaan",
-          "films": 1
-        },
-        "20687": {
-          "nom": "Steve Barancik",
-          "films": 1
-        },
-        "20692": {
-          "nom": "Jeff Beal",
-          "films": 1
-        },
-        "20696": {
-          "nom": "Jonathan Higgins",
-          "films": 1
-        },
-        "20697": {
-          "nom": "Shannon Lawson",
-          "films": 1
-        },
-        "20746": {
-          "nom": "Justin Chambers",
-          "films": 1
-        },
-        "20766": {
-          "nom": "Richard E. Grant",
-          "films": 3
-        },
-        "20817": {
-          "nom": "Peter Woodward",
-          "films": 1
-        },
-        "20897": {
-          "nom": "Bruce Broughton",
-          "films": 1
-        },
-        "20899": {
-          "nom": "Peter Riegert",
-          "films": 1
-        },
-        "20972": {
-          "nom": "Julie Bovasso",
-          "films": 1
-        },
-        "20982": {
-          "nom": "Marton Csokas",
-          "films": 1
-        },
-        "21045": {
-          "nom": "Maggie Q",
-          "films": 1
-        },
-        "21068": {
-          "nom": "Richard Gibbs",
-          "films": 2
-        },
-        "21089": {
-          "nom": "Bruce Greenwood",
-          "films": 1
-        },
-        "21134": {
-          "nom": "John Slattery",
-          "films": 1
-        },
-        "21178": {
-          "nom": "Chap Taylor",
-          "films": 1
-        },
-        "21179": {
-          "nom": "John Benjamin Hickey",
-          "films": 1
-        },
-        "21246": {
-          "nom": "Corbin Bernsen",
-          "films": 1
-        },
-        "21278": {
-          "nom": "Alan Alda",
-          "films": 2
-        },
-        "21282": {
-          "nom": "William Hickey",
-          "films": 1
-        },
-        "21283": {
-          "nom": "Lee Richardson",
-          "films": 1
-        },
-        "21353": {
-          "nom": "Isaiah Washington",
-          "films": 1
-        },
-        "21354": {
-          "nom": "Russell Wong",
-          "films": 1
-        },
-        "21368": {
-          "nom": "Peter Strauss",
-          "films": 1
-        },
-        "21369": {
-          "nom": "Gloria Reuben",
-          "films": 1
-        },
-        "21370": {
-          "nom": "Roger Donaldson",
-          "films": 1
-        },
-        "21380": {
-          "nom": "Larry Joshua",
-          "films": 1
-        },
-        "21382": {
-          "nom": "Gene Canfield",
-          "films": 1
-        },
-        "21422": {
-          "nom": "Brett Goldstein",
-          "films": 1
-        },
-        "21474": {
-          "nom": "Leslie Stefanson",
-          "films": 1
-        },
-        "21526": {
-          "nom": "Rod Lurie",
-          "films": 1
-        },
-        "21625": {
-          "nom": "Molly Ringwald",
-          "films": 1
-        },
-        "21736": {
-          "nom": "Jason Miller",
-          "films": 1
-        },
-        "21798": {
-          "nom": "Johnny Messner",
-          "films": 1
-        },
-        "21848": {
-          "nom": "Regina Taylor",
-          "films": 2
-        },
-        "22122": {
-          "nom": "Meagan Good",
-          "films": 1
-        },
-        "22131": {
-          "nom": "J.T. Walsh",
-          "films": 1
-        },
-        "22226": {
-          "nom": "Paul Rudd",
-          "films": 1
-        },
-        "22384": {
-          "nom": "John Amos",
-          "films": 1
-        },
-        "22462": {
-          "nom": "Joaquim de Almeida",
-          "films": 1
-        },
-        "22675": {
-          "nom": "Damon Wayans",
-          "films": 1
-        },
-        "22814": {
-          "nom": "Richard Wenk",
-          "films": 1
-        },
-        "23213": {
-          "nom": "Harold Becker",
-          "films": 1
-        },
-        "23393": {
-          "nom": "Barbet Schroeder",
-          "films": 1
-        },
-        "23447": {
-          "nom": "Jane Goldman",
-          "films": 2
-        },
-        "23524": {
-          "nom": "Veronica Ferres",
-          "films": 1
-        },
-        "23626": {
-          "nom": "Liev Schreiber",
-          "films": 1
-        },
-        "23628": {
-          "nom": "Eriq La Salle",
-          "films": 1
-        },
-        "23659": {
-          "nom": "Will Ferrell",
-          "films": 1
-        },
-        "23680": {
-          "nom": "Dee Bradley Baker",
-          "films": 1
-        },
-        "23970": {
-          "nom": "Denise Dowse",
-          "films": 1
-        },
-        "24048": {
-          "nom": "Jeffrey Nordling",
-          "films": 1
-        },
-        "24362": {
-          "nom": "Kevin Michael Richardson",
-          "films": 1
-        },
-        "24587": {
-          "nom": "James Carrington",
-          "films": 1
-        },
-        "25072": {
-          "nom": "Oscar Isaac",
-          "films": 1
-        },
-        "25503": {
-          "nom": "Mandy Patinkin",
-          "films": 1
-        },
-        "25544": {
-          "nom": "James Pickens Jr.",
-          "films": 1
-        },
-        "25626": {
-          "nom": "Robert Ridgely",
-          "films": 1
-        },
-        "25654": {
-          "nom": "Julianna Margulies",
-          "films": 1
-        },
-        "26209": {
-          "nom": "Matt Lucas",
-          "films": 1
-        },
-        "26510": {
-          "nom": "Eugene Levy",
-          "films": 2
-        },
-        "26706": {
-          "nom": "David Rintoul",
-          "films": 1
-        },
-        "27011": {
-          "nom": "Vanessa Williams",
-          "films": 1
-        },
-        "27012": {
-          "nom": "Robert Ginty",
-          "films": 1
-        },
-        "27181": {
-          "nom": "Carlo Siliotto",
-          "films": 1
-        },
-        "27319": {
-          "nom": "Christoph Waltz",
-          "films": 3
-        },
-        "27395": {
-          "nom": "Federico Pacifici",
-          "films": 1
-        },
-        "27428": {
-          "nom": "Aaron Taylor-Johnson",
-          "films": 1
-        },
-        "27740": {
-          "nom": "Walton Goggins",
-          "films": 2
-        },
-        "27762": {
-          "nom": "Ian McDiarmid",
-          "films": 3
-        },
-        "27770": {
-          "nom": "Dennis Christopher",
-          "films": 1
-        },
-        "28413": {
-          "nom": "Carmen Argenziano",
-          "films": 1
-        },
-        "28633": {
-          "nom": "Richard Jenkins",
-          "films": 3
-        },
-        "28641": {
-          "nom": "Terence Stamp",
-          "films": 1
-        },
-        "28744": {
-          "nom": "Jacqueline McKenzie",
-          "films": 1
-        },
-        "28846": {
-          "nom": "Alexander Skarsgård",
-          "films": 1
-        },
-        "28848": {
-          "nom": "Sean Pertwee",
-          "films": 1
-        },
-        "29312": {
-          "nom": "Christopher George",
-          "films": 1
-        },
-        "29378": {
-          "nom": "Daniel Pyne",
-          "films": 1
-        },
-        "29459": {
-          "nom": "Patrick Bergin",
-          "films": 1
-        },
-        "29605": {
-          "nom": "Mikael Håfström",
-          "films": 1
-        },
-        "29606": {
-          "nom": "Matt Greenberg",
-          "films": 1
-        },
-        "29612": {
-          "nom": "Jasmine Jessica Anthony",
-          "films": 1
-        },
-        "29615": {
-          "nom": "Noah Lee Margetts",
-          "films": 1
-        },
-        "29616": {
-          "nom": "William Armstrong",
-          "films": 1
-        },
-        "29617": {
-          "nom": "Paul Birchard",
-          "films": 1
-        },
-        "29686": {
-          "nom": "Stel Pavlou",
-          "films": 1
-        },
-        "29691": {
-          "nom": "Headrillaz",
-          "films": 1
-        },
-        "29698": {
-          "nom": "Paul Barber",
-          "films": 1
-        },
-        "29699": {
-          "nom": "Ricky Tomlinson",
-          "films": 1
-        },
-        "29707": {
-          "nom": "Barry De Vorzon",
-          "films": 1
-        },
-        "29774": {
-          "nom": "Dan Lauria",
-          "films": 1
-        },
-        "29803": {
-          "nom": "Madeline Kahn",
-          "films": 1
-        },
-        "29910": {
-          "nom": "Tina Louise",
-          "films": 1
-        },
-        "30315": {
-          "nom": "Richard Armitage",
-          "films": 1
-        },
-        "30364": {
-          "nom": "Tracey Ullman",
-          "films": 1
-        },
-        "30610": {
-          "nom": "Barbara Baxley",
-          "films": 1
-        },
-        "31839": {
-          "nom": "Ruben Santiago-Hudson",
-          "films": 1
-        },
-        "31923": {
-          "nom": "Oliver Ford Davies",
-          "films": 1
-        },
-        "31925": {
-          "nom": "Hugh Quarshie",
-          "films": 1
-        },
-        "32592": {
-          "nom": "Ron Vawter",
-          "films": 1
-        },
-        "32823": {
-          "nom": "Gedeon Burkhard",
-          "films": 1
-        },
-        "33051": {
-          "nom": "John B. Lowe",
-          "films": 1
-        },
-        "33181": {
-          "nom": "Jimmy Smits",
-          "films": 3
-        },
-        "33183": {
-          "nom": "David Bowers",
-          "films": 1
-        },
-        "33190": {
-          "nom": "Pernilla August",
-          "films": 2
-        },
-        "33196": {
-          "nom": "Jake Lloyd",
-          "films": 1
-        },
-        "33197": {
-          "nom": "Ahmed Best",
-          "films": 1
-        },
-        "33689": {
-          "nom": "Charlayne Woodard",
-          "films": 2
-        },
-        "33713": {
-          "nom": "Jordan Lund",
-          "films": 1
-        },
-        "33741": {
-          "nom": "Rita Hayworth",
-          "films": 1
-        },
-        "34202": {
-          "nom": "Matt Lanter",
-          "films": 1
-        },
-        "34395": {
-          "nom": "Kevin Chamberlin",
-          "films": 1
-        },
-        "34408": {
-          "nom": "Stana Katic",
-          "films": 1
-        },
-        "34489": {
-          "nom": "Eric Balfour",
-          "films": 1
-        },
-        "34490": {
-          "nom": "Sarah Paulson",
-          "films": 2
-        },
-        "34502": {
-          "nom": "Kellan Lutz",
-          "films": 1
-        },
-        "34544": {
-          "nom": "Joshua Harto",
-          "films": 1
-        },
-        "34691": {
-          "nom": "John Spencer",
-          "films": 2
-        },
-        "34982": {
-          "nom": "Jeff Bennett",
-          "films": 1
-        },
-        "35294": {
-          "nom": "Henry Gilroy",
-          "films": 1
-        },
-        "35596": {
-          "nom": "Deon Richmond",
-          "films": 1
-        },
-        "35705": {
-          "nom": "Regina Hall",
-          "films": 1
-        },
-        "36190": {
-          "nom": "Edie Falco",
-          "films": 1
-        },
-        "36422": {
-          "nom": "Luke Wilson",
-          "films": 1
-        },
-        "36424": {
-          "nom": "LL Cool J",
-          "films": 2
-        },
-        "36602": {
-          "nom": "Peter Berg",
-          "films": 1
-        },
-        "36811": {
-          "nom": "Nick Cannon",
-          "films": 1
-        },
-        "36905": {
-          "nom": "Fredrick Lopez",
-          "films": 1
-        },
-        "37038": {
-          "nom": "Larry Groupé",
-          "films": 1
-        },
-        "37042": {
-          "nom": "Ann Magnuson",
-          "films": 1
-        },
-        "37093": {
-          "nom": "Langley Kirkwood",
-          "films": 1
-        },
-        "37252": {
-          "nom": "Yvonne Zima",
-          "films": 1
-        },
-        "37260": {
-          "nom": "Abbie Cornish",
-          "films": 1
-        },
-        "37932": {
-          "nom": "F. Gary Gray",
-          "films": 1
-        },
-        "38673": {
-          "nom": "Channing Tatum",
-          "films": 1
-        },
-        "38898": {
-          "nom": "Jean-Luc Bideau",
-          "films": 1
-        },
-        "38951": {
-          "nom": "Reg E. Cathey",
-          "films": 1
-        },
-        "39185": {
-          "nom": "Kevin Eldon",
-          "films": 1
-        },
-        "39389": {
-          "nom": "Titus Welliver",
-          "films": 2
-        },
-        "39390": {
-          "nom": "Michael Kenneth Williams",
-          "films": 1
-        },
-        "39459": {
-          "nom": "Hayley Atwell",
-          "films": 1
-        },
-        "39516": {
-          "nom": "Nick Cave",
-          "films": 1
-        },
-        "39849": {
-          "nom": "Werner Daehn",
-          "films": 1
-        },
-        "39995": {
-          "nom": "Michael Cera",
-          "films": 1
-        },
-        "40256": {
-          "nom": "D.J. Caruso",
-          "films": 1
-        },
-        "40377": {
-          "nom": "Roger Guenveur Smith",
-          "films": 1
-        },
-        "40438": {
-          "nom": "Gary Chang",
-          "films": 2
-        },
-        "40462": {
-          "nom": "Kristen Bell",
-          "films": 1
-        },
-        "40468": {
-          "nom": "Michael Penn",
-          "films": 1
-        },
-        "40477": {
-          "nom": "Chris O'Dowd",
-          "films": 1
-        },
-        "40481": {
-          "nom": "Luis Guzmán",
-          "films": 3
-        },
-        "40543": {
-          "nom": "John Ortiz",
-          "films": 1
-        },
-        "41019": {
-          "nom": "Wilbur Fitzgerald",
-          "films": 1
-        },
-        "41247": {
-          "nom": "Len Cariou",
-          "films": 1
-        },
-        "41345": {
-          "nom": "Ashley Eckstein",
-          "films": 1
-        },
-        "41662": {
-          "nom": "Lindsay Sloane",
-          "films": 1
-        },
-        "41671": {
-          "nom": "Nimród Antal",
-          "films": 1
-        },
-        "41737": {
-          "nom": "Tony Plana",
-          "films": 1
-        },
-        "41883": {
-          "nom": "Max Thieriot",
-          "films": 1
-        },
-        "41901": {
-          "nom": "Roselyn Sánchez",
-          "films": 1
-        },
-        "42168": {
-          "nom": "Nancy Fish",
-          "films": 1
-        },
-        "42694": {
-          "nom": "Tamara Tunie",
-          "films": 1
-        },
-        "42712": {
-          "nom": "Tony Giglio",
-          "films": 1
-        },
-        "42993": {
-          "nom": "Martin Donovan",
-          "films": 1
-        },
-        "43393": {
-          "nom": "Robert Folk",
-          "films": 1
-        },
-        "44036": {
-          "nom": "Michael Miner",
-          "films": 1
-        },
-        "44795": {
-          "nom": "Louie Anderson",
-          "films": 1
-        },
-        "44994": {
-          "nom": "Arsenio Hall",
-          "films": 1
-        },
-        "45337": {
-          "nom": "Sam Phillips",
-          "films": 1
-        },
-        "45543": {
-          "nom": "Paul Attanasio",
-          "films": 1
-        },
-        "46780": {
-          "nom": "Samantha Eggar",
-          "films": 1
-        },
-        "47640": {
-          "nom": "Clark Johnson",
-          "films": 1
-        },
-        "47757": {
-          "nom": "Kelly Rowan",
-          "films": 1
-        },
-        "48067": {
-          "nom": "Scott Yagemann",
-          "films": 1
-        },
-        "48071": {
-          "nom": "Lobo Sebastian",
-          "films": 1
-        },
-        "48072": {
-          "nom": "Jonah Rooney",
-          "films": 1
-        },
-        "49002": {
-          "nom": "Donald Faison",
-          "films": 1
-        },
-        "49201": {
-          "nom": "Philippe Brenninkmeyer",
-          "films": 1
-        },
-        "49812": {
-          "nom": "Kirsty Mitchell",
-          "films": 1
-        },
-        "49823": {
-          "nom": "Eleazar Lipsky",
-          "films": 1
-        },
-        "49824": {
-          "nom": "Kathryn Erbe",
-          "films": 1
-        },
-        "49911": {
-          "nom": "Christopher Lennertz",
-          "films": 1
-        },
-        "49971": {
-          "nom": "Jennifer Ehle",
-          "films": 1
-        },
-        "50347": {
-          "nom": "Rachel Nichols",
-          "films": 1
-        },
-        "51446": {
-          "nom": "Andrew Klavan",
-          "films": 1
-        },
-        "51546": {
-          "nom": "Joe Seneca",
-          "films": 1
-        },
-        "51588": {
-          "nom": "Kevin Kiner",
-          "films": 1
-        },
-        "51636": {
-          "nom": "Jacky Ido",
-          "films": 1
-        },
-        "51736": {
-          "nom": "Cormac McCarthy",
-          "films": 1
-        },
-        "51812": {
-          "nom": "Nicol Williamson",
-          "films": 1
-        },
-        "51864": {
-          "nom": "Kasi Lemmons",
-          "films": 2
-        },
-        "51873": {
-          "nom": "Maggie Lawson",
-          "films": 1
-        },
-        "51944": {
-          "nom": "Mike Epps",
-          "films": 1
-        },
-        "51957": {
-          "nom": "Roger L. Jackson",
-          "films": 1
-        },
-        "52037": {
-          "nom": "Robert Ri'chard",
-          "films": 1
-        },
-        "52038": {
-          "nom": "Thomas Carter",
-          "films": 1
-        },
-        "52053": {
-          "nom": "Robert Ramsey",
-          "films": 1
-        },
-        "52054": {
-          "nom": "Matthew Stone",
-          "films": 1
-        },
-        "52358": {
-          "nom": "Boaz Yakin",
-          "films": 1
-        },
-        "52454": {
-          "nom": "Mateo Messina",
-          "films": 1
-        },
-        "52478": {
-          "nom": "Rachel Blanchard",
-          "films": 1
-        },
-        "52515": {
-          "nom": "Laura Karpman",
-          "films": 1
-        },
-        "52576": {
-          "nom": "José Padilha",
-          "films": 1
-        },
-        "52581": {
-          "nom": "Pedro Bromfman",
-          "films": 1
-        },
-        "52601": {
-          "nom": "Sean Hayes",
-          "films": 1
-        },
-        "52698": {
-          "nom": "Nika Futterman",
-          "films": 1
-        },
-        "52703": {
-          "nom": "A.C. Peterson",
-          "films": 1
-        },
-        "52783": {
-          "nom": "Rachel Bilson",
-          "films": 1
-        },
-        "52792": {
-          "nom": "Maya Rudolph",
-          "films": 1
-        },
-        "52852": {
-          "nom": "Kat Dennings",
-          "films": 1
-        },
-        "52865": {
-          "nom": "Garry Shandling",
-          "films": 1
-        },
-        "52978": {
-          "nom": "Florin Piersic Jr.",
-          "films": 1
-        },
-        "53056": {
-          "nom": "Shareeka Epps",
-          "films": 1
-        },
-        "53068": {
-          "nom": "Ryan Fleck",
-          "films": 1
-        },
-        "53069": {
-          "nom": "Anna Boden",
-          "films": 1
-        },
-        "53120": {
-          "nom": "James DeMonaco",
-          "films": 1
-        },
-        "53175": {
-          "nom": "Mark Schwahn",
-          "films": 1
-        },
-        "53176": {
-          "nom": "John Gatins",
-          "films": 1
-        },
-        "53184": {
-          "nom": "Rick Gonzalez",
-          "films": 1
-        },
-        "53185": {
-          "nom": "Texas Battle",
-          "films": 1
-        },
-        "53258": {
-          "nom": "David Banner",
-          "films": 1
-        },
-        "53259": {
-          "nom": "Michael Raymond-James",
-          "films": 1
-        },
-        "53260": {
-          "nom": "Adriane Lenox",
-          "films": 1
-        },
-        "53261": {
-          "nom": "Kim Richards",
-          "films": 1
-        },
-        "53262": {
-          "nom": "Neimus K. Williams",
-          "films": 1
-        },
-        "53267": {
-          "nom": "Craig Brewer",
-          "films": 2
-        },
-        "53345": {
-          "nom": "Rich Wilkes",
-          "films": 1
-        },
-        "53347": {
-          "nom": "Michael Roof",
-          "films": 2
-        },
-        "53348": {
-          "nom": "Petr Jákl",
-          "films": 1
-        },
-        "53639": {
-          "nom": "Scott Bomar",
-          "films": 1
-        },
-        "53650": {
-          "nom": "Anthony Mackie",
-          "films": 4
-        },
-        "53918": {
-          "nom": "Salli Richardson-Whitfield",
-          "films": 1
-        },
-        "53923": {
-          "nom": "Aunjanue Ellis-Taylor",
-          "films": 2
-        },
-        "53975": {
-          "nom": "Deepika Padukone",
-          "films": 1
-        },
-        "54246": {
-          "nom": "Peter Friedman",
-          "films": 1
-        },
-        "54422": {
-          "nom": "Tupac Shakur",
-          "films": 1
-        },
-        "54692": {
-          "nom": "Martha MacIsaac",
-          "films": 1
-        },
-        "54714": {
-          "nom": "Keith Loneker",
-          "films": 1
-        },
-        "54781": {
-          "nom": "Allison Burnett",
-          "films": 1
-        },
-        "54819": {
-          "nom": "Rachael Crawford",
-          "films": 1
-        },
-        "54830": {
-          "nom": "Sophia Bush",
-          "films": 1
-        },
-        "54883": {
-          "nom": "Michael Buscemi",
-          "films": 1
-        },
-        "54887": {
-          "nom": "Elizabeth Bracco",
-          "films": 1
-        },
-        "55177": {
-          "nom": "Marcelo Zarvos",
-          "films": 1
-        },
-        "55271": {
-          "nom": "Steve James",
-          "films": 1
-        },
-        "55470": {
-          "nom": "Dominic Cooper",
-          "films": 2
-        },
-        "55474": {
-          "nom": "John Collee",
-          "films": 1
-        },
-        "55614": {
-          "nom": "Dylan Taylor",
-          "films": 1
-        },
-        "55636": {
-          "nom": "Donald Sutherland",
-          "films": 2
-        },
-        "55710": {
-          "nom": "Adam McKay",
-          "films": 1
-        },
-        "55755": {
-          "nom": "Richard T. Jones",
-          "films": 1
-        },
-        "55788": {
-          "nom": "Keith Dallas",
-          "films": 1
-        },
-        "56183": {
-          "nom": "Art Evans",
-          "films": 1
-        },
-        "56257": {
-          "nom": "Duncan Kennedy",
-          "films": 1
-        },
-        "56258": {
-          "nom": "Donna Powers",
-          "films": 1
-        },
-        "56346": {
-          "nom": "Photek",
-          "films": 1
-        },
-        "56446": {
-          "nom": "John Cena",
-          "films": 1
-        },
-        "56614": {
-          "nom": "Ray Stevenson",
-          "films": 3
-        },
-        "56650": {
-          "nom": "Ray Fearon",
-          "films": 1
-        },
-        "56731": {
-          "nom": "Jessica Alba",
-          "films": 1
-        },
-        "56871": {
-          "nom": "Blair Underwood",
-          "films": 1
-        },
-        "56905": {
-          "nom": "Jim Farmer",
-          "films": 1
-        },
-        "56910": {
-          "nom": "Susie Essman",
-          "films": 1
-        },
-        "56911": {
-          "nom": "Les Mayfield",
-          "films": 1
-        },
-        "56912": {
-          "nom": "Margaret Oberman",
-          "films": 1
-        },
-        "56913": {
-          "nom": "Stephen Carpenter",
-          "films": 1
-        },
-        "56953": {
-          "nom": "Gene Quintano",
-          "films": 1
-        },
-        "57030": {
-          "nom": "Gregor Jordan",
-          "films": 1
-        },
-        "57113": {
-          "nom": "Dan Gilroy",
-          "films": 1
-        },
-        "57172": {
-          "nom": "Ashanti",
-          "films": 1
-        },
-        "57207": {
-          "nom": "Tony Jaa",
-          "films": 1
-        },
-        "57271": {
-          "nom": "Peter A. Dowling",
-          "films": 1
-        },
-        "57327": {
-          "nom": "David Sheffield",
-          "films": 1
-        },
-        "57328": {
-          "nom": "Barry W. Blaustein",
-          "films": 1
-        },
-        "57451": {
-          "nom": "Leslie Bibb",
-          "films": 2
-        },
-        "57452": {
-          "nom": "Faran Tahir",
-          "films": 1
-        },
-        "57461": {
-          "nom": "Simon Russell Beale",
-          "films": 1
-        },
-        "57751": {
-          "nom": "Patrick O'Hearn",
-          "films": 1
-        },
-        "57773": {
-          "nom": "Tyrin Turner",
-          "films": 1
-        },
-        "57775": {
-          "nom": "Tyger Williams",
-          "films": 1
-        },
-        "57778": {
-          "nom": "Quincy Jones III",
-          "films": 1
-        },
-        "57829": {
-          "nom": "Anthony LaPaglia",
-          "films": 2
-        },
-        "57922": {
-          "nom": "William Peter Blatty",
-          "films": 1
-        },
-        "58074": {
-          "nom": "Madge Sinclair",
-          "films": 1
-        },
-        "58203": {
-          "nom": "George Dawes Green",
-          "films": 1
-        },
-        "58228": {
-          "nom": "Kevin Fox",
-          "films": 1
-        },
-        "58276": {
-          "nom": "Don Holley",
-          "films": 1
-        },
-        "58277": {
-          "nom": "Kathy Ireland",
-          "films": 1
-        },
-        "58643": {
-          "nom": "Linda Emond",
-          "films": 1
-        },
-        "58689": {
-          "nom": "Neil LaBute",
-          "films": 1
-        },
-        "58707": {
-          "nom": "Sunny Mabrey",
-          "films": 2
-        },
-        "58795": {
-          "nom": "Brian Presley",
-          "films": 1
-        },
-        "59017": {
-          "nom": "Jurnee Smollett-Bell",
-          "films": 1
-        },
-        "59019": {
-          "nom": "Jamal Mixon",
-          "films": 1
-        },
-        "59256": {
-          "nom": "Adam Herschman",
-          "films": 1
-        },
-        "59313": {
-          "nom": "Erin Karpluk",
-          "films": 1
-        },
-        "59358": {
-          "nom": "Eli Fucile",
-          "films": 2
-        },
-        "59359": {
-          "nom": "Maeve Andrews",
-          "films": 1
-        },
-        "59360": {
-          "nom": "Spencer Fox",
-          "films": 1
-        },
-        "59361": {
-          "nom": "Sarah Vowell",
-          "films": 2
-        },
-        "59410": {
-          "nom": "Bob Odenkirk",
-          "films": 1
-        },
-        "59811": {
-          "nom": "Bear McCreary",
-          "films": 1
-        },
-        "59906": {
-          "nom": "Donald E. Stewart",
-          "films": 1
-        },
-        "60005": {
-          "nom": "Nathan Phillips",
-          "films": 1
-        },
-        "60073": {
-          "nom": "Brie Larson",
-          "films": 4
-        },
-        "60257": {
-          "nom": "S. Scott Bullock",
-          "films": 1
-        },
-        "60748": {
-          "nom": "Koji Steven Sakai",
-          "films": 1
-        },
-        "60765": {
-          "nom": "Adrian Roberts",
-          "films": 1
-        },
-        "60898": {
-          "nom": "Sebastian Stan",
-          "films": 3
-        },
-        "61010": {
-          "nom": "LaTanya Richardson Jackson",
-          "films": 1
-        },
-        "61216": {
-          "nom": "Vyto Ruginis",
-          "films": 1
-        },
-        "61411": {
-          "nom": "Mark Dindal",
-          "films": 1
-        },
-        "61843": {
-          "nom": "Pinar Toprak",
-          "films": 1
-        },
-        "61959": {
-          "nom": "Jeremy Suarez",
-          "films": 1
-        },
-        "61962": {
-          "nom": "D. B. Sweeney",
-          "films": 1
-        },
-        "62127": {
-          "nom": "Lonette McKee",
-          "films": 1
-        },
-        "62157": {
-          "nom": "Josh Stolberg",
-          "films": 1
-        },
-        "62564": {
-          "nom": "Madeline Carroll",
-          "films": 1
-        },
-        "62644": {
-          "nom": "50 Cent",
-          "films": 1
-        },
-        "62646": {
-          "nom": "Marc John Jefferies",
-          "films": 1
-        },
-        "62705": {
-          "nom": "H. Scott Salinas",
-          "films": 1
-        },
-        "62747": {
-          "nom": "Chad Michael Murray",
-          "films": 1
-        },
-        "63916": {
-          "nom": "Rodney Eastman",
-          "films": 1
-        },
-        "63976": {
-          "nom": "Marcus Miller",
-          "films": 1
-        },
-        "64028": {
-          "nom": "Stephen Hauser",
-          "films": 1
-        },
-        "64056": {
-          "nom": "Jenny Wright",
-          "films": 1
-        },
-        "64712": {
-          "nom": "Tom McCamus",
-          "films": 1
-        },
-        "64908": {
-          "nom": "LisaGay Hamilton",
-          "films": 1
-        },
-        "65020": {
-          "nom": "Victoria Rowell",
-          "films": 1
-        },
-        "65508": {
-          "nom": "James Olson",
-          "films": 1
-        },
-        "65681": {
-          "nom": "Joe Renzetti",
-          "films": 1
-        },
-        "65817": {
-          "nom": "Chris Fisher",
-          "films": 1
-        },
-        "65820": {
-          "nom": "Ryan Beveridge",
-          "films": 1
-        },
-        "66143": {
-          "nom": "Cristián de la Fuente",
-          "films": 1
-        },
-        "66524": {
-          "nom": "Noureen DeWulf",
-          "films": 1
-        },
-        "66526": {
-          "nom": "Jackie Long",
-          "films": 1
-        },
-        "66554": {
-          "nom": "Kadeem Hardison",
-          "films": 1
-        },
-        "66824": {
-          "nom": "Matt Johnson",
-          "films": 1
-        },
-        "67484": {
-          "nom": "Ashley Miller",
-          "films": 1
-        },
-        "67485": {
-          "nom": "Zack Stentz",
-          "films": 1
-        },
-        "68046": {
-          "nom": "Anna Keaveney",
-          "films": 1
-        },
-        "68122": {
-          "nom": "Tim Daly",
-          "films": 2
-        },
-        "68215": {
-          "nom": "Reginald Hudlin",
-          "films": 1
-        },
-        "68750": {
-          "nom": "Robert Townsend",
-          "films": 1
-        },
-        "68775": {
-          "nom": "Ron Hutchinson",
-          "films": 1
-        },
-        "68928": {
-          "nom": "E. Max Frye",
-          "films": 1
-        },
-        "69225": {
-          "nom": "Q'orianka Kilcher",
-          "films": 1
-        },
-        "69751": {
-          "nom": "Charley Boorman",
-          "films": 1
-        },
-        "69792": {
-          "nom": "John Corigliano",
-          "films": 1
-        },
-        "70746": {
-          "nom": "Ed Flanders",
-          "films": 1
-        },
-        "71083": {
-          "nom": "Kate Dickie",
-          "films": 1
-        },
-        "71189": {
-          "nom": "Cobie Smulders",
-          "films": 2
-        },
-        "71346": {
-          "nom": "Michael Bortman",
-          "films": 1
-        },
-        "71437": {
-          "nom": "Elan Mastai",
-          "films": 1
-        },
-        "71538": {
-          "nom": "Dave Filoni",
-          "films": 1
-        },
-        "71540": {
-          "nom": "Steven Melching",
-          "films": 1
-        },
-        "71541": {
-          "nom": "Scott Murphy",
-          "films": 1
-        },
-        "71580": {
-          "nom": "Benedict Cumberbatch",
-          "films": 2
-        },
-        "72024": {
-          "nom": "Malcolm D. Lee",
-          "films": 1
-        },
-        "72095": {
-          "nom": "Lee Pace",
-          "films": 1
-        },
-        "72113": {
-          "nom": "Jonah Loop",
-          "films": 1
-        },
-        "72268": {
-          "nom": "Atli Örvarsson",
-          "films": 2
-        },
-        "72466": {
-          "nom": "Colin Farrell",
-          "films": 1
-        },
-        "73269": {
-          "nom": "Elsa Pataky",
-          "films": 1
-        },
-        "73457": {
-          "nom": "Chris Pratt",
-          "films": 1
-        },
-        "73968": {
-          "nom": "Henry Cavill",
-          "films": 1
-        },
-        "74142": {
-          "nom": "Roger Gould",
-          "films": 1
-        },
-        "74242": {
-          "nom": "Shea Whigham",
-          "films": 1
-        },
-        "74307": {
-          "nom": "Nana Gbewonyo",
-          "films": 1
-        },
-        "74343": {
-          "nom": "Matthew Aldrich",
-          "films": 1
-        },
-        "74568": {
-          "nom": "Chris Hemsworth",
-          "films": 5
-        },
-        "74570": {
-          "nom": "Ron Glass",
-          "films": 1
-        },
-        "74571": {
-          "nom": "Regine Nehy",
-          "films": 1
-        },
-        "74572": {
-          "nom": "Jaishon Fisher",
-          "films": 1
-        },
-        "74573": {
-          "nom": "Robert Pine",
-          "films": 1
-        },
-        "74579": {
-          "nom": "Howard Korder",
-          "films": 1
-        },
-        "74618": {
-          "nom": "Katrina Bowden",
-          "films": 1
-        },
-        "74623": {
-          "nom": "Kyle Newman",
-          "films": 1
-        },
-        "74688": {
-          "nom": "Keke Palmer",
-          "films": 1
-        },
-        "75601": {
-          "nom": "Sean Nelson",
-          "films": 1
-        },
-        "75602": {
-          "nom": "Ron Brice",
-          "films": 1
-        },
-        "75603": {
-          "nom": "Luis Lantigua",
-          "films": 1
-        },
-        "75604": {
-          "nom": "Yul Vazquez",
-          "films": 1
-        },
-        "75605": {
-          "nom": "Cheryl Freeman",
-          "films": 1
-        },
-        "75822": {
-          "nom": "Jessica Burleson",
-          "films": 1
-        },
-        "76961": {
-          "nom": "Demián Bichir",
-          "films": 1
-        },
-        "77162": {
-          "nom": "Rodrigo García",
-          "films": 1
-        },
-        "77164": {
-          "nom": "Ryan Robbins",
-          "films": 1
-        },
-        "77177": {
-          "nom": "Fuminori Kizaki",
-          "films": 1
-        },
-        "77330": {
-          "nom": "Kenan Thompson",
-          "films": 1
-        },
-        "77335": {
-          "nom": "Ben Mendelsohn",
-          "films": 1
-        },
-        "77517": {
-          "nom": "Isabelle Fuhrman",
-          "films": 1
-        },
-        "77589": {
-          "nom": "Calvin Levels",
-          "films": 1
-        },
-        "77996": {
-          "nom": "Asa Butterfield",
-          "films": 1
-        },
-        "78012": {
-          "nom": "François Girard",
-          "films": 1
-        },
-        "78147": {
-          "nom": "Élodie Yung",
-          "films": 1
-        },
-        "78433": {
-          "nom": "Ryan Hansen",
-          "films": 1
-        },
-        "78729": {
-          "nom": "Nathan Lane",
-          "films": 1
-        },
-        "78952": {
-          "nom": "Samantha Womack",
-          "films": 1
-        },
-        "79207": {
-          "nom": "Mark Fergus",
-          "films": 1
-        },
-        "79209": {
-          "nom": "Hawk Ostby",
-          "films": 1
-        },
-        "79538": {
-          "nom": "Khalil Kain",
-          "films": 1
-        },
-        "79539": {
-          "nom": "Jermaine Hopkins",
-          "films": 1
-        },
-        "79540": {
-          "nom": "Gerard Brown",
-          "films": 1
-        },
-        "80380": {
-          "nom": "Kristen Shaw",
-          "films": 1
-        },
-        "80595": {
-          "nom": "Rob Huebel",
-          "films": 1
-        },
-        "81078": {
-          "nom": "György Pálfi",
-          "films": 1
-        },
-        "81480": {
-          "nom": "Ori Pfeffer",
-          "films": 1
-        },
-        "81685": {
-          "nom": "Frank Grillo",
-          "films": 2
-        },
-        "82136": {
-          "nom": "Richard Zeppieri",
-          "films": 1
-        },
-        "82190": {
-          "nom": "Robert Hobbs",
-          "films": 1
-        },
-        "82191": {
-          "nom": "Sharlto Copley",
-          "films": 1
-        },
-        "82217": {
-          "nom": "Guy Davis",
-          "films": 1
-        },
-        "84247": {
-          "nom": "Emily VanCamp",
-          "films": 1
-        },
-        "84457": {
-          "nom": "Marisol Nichols",
-          "films": 1
-        },
-        "84624": {
-          "nom": "Alexander Nicksay",
-          "films": 1
-        },
-        "85142": {
-          "nom": "Paul Ben-Victor",
-          "films": 1
-        },
-        "85313": {
-          "nom": "Max Pomeranc",
-          "films": 1
-        },
-        "86498": {
-          "nom": "Gabriel Iglesias",
-          "films": 1
-        },
-        "86988": {
-          "nom": "Demetrius Navarro",
-          "films": 1
-        },
-        "87117": {
-          "nom": "Cynda Williams",
-          "films": 1
-        },
-        "87312": {
-          "nom": "James Parks",
-          "films": 2
-        },
-        "87364": {
-          "nom": "Mark Friedman",
-          "films": 1
-        },
-        "87695": {
-          "nom": "Carlo Carlei",
-          "films": 1
-        },
-        "87956": {
-          "nom": "D.W. Moffett",
-          "films": 1
-        },
-        "88161": {
-          "nom": "Debbi Morgan",
-          "films": 1
-        },
-        "88970": {
-          "nom": "Ralph Ziman",
-          "films": 1
-        },
-        "89819": {
-          "nom": "Zachary Gordon",
-          "films": 1
-        },
-        "89966": {
-          "nom": "Liam O'Brien",
-          "films": 1
-        },
-        "90186": {
-          "nom": "Tiger Haynes",
-          "films": 1
-        },
-        "90187": {
-          "nom": "Eyde Byrde",
-          "films": 1
-        },
-        "90444": {
-          "nom": "Rony Clanton",
-          "films": 1
-        },
-        "91421": {
-          "nom": "Nicholas Wyman",
-          "films": 1
-        },
-        "91585": {
-          "nom": "Kevin Willmott",
-          "films": 1
-        },
-        "91606": {
-          "nom": "Tom Hiddleston",
-          "films": 3
-        },
-        "92404": {
-          "nom": "Joel Kinnaman",
-          "films": 1
-        },
-        "93210": {
-          "nom": "Domhnall Gleeson",
-          "films": 1
-        },
-        "93602": {
-          "nom": "Antwon Tanner",
-          "films": 1
-        },
-        "94075": {
-          "nom": "David Soren",
-          "films": 1
-        },
-        "95519": {
-          "nom": "Nick Sandow",
-          "films": 1
-        },
-        "95621": {
-          "nom": "Howard Rollins",
-          "films": 1
-        },
-        "96974": {
-          "nom": "Carlo Cecchi",
-          "films": 1
-        },
-        "97165": {
-          "nom": "Brian Pettifer",
-          "films": 1
-        },
-        "97259": {
-          "nom": "Joshua Hale Fialkov",
-          "films": 1
-        },
-        "97406": {
-          "nom": "Natalie Zea",
-          "films": 1
-        },
-        "97446": {
-          "nom": "James DuMont",
-          "films": 1
-        },
-        "97576": {
-          "nom": "Gemma Chan",
-          "films": 1
-        },
-        "98051": {
-          "nom": "Bret Roberts",
-          "films": 1
-        },
-        "98394": {
-          "nom": "Affion Crockett",
-          "films": 1
-        },
-        "99032": {
-          "nom": "James Glickenhaus",
-          "films": 1
-        },
-        "99360": {
-          "nom": "John Canada Terrell",
-          "films": 1
-        },
-        "99410": {
-          "nom": "Chris Henchy",
-          "films": 1
-        },
-        "100388": {
-          "nom": "Naomi Foner",
-          "films": 1
-        },
-        "100650": {
-          "nom": "Francis X. McCarthy",
-          "films": 1
-        },
-        "102996": {
-          "nom": "Bostin Christopher",
-          "films": 1
-        },
-        "103041": {
-          "nom": "Robert D. Siegel",
-          "films": 1
-        },
-        "105364": {
-          "nom": "Russel Savadier",
-          "films": 1
-        },
-        "106217": {
-          "nom": "Jason Alan Smith",
-          "films": 1
-        },
-        "106791": {
-          "nom": "Aida Turturro",
-          "films": 1
-        },
-        "109156": {
-          "nom": "Katia Winter",
-          "films": 1
-        },
-        "109686": {
-          "nom": "Flex Alexander",
-          "films": 1
-        },
-        "110496": {
-          "nom": "Jan Egleson",
-          "films": 1
-        },
-        "113461": {
-          "nom": "John Legend",
-          "films": 1
-        },
-        "114405": {
-          "nom": "Eric Garcia",
-          "films": 1
-        },
-        "117935": {
-          "nom": "Leo Chu",
-          "films": 1
-        },
-        "118034": {
-          "nom": "Zawe Ashton",
-          "films": 1
-        },
-        "118200": {
-          "nom": "Gabriella Wright",
-          "films": 1
-        },
-        "119586": {
-          "nom": "Ethan Peck",
-          "films": 1
-        },
-        "119687": {
-          "nom": "Simon Merrells",
-          "films": 1
-        },
-        "120560": {
-          "nom": "Jim Piddock",
-          "films": 1
-        },
-        "120831": {
-          "nom": "Annaleigh Ashford",
-          "films": 1
-        },
-        "120891": {
-          "nom": "Lora Kojovic",
-          "films": 1
-        },
-        "122491": {
-          "nom": "Christopher Murray",
-          "films": 1
-        },
-        "124688": {
-          "nom": "Ed Stone",
-          "films": 1
-        },
-        "124870": {
-          "nom": "Onni Tommila",
-          "films": 1
-        },
-        "126471": {
-          "nom": "Tom Amandes",
-          "films": 1
-        },
-        "127387": {
-          "nom": "Yuri Lowenthal",
-          "films": 1
-        },
-        "130162": {
-          "nom": "Hank Shocklee",
-          "films": 1
-        },
-        "130640": {
-          "nom": "Hailee Steinfeld",
-          "films": 1
-        },
-        "131532": {
-          "nom": "J.J. Perry",
-          "films": 1
-        },
-        "131546": {
-          "nom": "Thomas Mitchell",
-          "films": 1
-        },
-        "131680": {
-          "nom": "Chris Terrio",
-          "films": 1
-        },
-        "131947": {
-          "nom": "Jason Fuchs",
-          "films": 1
-        },
-        "132434": {
-          "nom": "Bernard Hocke",
-          "films": 1
-        },
-        "133586": {
-          "nom": "Minnie Gentry",
-          "films": 1
-        },
-        "137332": {
-          "nom": "Jan Filipenský",
-          "films": 1
-        },
-        "138116": {
-          "nom": "Tony DiBenedetto",
-          "films": 1
-        },
-        "139820": {
-          "nom": "Pom Klementieff",
-          "films": 1
-        },
-        "139997": {
-          "nom": "Cristos",
-          "films": 1
-        },
-        "140250": {
-          "nom": "Tom Everett",
-          "films": 2
-        },
-        "140570": {
-          "nom": "Jeff Blumenkrantz",
-          "films": 1
-        },
-        "141715": {
-          "nom": "Irene Grazioli",
-          "films": 1
-        },
-        "141716": {
-          "nom": "Anita Laurenzi",
-          "films": 1
-        },
-        "141717": {
-          "nom": "Tommaso Puntelli",
-          "films": 1
-        },
-        "141718": {
-          "nom": "Samuele Amighetti",
-          "films": 1
-        },
-        "141719": {
-          "nom": "Aldo Brugnini",
-          "films": 1
-        },
-        "141720": {
-          "nom": "Christoph Koncz",
-          "films": 1
-        },
-        "141747": {
-          "nom": "Anthony Peck",
-          "films": 1
-        },
-        "141748": {
-          "nom": "Sharon Washington",
-          "films": 1
-        },
-        "141808": {
-          "nom": "Daniel Rey",
-          "films": 1
-        },
-        "141823": {
-          "nom": "Tisha Campbell",
-          "films": 1
-        },
-        "143059": {
-          "nom": "Patrick Hughes",
-          "films": 2
-        },
-        "144842": {
-          "nom": "Marcelle Baer",
-          "films": 1
-        },
-        "145228": {
-          "nom": "Jalmari Helander",
-          "films": 1
-        },
-        "147085": {
-          "nom": "Tina Parker",
-          "films": 1
-        },
-        "148012": {
-          "nom": "Jorma Tommila",
-          "films": 1
-        },
-        "148385": {
-          "nom": "Risto Salmi",
-          "films": 1
-        },
-        "154096": {
-          "nom": "Reginald Ballard",
-          "films": 1
-        },
-        "154106": {
-          "nom": "Greg Eagles",
-          "films": 1
-        },
-        "154695": {
-          "nom": "Ashley Gardner",
-          "films": 1
-        },
-        "155530": {
-          "nom": "Rebecca Front",
-          "films": 1
-        },
-        "155783": {
-          "nom": "Shari Headley",
-          "films": 1
-        },
-        "156015": {
-          "nom": "June Kyoto Lu",
-          "films": 1
-        },
-        "156532": {
-          "nom": "Bruce Beatty",
-          "films": 1
-        },
-        "156963": {
-          "nom": "Toshi Toda",
-          "films": 1
-        },
-        "164481": {
-          "nom": "Candy Buckley",
-          "films": 1
-        },
-        "166518": {
-          "nom": "Dan Petronijevic",
-          "films": 1
-        },
-        "167566": {
-          "nom": "Michael Potts",
-          "films": 1
-        },
-        "167736": {
-          "nom": "Allison Dean",
-          "films": 1
-        },
-        "168452": {
-          "nom": "Leslie Jones",
-          "films": 1
-        },
-        "168702": {
-          "nom": "Huey Lewis",
-          "films": 1
-        },
-        "170152": {
-          "nom": "Gigi Rice",
-          "films": 1
-        },
-        "170159": {
-          "nom": "Jullian Roy Doster",
-          "films": 1
-        },
-        "171029": {
-          "nom": "Billie Allen",
-          "films": 1
-        },
-        "172069": {
-          "nom": "Chadwick Boseman",
-          "films": 1
-        },
-        "173251": {
-          "nom": "Alison Moir",
-          "films": 1
-        },
-        "173394": {
-          "nom": "Chris Bailey",
-          "films": 1
-        },
-        "173810": {
-          "nom": "Sayed Badreya",
-          "films": 1
-        },
-        "180942": {
-          "nom": "Aaron Poole",
-          "films": 1
-        },
-        "180997": {
-          "nom": "Nazneen Contractor",
-          "films": 1
-        },
-        "181297": {
-          "nom": "David Lipman",
-          "films": 1
-        },
-        "184581": {
-          "nom": "Hamish Linklater",
-          "films": 1
-        },
-        "193254": {
-          "nom": "David Shaughnessy",
-          "films": 1
-        },
-        "196864": {
-          "nom": "Ellen Holly",
-          "films": 1
-        },
-        "198847": {
-          "nom": "Jessie T. Usher",
-          "films": 2
-        },
-        "204122": {
-          "nom": "Daisy Eagan",
-          "films": 1
-        },
-        "204392": {
-          "nom": "Cristin Milioti",
-          "films": 1
-        },
-        "209578": {
-          "nom": "Laura Haddock",
-          "films": 1
-        },
-        "210172": {
-          "nom": "Harvey Guillén",
-          "films": 1
-        },
-        "211845": {
-          "nom": "Charlie Brooker",
-          "films": 1
-        },
-        "217589": {
-          "nom": "Jerrika Hinton",
-          "films": 1
-        },
-        "221116": {
-          "nom": "India Eisley",
-          "films": 1
-        },
-        "221841": {
-          "nom": "Zach Roerig",
-          "films": 1
-        },
-        "222121": {
-          "nom": "Ben Schwartz",
-          "films": 1
-        },
-        "222122": {
-          "nom": "Gabriel Basso",
-          "films": 1
-        },
-        "222336": {
-          "nom": "Michael Asberry",
-          "films": 1
-        },
-        "222338": {
-          "nom": "Celia Shuman",
-          "films": 1
-        },
-        "223797": {
-          "nom": "Bronson Dudley",
-          "films": 1
-        },
-        "225692": {
-          "nom": "Jeremy Irvine",
-          "films": 1
-        },
-        "227440": {
-          "nom": "Henry Jackman",
-          "films": 4
-        },
-        "227671": {
-          "nom": "Terence Bridgett",
-          "films": 1
-        },
-        "228141": {
-          "nom": "Dree Hemingway",
-          "films": 1
-        },
-        "228402": {
-          "nom": "Juri Seppä",
-          "films": 1
-        },
-        "228403": {
-          "nom": "Miska Seppä",
-          "films": 1
-        },
-        "229031": {
-          "nom": "Peyton List",
-          "films": 1
-        },
-        "229180": {
-          "nom": "Richard Gray",
-          "films": 1
-        },
-        "230430": {
-          "nom": "James Brown III",
-          "films": 1
-        },
-        "230435": {
-          "nom": "J. D. Hall",
-          "films": 1
-        },
-        "230436": {
-          "nom": "Barbara Harris",
-          "films": 1
-        },
-        "230810": {
-          "nom": "Jaco Muller",
-          "films": 1
-        },
-        "231273": {
-          "nom": "Jay Rodan",
-          "films": 1
-        },
-        "234352": {
-          "nom": "Margot Robbie",
-          "films": 1
-        },
-        "234479": {
-          "nom": "Dakota Goyo",
-          "films": 1
-        },
-        "236539": {
-          "nom": "Jordan Vogt-Roberts",
-          "films": 1
-        },
-        "236695": {
-          "nom": "John Boyega",
-          "films": 1
-        },
-        "236851": {
-          "nom": "Callan McAuliffe",
-          "films": 1
-        },
-        "238130": {
-          "nom": "Yuri Kolokolnikov",
-          "films": 1
-        },
-        "240171": {
-          "nom": "Gordon Liu",
-          "films": 2
-        },
-        "283842": {
-          "nom": "Catherine Taber",
-          "films": 1
-        },
-        "466505": {
-          "nom": "Kumail Nanjiani",
-          "films": 1
-        },
-        "505710": {
-          "nom": "Zendaya",
-          "films": 1
-        },
-        "543530": {
-          "nom": "Dave Bautista",
-          "films": 1
-        },
-        "545229": {
-          "nom": "David Weaver",
-          "films": 1
-        },
-        "550843": {
-          "nom": "Elizabeth Olsen",
-          "films": 1
-        },
-        "558902": {
-          "nom": "Terry Milam",
-          "films": 1
-        },
-        "562231": {
-          "nom": "Michael Hultquist",
-          "films": 1
-        },
-        "563559": {
-          "nom": "Sam Hazeldine",
-          "films": 1
-        },
-        "564063": {
-          "nom": "James Bond III",
-          "films": 1
-        },
-        "564065": {
-          "nom": "Cynthia Bond",
-          "films": 1
-        },
-        "564074": {
-          "nom": "Paul Laurence\t",
-          "films": 1
-        },
-        "568657": {
-          "nom": "Sofia Boutella",
-          "films": 2
-        },
-        "571418": {
-          "nom": "Kristofer Hivju",
-          "films": 1
-        },
-        "574380": {
-          "nom": "Danny Epper",
-          "films": 1
-        },
-        "582919": {
-          "nom": "Darren Lemke",
-          "films": 1
-        },
-        "589927": {
-          "nom": "Michael Weller\t",
-          "films": 1
-        },
-        "590269": {
-          "nom": "Warona Seane",
-          "films": 1
-        },
-        "929145": {
-          "nom": "Lorne Balfe",
-          "films": 1
-        },
-        "931785": {
-          "nom": "Hanna Alström",
-          "films": 1
-        },
-        "932257": {
-          "nom": "Zsófia Ruttkay",
-          "films": 1
-        },
-        "965416": {
-          "nom": "Pete Goldfinger",
-          "films": 1
-        },
-        "966400": {
-          "nom": "Adam Alleca",
-          "films": 1
-        },
-        "969021": {
-          "nom": "Matthew Margeson",
-          "films": 2
-        },
-        "970219": {
-          "nom": "Teyonah Parris",
-          "films": 2
-        },
-        "989325": {
-          "nom": "Ella Purnell",
-          "films": 1
-        },
-        "998225": {
-          "nom": "Alison Sudol",
-          "films": 1
-        },
-        "1001657": {
-          "nom": "Sophie Turner",
-          "films": 1
-        },
-        "1003386": {
-          "nom": "Sam Jones",
-          "films": 1
-        },
-        "1010799": {
-          "nom": "Taylor Black",
-          "films": 1
-        },
-        "1012022": {
-          "nom": "Joshua Zetumer",
-          "films": 1
-        },
-        "1014905": {
-          "nom": "Mohan Kapur",
-          "films": 1
-        },
-        "1018947": {
-          "nom": "Maximiliano Hernández",
-          "films": 1
-        },
-        "1020013": {
-          "nom": "Derek Connolly",
-          "films": 1
-        },
-        "1023139": {
-          "nom": "Adam Driver",
-          "films": 1
-        },
-        "1024492": {
-          "nom": "Rob Archer",
-          "films": 1
-        },
-        "1026019": {
-          "nom": "Casper Crump",
-          "films": 1
-        },
-        "1029045": {
-          "nom": "Yule Masiteng",
-          "films": 1
-        },
-        "1030524": {
-          "nom": "Tudor Chirilă",
-          "films": 1
-        },
-        "1040043": {
-          "nom": "Tony Hendra",
-          "films": 1
-        },
-        "1041697": {
-          "nom": "Deon Lotz",
-          "films": 1
-        },
-        "1048929": {
-          "nom": "James Jandrisch",
-          "films": 1
-        },
-        "1053423": {
-          "nom": "Alex ter Avest",
-          "films": 1
-        },
-        "1067187": {
-          "nom": "David Steen",
-          "films": 1
-        },
-        "1075148": {
-          "nom": "Michael Bird",
-          "films": 1
-        },
-        "1075505": {
-          "nom": "Emma Holzer",
-          "films": 1
-        },
-        "1077345": {
-          "nom": "Jennifer Kim",
-          "films": 1
-        },
-        "1080778": {
-          "nom": "Max Borenstein",
-          "films": 1
-        },
-        "1088938": {
-          "nom": "Anthony Reynolds",
-          "films": 1
-        },
-        "1093919": {
-          "nom": "Cecily Strong",
-          "films": 1
-        },
-        "1098107": {
-          "nom": "Wayne Thornley",
-          "films": 1
-        },
-        "1098110": {
-          "nom": "Andrew Cook",
-          "films": 1
-        },
-        "1098111": {
-          "nom": "Raffaella Delle Donne",
-          "films": 1
-        },
-        "1098962": {
-          "nom": "Dove Cameron",
-          "films": 1
-        },
-        "1106745": {
-          "nom": "Adam Cozad",
-          "films": 1
-        },
-        "1109482": {
-          "nom": "Carl Beukes",
-          "films": 1
-        },
-        "1109702": {
-          "nom": "Karan Soni",
-          "films": 1
-        },
-        "1115984": {
-          "nom": "Jason Mitchell",
-          "films": 1
-        },
-        "1117313": {
-          "nom": "John David Washington",
-          "films": 1
-        },
-        "1124949": {
-          "nom": "Todor Kobakov",
-          "films": 1
-        },
-        "1133063": {
-          "nom": "Dana Gourrier",
-          "films": 2
-        },
-        "1136406": {
-          "nom": "Tom Holland",
-          "films": 2
-        },
-        "1138751": {
-          "nom": "Gianni Capaldi",
-          "films": 2
-        },
-        "1142720": {
-          "nom": "Thomas Mann",
-          "films": 1
-        },
-        "1151657": {
-          "nom": "Jing Tian",
-          "films": 1
-        },
-        "1154054": {
-          "nom": "Corey Hawkins",
-          "films": 2
-        },
-        "1187860": {
-          "nom": "F. Scott Frazier",
-          "films": 1
-        },
-        "1191451": {
-          "nom": "John Gleeson Connolly",
-          "films": 1
-        },
-        "1193575": {
-          "nom": "Terry McDonough",
-          "films": 1
-        },
-        "1199049": {
-          "nom": "Anthony Silverston",
-          "films": 1
-        },
-        "1208702": {
-          "nom": "Erin Elizabeth Burns",
-          "films": 1
-        },
-        "1212699": {
-          "nom": "Cindy Herron",
-          "films": 1
-        },
-        "1214157": {
-          "nom": "Ethel Ayler",
-          "films": 1
-        },
-        "1216908": {
-          "nom": "Adam David Thompson",
-          "films": 1
-        },
-        "1219219": {
-          "nom": "Kyme",
-          "films": 1
-        },
-        "1221595": {
-          "nom": "Elaine C. Smith",
-          "films": 1
-        },
-        "1224390": {
-          "nom": "Matt Lauria",
-          "films": 1
-        },
-        "1224534": {
-          "nom": "Alex Barnow",
-          "films": 1
-        },
-        "1225436": {
-          "nom": "Michael Starke",
-          "films": 1
-        },
-        "1228470": {
-          "nom": "Virgil Williams",
-          "films": 1
-        },
-        "1230252": {
-          "nom": "Peter Howitt",
-          "films": 1
-        },
-        "1233161": {
-          "nom": "Mark Holden",
-          "films": 1
-        },
-        "1235786": {
-          "nom": "David Acord",
-          "films": 1
-        },
-        "1236065": {
-          "nom": "Michele Harrell",
-          "films": 1
-        },
-        "1236760": {
-          "nom": "Jake Smollett",
-          "films": 1
-        },
-        "1242819": {
-          "nom": "Nicol Paone",
-          "films": 1
-        },
-        "1246691": {
-          "nom": "Zane Meas",
-          "films": 1
-        },
-        "1246890": {
-          "nom": "Chris McKenna",
-          "films": 1
-        },
-        "1246972": {
-          "nom": "Ruby Rose",
-          "films": 1
-        },
-        "1253199": {
-          "nom": "Alexandra Shipp",
-          "films": 1
-        },
-        "1265629": {
-          "nom": "Angourie Rice",
-          "films": 1
-        },
-        "1271810": {
-          "nom": "Lane Styles",
-          "films": 1
-        },
-        "1277101": {
-          "nom": "Al Campbell",
-          "films": 1
-        },
-        "1278487": {
-          "nom": "Hannah Waddingham",
-          "films": 1
-        },
-        "1282054": {
-          "nom": "Sophie Cookson",
-          "films": 1
-        },
-        "1283864": {
-          "nom": "John D'Arco",
-          "films": 1
-        },
-        "1291350": {
-          "nom": "Tony Revolori",
-          "films": 1
-        },
-        "1293994": {
-          "nom": "Jon Watts",
-          "films": 1
-        },
-        "1296991": {
-          "nom": "Brian Cox",
-          "films": 1
-        },
-        "1299044": {
-          "nom": "Alan Connor",
-          "films": 1
-        },
-        "1303037": {
-          "nom": "Taron Egerton",
-          "films": 1
-        },
-        "1313559": {
-          "nom": "Ray Fisher",
-          "films": 1
-        },
-        "1315036": {
-          "nom": "Daisy Ridley",
-          "films": 1
-        },
-        "1321904": {
-          "nom": "Andrea Ridolfi",
-          "films": 1
-        },
-        "1322314": {
-          "nom": "Edward Holcroft",
-          "films": 1
-        },
-        "1329559": {
-          "nom": "Amy Le",
-          "films": 1
-        },
-        "1333665": {
-          "nom": "Elvis Nolasco",
-          "films": 1
-        },
-        "1336042": {
-          "nom": "Nathanael Cooper",
-          "films": 1
-        },
-        "1336043": {
-          "nom": "Wynn White",
-          "films": 1
-        },
-        "1336044": {
-          "nom": "Kathleen Campbell",
-          "films": 1
-        },
-        "1343741": {
-          "nom": "DeVille Vannik",
-          "films": 1
-        },
-        "1346535": {
-          "nom": "Samson Kayo",
-          "films": 1
-        },
-        "1347525": {
-          "nom": "Park Seo-jun",
-          "films": 1
-        },
-        "1347947": {
-          "nom": "Remy Hii",
-          "films": 1
-        },
-        "1350918": {
-          "nom": "Erik Sommers",
-          "films": 1
-        },
-        "1359436": {
-          "nom": "Dick Boccelli",
-          "films": 1
-        },
-        "1359447": {
-          "nom": "Jason Hazeley",
-          "films": 1
-        },
-        "1359448": {
-          "nom": "Joel Morris",
-          "films": 1
-        },
-        "1360281": {
-          "nom": "Lashana Lynch",
-          "films": 1
-        },
-        "1388314": {
-          "nom": "Stephan James",
-          "films": 1
-        },
-        "1388917": {
-          "nom": "Osy Ikhile",
-          "films": 1
-        },
-        "1389367": {
-          "nom": "Gail Bean",
-          "films": 1
-        },
-        "1392775": {
-          "nom": "Erik LaRay Harvey",
-          "films": 1
-        },
-        "1397778": {
-          "nom": "Anya Taylor-Joy",
-          "films": 1
-        },
-        "1407486": {
-          "nom": "Kenya Barris",
-          "films": 1
-        },
-        "1424871": {
-          "nom": "Yasuyuki Muto",
-          "films": 1
-        },
-        "1425134": {
-          "nom": "Milo Parker",
-          "films": 1
-        },
-        "1437491": {
-          "nom": "Ariana DeBose",
-          "films": 1
-        },
-        "1466409": {
-          "nom": "Eric S. Calderon",
-          "films": 1
-        },
-        "1467219": {
-          "nom": "Joe Keery",
-          "films": 1
-        },
-        "1492913": {
-          "nom": "Clarinda Ross",
-          "films": 1
-        },
-        "1501852": {
-          "nom": "Lee Zachariah",
-          "films": 1
-        },
-        "1525534": {
-          "nom": "Marga Gómez",
-          "films": 1
-        },
-        "1534628": {
-          "nom": "Tom O'Connor",
-          "films": 2
-        },
-        "1535020": {
-          "nom": "Mark Koetsier",
-          "films": 1
-        },
-        "1537686": {
-          "nom": "Naomi Ackie",
-          "films": 1
-        },
-        "1543364": {
-          "nom": "Diane Morgan",
-          "films": 1
-        },
-        "1551816": {
-          "nom": "West Dylan Thordson",
-          "films": 1
-        },
-        "1558555": {
-          "nom": "Murray Anderson",
-          "films": 1
-        },
-        "1560760": {
-          "nom": "John Heffernan",
-          "films": 1
-        },
-        "1564920": {
-          "nom": "Bowen Yang",
-          "films": 1
-        },
-        "1586047": {
-          "nom": "Owen Teague",
-          "films": 1
-        },
-        "1590230": {
-          "nom": "Edie Inksetter",
-          "films": 1
-        },
-        "1612453": {
-          "nom": "Geneva Robertson-Dworet",
-          "films": 1
-        },
-        "1636267": {
-          "nom": "Clark Sarullo",
-          "films": 1
-        },
-        "1639827": {
-          "nom": "Robert Lydecker",
-          "films": 1
-        },
-        "1639848": {
-          "nom": "Mamoudou Athie",
-          "films": 1
-        },
-        "1648158": {
-          "nom": "Tom Bruggemann",
-          "films": 1
-        },
-        "1649152": {
-          "nom": "Jacob Batalon",
-          "films": 1
-        },
-        "1650566": {
-          "nom": "Alice McMillan",
-          "films": 1
-        },
-        "1667351": {
-          "nom": "George Somner",
-          "films": 1
-        },
-        "1694260": {
-          "nom": "Patrick McManus",
-          "films": 1
-        },
-        "1705227": {
-          "nom": "Mark Torgove",
-          "films": 1
-        },
-        "1768633": {
-          "nom": "Menzi Ngubane",
-          "films": 1
-        },
-        "1795072": {
-          "nom": "Nia DaCosta",
-          "films": 1
-        },
-        "1809782": {
-          "nom": "Zenobia Shroff",
-          "films": 1
-        },
-        "1823157": {
-          "nom": "Nate Hopper",
-          "films": 1
-        },
-        "1842124": {
-          "nom": "Eden Epstein",
-          "films": 1
-        },
-        "1844445": {
-          "nom": "Brandon Lessard",
-          "films": 1
-        },
-        "1844699": {
-          "nom": "Fiona Ramsay",
-          "films": 1
-        },
-        "1852182": {
-          "nom": "Huck Milner",
-          "films": 1
-        },
-        "1853909": {
-          "nom": "Danielle Deadwyler",
-          "films": 1
-        },
-        "1856163": {
-          "nom": "Scott Johnson",
-          "films": 1
-        },
-        "1871103": {
-          "nom": "Robert Martinez",
-          "films": 1
-        },
-        "1882245": {
-          "nom": "Johnny Hiram Jamison",
-          "films": 1
-        },
-        "1882246": {
-          "nom": "Michaelia Carroll",
-          "films": 1
-        },
-        "1887066": {
-          "nom": "Samantha McIntyre",
-          "films": 1
-        },
-        "1903874": {
-          "nom": "Maya Hawke",
-          "films": 1
-        },
-        "1947696": {
-          "nom": "Evan Lurie",
-          "films": 1
-        },
-        "1959397": {
-          "nom": "Dua Lipa",
-          "films": 1
-        },
-        "2006099": {
-          "nom": "Philip Klein",
-          "films": 1
-        },
-        "2030473": {
-          "nom": "Alison Marlow",
-          "films": 1
-        },
-        "2038913": {
-          "nom": "Sarah Thorp",
-          "films": 1
-        },
-        "2042546": {
-          "nom": "Niceole R. Levy",
-          "films": 1
-        },
-        "2056482": {
-          "nom": "Megan McDonnell",
-          "films": 1
-        },
-        "2092069": {
-          "nom": "Malcolm Washington",
-          "films": 1
-        },
-        "2151076": {
-          "nom": "Patrick Farrelly",
-          "films": 1
-        },
-        "2199147": {
-          "nom": "Alexandria M. Salling",
-          "films": 1
-        },
-        "2240797": {
-          "nom": "Nyah Marie Johnson",
-          "films": 1
-        },
-        "2306806": {
-          "nom": "Dennis Parlato",
-          "films": 1
-        },
-        "2315499": {
-          "nom": "Alice Mathias",
-          "films": 1
-        },
-        "2353981": {
-          "nom": "Stephen Van Cleef",
-          "films": 1
-        },
-        "2401160": {
-          "nom": "David Lewis Smith",
-          "films": 1
-        },
-        "2401161": {
-          "nom": "Stan Younger",
-          "films": 1
-        },
-        "2547617": {
-          "nom": "Jordan Preston Carter",
-          "films": 1
-        },
-        "2557851": {
-          "nom": "Wayne Powers",
-          "films": 1
-        },
-        "2750002": {
-          "nom": "Tristan Beltrami",
-          "films": 1
-        },
-        "2784619": {
-          "nom": "Dhiru Shah",
-          "films": 1
-        },
-        "2798462": {
-          "nom": "Iman Vellani",
-          "films": 1
-        },
-        "2889306": {
-          "nom": "Saagar Shaikh",
-          "films": 1
-        },
-        "2897837": {
-          "nom": "Kylie Kuioka",
-          "films": 1
-        },
-        "2913390": {
-          "nom": "Angelo Irving",
-          "films": 1
-        },
-        "2916051": {
-          "nom": "Tom Baker",
-          "films": 1
-        },
-        "2916052": {
-          "nom": "Kemah Bob",
-          "films": 1
-        },
-        "2916053": {
-          "nom": "Ken Bordell",
-          "films": 1
-        },
-        "2916055": {
-          "nom": "Munya Chawawa",
-          "films": 1
-        },
-        "2916056": {
-          "nom": "Constance Cheng",
-          "films": 1
-        },
-        "2916057": {
-          "nom": "Erika Ehler",
-          "films": 1
-        },
-        "2916058": {
-          "nom": "Charlie George",
-          "films": 1
-        },
-        "2916059": {
-          "nom": "Eli Goldstone",
-          "films": 1
-        },
-        "2916060": {
-          "nom": "Mollie Goodfellow",
-          "films": 1
-        },
-        "2916061": {
-          "nom": "Kae Kurd",
-          "films": 1
-        },
-        "2916062": {
-          "nom": "Thanyia Moore",
-          "films": 1
-        },
-        "2916063": {
-          "nom": "Michael Odewale",
-          "films": 1
-        },
-        "2929164": {
-          "nom": "The Bomb Squad",
-          "films": 1
-        },
-        "3115878": {
-          "nom": "Robert Welch",
-          "films": 1
-        },
-        "3119329": {
-          "nom": "Elissa Karasik",
-          "films": 1
-        },
-        "3161941": {
-          "nom": "Gokul",
-          "films": 1
-        },
-        "3380679": {
-          "nom": "Phillip Murphy",
-          "films": 1
-        },
-        "3380680": {
-          "nom": "Brandon Murphy",
-          "films": 1
-        },
-        "3390795": {
-          "nom": "Amy Keum",
-          "films": 1
-        },
-        "3491510": {
-          "nom": "Jonathan Jacobson",
-          "films": 1
-        },
-        "3632483": {
-          "nom": "Bruce Retief",
-          "films": 1
-        },
-        "3981970": {
-          "nom": "Paul Aniello",
-          "films": 1
-        },
-        "4174087": {
-          "nom": "Paul A. Kaplan",
-          "films": 1
-        },
-        "4197900": {
-          "nom": "Jessica Rose Weiss",
-          "films": 1
-        },
-        "4910166": {
-          "nom": "Sergio Freijo",
-          "films": 1
-        },
-        "4945969": {
-          "nom": "Skylar Aleece Smith",
-          "films": 1
-        }
-      }
-    },
-    {
       "name": "Scarlett Johansson",
       "ok": true,
       "tmdb_id": 1245,
@@ -30391,11 +25031,22 @@
       "nb_films": 61,
       "nb_collaborateurs": 609,
       "nb_collaborateurs_recurrents": 72,
+      "top_collaborateurs": [
+        "Chris Evans (8)",
+        "Robert Downey Jr. (7)",
+        "Don Cheadle (5)",
+        "Samuel L. Jackson (5)",
+        "Alexandre Desplat (5)",
+        "Chris Hemsworth (5)",
+        "Woody Allen (4)",
+        "Clark Gregg (4)"
+      ],
       "amorce": {
-        "tmdb_id": 1083381,
-        "titre": "Backrooms",
-        "annee": "2026",
-        "_lien": "Chiwetel Ejiofor"
+        "tmdb_id": 105,
+        "titre": "Back to the Future",
+        "annee": "1985",
+        "_lien": "Alan Silvestri",
+        "_lien_films": 3
       },
       "collaborateurs": {
         "27": {
@@ -32845,11 +27496,22 @@
       "nb_films": 59,
       "nb_collaborateurs": 590,
       "nb_collaborateurs_recurrents": 83,
+      "top_collaborateurs": [
+        "Howard Shore (7)",
+        "Ian McKellen (6)",
+        "Peter Jackson (6)",
+        "Fran Walsh (6)",
+        "Philippa Boyens (6)",
+        "Guillermo del Toro (5)",
+        "Richard Armitage (4)",
+        "Benedict Cumberbatch (4)"
+      ],
       "amorce": {
-        "tmdb_id": 969681,
-        "titre": "Spider-Man: Brand New Day",
-        "annee": "2026",
-        "_lien": "Mark Ruffalo"
+        "tmdb_id": 38757,
+        "titre": "Tangled",
+        "annee": "2010",
+        "_lien": "Ron Perlman",
+        "_lien_films": 3
       },
       "collaborateurs": {
         "3": {
@@ -35223,11 +29885,22 @@
       "nb_films": 46,
       "nb_collaborateurs": 485,
       "nb_collaborateurs_recurrents": 51,
+      "top_collaborateurs": [
+        "Guillaume Canet (7)",
+        "Gilles Lellouche (6)",
+        "Frédéric Diefenthal (4)",
+        "Billy Crudup (3)",
+        "Samy Naceri (3)",
+        "Emma Wiklund (3)",
+        "Bernard Farcy (3)",
+        "Luc Besson (3)"
+      ],
       "amorce": {
-        "tmdb_id": 1275779,
-        "titre": "Disclosure Day",
-        "annee": "2026",
-        "_lien": "Josh O'Connor"
+        "tmdb_id": 637534,
+        "titre": "The Stronghold",
+        "annee": "2021",
+        "_lien": "Gilles Lellouche",
+        "_lien_films": 6
       },
       "collaborateurs": {
         "13": {
@@ -37181,11 +31854,22 @@
       "nb_films": 41,
       "nb_collaborateurs": 407,
       "nb_collaborateurs_recurrents": 55,
+      "top_collaborateurs": [
+        "Michel Hazanavicius (5)",
+        "James Huth (4)",
+        "Bruno Coulais (4)",
+        "Gilles Lellouche (4)",
+        "Guillaume Canet (4)",
+        "Sandrine Kiberlain (4)",
+        "Albert Dupontel (3)",
+        "Gilles Gaston-Dreyfus (3)"
+      ],
       "amorce": {
-        "tmdb_id": 969681,
-        "titre": "Spider-Man: Brand New Day",
-        "annee": "2026",
-        "_lien": "Jon Bernthal"
+        "tmdb_id": 1062722,
+        "titre": "Frankenstein",
+        "annee": "2025",
+        "_lien": "Alexandre Desplat",
+        "_lien_films": 3
       },
       "collaborateurs": {
         "112": {
@@ -38827,11 +33511,22 @@
       "nb_films": 25,
       "nb_collaborateurs": 249,
       "nb_collaborateurs_recurrents": 24,
+      "top_collaborateurs": [
+        "Romain Duris (4)",
+        "Kelly Reilly (3)",
+        "Cécile de France (3)",
+        "Cédric Klapisch (3)",
+        "Pierre Salvadori (3)",
+        "Benoît Graffin (3)",
+        "Pio Marmaï (3)",
+        "Dominique Pinon (2)"
+      ],
       "amorce": {
-        "tmdb_id": 1083381,
-        "titre": "Backrooms",
-        "annee": "2026",
-        "_lien": "Chiwetel Ejiofor"
+        "tmdb_id": 1062722,
+        "titre": "Frankenstein",
+        "annee": "2025",
+        "_lien": "Alexandre Desplat",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "31": {
@@ -39841,11 +34536,22 @@
       "nb_films": 50,
       "nb_collaborateurs": 526,
       "nb_collaborateurs_recurrents": 66,
+      "top_collaborateurs": [
+        "Ramzy Bedia (6)",
+        "Fred Testot (4)",
+        "Lionel Abelanski (4)",
+        "Olivier Baroux (4)",
+        "Éric Toledano (4)",
+        "Olivier Nakache (4)",
+        "Laurent Lafitte (4)",
+        "Éric Judor (4)"
+      ],
       "amorce": {
-        "tmdb_id": 969681,
-        "titre": "Spider-Man: Brand New Day",
-        "annee": "2026",
-        "_lien": "Michael Giacchino"
+        "tmdb_id": 414906,
+        "titre": "The Batman",
+        "annee": "2022",
+        "_lien": "Michael Giacchino",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "3": {
@@ -41963,11 +36669,22 @@
       "nb_films": 55,
       "nb_collaborateurs": 604,
       "nb_collaborateurs_recurrents": 65,
+      "top_collaborateurs": [
+        "Monica Bellucci (5)",
+        "Mathieu Kassovitz (4)",
+        "Romain Duris (4)",
+        "Jean-François Richet (4)",
+        "Marco Beltrami (4)",
+        "Louis Garrel (4)",
+        "Matt Damon (3)",
+        "Philippe Nahon (3)"
+      ],
       "amorce": {
-        "tmdb_id": 1368337,
-        "titre": "The Odyssey",
-        "annee": "2026",
-        "_lien": "Matt Damon"
+        "tmdb_id": 228150,
+        "titre": "Fury",
+        "annee": "2014",
+        "_lien": "Brad Pitt",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "59": {
@@ -44397,11 +39114,22 @@
       "nb_films": 65,
       "nb_collaborateurs": 644,
       "nb_collaborateurs_recurrents": 76,
+      "top_collaborateurs": [
+        "Claude Chabrol (7)",
+        "Matthieu Chabrol (6)",
+        "Bruno Coulais (5)",
+        "Michael Haneke (4)",
+        "Philippe Sarde (4)",
+        "Lolita Chammah (4)",
+        "Jean-François Balmer (3)",
+        "Gérard Depardieu (3)"
+      ],
       "amorce": {
-        "tmdb_id": 969681,
-        "titre": "Spider-Man: Brand New Day",
-        "annee": "2026",
-        "_lien": "Marisa Tomei"
+        "tmdb_id": 12445,
+        "titre": "Harry Potter and the Deathly Hallows: Part 2",
+        "annee": "2011",
+        "_lien": "Ciarán Hinds",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "50": {
@@ -46991,11 +41719,22 @@
       "nb_films": 68,
       "nb_collaborateurs": 691,
       "nb_collaborateurs_recurrents": 73,
+      "top_collaborateurs": [
+        "Chiara Mastroianni (9)",
+        "Philippe Sarde (7)",
+        "Gérard Depardieu (6)",
+        "Michel Legrand (6)",
+        "André Téchiné (6)",
+        "Emmanuelle Bercot (5)",
+        "Michel Piccoli (4)",
+        "Philippe Noiret (4)"
+      ],
       "amorce": {
-        "tmdb_id": 120,
-        "titre": "The Lord of the Rings: The Fellowship of the Ring",
-        "annee": "2001",
-        "_lien": "Ian Holm"
+        "tmdb_id": 11687,
+        "titre": "The Visitors",
+        "annee": "1993",
+        "_lien": "Valérie Lemercier",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "42": {
@@ -49773,11 +44512,22 @@
       "nb_films": 54,
       "nb_collaborateurs": 613,
       "nb_collaborateurs_recurrents": 37,
+      "top_collaborateurs": [
+        "Olivier Assayas (5)",
+        "Zbigniew Preisner (4)",
+        "Krzysztof Kieślowski (3)",
+        "Krzysztof Piesiewicz (3)",
+        "Ralph Fiennes (3)",
+        "Bruno Podalydès (3)",
+        "Jean-Claude Carrière (3)",
+        "Claire Denis (3)"
+      ],
       "amorce": {
-        "tmdb_id": 1368337,
-        "titre": "The Odyssey",
-        "annee": "2026",
-        "_lien": "Robert Pattinson"
+        "tmdb_id": 414906,
+        "titre": "The Batman",
+        "annee": "2022",
+        "_lien": "Robert Pattinson",
+        "_lien_films": 2
       },
       "collaborateurs": {
         "32": {
@@ -52240,6 +46990,11 @@
       "name": "Céline Sciamma",
       "ok": false,
       "raison": "seulement 4 collaborateurs récurrents (minimum 5) — thermomètre trop plat"
+    },
+    {
+      "name": "Samuel L. Jackson",
+      "ok": false,
+      "raison": "196 collaborateurs récurrents (maximum 120) — reliée à tout le monde, thermomètre inutile"
     }
   ]
 }

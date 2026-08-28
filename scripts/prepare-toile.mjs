@@ -49,6 +49,12 @@ const MIN_FILMS = 8;
 const MIN_COLLABORATORS = 40;
 const MIN_STRONG_COLLABORATORS = 5; // personnes vues sur 2 films ou plus
 
+// Un plafond, aussi. Samuel L. Jackson sort à 196 collaborateurs récurrents,
+// contre une cinquantaine pour la médiane : les univers partagés type Marvel le
+// relient à tout le monde. Le symptôme n'est pas qu'il soit facile, c'est que
+// PRESQUE TOUT ESSAI renvoie une connexion — le thermomètre ne mesure plus rien.
+const MAX_STRONG_COLLABORATORS = 120;
+
 // Un film trop confidentiel n'apprend rien au joueur : son casting ne lui dit
 // rien, et il ne le proposera jamais.
 const MIN_FILM_VOTES = 50;
@@ -61,6 +67,12 @@ const MIN_FILM_VOTES = 50;
 // systématiquement les films aux données les plus incomplètes.
 const AMORCE_MIN_VOTES = 1000;
 const AMORCE_MIN_PEOPLE = 10; // générique réellement renseigné
+
+// La personne qui relie l'amorce à la cible doit être une collaboratrice
+// RÉCURRENTE. Deuxième passage : l'amorce d'Agnès Varda passait par Tim Robbins
+// à un seul film — un lien si ténu qu'il n'apprend rien au joueur. Un fil unique
+// ne sert que s'il est solide.
+const AMORCE_MIN_LINK_FILMS = 2;
 
 // Taille de la réserve de films populaires où l'on cherche les amorces.
 const AMORCE_POOL_PAGES = 15; // 20 films par page
@@ -245,36 +257,61 @@ async function prepareTarget(name, amorcePool) {
       raison: `seulement ${strong.length} collaborateurs récurrents (minimum ${MIN_STRONG_COLLABORATORS}) — thermomètre trop plat`,
     };
   }
+  if (strong.length > MAX_STRONG_COLLABORATORS) {
+    return {
+      name,
+      ok: false,
+      raison: `${strong.length} collaborateurs récurrents (maximum ${MAX_STRONG_COLLABORATORS}) — reliée à tout le monde, thermomètre inutile`,
+    };
+  }
 
   // ─── Amorce ───────────────────────────────────────────────────────────
   // Un film qui ne contient PAS la cible et ne partage avec elle qu'UNE SEULE
   // personne. La partie test l'a montré : une amorce à trois fils invisibles
   // donne au joueur une pièce qu'il ne peut pas manipuler.
-  let amorce = null;
+  // On collecte TOUS les candidats valides avant d'en choisir un. Prendre le
+  // premier revenait à toujours servir le film le plus populaire du moment :
+  // au deuxième passage, 11 cibles sur 29 avaient un Spider-Man en amorce, et
+  // 13 films distincts seulement. Un joueur quotidien aurait vu la même amorce
+  // toute la semaine.
+  const candidates = [];
   for (const candidate of amorcePool) {
     if (films.has(candidate.id)) continue; // la cible y figure
     // Générique incomplet : un film annoncé n'a que quelques acteurs
     // renseignés et satisferait le critère « une seule personne » par défaut
     // de données, pas par vraie proximité.
     if (candidate.people.size < AMORCE_MIN_PEOPLE) continue;
+    if (candidate.people.has(person.id)) continue;
+
     const shared = [...candidate.people.keys()].filter((id) =>
       collaborators.has(id),
     );
-    if (shared.length === 1 && !candidate.people.has(person.id)) {
-      amorce = {
-        tmdb_id: candidate.id,
-        titre: candidate.title,
-        annee: candidate.year,
-        // Consigné pour vérification humaine ; jamais envoyé au navigateur.
-        _lien: collaborators.get(shared[0]).nom,
-      };
-      break;
-    }
+    if (shared.length !== 1) continue;
+
+    const link = collaborators.get(shared[0]);
+    if (link.films < AMORCE_MIN_LINK_FILMS) continue;
+
+    candidates.push({
+      tmdb_id: candidate.id,
+      titre: candidate.title,
+      annee: candidate.year,
+      // Consignés pour vérification humaine ; jamais envoyés au navigateur.
+      _lien: link.nom,
+      _lien_films: link.films,
+    });
   }
 
-  if (!amorce) {
-    return { name, ok: false, raison: "aucune amorce à une seule personne" };
+  if (!candidates.length) {
+    return {
+      name,
+      ok: false,
+      raison: "aucune amorce reliée par un collaborateur récurrent",
+    };
   }
+
+  // Choix déterministe : même cible, même amorce à chaque exécution, mais
+  // réparti dans la liste plutôt que toujours en tête.
+  const amorce = candidates[person.id % candidates.length];
 
   return {
     name,
@@ -285,6 +322,12 @@ async function prepareTarget(name, amorcePool) {
     nb_films: films.size,
     nb_collaborateurs: collaborators.size,
     nb_collaborateurs_recurrents: strong.length,
+    // Pour contrôle à l'œil : des noms invraisemblables ici trahissent une
+    // pollution des données qu'aucun seuil ne détectera.
+    top_collaborateurs: [...collaborators.values()]
+      .sort((a, b) => b.films - a.films)
+      .slice(0, 8)
+      .map((c) => `${c.nom} (${c.films})`),
     amorce,
     collaborateurs: Object.fromEntries(
       [...collaborators].map(([id, v]) => [id, v]),
@@ -368,7 +411,7 @@ async function main() {
       if (result.ok) {
         retenues.push(result);
         console.log(
-          `retenue (${result.nb_films} films, ${result.nb_collaborateurs} collaborateurs dont ${result.nb_collaborateurs_recurrents} récurrents, amorce : ${result.amorce.titre} ${result.amorce.annee} via ${result.amorce._lien})`,
+          `retenue (${result.nb_films} films, ${result.nb_collaborateurs_recurrents} récurrents, amorce : ${result.amorce.titre} ${result.amorce.annee} via ${result.amorce._lien} ×${result.amorce._lien_films})`,
         );
       } else {
         ecartees.push(result);
