@@ -26,25 +26,10 @@ const CREW_JOBS = new Set([
   "Original Music Composer",
 ]);
 
-export type ResultatFilm = {
-  kind: "film";
-  id: number;
-  label: string;
-  detail: string | null;
-  ciblePresente: boolean;
-  personnes: { nom: string; films: number }[];
-};
-
-export type ResultatPersonne = {
-  kind: "personne";
-  id: number;
-  label: string;
-  detail: string | null;
-  trouve: boolean;
-  films: number;
-};
-
-export type Resultat = ResultatFilm | ResultatPersonne | { kind: "erreur"; message: string };
+// Les types vivent dans src/lib/toile-etat.ts, avec le stockage navigateur qui
+// les manipule : le badge de la page d'accueil et l'écran de jeu doivent lire
+// exactement la même forme.
+import type { Resultat } from "@/lib/toile-etat";
 
 /** Télécharge le générique d'un film et l'écrit en base (clé de service). */
 async function mettreEnCache(movieId: number, titre: string, annee: string | null) {

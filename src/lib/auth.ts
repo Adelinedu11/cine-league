@@ -40,7 +40,21 @@ export function authErrorKey(
       return "login.emailTaken";
     case "weak_password":
       return "login.passwordTooShort";
+    // Compte créé mais adresse jamais validée. C'était le cas le plus fréquent
+    // en production et il tombait dans le repli générique : la personne lisait
+    // « quelque chose s'est mal passé » sans jamais apprendre qu'il lui
+    // suffisait de cliquer dans un e-mail.
+    case "email_not_confirmed":
+      return "login.emailNotConfirmed";
+    // Le service d'envoi par défaut de Supabase est bridé à quelques messages
+    // par heure. Sans message dédié, la limite ressemble à une panne.
+    case "over_email_send_rate_limit":
+    case "over_request_rate_limit":
+      return "login.rateLimit";
     default:
+      if (message?.toLowerCase().includes("not confirmed")) {
+        return "login.emailNotConfirmed";
+      }
       // Certaines versions ne renvoient pas de `code` : repli sur le message.
       if (message?.toLowerCase().includes("already registered")) {
         return "login.emailTaken";

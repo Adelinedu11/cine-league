@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getLocale, t } from "@/lib/i18n";
@@ -13,13 +12,21 @@ import {
   PopTicket,
   PopTrophy,
 } from "@/components/pop/PopShapes";
+import StatutDuJour from "@/components/toile/StatutDuJour";
 
 /**
- * Page de garde publique. Premier écran d'un visiteur sans compte : elle doit
- * expliquer le jeu et donner envie, sans jamais interroger la base — aucune
- * donnée de league n'y est lue, donc aucune policy RLS à ouvrir en anonyme.
+ * Page d'accueil, pour TOUT LE MONDE.
  *
- * Un visiteur déjà connecté n'a rien à faire ici : on l'envoie sur /leagues.
+ * Elle a d'abord redirigé les personnes connectées vers /toile, au motif
+ * qu'elles venaient pour le jeu. C'était une erreur : la page d'accueil
+ * devenait inaccessible dès qu'on avait un compte, sans aucun moyen d'y
+ * revenir. Et l'argument est tombé avec sa réorganisation — depuis qu'elle mène
+ * avec La Toile et porte les ligues en dessous, elle sert aussi bien de hub aux
+ * membres que de vitrine aux visiteurs.
+ *
+ * Elle n'interroge la base que pour savoir si quelqu'un est connecté, afin
+ * d'adapter ses boutons. Aucune donnée de league n'y est lue, donc aucune
+ * policy RLS à ouvrir en anonyme.
  */
 export default async function LandingPage() {
   const supabase = await createClient();
@@ -27,13 +34,12 @@ export default async function LandingPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Un visiteur déjà connecté va droit au jeu du jour : c'est ce qu'il vient
-  // chercher, et la vitrine ne lui apprend plus rien.
-  if (user) {
-    redirect("/toile");
-  }
-
   const locale = await getLocale();
+
+  // Y a-t-il une partie aujourd'hui ? On ne récupère que sa date : le statut du
+  // joueur, lui, vit dans son navigateur et n'a pas à remonter jusqu'ici.
+  const { data: duJour } = await supabase.rpc("toile_du_jour", {});
+  const partie = duJour as { jour: string } | null;
 
   // Une forme par étape, choisie pour illustrer l'étape et non pour décorer :
   // la claquette ouvre le tournage, la bobine porte les films, le trophée
@@ -97,17 +103,22 @@ export default async function LandingPage() {
             >
               {t(locale, "landing.ctaJouer")}
             </Link>
+            {/* Le bouton secondaire dépend de qui regarde : se connecter pour
+                un visiteur, aller à ses ligues pour un membre. Proposer une
+                connexion à quelqu'un de déjà connecté n'a aucun sens. */}
             <Link
-              href="/login"
+              href={user ? "/leagues" : "/login"}
               className="rounded-xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-2.5 text-sm font-medium text-[var(--color-cream)] transition-colors hover:border-[var(--color-cream)]"
             >
-              {t(locale, "landing.ctaSignIn")}
+              {t(locale, user ? "landing.ctaMesLigues" : "landing.ctaSignIn")}
             </Link>
           </div>
 
-          <p className="mt-4 max-w-xs text-xs text-[var(--color-muted)]">
-            {t(locale, "landing.ctaNote")}
-          </p>
+          {!user && (
+            <p className="mt-4 max-w-xs text-xs text-[var(--color-muted)]">
+              {t(locale, "landing.ctaNote")}
+            </p>
+          )}
         </section>
 
         {/* --- La Toile, juste après le héros : c'est le geste quotidien et la
@@ -115,6 +126,14 @@ export default async function LandingPage() {
         <section className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-gold-bright)]/25 p-6">
           <div className="relative z-10 max-w-md">
             <PopReel size={64} fill="var(--color-gold-bright)" />
+            {/* Le statut n'apparaît que s'il y a une partie programmée ce
+                jour-là : annoncer « pas encore joué » un jour sans partie
+                enverrait le joueur sur un écran vide. */}
+            {partie && (
+              <div className="mt-3">
+                <StatutDuJour locale={locale} jour={partie.jour} />
+              </div>
+            )}
             <h2 className="font-display mt-3 text-3xl tracking-wide text-[var(--color-cream)]">
               {t(locale, "landing.toileTitle")}
             </h2>
@@ -205,19 +224,20 @@ export default async function LandingPage() {
 
         {/* --- Créer un compte : demandé ICI, et pas avant. Une inscription se
                 justifie quand on veut jouer avec des gens ; pour La Toile elle
-                n'a aucun sens. --- */}
+                n'a aucun sens. Pour un membre, le même bloc devient l'accès à
+                ses ligues. --- */}
         <section className="rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-yellow)]/30 p-6 text-center">
           <h3 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
-            {t(locale, "landing.compteTitle")}
+            {t(locale, user ? "landing.membreTitle" : "landing.compteTitle")}
           </h3>
           <p className="mx-auto mt-2 max-w-md text-sm text-[var(--color-cream)]/85">
-            {t(locale, "landing.compteText")}
+            {t(locale, user ? "landing.membreText" : "landing.compteText")}
           </p>
           <Link
-            href="/login?mode=signup"
+            href={user ? "/leagues" : "/login?mode=signup"}
             className="font-display mt-5 inline-block rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-gold)] px-6 py-3 text-lg tracking-wide text-[var(--color-bg)] transition-transform hover:-translate-y-0.5"
           >
-            {t(locale, "landing.ctaSignUp")}
+            {t(locale, user ? "landing.ctaMesLigues" : "landing.ctaSignUp")}
           </Link>
         </section>
 

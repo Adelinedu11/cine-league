@@ -5,12 +5,12 @@ import Link from "next/link";
 import { Search, Film, User, Flame, Lightbulb } from "lucide-react";
 import { t, type Locale } from "@/lib/i18n";
 import { PopTicket, PopTrophy } from "@/components/pop/PopShapes";
+import { cleDuJour, creerStore } from "@/lib/toile-etat";
 import {
   essaiFilm,
   essaiPersonne,
   obtenirIndice,
   revelerCible,
-  type Resultat,
 } from "./actions";
 
 // Paliers de rattrapage. Pas de limite d'essais, donc un indice unique
@@ -35,87 +35,6 @@ type Suggestion = {
   detail: string | null;
 };
 
-type Indice = { rang: number; cle: string; valeur: string | null };
-
-type Etat = {
-  essais: Resultat[];
-  gagne: boolean;
-  abandon: boolean;
-  cible: { nom: string } | null;
-  indices: Indice[];
-};
-
-// Référence stable : `useSyncExternalStore` compare les instantanés par
-// identité. Recréer un objet vide à chaque appel provoquerait une boucle de
-// rendus infinie.
-const ETAT_VIDE: Etat = {
-  essais: [],
-  gagne: false,
-  abandon: false,
-  cible: null,
-  indices: [],
-};
-
-/**
- * La partie vit dans localStorage, qui en est la source de vérité.
- *
- * Deux raisons. On joue sans compte, donc il n'y a pas de base où l'écrire. Et
- * surtout on quitte la page pour chercher un titre puis on revient : une partie
- * qui ne survit pas à un rechargement est un cul-de-sac — la leçon a déjà été
- * payée sur l'écran « mot de passe oublié ».
- *
- * On passe par `useSyncExternalStore` plutôt que par un effet d'hydratation :
- * c'est la façon prévue de lire un stockage externe sans décalage entre le
- * rendu serveur et le rendu client. Bénéfice au passage, deux onglets ouverts
- * restent synchronisés.
- *
- * Ce qui est stocké, ce sont les RÉSULTATS déjà vus par le joueur. Rien de
- * secret n'y transite : la cible n'apparaît qu'une fois la partie terminée.
- */
-function creerStore(cle: string) {
-  const abonnes = new Set<() => void>();
-  let brutEnCache: string | null = null;
-  let etatEnCache: Etat = ETAT_VIDE;
-
-  return {
-    subscribe(onChange: () => void) {
-      abonnes.add(onChange);
-      window.addEventListener("storage", onChange);
-      return () => {
-        abonnes.delete(onChange);
-        window.removeEventListener("storage", onChange);
-      };
-    },
-    lire(): Etat {
-      let brut: string | null = null;
-      try {
-        brut = localStorage.getItem(cle);
-      } catch {
-        // Navigation privée stricte : on joue sans reprise plutôt que de
-        // planter.
-        return ETAT_VIDE;
-      }
-      if (brut !== brutEnCache) {
-        brutEnCache = brut;
-        etatEnCache = brut ? { ...ETAT_VIDE, ...JSON.parse(brut) } : ETAT_VIDE;
-      }
-      return etatEnCache;
-    },
-    lireServeur(): Etat {
-      return ETAT_VIDE;
-    },
-    ecrire(etat: Etat) {
-      try {
-        localStorage.setItem(cle, JSON.stringify(etat));
-      } catch {
-        // idem : ne pas pouvoir sauver n'interrompt pas la partie en cours.
-      }
-      brutEnCache = null; // force la relecture au prochain instantané
-      abonnes.forEach((fn) => fn());
-    },
-  };
-}
-
 /** Écran de jeu de La Toile. */
 export default function ToileGame({
   locale,
@@ -124,7 +43,7 @@ export default function ToileGame({
   locale: Locale;
   partie: Partie;
 }) {
-  const store = useMemo(() => creerStore(`toile:${partie.jour}`), [partie.jour]);
+  const store = useMemo(() => creerStore(cleDuJour(partie.jour)), [partie.jour]);
   const etat = useSyncExternalStore(
     store.subscribe,
     store.lire,

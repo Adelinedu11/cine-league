@@ -42,6 +42,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `029_toile.sql` | **La Toile** (jeu quotidien) : tables `toile_targets` / `toile_collaborators` / `toile_films` / `toile_film_people`, RLS totalement fermée sur les cibles, RPC `toile_du_jour`, `toile_essai_film`, `toile_essai_personne`, `toile_reveler`, `toile_programmer`. La cible ne sort jamais de la base. | — |
 | `030_toile_indices.sql` | Échelle d'indices de La Toile : colonnes `indice_epoque` / `indice_pays` / `indice_nb_films` + RPC `toile_indice(_jour, _rang)`. Paliers 10/15/20 vérifiés côté interface seulement — aucun indice ne révèle la cible à lui seul. | 029 |
 | `031_retrait_league_publique.sql` | **Défait la league publique de `028`** (trigger d'adhésion auto, league officielle, colonne `is_public`, `public_league_id`), remplacée par La Toile. **Garde le vrai apport de 028** : plus aucune policy d'insertion sur `league_members`, l'adhésion passe exclusivement par `create_league()` et `join_league_by_code()`. | 028, 029 |
+| `032_categories_par_ligue.sql` | Catégories choisies par ligue (5 max) : colonne `league_id` sur `categories` (null = catalogue commun), tables `league_categories` (sélection) et `round_categories` (photo prise au lancement par déclencheur), RPC `set_league_categories`, `create_league_category`, `round_categories_list`, `league_categories_options`. **On ne supprime jamais une ligne de `categories`** — `get_round_results` y joint les votes pour le nom affiché. | 001, 008 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de
@@ -49,8 +50,22 @@ colonnes en `add column if not exists`, policies précédées de
 
 ## Hors périmètre
 
-La fonction `create_league(_name, _display_name)` a été créée directement
-dans Supabase. `008_admin_and_features.sql` en fournit une **reconstruction**
-(pour insérer le créateur en `admin`) : compare-la à la définition réelle en
-base avant de l'exécuter. De même, `get_round_results(p_round_id)` a été créée
-directement et n'est pas versionnée ; `008` en dépend sans la redéfinir.
+`create_league(_name, _display_name)`, `get_round_results(p_round_id)` et
+`round_ballot(_round_id)` ont été créées directement dans Supabase et ne sont
+versionnées nulle part. **Leurs définitions réelles ont été relevées en base le
+28/08/2026** et vérifiées — ce ne sont plus des suppositions :
+
+- `create_league` correspond exactement à la reconstruction de `008`.
+- `get_round_results` regroupe par `votes.category_id` en joignant `categories`
+  pour retrouver le nom affiché. D'où l'interdiction de supprimer une catégorie
+  (voir `032`). Conséquence connexe : **une catégorie sans aucun vote
+  n'apparaît pas au palmarès**.
+- `round_ballot` renvoie les soumissions de la séance sauf la sienne.
+
+Pour les relire à tout moment :
+
+```sql
+select pg_get_functiondef(oid) from pg_proc
+where proname in ('get_round_results', 'create_league', 'round_ballot')
+  and pronamespace = 'public'::regnamespace;
+```

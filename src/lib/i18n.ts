@@ -121,6 +121,15 @@ export const dict: Record<Locale, Dict> = {
     "login.emailTaken":
       "Un compte existe déjà avec cet e-mail. Essaie de te connecter.",
     "login.errorFallback": "Quelque chose s'est mal passé, réessaie.",
+    "login.emailNotConfirmed":
+      "Ton compte existe, mais son adresse n'a jamais été validée. Clique sur le lien reçu à l'inscription, ou demande un nouveau mot de passe : ça la validera aussi.",
+    "login.rateLimit":
+      "Trop d'e-mails envoyés dans la dernière heure. Réessaie un peu plus tard.",
+    "login.confirmTitle": "Compte créé",
+    "login.confirmText":
+      "Ton compte existe. Il reste à confirmer ton adresse : un lien vient d'être envoyé à {email}. Clique dessus, puis reviens te connecter.",
+    "login.confirmSpam":
+      "Rien reçu au bout de quelques minutes ? Regarde dans les indésirables.",
 
     // Mot de passe oublié
     "forgot.title": "Mot de passe oublié",
@@ -165,9 +174,13 @@ export const dict: Record<Locale, Dict> = {
     "landing.leaguesTitle": "Et avec vos amis : les ligues",
     "landing.leaguesText":
       "Une ligue réunit des gens qui se connaissent. On y organise des séances : un thème, des films, un vote, une cérémonie.",
+    "landing.ctaMesLigues": "Mes ligues",
     "landing.compteTitle": "Envie de jouer à plusieurs ?",
     "landing.compteText":
       "Le compte ne sert qu'aux ligues — et à garder ta série de jours à La Toile. Gratuit, et il ne demande qu'un pseudo.",
+    "landing.membreTitle": "Tes ligues t'attendent",
+    "landing.membreText":
+      "Retrouve tes séances en cours, propose un film, vote, ou lance une nouvelle ligue.",
 
     "landing.howTitle": "Comment ça marche",
     "landing.step1Title": "Un thème est lancé",
@@ -235,11 +248,19 @@ export const dict: Record<Locale, Dict> = {
     "toile.perdu": "C'était…",
     "toile.aucunePartie": "Pas de partie ce jour-là.",
     "toile.versLeagues": "Mes ligues →",
+    "toile.statutPasJoue": "Tu n'as pas encore joué aujourd'hui",
+    "toile.statutEnCours": "Partie en cours — {n} essai(s)",
+    "toile.statutGagne": "Trouvé aujourd'hui en {coups} coups",
+    "toile.statutAbandon": "Partie du jour terminée",
 
     // Liste des ligues
-    "leagues.welcomeTitle": "Bienvenue sur Ciné League",
+    "leagues.toileTitle": "La Toile n° {numero}",
+    "leagues.toileText":
+      "Une personnalité du cinéma à démasquer en proposant des films. Nouvelle chaque jour.",
+    "leagues.versRegles": "Voir les règles complètes →",
+    "leagues.welcomeTitle": "Le but du jeu",
     "leagues.welcomeIntro":
-      "Crée ou rejoins une ligue pour jouer entre amis : proposez des films, votez, devinez les films mystères, et grimpez au classement.",
+      "Deux façons de jouer. Chaque jour, La Toile : retrouver une personnalité du cinéma par ses collaborations. Et quand vous êtes plusieurs, une ligue : proposez un film sur un thème, votez en aveugle, découvrez le palmarès à la cérémonie.",
     "leagues.badge": "VOS LIGUES",
     "leagues.title": "Mes ligues",
     "leagues.subtitle": "Rejoignez ou créez une ligue.",
@@ -517,6 +538,15 @@ export const dict: Record<Locale, Dict> = {
     "login.emailTaken":
       "An account already exists for this email. Try signing in.",
     "login.errorFallback": "Something went wrong, please try again.",
+    "login.emailNotConfirmed":
+      "Your account exists, but its address was never confirmed. Click the link you got when signing up, or request a new password — that confirms it too.",
+    "login.rateLimit":
+      "Too many emails sent in the last hour. Try again a little later.",
+    "login.confirmTitle": "Account created",
+    "login.confirmText":
+      "Your account exists. One step left: confirm your address. A link was just sent to {email}. Click it, then come back and sign in.",
+    "login.confirmSpam":
+      "Nothing after a few minutes? Check your spam folder.",
 
     // Forgot password
     "forgot.title": "Forgot your password",
@@ -560,9 +590,13 @@ export const dict: Record<Locale, Dict> = {
     "landing.leaguesTitle": "And with friends: leagues",
     "landing.leaguesText":
       "A league brings together people who know each other. You run screenings: a theme, films, a vote, a ceremony.",
+    "landing.ctaMesLigues": "My leagues",
     "landing.compteTitle": "Want to play with others?",
     "landing.compteText":
       "The account is only for leagues — and to keep your daily streak on La Toile. Free, and all it asks for is a nickname.",
+    "landing.membreTitle": "Your leagues are waiting",
+    "landing.membreText":
+      "Pick up your ongoing screenings, submit a film, vote, or start a new league.",
 
     "landing.howTitle": "How it works",
     "landing.step1Title": "A theme goes live",
@@ -633,10 +667,18 @@ export const dict: Record<Locale, Dict> = {
     "toile.perdu": "It was…",
     "toile.aucunePartie": "No game that day.",
     "toile.versLeagues": "My leagues →",
+    "toile.statutPasJoue": "You haven't played today",
+    "toile.statutEnCours": "Game in progress — {n} guess(es)",
+    "toile.statutGagne": "Solved today in {coups} guesses",
+    "toile.statutAbandon": "Today's game is over",
 
-    "leagues.welcomeTitle": "Welcome to Ciné League",
+    "leagues.toileTitle": "La Toile no. {numero}",
+    "leagues.toileText":
+      "A film personality to unmask by naming films. A new one every day.",
+    "leagues.versRegles": "See the full rules →",
+    "leagues.welcomeTitle": "How it works",
     "leagues.welcomeIntro":
-      "Create or join a league to play with friends: submit films, vote, guess mystery films, and climb the standings.",
+      "Two ways to play. Every day, La Toile: find a film personality through their collaborations. And when there are several of you, a league: submit a film on a theme, vote blind, reveal the winners at the ceremony.",
     "leagues.badge": "YOUR LEAGUES",
     "leagues.title": "My leagues",
     "leagues.subtitle": "Join or create a league.",

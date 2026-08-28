@@ -11,7 +11,7 @@ const ALLOWED_NEXT = ["/toile", "/leagues", "/reset-password"] as const;
 function safeNext(raw: string | null): string {
   return ALLOWED_NEXT.includes((raw ?? "") as (typeof ALLOWED_NEXT)[number])
     ? raw!
-    : "/toile";
+    : "/leagues";
 }
 
 /**

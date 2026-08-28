@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { MailCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { t, type Locale } from "@/lib/i18n";
 import { MIN_PASSWORD_LENGTH, authErrorKey } from "@/lib/auth";
@@ -11,6 +12,13 @@ import PasswordField from "@/components/PasswordField";
 // Deux modes dans un seul écran : on bascule par onglet, sans changer d'URL,
 // pour que l'e-mail déjà saisi ne soit pas perdu.
 type Mode = "signin" | "signup";
+
+/** Code et statut HTTP de l'erreur Supabase, pour un diagnostic à distance. */
+function detailTechnique(error: { code?: string; status?: number }) {
+  return [error.code, error.status ? `HTTP ${error.status}` : null]
+    .filter(Boolean)
+    .join(" · ");
+}
 
 export default function LoginForm({
   locale,
@@ -25,16 +33,24 @@ export default function LoginForm({
   const [pseudo, setPseudo] = useState("");
   const [busy, setBusy] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  // Code d'erreur brut, affiché en petit sous le message traduit. Le formulaire
+  // OTP le faisait, ma réécriture l'avait perdu — et sans lui, un cas non
+  // traité devient indiagnosticable à distance.
+  const [detail, setDetail] = useState("");
+  // "confirmation" : compte créé mais e-mail à valider avant de pouvoir entrer.
+  const [status, setStatus] = useState<"form" | "confirmation">("form");
 
   function switchMode(next: Mode) {
     setMode(next);
     setErrorMsg("");
+    setDetail("");
     setPassword("");
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMsg("");
+    setDetail("");
 
     // Validation locale avant l'appel réseau : messages immédiats et traduits,
     // là où Supabase répondrait en anglais.
@@ -60,23 +76,42 @@ export default function LoginForm({
       if (error) {
         console.error("Échec de signInWithPassword :", error);
         setErrorMsg(t(locale, authErrorKey(error.code, error.message)));
+        setDetail(detailTechnique(error));
         setBusy(false);
         return;
       }
     } else {
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        // Le pseudo est aussi rangé dans les métadonnées du compte : si la
+        // confirmation d'e-mail est exigée, il n'y a pas encore de session pour
+        // écrire dans `profiles`, et sans ça le pseudo serait perdu.
+        options: { data: { pseudo: pseudo.trim() } },
+      });
       if (error) {
         console.error("Échec de signUp :", error);
         setErrorMsg(t(locale, authErrorKey(error.code, error.message)));
+        setDetail(detailTechnique(error));
         setBusy(false);
         return;
       }
 
-      // Sans confirmation d'e-mail, la session est ouverte immédiatement : on
-      // peut écrire le pseudo tout de suite (policy profiles_insert = sa propre
-      // ligne). Si l'écriture échoue, on ne bloque pas l'entrée — le pseudo
-      // reste modifiable dans /profil.
-      if (data.session && data.user) {
+      // PAS DE SESSION = confirmation d'e-mail exigée côté Supabase.
+      // Ce cas existait déjà et n'était pas traité : on redirigeait quand même
+      // vers le jeu, donc la personne atterrissait sur un écran anonyme, sans
+      // compte actif et sans la moindre explication. C'est exactement ce qui
+      // s'est produit en production.
+      if (!data.session) {
+        setStatus("confirmation");
+        setBusy(false);
+        return;
+      }
+
+      // Session immédiate : on écrit le pseudo tout de suite (policy
+      // profiles_insert = sa propre ligne). Si l'écriture échoue, on ne bloque
+      // pas l'entrée — le pseudo reste modifiable dans /profil.
+      if (data.user) {
         const { error: profileError } = await supabase
           .from("profiles")
           .upsert(
@@ -92,12 +127,38 @@ export default function LoginForm({
     // Navigation en dur (et non router.push) : elle force un aller-retour
     // serveur, sans quoi les Server Components ne verraient pas la session
     // fraîchement posée dans les cookies.
-    // La Toile est le premier écran de Ciné League : c'est le geste quotidien,
-    // et il ne demande ni league ni ami pour avoir de l'intérêt.
-    window.location.href = "/toile";
+    // /leagues sert de tableau de bord après connexion : on y trouve la partie
+    // du jour avec son statut, le but du jeu et ses ligues. Envoyer directement
+    // sur /toile privait d'un point de vue d'ensemble — et d'un écran qui dise
+    // simplement qu'on est bien connecté.
+    window.location.href = "/leagues";
   }
 
   const isSignUp = mode === "signup";
+
+  // Compte créé, en attente de validation de l'adresse.
+  if (status === "confirmation") {
+    return (
+      <AuthCard>
+        <div className="text-center">
+          <MailCheck
+            size={32}
+            strokeWidth={1.5}
+            className="mx-auto text-[var(--color-gold)]"
+          />
+          <h1 className="font-display mt-4 text-3xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "login.confirmTitle")}
+          </h1>
+          <p className="mt-3 text-sm text-[var(--color-muted)]">
+            {t(locale, "login.confirmText", { email })}
+          </p>
+          <p className="mt-3 text-xs text-[var(--color-muted)]">
+            {t(locale, "login.confirmSpam")}
+          </p>
+        </div>
+      </AuthCard>
+    );
+  }
 
   return (
     <AuthCard>
@@ -197,12 +258,17 @@ export default function LoginForm({
         />
 
         {errorMsg && (
-          <p
+          <div
             role="alert"
-            className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400"
+            className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2"
           >
-            {errorMsg}
-          </p>
+            <p className="text-sm text-red-400">{errorMsg}</p>
+            {detail && (
+              <p className="font-mono mt-1 text-[11px] text-red-400/70">
+                {detail}
+              </p>
+            )}
+          </div>
         )}
 
         <button

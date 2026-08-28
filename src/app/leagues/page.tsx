@@ -7,7 +7,8 @@ import TicketStub from "@/components/TicketStub";
 import SubmitButton from "@/components/SubmitButton";
 import PopBackdrop from "@/components/pop/PopBackdrop";
 import PopEmptyState from "@/components/pop/PopEmptyState";
-import { PopSeat } from "@/components/pop/PopShapes";
+import { PopReel, PopSeat } from "@/components/pop/PopShapes";
+import StatutDuJour from "@/components/toile/StatutDuJour";
 
 export default async function LeaguesPage({
   searchParams,
@@ -35,6 +36,11 @@ export default async function LeaguesPage({
   const leagues = (memberships ?? [])
     .map((m) => m.league)
     .filter((league) => league !== null);
+
+  // Partie du jour. On n'en récupère que la date et le numéro : le fait de
+  // l'avoir jouée ou non vit dans le navigateur, et se lit côté client.
+  const { data: duJour } = await supabase.rpc("toile_du_jour", {});
+  const partie = duJour as { jour: string; numero: number } | null;
 
   // --- Server Action : créer une ligue ---
   async function createLeague(formData: FormData) {
@@ -113,7 +119,36 @@ export default async function LeaguesPage({
       <PopBackdrop density="light" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col gap-10 p-6">
-      {/* Bandeau d'accueil */}
+      {/* La Toile en tête : c'est le geste quotidien, et la seule chose qui
+          change tous les jours. Une liste de ligues, elle, est identique d'une
+          semaine à l'autre. */}
+      {partie && (
+        <section className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-gold-bright)]/25 p-6">
+          <div className="relative z-10 max-w-md">
+            <StatutDuJour locale={locale} jour={partie.jour} />
+            <h2 className="font-display mt-3 text-2xl tracking-wide text-[var(--color-cream)]">
+              {t(locale, "leagues.toileTitle", { numero: partie.numero })}
+            </h2>
+            <p className="mt-2 text-sm text-[var(--color-cream)]/85">
+              {t(locale, "leagues.toileText")}
+            </p>
+            <Link
+              href="/toile"
+              className="font-display mt-4 inline-block rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-surface)] px-5 py-2.5 tracking-wide text-[var(--color-cream)] transition-transform hover:-translate-y-0.5"
+            >
+              {t(locale, "landing.toileCta")}
+            </Link>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-4 -right-3 hidden rotate-12 sm:block"
+          >
+            <PopReel size={96} fill="var(--color-gold-bright)" />
+          </div>
+        </section>
+      )}
+
+      {/* Le but du jeu, en deux phrases, avec un renvoi aux règles complètes. */}
       <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
         <h2 className="font-display text-2xl tracking-wide text-[var(--color-gold)]">
           {t(locale, "leagues.welcomeTitle")}
@@ -121,6 +156,12 @@ export default async function LeaguesPage({
         <p className="mt-2 text-sm text-[var(--color-cream)]/90">
           {t(locale, "leagues.welcomeIntro")}
         </p>
+        <Link
+          href="/regles"
+          className="mt-3 inline-block text-sm text-[var(--color-gold)] underline-offset-4 hover:underline"
+        >
+          {t(locale, "leagues.versRegles")}
+        </Link>
       </section>
 
       <div className="flex flex-col gap-3">
