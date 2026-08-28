@@ -1,4 +1,5 @@
 import { redirect, notFound } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { Ticket, Trophy, Search } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
@@ -7,6 +8,7 @@ import { getLocale, t } from "@/lib/i18n";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import RenameLeagueForm from "@/components/RenameLeagueForm";
+import LeagueCategoriesForm from "@/components/LeagueCategoriesForm";
 import SubmitButton from "@/components/SubmitButton";
 import RoundModeDateFields from "@/components/RoundModeDateFields";
 import Avatar from "@/components/Avatar";
@@ -92,11 +94,13 @@ export default async function LeaguePage({
     { data: members },
     { data: winHistory },
     { data: cineHistory },
+    { data: categoryOptions },
   ] = await Promise.all([
     supabase.rpc("is_league_admin", { _league_id: id }),
     supabase.rpc("league_members_list", { _league_id: id }),
     supabase.rpc("league_win_history", { _league_id: id }),
     supabase.rpc("league_cine_files_detail", { _league_id: id }),
+    supabase.rpc("league_categories_options", { _league_id: id }),
   ]);
 
   // Rendu factorisé de la liste des séances (utilisé pour "En cours" et
@@ -307,6 +311,38 @@ export default async function LeaguePage({
     redirect(`/leagues/${id}`);
   }
 
+  // --- Server Actions : catégories de vote (admin uniquement) ---
+  // Les gardes effectives sont dans les fonctions SQL, qui rejouent le contrôle
+  // d'admin et le plafond de cinq. On se contente ici de remonter le message
+  // d'erreur pour que l'admin sache pourquoi ça n'a pas marché.
+  async function enregistrerCategories(ids: string[]) {
+    "use server";
+    const supabase = await createClient();
+    const { error } = await supabase.rpc("set_league_categories", {
+      _league_id: id,
+      _category_ids: ids,
+    });
+    if (error) {
+      console.error("set_league_categories :", error);
+      return { erreur: error.message };
+    }
+    revalidatePath(`/leagues/${id}`);
+  }
+
+  async function creerCategorie(nom: string) {
+    "use server";
+    const supabase = await createClient();
+    const { error } = await supabase.rpc("create_league_category", {
+      _league_id: id,
+      _name: nom,
+    });
+    if (error) {
+      console.error("create_league_category :", error);
+      return { erreur: error.message };
+    }
+    revalidatePath(`/leagues/${id}`);
+  }
+
   // --- Server Action : supprimer la ligue (admin uniquement) ---
   // Cascade sur les tables liées (ON DELETE CASCADE). Garde effective : la
   // policy RLS DELETE (is_league_admin).
@@ -374,6 +410,22 @@ export default async function LeaguePage({
           </ConfirmSubmitButton>
         )}
       </div>
+
+      {/* Catégories de vote — admin uniquement. Placé hors des onglets : c'est
+          une configuration de la ligue, pas un contenu qu'on consulte. */}
+      {isAdmin && (
+        <section className="flex flex-col gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+          <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "categories.titre")}
+          </h2>
+          <LeagueCategoriesForm
+            locale={locale}
+            options={categoryOptions ?? []}
+            enregistrer={enregistrerCategories}
+            creerCategorie={creerCategorie}
+          />
+        </section>
+      )}
 
       <LeagueTabs
         tabs={[

@@ -487,6 +487,28 @@ export type Database = {
         Args: { _jour: string; _person_id: number }
         Returns: Json
       }
+      round_categories_list: {
+        Args: { _round_id: string }
+        Returns: { id: string; name: string }[]
+      }
+      league_categories_options: {
+        Args: { _league_id: string }
+        Returns: {
+          id: string
+          name: string
+          propre: boolean
+          choisie: boolean
+          rang: number | null
+        }[]
+      }
+      set_league_categories: {
+        Args: { _league_id: string; _category_ids: string[] }
+        Returns: undefined
+      }
+      create_league_category: {
+        Args: { _league_id: string; _name: string }
+        Returns: string
+      }
       toile_indice: {
         Args: { _jour: string; _rang: number }
         Returns: Json

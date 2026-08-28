@@ -472,7 +472,10 @@ export default async function RoundPage({
   if (round.status === "voting") {
     const [{ data: cats }, { data: ballotRows }, { data: voterRows }] =
       await Promise.all([
-        supabase.from("categories").select("id, name").order("name"),
+        // Les catégories figées au lancement de CETTE séance, pas la table
+        // globale : si l'admin change la configuration de la ligue en cours de
+        // route, le bulletin d'une séance déjà lancée ne doit pas bouger.
+        supabase.rpc("round_categories_list", { _round_id: roundId }),
         // Films du round SAUF celui du votant, sans jamais exposer les user_id.
         supabase.rpc("round_ballot", { _round_id: roundId }),
         supabase.rpc("round_voters", { _round_id: roundId }),
@@ -638,8 +641,13 @@ export default async function RoundPage({
       redirect(`/leagues/${id}/rounds/${roundId}?error=vote`);
     }
 
-    // Un vote par catégorie ; on relit la liste des catégories côté serveur.
-    const { data: cats } = await supabase.from("categories").select("id");
+    // Un vote par catégorie ; on relit la liste côté serveur — et depuis la
+    // PHOTO de la séance, comme le bulletin affiché. Relire la table globale
+    // enregistrerait des votes dans des catégories que le joueur n'a jamais
+    // vues, et en oublierait s'il en existe une propre à la ligue.
+    const { data: cats } = await supabase.rpc("round_categories_list", {
+      _round_id: roundId,
+    });
     const rows = (cats ?? [])
       .map((cat) => ({
         categoryId: cat.id,
