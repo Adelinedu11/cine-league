@@ -1,5 +1,4 @@
 import { redirect, notFound } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { Ticket, Trophy, Search } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
@@ -8,7 +7,6 @@ import { getLocale, t } from "@/lib/i18n";
 import TicketStub from "@/components/TicketStub";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import RenameLeagueForm from "@/components/RenameLeagueForm";
-import LeagueCategoriesForm from "@/components/LeagueCategoriesForm";
 import SubmitButton from "@/components/SubmitButton";
 import RoundModeDateFields from "@/components/RoundModeDateFields";
 import Avatar from "@/components/Avatar";
@@ -265,6 +263,43 @@ export default async function LeaguePage({
       redirect(`/leagues/${id}?error=round`);
     }
 
+    // Catégories choisies dans le formulaire. Le déclencheur a déjà posé la
+    // sélection mémorisée de la ligue ; cet appel la remplace par le choix
+    // explicite. On ne bloque pas la création si ça échoue — une séance sans
+    // catégorie personnalisée reste jouable avec celles par défaut.
+    if (gameMode === "competition_officielle") {
+      const categoryIds = formData
+        .getAll("category_ids")
+        .map(String)
+        .filter(Boolean);
+
+      // Catégorie libre saisie dans le formulaire : on la crée puis on
+      // l'ajoute. Elle reste privée à la ligue et n'est jamais versée au
+      // catalogue commun — une blague interne n'a pas à circuler ailleurs.
+      const custom = String(formData.get("custom_category") ?? "").trim();
+      if (custom && categoryIds.length < 5) {
+        const { data: newId, error: createError } = await supabase.rpc(
+          "create_league_category",
+          { _league_id: id, _name: custom },
+        );
+        if (createError) {
+          console.error("create_league_category :", createError);
+        } else if (newId) {
+          categoryIds.push(newId);
+        }
+      }
+
+      if (categoryIds.length > 0) {
+        const { error: catError } = await supabase.rpc("set_round_categories", {
+          _round_id: round.id,
+          _category_ids: categoryIds,
+        });
+        if (catError) {
+          console.error("set_round_categories :", catError);
+        }
+      }
+    }
+
     // Notification in-app "league lancée" (1ère séance) ou "activité"
     // (séances suivantes) — best effort, ne bloque jamais la création.
     await supabase.rpc("notify_round_created", { _round_id: round.id });
@@ -309,38 +344,6 @@ export default async function LeaguePage({
 
     await supabase.from("leagues").update({ name }).eq("id", id);
     redirect(`/leagues/${id}`);
-  }
-
-  // --- Server Actions : catégories de vote (admin uniquement) ---
-  // Les gardes effectives sont dans les fonctions SQL, qui rejouent le contrôle
-  // d'admin et le plafond de cinq. On se contente ici de remonter le message
-  // d'erreur pour que l'admin sache pourquoi ça n'a pas marché.
-  async function enregistrerCategories(ids: string[]) {
-    "use server";
-    const supabase = await createClient();
-    const { error } = await supabase.rpc("set_league_categories", {
-      _league_id: id,
-      _category_ids: ids,
-    });
-    if (error) {
-      console.error("set_league_categories :", error);
-      return { erreur: error.message };
-    }
-    revalidatePath(`/leagues/${id}`);
-  }
-
-  async function creerCategorie(nom: string) {
-    "use server";
-    const supabase = await createClient();
-    const { error } = await supabase.rpc("create_league_category", {
-      _league_id: id,
-      _name: nom,
-    });
-    if (error) {
-      console.error("create_league_category :", error);
-      return { erreur: error.message };
-    }
-    revalidatePath(`/leagues/${id}`);
   }
 
   // --- Server Action : supprimer la ligue (admin uniquement) ---
@@ -411,21 +414,6 @@ export default async function LeaguePage({
         )}
       </div>
 
-      {/* Catégories de vote — admin uniquement. Placé hors des onglets : c'est
-          une configuration de la ligue, pas un contenu qu'on consulte. */}
-      {isAdmin && (
-        <section className="flex flex-col gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-          <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
-            {t(locale, "categories.titre")}
-          </h2>
-          <LeagueCategoriesForm
-            locale={locale}
-            options={categoryOptions ?? []}
-            enregistrer={enregistrerCategories}
-            creerCategorie={creerCategorie}
-          />
-        </section>
-      )}
 
       <LeagueTabs
         tabs={[
@@ -465,7 +453,10 @@ export default async function LeaguePage({
                     action={createRound}
                     className="mt-4 flex flex-col gap-3"
                   >
-                    <RoundModeDateFields locale={locale} />
+                    <RoundModeDateFields
+                      locale={locale}
+                      categoryOptions={categoryOptions ?? []}
+                    />
 
                     {pageError === "round" && (
                       <p className="text-sm text-red-400">

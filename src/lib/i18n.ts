@@ -259,12 +259,6 @@ export const dict: Record<Locale, Dict> = {
       "Choisis jusqu'à {max} catégories pour les prochaines séances en Compétition officielle. Ciné'Files n'utilise pas de catégories. {n} sélectionnée(s).",
     "categories.propre": "(à vous)",
     "categories.nouvellePlaceholder": "Écrire une catégorie à vous",
-    "categories.ajouter": "Ajouter",
-    "categories.enregistrer": "Enregistrer",
-    "categories.enregistre": "Catégories enregistrées.",
-    "categories.auMoinsUne": "Il faut au moins une catégorie.",
-    "categories.note":
-      "Les séances déjà lancées gardent leurs catégories : un changement ne s'applique qu'aux suivantes.",
 
     // Liste des ligues
     "leagues.toileTitle": "La Toile n° {numero}",
@@ -691,12 +685,6 @@ export const dict: Record<Locale, Dict> = {
       "Pick up to {max} categories for upcoming Official competition screenings. Ciné'Files doesn't use categories. {n} selected.",
     "categories.propre": "(yours)",
     "categories.nouvellePlaceholder": "Write your own category",
-    "categories.ajouter": "Add",
-    "categories.enregistrer": "Save",
-    "categories.enregistre": "Categories saved.",
-    "categories.auMoinsUne": "Pick at least one category.",
-    "categories.note":
-      "Screenings already under way keep their categories: a change only applies to the next ones.",
 
     "leagues.toileTitle": "La Toile no. {numero}",
     "leagues.toileText":

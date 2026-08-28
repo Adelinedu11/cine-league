@@ -501,8 +501,8 @@ export type Database = {
           rang: number | null
         }[]
       }
-      set_league_categories: {
-        Args: { _league_id: string; _category_ids: string[] }
+      set_round_categories: {
+        Args: { _round_id: string; _category_ids: string[] }
         Returns: undefined
       }
       create_league_category: {

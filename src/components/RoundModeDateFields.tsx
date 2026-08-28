@@ -24,8 +24,43 @@ const labelClass = "text-sm font-medium text-[var(--color-cream)]";
  * clôture (le serveur la copie dans les deux colonnes submission_deadline /
  * ceremony_at).
  */
-export default function RoundModeDateFields({ locale }: { locale: Locale }) {
+export const MAX_CATEGORIES = 5;
+
+export type CategoryOption = {
+  id: string;
+  name: string;
+  propre: boolean;
+  choisie: boolean;
+};
+
+export default function RoundModeDateFields({
+  locale,
+  categoryOptions,
+}: {
+  locale: Locale;
+  categoryOptions: CategoryOption[];
+}) {
   const [mode, setMode] = useState<Mode>("competition_officielle");
+
+  // Pré-remplies avec le dernier choix de la ligue — ou tout ce qui est
+  // disponible si elle n'a encore jamais lancé de séance en compétition.
+  const [categories, setCategories] = useState<string[]>(() => {
+    const dejaChoisies = categoryOptions.filter((o) => o.choisie);
+    return (dejaChoisies.length ? dejaChoisies : categoryOptions)
+      .slice(0, MAX_CATEGORIES)
+      .map((o) => o.id);
+  });
+  const plein = categories.length >= MAX_CATEGORIES;
+
+  function basculer(id: string) {
+    setCategories((prev) =>
+      prev.includes(id)
+        ? prev.filter((x) => x !== id)
+        : prev.length >= MAX_CATEGORIES
+          ? prev
+          : [...prev, id],
+    );
+  }
   const [closeMinutes, setCloseMinutes] = useState(
     CINE_FILES_DURATION_PRESETS[2]?.minutes ?? 120,
   );
@@ -74,6 +109,65 @@ export default function RoundModeDateFields({ locale }: { locale: Locale }) {
         <p className="-mt-1 text-xs text-[var(--color-muted)]">
           {t(locale, "cinefiles.createNote")}
         </p>
+      )}
+
+      {/* Catégories de vote — uniquement en Compétition officielle, puisque
+          Ciné'Files se joue en devinant un film mystère et n'a rien à
+          départager. Le choix se fait ICI, à l'ouverture de la séance : c'est
+          le moment où la question se pose. */}
+      {mode === "competition_officielle" && categoryOptions.length > 0 && (
+        <fieldset className="rounded-lg border border-[var(--color-border)] p-3">
+          <legend className={`${labelClass} px-1`}>
+            {t(locale, "categories.titre")}
+          </legend>
+          <p className="mb-2 text-xs text-[var(--color-muted)]">
+            {t(locale, "categories.aide", {
+              n: categories.length,
+              max: MAX_CATEGORIES,
+            })}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {categoryOptions.map((o) => {
+              const active = categories.includes(o.id);
+              return (
+                <button
+                  key={o.id}
+                  type="button"
+                  onClick={() => basculer(o.id)}
+                  disabled={!active && plein}
+                  aria-pressed={active}
+                  className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${
+                    active
+                      ? "border-[var(--color-cream)] bg-[var(--color-sage)]/30 text-[var(--color-cream)]"
+                      : plein
+                        ? "border-[var(--color-border)] text-[var(--color-muted)] opacity-40"
+                        : "border-[var(--color-border)] text-[var(--color-cream)] hover:border-[var(--color-cream)]"
+                  }`}
+                >
+                  {o.name}
+                </button>
+              );
+            })}
+          </div>
+          {/* Transmises au serveur : un champ caché par catégorie retenue. */}
+          {categories.map((id) => (
+            <input key={id} type="hidden" name="category_ids" value={id} />
+          ))}
+
+          {/* Catégorie libre. Volontairement un simple champ de texte plutôt
+              qu'un bouton « ajouter » : le serveur la crée au moment de créer
+              la séance, ce qui évite un aller-retour et un état intermédiaire
+              à gérer. Elle reste privée à la ligue. */}
+          {!plein && (
+            <input
+              type="text"
+              name="custom_category"
+              maxLength={60}
+              placeholder={t(locale, "categories.nouvellePlaceholder")}
+              className={`${inputClass} mt-2 text-xs placeholder:text-[var(--color-cream)]/40`}
+            />
+          )}
+        </fieldset>
       )}
 
       {mode === "cine_files" ? (
