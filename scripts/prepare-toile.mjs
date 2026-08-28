@@ -170,10 +170,18 @@ async function filmPeople(movieId) {
   return ids;
 }
 
-/** Filmographie retenue d'une personne : ses films en tant qu'acteur ou aux postes clés. */
+/**
+ * Filmographie retenue d'une personne, et son métier réel.
+ *
+ * Le métier ne vient PAS de `known_for_department` : ce champ TMDB annonçait
+ * « Writing » pour Luc Besson, ce qui est techniquement défendable et
+ * totalement inutile comme indice — le joueur attend « réalisateur ». On le
+ * déduit donc de la filmographie effectivement retenue.
+ */
 async function personFilms(personId) {
   const credits = await tmdb(`/person/${personId}/movie_credits`);
   const films = new Map(); // id → { title, year }
+  const realises = new Set();
 
   const keep = (m) => {
     if (!m.id || !m.title) return;
@@ -195,9 +203,18 @@ async function personFilms(personId) {
 
   for (const m of credits.cast ?? []) keep(m);
   for (const m of credits.crew ?? []) {
-    if (CREW_JOBS.has(m.job)) keep(m);
+    if (!CREW_JOBS.has(m.job)) continue;
+    keep(m);
+    // On ne compte que si le film a survécu aux filtres.
+    if (m.job === "Director" && films.has(m.id)) realises.add(m.id);
   }
-  return films;
+
+  // Trois films réalisés suffisent à faire un réalisateur : en dessous, c'est
+  // un acteur qui est passé une fois derrière la caméra.
+  const metier =
+    realises.size >= 3 ? "réalisateur ou réalisatrice" : "acteur ou actrice";
+
+  return { films, metier };
 }
 
 // ───────────────────────────────────────────────────────────────────────────
@@ -211,7 +228,7 @@ async function prepareTarget(name, amorcePool) {
     return { name, ok: false, raison: "introuvable sur TMDB" };
   }
 
-  const films = await personFilms(person.id);
+  const { films, metier } = await personFilms(person.id);
   if (films.size < MIN_FILMS) {
     return {
       name,
@@ -318,7 +335,7 @@ async function prepareTarget(name, amorcePool) {
     ok: true,
     tmdb_id: person.id,
     nom: person.name,
-    metier: person.known_for_department ?? null,
+    metier,
     nb_films: films.size,
     nb_collaborateurs: collaborators.size,
     nb_collaborateurs_recurrents: strong.length,
