@@ -6,12 +6,12 @@ import { createClient } from "@/lib/supabase/server";
  * rediriger vers un `next` arbitraire venu de l'URL ouvrirait une faille
  * d'open redirect (un lien de phishing pourrait renvoyer ailleurs).
  */
-const ALLOWED_NEXT = ["/leagues", "/reset-password"] as const;
+const ALLOWED_NEXT = ["/toile", "/leagues", "/reset-password"] as const;
 
 function safeNext(raw: string | null): string {
   return ALLOWED_NEXT.includes((raw ?? "") as (typeof ALLOWED_NEXT)[number])
     ? raw!
-    : "/leagues";
+    : "/toile";
 }
 
 /**

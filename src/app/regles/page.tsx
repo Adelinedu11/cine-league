@@ -9,6 +9,7 @@ import {
   PopTrophy,
 } from "@/components/pop/PopShapes";
 
+
 /**
  * Règles du jeu — page PUBLIQUE.
  *
@@ -70,11 +71,54 @@ export default async function RulesPage() {
           <p className="text-[var(--color-muted)]">{t(locale, "rules.intro")}</p>
         </div>
 
-        {/* --- Comment ça marche : les trois temps d'une séance --- */}
-        <section className="flex flex-col gap-5">
-          <h2 className="font-display text-3xl tracking-wide text-[var(--color-cream)]">
-            {t(locale, "landing.howTitle")}
+        {/* --- La Toile en premier : c'est la porte d'entrée du produit, et
+                le seul mode jouable sans compte ni ami. --- */}
+        <section className="flex flex-col gap-3 rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-gold-bright)]/20 p-6">
+          <PopReel size={64} fill="var(--color-gold-bright)" />
+          <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "rules.toileTitle")}
           </h2>
+          <p className="text-sm text-[var(--color-cream)]/90">
+            {t(locale, "rules.toileIntro")}
+          </p>
+          <p className="text-sm text-[var(--color-cream)]/90">
+            {t(locale, "rules.toileAmorce")}
+          </p>
+          <p className="text-sm text-[var(--color-cream)]/90">
+            {t(locale, "rules.toileFilm")}
+          </p>
+          <p className="text-sm text-[var(--color-cream)]/90">
+            {t(locale, "rules.toilePersonne")}
+          </p>
+          <p className="text-sm text-[var(--color-cream)]/90">
+            {t(locale, "rules.toileBrulant")}
+          </p>
+          <p className="text-sm text-[var(--color-cream)]/90">
+            {t(locale, "rules.toileIndices")}
+          </p>
+          <Link
+            href="/toile"
+            className="font-display mt-2 inline-block self-start rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-surface)] px-5 py-2.5 tracking-wide text-[var(--color-cream)] transition-transform hover:-translate-y-0.5"
+          >
+            {t(locale, "landing.toileCta")}
+          </Link>
+        </section>
+
+        {/* --- Les ligues --- */}
+        <div className="flex flex-col gap-2">
+          <h2 className="font-display text-3xl tracking-wide text-[var(--color-gold)]">
+            {t(locale, "rules.leaguesTitle")}
+          </h2>
+          <p className="text-sm text-[var(--color-muted)]">
+            {t(locale, "rules.leaguesIntro")}
+          </p>
+        </div>
+
+        {/* --- Comment marche une séance --- */}
+        <section className="flex flex-col gap-5">
+          <h3 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "landing.howTitle")}
+          </h3>
           <ol className="flex flex-col gap-4">
             {steps.map((step, i) => (
               <li
@@ -100,11 +144,11 @@ export default async function RulesPage() {
           </ol>
         </section>
 
-        {/* --- Le détail des deux modes --- */}
+        {/* --- Le détail des deux modes de séance --- */}
         <section className="flex flex-col gap-5">
-          <h2 className="font-display text-3xl tracking-wide text-[var(--color-cream)]">
+          <h3 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
             {t(locale, "landing.modesTitle")}
-          </h2>
+          </h3>
 
           {/* Compétition officielle */}
           <article className="flex flex-col gap-3 rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-surface)] p-6">

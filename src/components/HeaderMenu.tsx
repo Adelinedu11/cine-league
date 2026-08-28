@@ -74,6 +74,15 @@ export default function HeaderMenu({
             </span>
           </div>
 
+          {/* La Toile en tête : c'est le geste quotidien, et donc la première
+              chose qu'on vient chercher. */}
+          <Link
+            href="/toile"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-[var(--color-cream)] transition-colors hover:bg-[var(--color-surface-alt)]"
+          >
+            {t(locale, "header.toile")}
+          </Link>
           {/* Le logo de l'en-tête mène désormais aux règles : ce raccourci
               reprend le retour vers les leagues qu'il assurait avant. Sans lui,
               on n'aurait plus aucun chemin direct depuis le fond d'une séance. */}

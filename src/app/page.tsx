@@ -27,8 +27,10 @@ export default async function LandingPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Un visiteur déjà connecté va droit au jeu du jour : c'est ce qu'il vient
+  // chercher, et la vitrine ne lui apprend plus rien.
   if (user) {
-    redirect("/leagues");
+    redirect("/toile");
   }
 
   const locale = await getLocale();
@@ -161,20 +163,22 @@ export default async function LandingPage() {
           </div>
         </section>
 
-        {/* --- League publique --- */}
+        {/* --- La Toile : le jeu du jour, sans compte ni amis --- */}
         <section className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-yellow)]/30 p-6">
           <div className="relative z-10 max-w-md">
             <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
-              {t(locale, "landing.publicTitle")}
+              {t(locale, "landing.toileTitle")}
             </h2>
             <p className="mt-2 text-sm text-[var(--color-cream)]/85">
-              {t(locale, "landing.publicText")}
+              {t(locale, "landing.toileText")}
             </p>
+            {/* Aucun compte demandé : c'est la porte d'entrée du produit, et
+                exiger une inscription ici reviendrait à la fermer. */}
             <Link
-              href="/login?mode=signup"
+              href="/toile"
               className="font-display mt-5 inline-block rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-surface)] px-5 py-2.5 tracking-wide text-[var(--color-cream)] transition-transform hover:-translate-y-0.5"
             >
-              {t(locale, "landing.ctaSignUp")}
+              {t(locale, "landing.toileCta")}
             </Link>
           </div>
           <div

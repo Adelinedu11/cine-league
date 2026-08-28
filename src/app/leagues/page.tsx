@@ -29,15 +29,12 @@ export default async function LeaguesPage({
   // Ligues dont l'utilisateur est déjà membre.
   const { data: memberships } = await supabase
     .from("league_members")
-    .select("league:leagues(id, name, invite_code, is_public)")
+    .select("league:leagues(id, name, invite_code)")
     .eq("user_id", user.id);
 
-  // La league publique remonte en tête : c'est celle où tout le monde a
-  // quelque chose à faire, y compris un compte tout neuf sans amis inscrits.
   const leagues = (memberships ?? [])
     .map((m) => m.league)
-    .filter((league) => league !== null)
-    .sort((a, b) => Number(b.is_public) - Number(a.is_public));
+    .filter((league) => league !== null);
 
   // --- Server Action : créer une ligue ---
   async function createLeague(formData: FormData) {
@@ -154,22 +151,9 @@ export default async function LeaguesPage({
                   href={`/leagues/${league.id}`}
                   className="block transition-opacity hover:opacity-90"
                 >
-                  <TicketStub
-                    stub={
-                      league.is_public
-                        ? t(locale, "leagues.publicStub")
-                        : league.invite_code
-                    }
-                  >
-                    <span className="flex flex-wrap items-center gap-2">
-                      <span className="font-medium uppercase text-[var(--color-cream)]">
-                        {league.name}
-                      </span>
-                      {league.is_public && (
-                        <span className="font-mono rounded border border-[var(--color-sage)] bg-[var(--color-sage)]/20 px-1.5 py-0.5 text-[10px] tracking-wide text-[var(--color-sage-ink)]">
-                          {t(locale, "leagues.publicBadge")}
-                        </span>
-                      )}
+                  <TicketStub stub={league.invite_code}>
+                    <span className="font-medium uppercase text-[var(--color-cream)]">
+                      {league.name}
                     </span>
                   </TicketStub>
                 </Link>

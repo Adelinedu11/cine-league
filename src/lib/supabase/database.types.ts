@@ -281,21 +281,18 @@ export type Database = {
           created_at: string | null
           id: string
           invite_code: string
-          is_public: boolean
           name: string
         }
         Insert: {
           created_at?: string | null
           id?: string
           invite_code?: string
-          is_public?: boolean
           name: string
         }
         Update: {
           created_at?: string | null
           id?: string
           invite_code?: string
-          is_public?: boolean
           name?: string
         }
         Relationships: []
@@ -497,10 +494,6 @@ export type Database = {
       toile_reveler: {
         Args: { _jour: string }
         Returns: Json
-      }
-      public_league_id: {
-        Args: Record<string, never>
-        Returns: string | null
       }
       round_credit_overlaps: {
         Args: { _round_id: string; _people: string[] }

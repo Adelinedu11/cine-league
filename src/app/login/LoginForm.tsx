@@ -92,7 +92,9 @@ export default function LoginForm({
     // Navigation en dur (et non router.push) : elle force un aller-retour
     // serveur, sans quoi les Server Components ne verraient pas la session
     // fraîchement posée dans les cookies.
-    window.location.href = "/leagues";
+    // La Toile est le premier écran de Ciné League : c'est le geste quotidien,
+    // et il ne demande ni league ni ami pour avoir de l'intérêt.
+    window.location.href = "/toile";
   }
 
   const isSignUp = mode === "signup";

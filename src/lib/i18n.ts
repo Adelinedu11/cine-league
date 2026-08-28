@@ -25,6 +25,7 @@ export const dict: Record<Locale, Dict> = {
     "common.sending": "Envoi…",
 
     // Profil
+    "header.toile": "La Toile — jeu du jour",
     "header.myLeagues": "Mes ligues",
     "header.profile": "Mon profil",
     "header.theme": "Thème",
@@ -181,11 +182,30 @@ export const dict: Record<Locale, Dict> = {
     "landing.mode2Text":
       "Chacun cache un film. Aux autres de le deviner en vingt essais, avec des indices de plus en plus généreux.",
 
-    "landing.publicTitle": "Pas encore d'amis sur Ciné League ?",
-    "landing.publicText":
-      "La league publique est ouverte à tous les inscrits. Tu y entres automatiquement, tu joues avec ceux qui sont là, et tu crées ta league privée quand tu veux.",
+    "landing.toileTitle": "Pas encore d'amis sur Ciné League ?",
+    "landing.toileText":
+      "Joue à La Toile : chaque jour, une personnalité du cinéma à démasquer en proposant des films. Sans compte, sans amis, en cinq minutes.",
+    "landing.toileCta": "Jouer à La Toile",
 
     "landing.footer": "Ciné League — vos soirées ciné, en compétition.",
+
+    // Règles — La Toile
+    "rules.toileTitle": "La Toile — le jeu du jour",
+    "rules.toileIntro":
+      "Chaque jour, une réalisatrice, un réalisateur, une actrice ou un acteur se cache. Pour le démasquer, tu proposes des films — ou des noms. Sans compte, en quelques minutes.",
+    "rules.toileAmorce":
+      "La partie s'ouvre sur une amorce : un film qui partage exactement une personne avec la cible. À toi de trouver laquelle.",
+    "rules.toileFilm":
+      "Chaque film proposé te dit qui, dans son générique, a déjà travaillé avec la cible, et sur combien de films. Un acteur à trois films est une piste bien plus chaude qu'une apparition unique.",
+    "rules.toilePersonne":
+      "Chaque nom proposé te dit combien de films cette personne a tournés avec la cible. Zéro film raye la piste, un film t'oriente.",
+    "rules.toileBrulant":
+      "Si tu proposes un film où la cible figure, on te le dit : brûlant. Mais il reste à la nommer — c'est en la nommant qu'on gagne.",
+    "rules.toileIndices":
+      "Pas de limite d'essais : ton score, c'est le nombre de coups. Au 10e, au 15e et au 20e essai, un indice se débloque — l'époque de son premier film, le nombre de films à son actif, puis son pays de naissance.",
+    "rules.leaguesTitle": "Les ligues — jouer entre amis",
+    "rules.leaguesIntro":
+      "Une ligue réunit des gens qui se connaissent. On y organise des séances : un thème, des films, un vote, une cérémonie.",
 
     // La Toile — jeu du jour
     "toile.amorce": "AMORCE",
@@ -226,8 +246,6 @@ export const dict: Record<Locale, Dict> = {
     "leagues.createError": "La création a échoué, réessaie.",
     "leagues.createButton": "Créer",
     "leagues.joinTitle": "Rejoindre une ligue",
-    "leagues.publicBadge": "PUBLIQUE",
-    "leagues.publicStub": "OPEN",
     "leagues.inviteLabel": "Code d'invitation",
     "leagues.invitePlaceholder": "Ex : ABC123",
     "leagues.invalidCode": "Code invalide.",
@@ -398,6 +416,7 @@ export const dict: Record<Locale, Dict> = {
     "common.sending": "Sending…",
 
     // Profile
+    "header.toile": "La Toile — daily game",
     "header.myLeagues": "My leagues",
     "header.profile": "My profile",
     "header.theme": "Theme",
@@ -552,15 +571,34 @@ export const dict: Record<Locale, Dict> = {
     "landing.mode2Text":
       "Everyone hides a film. The others get twenty guesses to find it, with hints growing kinder as they go.",
 
-    "landing.publicTitle": "No friends on Ciné League yet?",
-    "landing.publicText":
-      "The public league is open to every member. You're added automatically, you play with whoever's around, and you can start your own private league any time.",
+    "landing.toileTitle": "No friends on Ciné League yet?",
+    "landing.toileText":
+      "Play La Toile: every day, a film personality to unmask by naming films. No account, no friends, five minutes.",
+    "landing.toileCta": "Play La Toile",
 
     "landing.footer": "Ciné League — movie nights, made competitive.",
 
     // Home
 
     // Leagues list
+    // Rules — La Toile
+    "rules.toileTitle": "La Toile — the daily game",
+    "rules.toileIntro":
+      "Every day, a director or an actor is hiding. To unmask them, you name films — or people. No account needed, a few minutes at most.",
+    "rules.toileAmorce":
+      "The game opens on a clue film: it shares exactly one person with the target. Work out who.",
+    "rules.toileFilm":
+      "Each film you name tells you who in its credits has worked with the target, and on how many films. A three-film regular is a far hotter lead than a one-off.",
+    "rules.toilePersonne":
+      "Each name you try tells you how many films that person made with the target. Zero rules the lead out, one points you somewhere.",
+    "rules.toileBrulant":
+      "Name a film the target appears in and we'll say so: burning. But you still have to name them — naming is how you win.",
+    "rules.toileIndices":
+      "No guess limit: your score is the number of guesses. Hints unlock on the 10th, 15th and 20th try — the decade of their first film, how many films they've made, then their country of birth.",
+    "rules.leaguesTitle": "Leagues — playing with friends",
+    "rules.leaguesIntro":
+      "A league brings together people who know each other. You run screenings: a theme, films, a vote, a ceremony.",
+
     // La Toile — daily game
     "toile.amorce": "OPENING CLUE",
     "toile.amorceExplication":
@@ -599,8 +637,6 @@ export const dict: Record<Locale, Dict> = {
     "leagues.createError": "Creation failed, try again.",
     "leagues.createButton": "Create",
     "leagues.joinTitle": "Join a league",
-    "leagues.publicBadge": "PUBLIC",
-    "leagues.publicStub": "OPEN",
     "leagues.inviteLabel": "Invite code",
     "leagues.invitePlaceholder": "e.g. ABC123",
     "leagues.invalidCode": "Invalid code.",
