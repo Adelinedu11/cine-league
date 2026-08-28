@@ -28,11 +28,26 @@ drop function if exists public.join_public_league_on_signup();
 -- =====================================================================
 -- Les adhésions d'abord : on ne présume pas d'un ON DELETE CASCADE sur une
 -- table créée hors migration.
+--
+-- Le bloc conditionnel n'est pas de la coquetterie : la section 4 supprime la
+-- colonne `is_public`, donc au second passage ces deux DELETE échoueraient sur
+-- une colonne inexistante. La première version de ce fichier se prétendait
+-- rejouable et ne l'était pas — elle cassait sur sa propre trace.
 
-delete from public.league_members
-where league_id in (select id from public.leagues where is_public);
+do $$
+begin
+  if exists (
+    select 1 from information_schema.columns
+    where table_schema = 'public'
+      and table_name = 'leagues'
+      and column_name = 'is_public'
+  ) then
+    delete from public.league_members
+    where league_id in (select id from public.leagues where is_public);
 
-delete from public.leagues where is_public;
+    delete from public.leagues where is_public;
+  end if;
+end $$;
 
 -- =====================================================================
 -- 3. Retour à des policies simples
