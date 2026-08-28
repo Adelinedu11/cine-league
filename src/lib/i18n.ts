@@ -187,6 +187,24 @@ export const dict: Record<Locale, Dict> = {
 
     "landing.footer": "Ciné League — vos soirées ciné, en compétition.",
 
+    // La Toile — jeu du jour
+    "toile.amorce": "AMORCE",
+    "toile.amorceExplication":
+      "Ce film partage exactement une personne avec la cible. À toi de trouver laquelle.",
+    "toile.indiceMetier": "La cible est {metier}.",
+    "toile.placeholder": "Un film ou une personne",
+    "toile.dejaJoue": "déjà joué",
+    "toile.brulant": "Brûlant — la cible est dans ce film. Reste à la nommer.",
+    "toile.aucunePersonne": "Aucune personne en commun.",
+    "toile.nFilms": "{n} film(s)",
+    "toile.aucunFilm": "aucun film avec la cible",
+    "toile.nEssais": "{n} essai(s)",
+    "toile.abandonner": "Donner sa langue au chat",
+    "toile.gagne": "Trouvé en {coups} coups !",
+    "toile.perdu": "C'était…",
+    "toile.aucunePartie": "Pas de partie ce jour-là.",
+    "toile.versLeagues": "Mes ligues →",
+
     // Liste des ligues
     "leagues.welcomeTitle": "Bienvenue sur Ciné League",
     "leagues.welcomeIntro":
@@ -538,6 +556,24 @@ export const dict: Record<Locale, Dict> = {
     // Home
 
     // Leagues list
+    // La Toile — daily game
+    "toile.amorce": "OPENING CLUE",
+    "toile.amorceExplication":
+      "This film shares exactly one person with the target. Work out who.",
+    "toile.indiceMetier": "The target is {metier}.",
+    "toile.placeholder": "A film or a person",
+    "toile.dejaJoue": "already played",
+    "toile.brulant": "Burning — the target is in this film. Now name them.",
+    "toile.aucunePersonne": "No one in common.",
+    "toile.nFilms": "{n} film(s)",
+    "toile.aucunFilm": "no film with the target",
+    "toile.nEssais": "{n} guess(es)",
+    "toile.abandonner": "Give up",
+    "toile.gagne": "Found in {coups} guesses!",
+    "toile.perdu": "It was…",
+    "toile.aucunePartie": "No game that day.",
+    "toile.versLeagues": "My leagues →",
+
     "leagues.welcomeTitle": "Welcome to Ciné League",
     "leagues.welcomeIntro":
       "Create or join a league to play with friends: submit films, vote, guess mystery films, and climb the standings.",

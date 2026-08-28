@@ -237,6 +237,45 @@ export type Database = {
           },
         ]
       }
+      toile_films: {
+        Row: {
+          annee: string | null
+          fetched_at: string
+          titre: string
+          tmdb_movie_id: number
+        }
+        Insert: {
+          annee?: string | null
+          fetched_at?: string
+          titre: string
+          tmdb_movie_id: number
+        }
+        Update: {
+          annee?: string | null
+          fetched_at?: string
+          titre?: string
+          tmdb_movie_id?: number
+        }
+        Relationships: []
+      }
+      toile_film_people: {
+        Row: {
+          nom: string
+          tmdb_movie_id: number
+          tmdb_person_id: number
+        }
+        Insert: {
+          nom: string
+          tmdb_movie_id: number
+          tmdb_person_id: number
+        }
+        Update: {
+          nom?: string
+          tmdb_movie_id?: number
+          tmdb_person_id?: number
+        }
+        Relationships: []
+      }
       leagues: {
         Row: {
           created_at: string | null
@@ -438,6 +477,22 @@ export type Database = {
       join_league_by_code: {
         Args: { _code: string; _display_name: string }
         Returns: string | null
+      }
+      toile_du_jour: {
+        Args: { _jour?: string }
+        Returns: Json
+      }
+      toile_essai_film: {
+        Args: { _jour: string; _movie_id: number }
+        Returns: Json
+      }
+      toile_essai_personne: {
+        Args: { _jour: string; _person_id: number }
+        Returns: Json
+      }
+      toile_reveler: {
+        Args: { _jour: string }
+        Returns: Json
       }
       public_league_id: {
         Args: Record<string, never>
