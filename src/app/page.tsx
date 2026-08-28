@@ -86,12 +86,16 @@ export default async function LandingPage() {
             {t(locale, "landing.pitch")}
           </p>
 
+          {/* L'action principale est de JOUER, pas de s'inscrire. La Toile ne
+              demande pas de compte : mettre l'inscription en premier
+              reviendrait à poser une barrière devant la seule chose qu'on peut
+              essayer en trente secondes. */}
           <div className="mt-8 flex w-full max-w-xs flex-col gap-3">
             <Link
-              href="/login?mode=signup"
+              href="/toile"
               className="font-display rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-gold)] px-6 py-3 text-xl tracking-wide text-[var(--color-bg)] transition-transform hover:-translate-y-0.5 active:translate-y-0"
             >
-              {t(locale, "landing.ctaSignUp")}
+              {t(locale, "landing.ctaJouer")}
             </Link>
             <Link
               href="/login"
@@ -106,11 +110,47 @@ export default async function LandingPage() {
           </p>
         </section>
 
-        {/* --- Comment ça marche --- */}
-        <section className="flex flex-col gap-5">
-          <h2 className="font-display text-3xl tracking-wide text-[var(--color-cream)]">
-            {t(locale, "landing.howTitle")}
+        {/* --- La Toile, juste après le héros : c'est le geste quotidien et la
+                seule chose jouable sans compte ni ami. --- */}
+        <section className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-gold-bright)]/25 p-6">
+          <div className="relative z-10 max-w-md">
+            <PopReel size={64} fill="var(--color-gold-bright)" />
+            <h2 className="font-display mt-3 text-3xl tracking-wide text-[var(--color-cream)]">
+              {t(locale, "landing.toileTitle")}
+            </h2>
+            <p className="mt-2 text-[var(--color-cream)]/90">
+              {t(locale, "landing.toileText")}
+            </p>
+            <Link
+              href="/toile"
+              className="font-display mt-5 inline-block rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-surface)] px-5 py-2.5 tracking-wide text-[var(--color-cream)] transition-transform hover:-translate-y-0.5"
+            >
+              {t(locale, "landing.toileCta")}
+            </Link>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-5 -right-3 hidden rotate-12 sm:block"
+          >
+            <PopPopcorn size={116} />
+          </div>
+        </section>
+
+        {/* --- Bascule vers l'autre moitié du produit --- */}
+        <div className="flex flex-col gap-2">
+          <h2 className="font-display text-3xl tracking-wide text-[var(--color-gold)]">
+            {t(locale, "landing.leaguesTitle")}
           </h2>
+          <p className="text-[var(--color-muted)]">
+            {t(locale, "landing.leaguesText")}
+          </p>
+        </div>
+
+        {/* --- Comment marche une séance --- */}
+        <section className="flex flex-col gap-5">
+          <h3 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "landing.howTitle")}
+          </h3>
           <ol className="flex flex-col gap-4">
             {steps.map((step, i) => (
               <li
@@ -136,11 +176,11 @@ export default async function LandingPage() {
           </ol>
         </section>
 
-        {/* --- Les deux modes --- */}
+        {/* --- Les deux modes de séance --- */}
         <section className="flex flex-col gap-5">
-          <h2 className="font-display text-3xl tracking-wide text-[var(--color-cream)]">
+          <h3 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
             {t(locale, "landing.modesTitle")}
-          </h2>
+          </h3>
           <div className="grid gap-4 sm:grid-cols-2">
             <article className="rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-gold-bright)]/25 p-5">
               <PopTicket size={80} fill="var(--color-gold-bright)" />
@@ -163,30 +203,22 @@ export default async function LandingPage() {
           </div>
         </section>
 
-        {/* --- La Toile : le jeu du jour, sans compte ni amis --- */}
-        <section className="relative overflow-hidden rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-yellow)]/30 p-6">
-          <div className="relative z-10 max-w-md">
-            <h2 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
-              {t(locale, "landing.toileTitle")}
-            </h2>
-            <p className="mt-2 text-sm text-[var(--color-cream)]/85">
-              {t(locale, "landing.toileText")}
-            </p>
-            {/* Aucun compte demandé : c'est la porte d'entrée du produit, et
-                exiger une inscription ici reviendrait à la fermer. */}
-            <Link
-              href="/toile"
-              className="font-display mt-5 inline-block rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-surface)] px-5 py-2.5 tracking-wide text-[var(--color-cream)] transition-transform hover:-translate-y-0.5"
-            >
-              {t(locale, "landing.toileCta")}
-            </Link>
-          </div>
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-5 -right-3 hidden rotate-12 sm:block"
+        {/* --- Créer un compte : demandé ICI, et pas avant. Une inscription se
+                justifie quand on veut jouer avec des gens ; pour La Toile elle
+                n'a aucun sens. --- */}
+        <section className="rounded-2xl border-2 border-[var(--color-cream)] bg-[var(--color-yellow)]/30 p-6 text-center">
+          <h3 className="font-display text-2xl tracking-wide text-[var(--color-cream)]">
+            {t(locale, "landing.compteTitle")}
+          </h3>
+          <p className="mx-auto mt-2 max-w-md text-sm text-[var(--color-cream)]/85">
+            {t(locale, "landing.compteText")}
+          </p>
+          <Link
+            href="/login?mode=signup"
+            className="font-display mt-5 inline-block rounded-xl border-2 border-[var(--color-cream)] bg-[var(--color-gold)] px-6 py-3 text-lg tracking-wide text-[var(--color-bg)] transition-transform hover:-translate-y-0.5"
           >
-            <PopPopcorn size={116} />
-          </div>
+            {t(locale, "landing.ctaSignUp")}
+          </Link>
         </section>
 
         <footer className="flex flex-col items-center gap-3 pt-4 text-center">

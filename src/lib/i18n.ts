@@ -155,13 +155,19 @@ export const dict: Record<Locale, Dict> = {
       "Ce lien a expiré ou a déjà été utilisé. Demandes-en un nouveau.",
 
     // Page de garde publique (/) — visible sans compte
-    "landing.tagline": "LE CINÉ, MAIS EN COMPÉTITION",
+    "landing.tagline": "UN JEU DE CINÉMA PAR JOUR",
     "landing.pitch":
-      "Un thème, un film chacun, un vote en aveugle. Et une cérémonie pour découvrir qui avait le meilleur goût.",
+      "Chaque jour, une personnalité du cinéma à démasquer. Et des ligues pour organiser vos soirées ciné en compétition, entre amis.",
+    "landing.ctaJouer": "Jouer maintenant",
     "landing.ctaSignUp": "Créer un compte",
     "landing.ctaSignIn": "J'ai déjà un compte",
-    "landing.ctaNote":
-      "Gratuit, et tu rejoins la league publique dès l'inscription — pas besoin d'amis inscrits.",
+    "landing.ctaNote": "Sans compte, sans installation. Deux minutes.",
+    "landing.leaguesTitle": "Et avec vos amis : les ligues",
+    "landing.leaguesText":
+      "Une ligue réunit des gens qui se connaissent. On y organise des séances : un thème, des films, un vote, une cérémonie.",
+    "landing.compteTitle": "Envie de jouer à plusieurs ?",
+    "landing.compteText":
+      "Le compte ne sert qu'aux ligues — et à garder ta série de jours à La Toile. Gratuit, et il ne demande qu'un pseudo.",
 
     "landing.howTitle": "Comment ça marche",
     "landing.step1Title": "Un thème est lancé",
@@ -544,13 +550,19 @@ export const dict: Record<Locale, Dict> = {
     "reset.expired": "This link has expired or was already used. Request a new one.",
 
     // Public landing page (/) — visible without an account
-    "landing.tagline": "MOVIE NIGHTS, MADE COMPETITIVE",
+    "landing.tagline": "A FILM GAME EVERY DAY",
     "landing.pitch":
-      "One theme, one film each, a blind vote. Then a ceremony to find out who really has taste.",
+      "Every day, a film personality to unmask. Plus leagues to turn your movie nights into a competition with friends.",
+    "landing.ctaJouer": "Play now",
     "landing.ctaSignUp": "Create an account",
     "landing.ctaSignIn": "I already have an account",
-    "landing.ctaNote":
-      "Free, and you join the public league the moment you sign up — no friends required.",
+    "landing.ctaNote": "No account, no install. Two minutes.",
+    "landing.leaguesTitle": "And with friends: leagues",
+    "landing.leaguesText":
+      "A league brings together people who know each other. You run screenings: a theme, films, a vote, a ceremony.",
+    "landing.compteTitle": "Want to play with others?",
+    "landing.compteText":
+      "The account is only for leagues — and to keep your daily streak on La Toile. Free, and all it asks for is a nickname.",
 
     "landing.howTitle": "How it works",
     "landing.step1Title": "A theme goes live",
