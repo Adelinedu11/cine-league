@@ -1,4 +1,40 @@
-# Le jeu du jour — deviner une personnalité par ses collaborations
+# La Toile — deviner une personnalité par ses collaborations
+
+**Nom retenu : La Toile.** Le mot dit les deux choses à la fois — l'écran de
+cinéma (« se faire une toile ») et le réseau, le maillage, la toile d'araignée,
+c'est-à-dire la matière même du jeu : ce graphe de gens qui ont travaillé
+ensemble. Il nomme le sujet *et* la mécanique, sans notice.
+
+Court, partageable (« La Toile n° 42, trouvé en 6 »), et distinct de
+« Ciné League », dont ce n'est qu'un mode.
+
+*Inconvénient assumé : c'est un mot courant, qui désigne aussi le Web. Le jeu
+sera plus difficile à retrouver dans un moteur de recherche qu'un nom
+distinctif. Écarté au profit du gain de sens.*
+
+---
+
+## Les règles, telles qu'on les présente au joueur
+
+> **Trouve la personnalité du jour.**
+>
+> Chaque jour, une réalisatrice, un réalisateur, une actrice ou un acteur se
+> cache. Pour le démasquer, propose des films — ou des noms.
+>
+> **La partie s'ouvre sur une amorce :** un film qui partage exactement une
+> personne avec la cible. À toi de trouver laquelle.
+>
+> **Chaque film proposé** te dit qui, dans son générique, a déjà travaillé avec
+> la cible, et sur combien de films. Un acteur à trois films est une piste bien
+> plus chaude qu'une apparition unique.
+>
+> **Chaque nom proposé** te dit combien de films cette personne a tournés avec
+> la cible. Zéro film raye la piste. Un film t'oriente.
+>
+> **Tu gagnes** en nommant la cible — ou en citant n'importe lequel de ses
+> films.
+>
+> Pas de limite d'essais. Ton score, c'est le nombre de coups.
 
 Issu de la séance de conception du 27/08/2026 et de deux parties tests jouées à
 la main : Wes Anderson en 4 essais sans amorce, Ridley Scott en 6 essais avec
