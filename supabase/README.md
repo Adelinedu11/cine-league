@@ -43,6 +43,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `030_toile_indices.sql` | Échelle d'indices de La Toile : colonnes `indice_epoque` / `indice_pays` / `indice_nb_films` + RPC `toile_indice(_jour, _rang)`. Paliers 10/15/20 vérifiés côté interface seulement — aucun indice ne révèle la cible à lui seul. | 029 |
 | `031_retrait_league_publique.sql` | **Défait la league publique de `028`** (trigger d'adhésion auto, league officielle, colonne `is_public`, `public_league_id`), remplacée par La Toile. **Garde le vrai apport de 028** : plus aucune policy d'insertion sur `league_members`, l'adhésion passe exclusivement par `create_league()` et `join_league_by_code()`. | 028, 029 |
 | `032_categories_par_ligue.sql` | Catégories choisies par ligue (5 max) : colonne `league_id` sur `categories` (null = catalogue commun), tables `league_categories` (sélection) et `round_categories` (photo prise au lancement par déclencheur), RPC `set_league_categories`, `create_league_category`, `round_categories_list`, `league_categories_options`. **On ne supprime jamais une ligne de `categories`** — `get_round_results` y joint les votes pour le nom affiché. | 001, 008 |
+| `033_categories_competition_seulement.sql` | Le déclencheur de photo ignore les séances qui ne sont pas en Compétition officielle (Ciné'Files n'a pas de catégories), et nettoie les photos inutiles posées par `032` — sauf sur les séances ayant des votes. | 032 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

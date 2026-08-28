@@ -254,9 +254,9 @@ export const dict: Record<Locale, Dict> = {
     "toile.statutAbandon": "Partie du jour terminée",
 
     // Catégories de vote d'une ligue
-    "categories.titre": "Catégories de vote",
+    "categories.titre": "Catégories de vote — Compétition officielle",
     "categories.aide":
-      "Choisis jusqu'à {max} catégories pour les prochaines séances. {n} sélectionnée(s).",
+      "Choisis jusqu'à {max} catégories pour les prochaines séances en Compétition officielle. Ciné'Files n'utilise pas de catégories. {n} sélectionnée(s).",
     "categories.propre": "(à vous)",
     "categories.nouvellePlaceholder": "Écrire une catégorie à vous",
     "categories.ajouter": "Ajouter",
@@ -686,9 +686,9 @@ export const dict: Record<Locale, Dict> = {
     "toile.statutAbandon": "Today's game is over",
 
     // League voting categories
-    "categories.titre": "Voting categories",
+    "categories.titre": "Voting categories — Official competition",
     "categories.aide":
-      "Pick up to {max} categories for upcoming screenings. {n} selected.",
+      "Pick up to {max} categories for upcoming Official competition screenings. Ciné'Files doesn't use categories. {n} selected.",
     "categories.propre": "(yours)",
     "categories.nouvellePlaceholder": "Write your own category",
     "categories.ajouter": "Add",
