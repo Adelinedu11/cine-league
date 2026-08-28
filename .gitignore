@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# La Toile — cache des réponses TMDB (des milliers de fichiers, reconstructible
+# à tout moment en relançant le script). Le résultat, lui, est versionné.
+/scripts/.cache
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

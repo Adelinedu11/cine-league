@@ -31,8 +31,10 @@ distinctif. Écarté au profit du gain de sens.*
 > **Chaque nom proposé** te dit combien de films cette personne a tournés avec
 > la cible. Zéro film raye la piste. Un film t'oriente.
 >
-> **Tu gagnes** en nommant la cible — ou en citant n'importe lequel de ses
-> films.
+> **Si tu proposes un film où elle figure**, on te le dit : brûlant, la cible
+> est dans ce film. Mais il reste à la nommer.
+>
+> **Tu gagnes en la nommant.**
 >
 > Pas de limite d'essais. Ton score, c'est le nombre de coups.
 
@@ -111,10 +113,22 @@ personne.
 collaborations qui fait le thermomètre, pas les degrés de séparation — dans un
 graphe aussi dense, tout le monde est à deux degrés de tout le monde.
 
-**Citer un film de la cible fait gagner.** La règle se généralise seule : le
-moteur cherche les personnes communes entre le film proposé et la cible, et il
-trouve la cible elle-même. Même code que la cible soit derrière ou devant la
-caméra. Un seul champ de saisie, une seule mécanique.
+**Citer un film de la cible ne fait PAS gagner — il annonce « brûlant ».**
+On ne gagne qu'en nommant la personne.
+
+La première version faisait gagner sur le film, parce que la règle se
+généralisait élégamment : le moteur cherche les personnes communes entre le film
+proposé et la cible, et il trouve la cible elle-même — même code qu'elle soit
+derrière ou devant la caméra. Élégant, mais faux pour le joueur, et ce sont deux
+choses différentes.
+
+Deux défauts, l'un et l'autre rédhibitoires. On pouvait **gagner par accident**,
+en tentant un film au hasard qui se trouvait être le sien, sans avoir rien
+déduit. Et on pouvait gagner **sans jamais prononcer le nom**, dans un jeu qui
+s'appelle « trouve la personnalité ».
+
+Le film brûlant reste donc un indice — le plus fort du jeu — et le nom reste le
+moment de victoire. Le coût est d'un clic, et ce clic est la récompense.
 
 **Pas de limite d'essais.** Avec une limite, un essai froid coûte, le joueur
 devient prudent et ne tente que ce dont il est sûr — l'inverse de ce que ce jeu
@@ -160,12 +174,29 @@ partage **qu'une seule** personne, pour que le fil soit unique.
 film* il a croisé la cible. C'est l'information qui débloque, et elle donne
 presque la réponse — donc elle doit coûter cher.
 
-**Classement ou distribution ?** Un classement strict « en moins de coups »
-se heurte à l'arithmétique : sur mille joueurs, trois cents seront à quatre
-essais, et départager au chronomètre récompense les insomniaques. Une
-distribution — « trouvé en 4 coups, comme 23 % des joueurs » — plus une série
-de jours consécutifs colle mieux au format. Le classement strict garde tout son
-sens dans les leagues, où l'on connaît les gens.
+**Rang par ordre d'arrivée** — repris de Cémantix, et c'est la solution au
+problème du classement. « Tu es le 247ᵉ à trouver aujourd'hui » ne classe pas
+par performance mais par ordre d'arrivée dans la journée : aucune égalité à
+départager, aucune humiliation (être 247ᵉ n'est pas être mauvais), et une petite
+urgence à jouer tôt. Un classement strict « en moins de coups » se heurterait à
+l'arithmétique — sur mille joueurs, trois cents seraient à quatre essais, et
+départager au chronomètre récompense les insomniaques. Le classement strict
+garde tout son sens dans les leagues, où l'on connaît les gens.
+
+**Pas de pourcentage de proximité.** La tentation vient de Cémantix, dont la
+température mesure une vraie distance sémantique continue. La Toile n'a pas de
+continuum : elle a des faits discrets (cette personne a fait tant de films avec
+la cible). Afficher un pourcentage supposerait d'inventer une distance qui
+n'existe pas — et un thermomètre qui ment est pire que pas de thermomètre.
+L'intensité honnête existe déjà : le nombre de films partagés, éventuellement
+exprimé en ratio (« 3 films sur les 12 de la cible »).
+
+**« Découvre la personnalité d'hier »**, jamais « la cible d'hier était X ».
+Écrire le nom tue le rejeu : on ne rejoue pas une partie dont on connaît la
+réponse. Le lien doit intriguer, pas résoudre.
+
+**Compteur de joueurs du jour :** à afficher ou non selon le volume. Décision
+d'Adeline : l'afficher même bas, assumer les débuts.
 
 **Jouer sans compte ?** Proposition : partie anonyme mémorisée dans le
 navigateur, compte demandé seulement pour conserver sa série. C'est ce qui

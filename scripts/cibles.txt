@@ -1,0 +1,37 @@
+# Réserve de cibles pour La Toile — une par ligne.
+# Les lignes vides et celles commençant par # sont ignorées.
+# Remplace, ajoute, retire : c'est ta curation qui donne sa voix au jeu.
+
+# --- Réalisatrices et réalisateurs ---
+Steven Spielberg
+Quentin Tarantino
+Martin Scorsese
+Tim Burton
+Christopher Nolan
+Wes Anderson
+Ridley Scott
+James Cameron
+Pedro Almodóvar
+Luc Besson
+Jean-Pierre Jeunet
+Sofia Coppola
+Céline Sciamma
+Alfred Hitchcock
+Agnès Varda
+
+# --- Actrices et acteurs ---
+Meryl Streep
+Tom Hanks
+Leonardo DiCaprio
+Denzel Washington
+Samuel L. Jackson
+Scarlett Johansson
+Cate Blanchett
+Marion Cotillard
+Jean Dujardin
+Audrey Tautou
+Omar Sy
+Vincent Cassel
+Isabelle Huppert
+Catherine Deneuve
+Juliette Binoche
