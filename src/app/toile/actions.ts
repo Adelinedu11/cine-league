@@ -165,6 +165,25 @@ export async function essaiPersonne(
 }
 
 /**
+ * Un indice de rattrapage, désigné par son rang (1, 2 ou 3).
+ *
+ * Le palier de déblocage (10 / 15 / 20 essais) est vérifié côté interface
+ * seulement : le compteur d'essais vit dans le navigateur, puisqu'on joue sans
+ * compte. C'est assumé — aucun de ces trois indices ne donne la réponse à lui
+ * seul, donc contourner le verrou n'apporte rien d'autre que trois
+ * renseignements vagues obtenus trop tôt.
+ */
+export async function obtenirIndice(jour: string, rang: number) {
+  const supabase = await createClient();
+  const { data } = await supabase.rpc("toile_indice", {
+    _jour: jour,
+    _rang: rang,
+  });
+  if (!data || typeof data !== "object" || "erreur" in data) return null;
+  return data as { rang: number; cle: string; valeur: string | null };
+}
+
+/**
  * Révélation de la cible. Appelée uniquement après victoire ou abandon —
  * ce contrôle ne peut pas vivre en base, qui ignore où en est le joueur.
  */

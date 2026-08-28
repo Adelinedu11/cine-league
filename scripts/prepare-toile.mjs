@@ -74,6 +74,39 @@ const AMORCE_MIN_PEOPLE = 10; // générique réellement renseigné
 // ne sert que s'il est solide.
 const AMORCE_MIN_LINK_FILMS = 2;
 
+/**
+ * Pays de naissance, en français. TMDB renvoie `place_of_birth` en anglais et
+ * sous forme libre (« Cincinnati, Ohio, USA ») : on garde le dernier segment et
+ * on traduit les pays effectivement présents dans la réserve. Le repli laisse
+ * la valeur brute plutôt que d'inventer une traduction.
+ */
+const PAYS_FR = {
+  USA: "États-Unis",
+  "United States": "États-Unis",
+  "United States of America": "États-Unis",
+  UK: "Royaume-Uni",
+  England: "Royaume-Uni",
+  Scotland: "Royaume-Uni",
+  "United Kingdom": "Royaume-Uni",
+  France: "France",
+  Spain: "Espagne",
+  Germany: "Allemagne",
+  Italy: "Italie",
+  Australia: "Australie",
+  Canada: "Canada",
+  Belgium: "Belgique",
+  Switzerland: "Suisse",
+  Senegal: "Sénégal",
+  Morocco: "Maroc",
+  Algeria: "Algérie",
+};
+
+function paysDeNaissance(placeOfBirth) {
+  if (!placeOfBirth) return null;
+  const dernier = placeOfBirth.split(",").pop().trim();
+  return PAYS_FR[dernier] ?? dernier;
+}
+
 // Taille de la réserve de films populaires où l'on cherche les amorces.
 const AMORCE_POOL_PAGES = 15; // 20 films par page
 
@@ -200,6 +233,7 @@ async function personFilms(personId) {
 
     films.set(m.id, { title: m.title, year: m.release_date.slice(0, 4) });
   };
+
 
   for (const m of credits.cast ?? []) keep(m);
   for (const m of credits.crew ?? []) {
@@ -330,12 +364,25 @@ async function prepareTarget(name, amorcePool) {
   // réparti dans la liste plutôt que toujours en tête.
   const amorce = candidates[person.id % candidates.length];
 
+  // Indices de rattrapage (paliers 10 / 15 / 20). Aucun ne donne la réponse à
+  // lui seul — voir l'avertissement en tête de supabase/030_toile_indices.sql.
+  const detail = await tmdb(`/person/${person.id}`);
+  const annees = [...films.values()]
+    .map((f) => Number(f.year))
+    .filter((y) => Number.isFinite(y) && y > 1900);
+  const premiere = annees.length ? Math.min(...annees) : null;
+
   return {
     name,
     ok: true,
     tmdb_id: person.id,
     nom: person.name,
     metier,
+    indice_epoque: premiere
+      ? `les années ${Math.floor(premiere / 10) * 10}`
+      : null,
+    indice_pays: paysDeNaissance(detail.place_of_birth),
+    indice_nb_films: films.size,
     nb_films: films.size,
     nb_collaborateurs: collaborators.size,
     nb_collaborateurs_recurrents: strong.length,

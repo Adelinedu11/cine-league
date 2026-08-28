@@ -490,6 +490,10 @@ export type Database = {
         Args: { _jour: string; _person_id: number }
         Returns: Json
       }
+      toile_indice: {
+        Args: { _jour: string; _rang: number }
+        Returns: Json
+      }
       toile_reveler: {
         Args: { _jour: string }
         Returns: Json

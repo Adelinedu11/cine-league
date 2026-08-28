@@ -40,6 +40,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `027_notifications.sql` | table `notifications` + RLS + RPC `sync_round_deadline_notifications` (alerte T-1h, à la demande), `notify_round_created` (league lancée / activité), `notify_round_activity` (soumission/vote/tentative), `list_recent_notifications`, `mark_all_notifications_read` | 001 |
 | `028_public_league.sql` | colonne `is_public` + league « Ciné League Officielle » (unicité garantie par index partiel), policy de lecture publique, **fermeture réelle des leagues privées** (l'insertion directe dans `league_members` n'est plus permise que vers la league publique ; les privées passent par `join_league_by_code`, qui vérifie le code en base), trigger d'adhésion auto à l'inscription + rattrapage des comptes existants | 001, 008, 013, 019 |
 | `029_toile.sql` | **La Toile** (jeu quotidien) : tables `toile_targets` / `toile_collaborators` / `toile_films` / `toile_film_people`, RLS totalement fermée sur les cibles, RPC `toile_du_jour`, `toile_essai_film`, `toile_essai_personne`, `toile_reveler`, `toile_programmer`. La cible ne sort jamais de la base. | — |
+| `030_toile_indices.sql` | Échelle d'indices de La Toile : colonnes `indice_epoque` / `indice_pays` / `indice_nb_films` + RPC `toile_indice(_jour, _rang)`. Paliers 10/15/20 vérifiés côté interface seulement — aucun indice ne révèle la cible à lui seul. | 029 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

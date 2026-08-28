@@ -2,15 +2,24 @@
 
 import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { Search, Film, User, Flame } from "lucide-react";
+import { Search, Film, User, Flame, Lightbulb } from "lucide-react";
 import { t, type Locale } from "@/lib/i18n";
 import { PopTicket, PopTrophy } from "@/components/pop/PopShapes";
 import {
   essaiFilm,
   essaiPersonne,
+  obtenirIndice,
   revelerCible,
   type Resultat,
 } from "./actions";
+
+// Paliers de rattrapage. Pas de limite d'essais, donc un indice unique
+// laisserait sans rien quelqu'un encore bloqué au 25e coup.
+const PALIERS = [
+  { rang: 1, aPartirDe: 10 },
+  { rang: 2, aPartirDe: 15 },
+  { rang: 3, aPartirDe: 20 },
+];
 
 type Partie = {
   jour: string;
@@ -26,17 +35,26 @@ type Suggestion = {
   detail: string | null;
 };
 
+type Indice = { rang: number; cle: string; valeur: string | null };
+
 type Etat = {
   essais: Resultat[];
   gagne: boolean;
   abandon: boolean;
   cible: { nom: string } | null;
+  indices: Indice[];
 };
 
 // Référence stable : `useSyncExternalStore` compare les instantanés par
 // identité. Recréer un objet vide à chaque appel provoquerait une boucle de
 // rendus infinie.
-const ETAT_VIDE: Etat = { essais: [], gagne: false, abandon: false, cible: null };
+const ETAT_VIDE: Etat = {
+  essais: [],
+  gagne: false,
+  abandon: false,
+  cible: null,
+  indices: [],
+};
 
 /**
  * La partie vit dans localStorage, qui en est la source de vérité.
@@ -112,7 +130,7 @@ export default function ToileGame({
     store.lire,
     store.lireServeur,
   );
-  const { essais, gagne, abandon, cible } = etat;
+  const { essais, gagne, abandon, cible, indices } = etat;
 
   const [saisie, setSaisie] = useState("");
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -167,6 +185,16 @@ export default function ToileGame({
       });
     }
     setEnCours(false);
+  }
+
+  async function demanderIndice(rang: number) {
+    if (indices.some((i) => i.rang === rang)) return;
+    const indice = await obtenirIndice(partie.jour, rang);
+    if (!indice) return;
+    store.ecrire({
+      ...etat,
+      indices: [...etat.indices, indice].sort((a, b) => a.rang - b.rang),
+    });
   }
 
   async function donnerSaLangue() {
@@ -256,6 +284,53 @@ export default function ToileGame({
               : t(locale, "toile.perdu")}
           </h2>
           <p className="text-lg text-[var(--color-cream)]">{cible.nom}</p>
+        </section>
+      )}
+
+      {/* Indices de rattrapage */}
+      {!termine && essais.length >= PALIERS[0].aPartirDe && (
+        <section className="flex flex-col gap-2 rounded-2xl border-2 border-[var(--color-yellow)] bg-[var(--color-yellow)]/20 p-4">
+          {indices.map((i) => (
+            <p
+              key={i.rang}
+              className="flex items-start gap-2 text-sm text-[var(--color-cream)]"
+            >
+              <Lightbulb
+                size={15}
+                strokeWidth={1.8}
+                className="mt-0.5 shrink-0 text-[var(--color-yellow-ink)]"
+              />
+              {t(locale, `toile.indice.${i.cle}`, { valeur: i.valeur ?? "?" })}
+            </p>
+          ))}
+
+          {PALIERS.filter(
+            (p) =>
+              essais.length >= p.aPartirDe &&
+              !indices.some((i) => i.rang === p.rang),
+          ).map((p) => (
+            <button
+              key={p.rang}
+              type="button"
+              onClick={() => demanderIndice(p.rang)}
+              className="flex items-center gap-2 self-start rounded-lg border-2 border-[var(--color-cream)] bg-[var(--color-surface)] px-3 py-1.5 text-sm font-medium text-[var(--color-cream)] transition-transform hover:-translate-y-0.5"
+            >
+              <Lightbulb size={14} strokeWidth={1.8} />
+              {t(locale, "toile.demanderIndice")}
+            </button>
+          ))}
+
+          {/* Prochain palier, pour que l'effort ait un horizon. */}
+          {(() => {
+            const suivant = PALIERS.find((p) => essais.length < p.aPartirDe);
+            return suivant ? (
+              <p className="text-xs text-[var(--color-muted)]">
+                {t(locale, "toile.prochainIndice", {
+                  n: suivant.aPartirDe - essais.length,
+                })}
+              </p>
+            ) : null;
+          })()}
         </section>
       )}
 

@@ -143,6 +143,21 @@ s'appelle « trouve la personnalité ».
 Le film brûlant reste donc un indice — le plus fort du jeu — et le nom reste le
 moment de victoire. Le coût est d'un clic, et ce clic est la récompense.
 
+**Une échelle d'indices : 10 / 15 / 20 essais.** L'époque du premier film, puis
+le nombre de films, puis le pays de naissance — du plus doux au plus tranchant,
+le pays coupant le plus fort sur une réserve à moitié française. Une échelle et
+non un indice unique, parce qu'en l'absence de limite d'essais, quelqu'un peut
+être encore bloqué au 25ᵉ coup.
+
+*Contrainte qui a décidé du contenu, et qu'il ne faut pas oublier :* le compteur
+d'essais vit dans le navigateur, puisqu'on joue sans compte. Le verrou du 10ᵉ
+essai n'est donc qu'une politesse d'interface — qui ouvre les outils de
+développement peut appeler la fonction dès le premier coup. C'est pourquoi
+**aucun de ces trois indices ne donne la réponse à lui seul**. L'indice fort —
+« dans quel film ce collaborateur a-t-il croisé la cible ? » — révélerait un
+film de la cible, donc la cible : il attend que les parties soient enregistrées
+côté serveur, ce qui viendra avec les comptes et les séries.
+
 **Pas de limite d'essais.** Avec une limite, un essai froid coûte, le joueur
 devient prudent et ne tente que ce dont il est sûr — l'inverse de ce que ce jeu
 veut. Sans limite, on balance des films par curiosité. Le score reste le nombre
