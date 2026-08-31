@@ -71,10 +71,27 @@ export default function RoundModeDateFields({
     VOTING_DURATION_PRESETS[2]?.minutes ?? 4320,
   );
 
+  // Mode « date personnalisée » : on mémorise une DATE ABSOLUE, pas une durée.
+  // Réservé à la Compétition officielle, dont les listes de durées plafonnent
+  // (7 jours pour le vote) ; Ciné'Files se joue en direct sur quelques heures
+  // et n'en a pas besoin. null = on est en mode durée prédéfinie.
+  const [submissionCustomIso, setSubmissionCustomIso] = useState<string | null>(
+    null,
+  );
+  const [votingCustomIso, setVotingCustomIso] = useState<string | null>(null);
+
   // Initialisation paresseuse (exécutée une seule fois, au montage) : sert
   // uniquement à l'aperçu affiché à l'utilisateur, l'échéance réelle est de
   // toute façon recalculée par le serveur au moment de la création.
   const [now] = useState(() => Date.now());
+
+  // La phase de vote se décompte depuis la clôture des soumissions : il faut
+  // donc connaître la durée de soumission RÉELLEMENT retenue, date perso
+  // comprise, pour caler la base du second champ.
+  const submissionMinutesEffectives = submissionCustomIso
+    ? Math.round((new Date(submissionCustomIso).getTime() - now) / 60_000)
+    : submissionMinutes;
+  const baseVote = now + submissionMinutesEffectives * 60_000;
 
   return (
     <>
@@ -190,8 +207,14 @@ export default function RoundModeDateFields({
             value={submissionMinutes}
             onChange={setSubmissionMinutes}
             baseIsoMs={now}
+            customIso={submissionCustomIso}
+            onCustomIsoChange={setSubmissionCustomIso}
           />
 
+          {/* `baseVote` intègre la date perso de soumission : si elle change,
+              la base du vote se déplace et `DurationSelect` retraduit la date
+              absolue en minutes — la date de cérémonie affichée reste celle
+              que l'utilisateur a saisie. */}
           <DurationSelect
             name="voting_duration_minutes"
             label={t(locale, "league.ceremonyLabel")}
@@ -199,7 +222,9 @@ export default function RoundModeDateFields({
             locale={locale}
             value={votingMinutes}
             onChange={setVotingMinutes}
-            baseIsoMs={now + submissionMinutes * 60_000}
+            baseIsoMs={baseVote}
+            customIso={votingCustomIso}
+            onCustomIsoChange={setVotingCustomIso}
           />
         </>
       )}

@@ -52,7 +52,6 @@ export const dict: Record<Locale, Dict> = {
     // Ciné'Files (compléments)
     "cinefiles.proposalBy": "Le secret de {name}",
     "roundStatus.cineOngoing": "En cours",
-    "roundAction.cineClose": "Clôturer cette séance",
     "league.closeDateLabel": "Date de clôture",
 
     // Onglets + classements + règles
@@ -326,10 +325,12 @@ export const dict: Record<Locale, Dict> = {
     "roundStatus.submission": "Soumissions ouvertes",
     "roundStatus.voting": "Votes en cours",
     "roundStatus.closed": "Terminé",
-    "roundAction.submission": "Ouvrir les votes",
-    "roundAction.voting": "Clôturer la séance",
-    "round.votesOpenOn": "Les votes ouvriront le {date}.",
-    "round.canCloseOn": "La séance pourra être clôturée le {date}.",
+    // Le changement de phase est automatique (cron) : on annonce, on ne propose
+    // plus d'agir. Les anciennes clés roundAction.* / round.votesOpenOn /
+    // round.canCloseOn / round.tooEarly ont disparu avec le bouton.
+    "round.votesOpenAuto": "Les votes s'ouvriront automatiquement le {date}.",
+    "round.closesAuto": "La séance se clôturera automatiquement le {date}.",
+    "round.cineClosesAuto": "La séance se clôturera automatiquement le {date}.",
 
     // Round — dates
     "round.submissionsUntil": "Soumissions jusqu'au {date}",
@@ -338,7 +339,6 @@ export const dict: Record<Locale, Dict> = {
 
     // Page round
     "round.back": "← Retour à la ligue",
-    "round.tooEarly": "Cette transition n'est pas encore possible.",
     "round.editDates": "Modifier les dates",
     "round.whereToWatch": "Où regarder ?",
     "round.hideWhereToWatch": "Masquer",
@@ -349,6 +349,9 @@ export const dict: Record<Locale, Dict> = {
     "date.minutesShort": "min",
     "date.secondsShort": "s",
     "league.durationPreview": "Échéance estimée : {date}",
+    "league.customDate": "Date personnalisée…",
+    "league.customDateTooEarly":
+      "Cette date doit être postérieure au {date}, début de la phase.",
     "notifications.title": "Notifications",
     "notifications.empty": "Aucune notification pour l'instant.",
     "notifications.markAllRead": "Tout marquer comme lu",
@@ -476,7 +479,6 @@ export const dict: Record<Locale, Dict> = {
     // Ciné'Files (extras)
     "cinefiles.proposalBy": "{name}'s secret",
     "roundStatus.cineOngoing": "Ongoing",
-    "roundAction.cineClose": "Close this screening",
     "league.closeDateLabel": "Close date",
 
     // Tabs + standings + rules
@@ -750,10 +752,10 @@ export const dict: Record<Locale, Dict> = {
     "roundStatus.submission": "Submissions open",
     "roundStatus.voting": "Voting open",
     "roundStatus.closed": "Closed",
-    "roundAction.submission": "Open voting",
-    "roundAction.voting": "Close the screening",
-    "round.votesOpenOn": "Voting opens on {date}.",
-    "round.canCloseOn": "The screening can be closed on {date}.",
+    "round.votesOpenAuto": "Voting will open automatically on {date}.",
+    "round.closesAuto": "The screening will close automatically on {date}.",
+    "round.cineClosesAuto":
+      "The screening will close automatically on {date}.",
 
     // Round — dates
     "round.submissionsUntil": "Submissions until {date}",
@@ -762,7 +764,6 @@ export const dict: Record<Locale, Dict> = {
 
     // Round page
     "round.back": "← Back to league",
-    "round.tooEarly": "This transition isn't possible yet.",
     "round.editDates": "Edit dates",
     "round.whereToWatch": "Where to watch?",
     "round.hideWhereToWatch": "Hide",
@@ -773,6 +774,9 @@ export const dict: Record<Locale, Dict> = {
     "date.minutesShort": "min",
     "date.secondsShort": "s",
     "league.durationPreview": "Estimated deadline: {date}",
+    "league.customDate": "Custom date…",
+    "league.customDateTooEarly":
+      "This date must be after {date}, when the phase starts.",
     "notifications.title": "Notifications",
     "notifications.empty": "No notification yet.",
     "notifications.markAllRead": "Mark all as read",

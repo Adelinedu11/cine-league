@@ -3,20 +3,7 @@
 import { useState } from "react";
 import SubmitButton from "@/components/SubmitButton";
 import { t, type Locale } from "@/lib/i18n";
-
-/**
- * Format ISO → valeur d'un <input type="datetime-local"> (YYYY-MM-DDTHH:mm),
- * en heure locale du navigateur (le composant natif n'a pas de fuseau).
- * La conversion retour en ISO est faite côté Server Action via new Date().
- */
-function toDatetimeLocalValue(iso: string): string {
-  const d = new Date(iso);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return (
-    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` +
-    `T${pad(d.getHours())}:${pad(d.getMinutes())}`
-  );
-}
+import { toDatetimeLocalValue } from "@/lib/rounds";
 
 /**
  * Bouton admin « Modifier les dates » d'une séance. Au clic, déplie un
