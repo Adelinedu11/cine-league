@@ -1,31 +1,20 @@
 import { t, type Locale } from "@/lib/i18n";
 
 /**
- * Cycle de vie d'un round : submission → voting → closed.
- * La transition est déclenchée manuellement par un membre.
- * Les libellés visibles (statut, action) sont désormais dans le dictionnaire
- * i18n (clés `roundStatus.*` et `roundAction.*`).
+ * Cycle de vie d'un round : submission → voting → closed (Ciné'Files saute
+ * `voting` et va directement à `closed`).
+ *
+ * ATTENTION — la transition n'est plus déclenchée depuis l'application. Elle
+ * est entièrement pilotée en SQL par `advance_due_rounds()`
+ * (supabase/035_cron_avancement_rounds.sql), appelée par un job pg_cron chaque
+ * minute et en rattrapage au chargement du layout connecté. Il n'existe donc
+ * plus d'équivalent TypeScript de `nextRoundStatus()` : le dupliquer ici
+ * ferait courir le risque de deux logiques divergentes. Les libellés de statut
+ * visibles restent dans le dictionnaire i18n (clés `roundStatus.*`).
+ *
+ * Ce module ne garde que le formatage des dates et le calcul de l'échéance
+ * affichée (compte à rebours), qui sont bien des besoins d'affichage.
  */
-
-/** État suivant dans le cycle (undefined si déjà au dernier état). */
-export const ROUND_NEXT_STATUS: Record<string, string | undefined> = {
-  submission: "voting",
-  voting: "closed",
-};
-
-/**
- * État suivant selon le mode de jeu. Ciné'Files n'a que 2 phases :
- * submission → closed (on saute voting). Compétition : cycle complet.
- */
-export function nextRoundStatus(
-  status: string,
-  gameMode: string,
-): string | undefined {
-  if (gameMode === "cine_files") {
-    return status === "submission" ? "closed" : undefined;
-  }
-  return ROUND_NEXT_STATUS[status];
-}
 
 /** Code de locale Intl selon la langue de l'app. */
 const DATE_LOCALE: Record<Locale, string> = { fr: "fr-FR", en: "en-GB" };
@@ -36,6 +25,22 @@ export function formatRoundDate(iso: string, locale: Locale = "fr"): string {
     dateStyle: "short",
     timeStyle: "short",
   });
+}
+
+/**
+ * Format ISO → valeur d'un `<input type="datetime-local">` (YYYY-MM-DDTHH:mm),
+ * en heure locale du navigateur : le composant natif n'a pas de fuseau, il
+ * affiche et renvoie toujours de l'heure locale. Le retour en ISO se fait par
+ * un simple `new Date(valeur)`, que le navigateur interprète lui aussi en
+ * heure locale — l'aller-retour est donc symétrique.
+ */
+export function toDatetimeLocalValue(iso: string): string {
+  const d = new Date(iso);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return (
+    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` +
+    `T${pad(d.getHours())}:${pad(d.getMinutes())}`
+  );
 }
 
 /** Formatte une date ISO en « JJ/MM/AAAA à HH:MM » (pour les phrases). */
@@ -53,8 +58,10 @@ export function formatRoundDateWithHour(
 }
 
 /**
- * Date/heure seuil à dépasser pour autoriser la transition depuis `status` :
- * submission → submission_deadline, voting → ceremony_at. Null sinon.
+ * Échéance de la phase en cours : submission → submission_deadline,
+ * voting → ceremony_at. Null si la séance est clôturée. C'est la date à
+ * laquelle `advance_due_rounds()` fera basculer la séance — sert au compte à
+ * rebours et à la phrase « les votes s'ouvriront le… ».
  */
 export function transitionThresholdIso(
   status: string,
@@ -69,9 +76,9 @@ export function transitionThresholdIso(
 /**
  * Système de durée ("tic-tac-boom") : à la création d'un round, l'auteur
  * choisit une durée (pas une date précise) et le serveur calcule l'échéance
- * exacte à partir de l'instant de lancement. Plus robuste et plus lisible
- * qu'une comparaison de date fixe (voir backlog point 13) — remplace la
- * correction du cron, qui n'existait pas.
+ * exacte à partir de l'instant de lancement. Cette échéance est désormais
+ * appliquée pour de vrai par le cron d'avancement (035) : le chrono expire
+ * tout seul, sans que personne n'ait à cliquer.
  */
 export type DurationPreset = {
   minutes: number;

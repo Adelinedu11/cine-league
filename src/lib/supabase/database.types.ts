@@ -563,6 +563,12 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
+      // 035 : avancement automatique des séances. Renvoie le nombre de
+      // séances effectivement basculées (0 la plupart du temps).
+      advance_due_rounds: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       notify_round_created: {
         Args: { _round_id: string }
         Returns: undefined

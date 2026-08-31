@@ -9,7 +9,6 @@ import {
   fetchMoviePlatforms,
 } from "@/lib/tmdb";
 import {
-  nextRoundStatus,
   formatRoundDate,
   formatRoundDateWithHour,
   transitionThresholdIso,
@@ -79,26 +78,28 @@ export default async function RoundPage({
   }
 
   const locale = await getLocale();
-  const nextStatus = nextRoundStatus(round.status, round.game_mode);
 
-  // La transition n'est possible qu'une fois la date seuil dépassée…
-  // …sauf pour un admin de la ligue, qui peut forcer la transition (même règle
-  // que la Server Action advanceStatus).
+  // Échéance de la phase en cours. Le changement de phase est entièrement
+  // automatique (job pg_cron + rattrapage dans le layout connecté, voir
+  // supabase/035_cron_avancement_rounds.sql) : plus aucun bouton pour le
+  // déclencher, y compris pour l'admin — son seul levier est de déplacer les
+  // dates. On se contente donc d'annoncer ce qui va se passer tout seul.
   const thresholdIso = transitionThresholdIso(
     round.status,
     round.submission_deadline,
     round.ceremony_at,
   );
-  const canAdvance =
-    Boolean(isAdmin) ||
-    (thresholdIso !== null && Date.now() > new Date(thresholdIso).getTime());
-  const advanceBlockedMessage =
+  const nextPhaseMessage =
     round.status === "submission" && thresholdIso
-      ? t(locale, "round.votesOpenOn", {
-          date: formatRoundDateWithHour(thresholdIso, locale),
-        })
+      ? t(
+          locale,
+          round.game_mode === "cine_files"
+            ? "round.cineClosesAuto"
+            : "round.votesOpenAuto",
+          { date: formatRoundDateWithHour(thresholdIso, locale) },
+        )
       : round.status === "voting" && thresholdIso
-        ? t(locale, "round.canCloseOn", {
+        ? t(locale, "round.closesAuto", {
             date: formatRoundDateWithHour(thresholdIso, locale),
           })
         : null;
@@ -123,77 +124,11 @@ export default async function RoundPage({
     myCineTarget = data;
   }
 
-  // --- Server Action : faire avancer le statut du round ---
-  async function advanceStatus() {
-    "use server";
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      redirect("/login");
-    }
-
-    const { data: membership } = await supabase
-      .from("league_members")
-      .select("id")
-      .eq("league_id", id)
-      .eq("user_id", user.id)
-      .maybeSingle();
-    if (!membership) {
-      redirect("/leagues?error=forbidden");
-    }
-
-    // On relit le statut ET les dates côté serveur, plutôt que de faire
-    // confiance à des valeurs venues du client.
-    const { data: current } = await supabase
-      .from("rounds")
-      .select("status, submission_deadline, ceremony_at, game_mode")
-      .eq("id", roundId)
-      .eq("league_id", id)
-      .maybeSingle();
-
-    if (!current) {
-      redirect(`/leagues/${id}/rounds/${roundId}`);
-    }
-
-    const next = nextRoundStatus(current.status, current.game_mode);
-    if (!next) {
-      redirect(`/leagues/${id}/rounds/${roundId}`);
-    }
-
-    // Un admin de la ligue peut forcer la transition sans attendre la date
-    // seuil ; les membres normaux y restent soumis.
-    const { data: isAdmin } = await supabase.rpc("is_league_admin", {
-      _league_id: id,
-    });
-
-    // Garde-fou serveur : la date seuil doit être dépassée pour transiter.
-    // Empêche de forcer la transition en appelant l'action directement.
-    const thresholdIso = transitionThresholdIso(
-      current.status,
-      current.submission_deadline,
-      current.ceremony_at,
-    );
-    if (
-      !isAdmin &&
-      thresholdIso &&
-      Date.now() <= new Date(thresholdIso).getTime()
-    ) {
-      redirect(`/leagues/${id}/rounds/${roundId}?error=too_early`);
-    }
-
-    await supabase
-      .from("rounds")
-      .update({ status: next })
-      .eq("id", roundId)
-      .eq("league_id", id);
-
-    // Invalide le Router Cache pour que la nouvelle phase (ex. cérémonie/closed)
-    // s'affiche sans refresh manuel.
-    revalidatePath(`/leagues/${id}/rounds/${roundId}`);
-    redirect(`/leagues/${id}/rounds/${roundId}`);
-  }
+  // NOTE : il n'y a plus de Server Action « faire avancer le statut ». Le
+  // cycle submission → voting → closed est piloté par `advance_due_rounds()`
+  // (job pg_cron chaque minute + rattrapage au chargement du layout connecté).
+  // Un chrono qui n'expire pas tout seul ne sert à rien : personne ne clique,
+  // pas même l'admin, qui agit uniquement sur les dates ci-dessous.
 
   // --- Server Action : supprimer le round (admin uniquement) ---
   async function deleteRound() {
@@ -731,6 +666,11 @@ export default async function RoundPage({
         {round.status !== "closed" && thresholdIso && (
           <RoundCountdown targetIso={thresholdIso} locale={locale} />
         )}
+        {nextPhaseMessage && (
+          <p className="font-mono mt-1 text-xs text-[var(--color-muted)]">
+            {nextPhaseMessage}
+          </p>
+        )}
         {round.game_mode === "cine_files" && (
           <p className="mt-3 max-w-md text-sm text-[var(--color-muted)]">
             {t(locale, "cinefiles.themeExplain", { theme: round.theme })}
@@ -738,35 +678,12 @@ export default async function RoundPage({
         )}
       </div>
 
-      {/* Transition de statut (après la date seuil) et actions admin. */}
-      {(nextStatus || isAdmin) && (
+      {/* Actions admin. Le changement de phase n'est plus une action : c'est
+          l'échéance qui décide. L'admin rallonge ou raccourcit les dates —
+          raccourcir à une date passée revient à clôturer la phase. */}
+      {isAdmin && (
         <div className="flex flex-wrap items-start gap-3">
-          {nextStatus && (
-            <div className="flex flex-col gap-2">
-              <form action={advanceStatus}>
-                <SubmitButton
-                  locale={locale}
-                  disabled={!canAdvance}
-                  className="rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
-                >
-                  {round.game_mode === "cine_files"
-                    ? t(locale, "roundAction.cineClose")
-                    : t(locale, `roundAction.${round.status}`)}
-                </SubmitButton>
-              </form>
-              {!canAdvance && advanceBlockedMessage && (
-                <p className="font-mono text-xs text-[var(--color-muted)]">
-                  {advanceBlockedMessage}
-                </p>
-              )}
-              {submissionError === "too_early" && (
-                <p className="text-xs text-red-400">
-                  {t(locale, "round.tooEarly")}
-                </p>
-              )}
-            </div>
-          )}
-          {isAdmin && (
+          {round.status !== "closed" && (
             <EditRoundDatesButton
               action={updateRoundDates}
               submissionDeadline={round.submission_deadline}
@@ -774,16 +691,14 @@ export default async function RoundPage({
               locale={locale}
             />
           )}
-          {isAdmin && (
-            <ConfirmSubmitButton
-              action={deleteRound}
-              locale={locale}
-              confirmMessage={t(locale, "round.deleteConfirm")}
-              className="rounded-lg border border-red-500/40 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10"
-            >
-              {t(locale, "round.deleteButton")}
-            </ConfirmSubmitButton>
-          )}
+          <ConfirmSubmitButton
+            action={deleteRound}
+            locale={locale}
+            confirmMessage={t(locale, "round.deleteConfirm")}
+            className="rounded-lg border border-red-500/40 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10"
+          >
+            {t(locale, "round.deleteButton")}
+          </ConfirmSubmitButton>
           {submissionError === "dates" && (
             <p className="w-full text-xs text-red-400">
               {t(locale, "round.datesError")}

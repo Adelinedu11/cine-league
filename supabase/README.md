@@ -44,10 +44,32 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `031_retrait_league_publique.sql` | **Défait la league publique de `028`** (trigger d'adhésion auto, league officielle, colonne `is_public`, `public_league_id`), remplacée par La Toile. **Garde le vrai apport de 028** : plus aucune policy d'insertion sur `league_members`, l'adhésion passe exclusivement par `create_league()` et `join_league_by_code()`. | 028, 029 |
 | `032_categories_par_ligue.sql` | Catégories choisies par ligue (5 max) : colonne `league_id` sur `categories` (null = catalogue commun), tables `league_categories` (sélection) et `round_categories` (photo prise au lancement par déclencheur), RPC `set_league_categories`, `create_league_category`, `round_categories_list`, `league_categories_options`. **On ne supprime jamais une ligne de `categories`** — `get_round_results` y joint les votes pour le nom affiché. | 001, 008 |
 | `033_categories_competition_seulement.sql` | Le déclencheur de photo ignore les séances qui ne sont pas en Compétition officielle (Ciné'Files n'a pas de catégories), et nettoie les photos inutiles posées par `032` — sauf sur les séances ayant des votes. | 032 |
+| `034_categories_par_seance.sql` | Le choix des catégories passe de la configuration de la ligue à l'ouverture d'une séance ; `league_categories` devient la mémoire du dernier choix (pré-remplissage du formulaire suivant). | 032, 033 |
+| `035_cron_avancement_rounds.sql` | **Avancement automatique des séances.** `advance_due_rounds()` fait basculer submission → voting → closed dès l'échéance dépassée (Ciné'Files : submission → closed), notifie tous les membres (`kind` `phase_changed`, nouveau) ; job `pg_cron` « avancer-rounds » chaque minute + rattrapage au chargement du layout connecté. `update_round_dates` **remplace** celle de `026` : accepte une date passée (= clôturer maintenant), ignore `submission_deadline` hors phase de soumission, refuse une séance déjà `closed`. Le bouton « faire avancer » a disparu de l'interface. | 001, 008, 026, 027 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de
 `drop policy if exists`.
+
+## Extensions à activer
+
+`035` est le premier fichier à dépendre d'une extension. **Activer `pg_cron`
+avant de le jouer** : Supabase → Database → Extensions → `pg_cron`. Le
+`create extension if not exists pg_cron` présent dans le fichier suffit en
+principe, mais le dashboard est la voie recommandée par Supabase.
+
+⚠️ Les jobs `pg_cron` **ne tournent pas** quand le projet est en pause — ce qui
+arrive après 7 jours d'inactivité sur le plan gratuit. D'où l'appel de
+rattrapage à `advance_due_rounds()` dans `src/app/leagues/layout.tsx` : la
+première visite après un réveil remet les séances à la bonne phase.
+
+Vérifier le job :
+
+```sql
+select jobid, jobname, schedule, active from cron.job;
+select jobid, status, return_message, start_time
+  from cron.job_run_details order by start_time desc limit 10;
+```
 
 ## Hors périmètre
 

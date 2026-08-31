@@ -31,9 +31,16 @@ export default async function LeaguesLayout({
     .maybeSingle();
   const headerName = profile?.pseudo?.trim() || user.email || "?";
 
+  // Rattrapage de l'avancement des séances. Le mécanisme principal est le job
+  // pg_cron d'une minute (supabase/035_cron_avancement_rounds.sql) ; mais un
+  // projet Supabase mis en pause après 7 jours d'inactivité n'exécute aucun
+  // job planifié. Ce filet garantit qu'une séance est à la bonne phase dès que
+  // quelqu'un ouvre une page — sans effet si le cron a déjà fait le travail.
+  await supabase.rpc("advance_due_rounds");
+
   // Alerte T-1h "à la demande" : calculée à chaque visite d'une page connectée
-  // plutôt que par un cron (voir backlog point 13) — best effort, ne bloque
-  // jamais le rendu de la page si ça échoue.
+  // plutôt que par un cron — best effort, ne bloque jamais le rendu de la page
+  // si ça échoue.
   await supabase.rpc("sync_round_deadline_notifications");
   const { data: notifications } = await supabase.rpc(
     "list_recent_notifications",
