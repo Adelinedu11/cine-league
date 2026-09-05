@@ -1,7 +1,7 @@
 import { redirect, notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import { Check, Clock, Star } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import {
   fetchMovieCredits,
@@ -19,12 +19,11 @@ import FilmSearch from "./FilmSearch";
 import Avatar from "@/components/Avatar";
 import RoundResults from "./RoundResults";
 import CineRoundScores from "@/components/CineRoundScores";
-import TicketStub from "@/components/TicketStub";
+import SelectionList from "./SelectionList";
+import VoteBallot from "./VoteBallot";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import EditRoundDatesButton from "@/components/EditRoundDatesButton";
-import WhereToWatch from "@/components/WhereToWatch";
 import RoundCountdown from "@/components/RoundCountdown";
-import FilmPoster from "@/components/FilmPoster";
 import SubmitButton from "@/components/SubmitButton";
 import PopBackdrop from "@/components/pop/PopBackdrop";
 
@@ -107,7 +106,7 @@ export default async function RoundPage({
   // Soumission de l'utilisateur courant pour ce round (jamais celles des autres).
   const { data: mySubmission } = await supabase
     .from("submissions")
-    .select("film_title, comment")
+    .select("film_title, comment, poster_path, platforms")
     .eq("round_id", roundId)
     .eq("user_id", user.id)
     .maybeSingle();
@@ -401,6 +400,9 @@ export default async function RoundPage({
     film_title: string;
     platforms: string[] | null;
     poster_path: string | null;
+    // Commentaire laissé par celui qui a soumis le film — affiché SANS son
+    // nom : l'attribution reste réservée à la cérémonie (voir 036).
+    comment: string | null;
   }[] = [];
   // Qui a voté (existence d'un vote uniquement, jamais le contenu).
   let voters: { display_name: string; has_voted: boolean }[] = [];
@@ -850,67 +852,38 @@ export default async function RoundPage({
             </p>
           )}
 
+          {/* 1. La sélection : les films une seule fois, avec le commentaire
+              du directeur (anonyme) et sa propre soumission, qui n'est jamais
+              sur le bulletin — on ne vote pas pour soi. */}
+          <SelectionList films={ballot} mine={mySubmission} locale={locale} />
+
+          {/* 2. Le bulletin : plus que les titres, en menu déroulant. */}
           {categories.length === 0 || ballot.length === 0 ? (
             <p className="text-sm text-[var(--color-muted)]">
               {t(locale, "round.nothingToVote")}
             </p>
           ) : (
-            <form action={submitVotes} className="flex flex-col gap-4">
-              {categories.map((category) => (
-                <TicketStub
-                  key={category.id}
-                  stub={<Star size={14} strokeWidth={1.8} />}
-                  stubClassName="text-[var(--color-muted)]"
-                >
-                  <fieldset className="flex flex-col gap-2">
-                    <legend className="font-display mb-1 text-lg tracking-wide text-[var(--color-cream)]">
-                      {category.name}
-                    </legend>
-                    {ballot.map((film) => (
-                      <label
-                        key={film.submission_id}
-                        className="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--color-border)] px-3 py-2 text-sm text-[var(--color-cream)] transition-colors hover:border-[var(--color-muted)] has-[:checked]:border-[var(--color-gold)] has-[:checked]:bg-[var(--color-gold)]/10 has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-[var(--color-gold)]"
-                      >
-                        <input
-                          type="radio"
-                          name={`category-${category.id}`}
-                          value={film.submission_id}
-                          className="sr-only"
-                        />
-                        <FilmPoster
-                          posterPath={film.poster_path}
-                          alt={film.film_title}
-                          width={56}
-                        />
-                        <span className="flex flex-1 flex-wrap items-center gap-2">
-                          <span>{film.film_title}</span>
-                          <WhereToWatch platforms={film.platforms ?? []} locale={locale} />
-                        </span>
-                      </label>
-                    ))}
-                    <label
-                      htmlFor={`comment-${category.id}`}
-                      className="mt-1 text-xs text-[var(--color-muted)]"
-                    >
-                      {t(locale, "round.whyChoice")}
-                    </label>
-                    <textarea
-                      id={`comment-${category.id}`}
-                      name={`comment-${category.id}`}
-                      rows={2}
-                      placeholder={t(locale, "round.voteCommentPlaceholder")}
-                      className="w-full resize-y rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-cream)] outline-none placeholder:text-[var(--color-cream)]/40 focus:border-[var(--color-gold)]"
-                    />
-                  </fieldset>
-                </TicketStub>
-              ))}
+            <form action={submitVotes} className="flex flex-col gap-3">
+              <h3 className="font-display text-xl tracking-wide text-[var(--color-cream)]">
+                {t(locale, "round.ballotTitle")}
+              </h3>
+
+              <VoteBallot
+                categories={categories}
+                films={ballot}
+                locale={locale}
+              />
 
               <SubmitButton
                 locale={locale}
-                className="rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
+                className="mt-1 self-start rounded-lg bg-[var(--color-gold)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] transition-colors hover:bg-[var(--color-flesh)] hover:text-[var(--color-flesh-ink)]"
               >
                 {t(locale, "round.voteButton")}
               </SubmitButton>
+
+              <p className="text-xs text-[var(--color-muted)]">
+                {t(locale, "round.voteEditable")}
+              </p>
             </form>
           )}
 

@@ -528,6 +528,7 @@ export type Database = {
           film_title: string
           platforms: string[] | null
           poster_path: string | null
+          comment: string | null
         }[]
       }
       is_league_admin: {

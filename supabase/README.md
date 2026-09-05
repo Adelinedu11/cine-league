@@ -46,6 +46,7 @@ Le préfixe numérique donne l'ordre, imposé par les dépendances :
 | `033_categories_competition_seulement.sql` | Le déclencheur de photo ignore les séances qui ne sont pas en Compétition officielle (Ciné'Files n'a pas de catégories), et nettoie les photos inutiles posées par `032` — sauf sur les séances ayant des votes. | 032 |
 | `034_categories_par_seance.sql` | Le choix des catégories passe de la configuration de la ligue à l'ouverture d'une séance ; `league_categories` devient la mémoire du dernier choix (pré-remplissage du formulaire suivant). | 032, 033 |
 | `035_cron_avancement_rounds.sql` | **Avancement automatique des séances.** `advance_due_rounds()` fait basculer submission → voting → closed dès l'échéance dépassée (Ciné'Files : submission → closed), notifie tous les membres (`kind` `phase_changed`, nouveau) ; job `pg_cron` « avancer-rounds » chaque minute + rattrapage au chargement du layout connecté. `update_round_dates` **remplace** celle de `026` : accepte une date passée (= clôturer maintenant), ignore `submission_deadline` hors phase de soumission, refuse une séance déjà `closed`. Le bouton « faire avancer » a disparu de l'interface. | 001, 008, 026, 027 |
+| `036_commentaires_bulletin.sql` | `round_ballot` (+`comment`) : le commentaire de soumission (« commentaire du directeur ») est visible dès la phase de vote, **sans son auteur** — l'attribution reste réservée à la cérémonie | 001, 010, 011 |
 
 Rejouer un fichier est sans risque : fonctions en `create or replace`,
 colonnes en `add column if not exists`, policies précédées de

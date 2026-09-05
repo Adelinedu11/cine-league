@@ -322,7 +322,7 @@ export default function FilmSearch({
                 htmlFor="comment"
                 className="text-sm font-medium text-[var(--color-cream)]"
               >
-                {t(locale, "round.whyChoice")}
+                {t(locale, "round.directorComment")}
               </label>
               <textarea
                 id="comment"
